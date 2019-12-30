@@ -30,8 +30,8 @@ function srchmdia {
 
 function winupd {
     Clear-Host
+    Write-Host("Installing module PSWindowsUpdate if not already installed... ")
     Install-Module PSWindowsUpdate
-    Write-Host("This might take a little bit...")
     Get-WindowsUpdate
     Install-WindowsUpdate -Confirm
 }
@@ -49,7 +49,7 @@ function enblbit {
 #main menu function
 function main_menu{
     Clear-Host
-    Write-Host("")
+    Write-Host("Windows 10 CyberPatriots Script created by Michael Brenner for Team Apple Cidr")
     Write-Host("Commands:")
     Write-Host("")
     Write-Host("(1)Search Media Files                 (2)Windows Update")
@@ -100,12 +100,12 @@ function main_menu{
 ######user/group menu function#####
 function usr_grumnu{
     Clear-Host
-    Write-Host("")
+    Write-Host("Windows 10 CyberPatriots Script created by Michael Brenner for Team Apple Cidr")
     Write-Host("Commands:")
     Write-Host("")
     Write-Host("(1)Add user to system           (2)Remove User from system")
-    Write-Host("(3)Create New User Group        (4)Remove User Group")
-    Write-Host("(5)Add User to User Group       (6)Remove User from User Group")
+    Write-Host("(3)Create New User Group        (4)Remove User Group*")
+    Write-Host("(5)Add User to User Group*       (6)Remove User from User Group*")
     Write-Host("(7)List Local Users		(8)List Local Groups")
     Write-Host("(99)Back            ")
     Write-Host("")
@@ -114,73 +114,83 @@ function usr_grumnu{
     
     if ($usrcommand -eq '1'){
 	$aus = Read-Host -Prompt 'Would you like to add a user to this system? [y/n] '
-	if ($aus -eq 'y'){
-		$nusnm = Read-Host -Prompt 'What would you like the name of the user to be? '
-		$nuspss = Read-Host -Prompt -AsSecureString 'Please input a new password for the user '
-		New-LocalUser $nusnm -Password $nuspss -Confirm 
-		Get-LocalUser 
-	} else {
-		Read-Host -Prompt 'Press any key to continue... '
-		break
-	}
+	    if ($aus -eq 'y'){
+		    $nusnm = Read-Host -Prompt 'What would you like the name of the user to be? '
+		    $nuspss = Read-Host -Prompt -AsSecureString 'Please input a new password for the user '
+		    New-LocalUser $nusnm -Password $nuspss -Confirm 
+		    Get-LocalUser 
+	    } else {
+		    Read-Host -Prompt 'Press any key to continue... '
+		    break
+	    }
     }
+    
     if ($usrcommand -eq '2'){
 	$rusyn = Read-Host -Prompt 'Would you like to remove a user from this system? [y/n] '
-	if ($rusyn -eq 'y'){
-		$remvusr = $True
-		while ($remvusr -eq $True){
-			Write-Host(Get-LocalUser)
-			$rus = Read-Host -Prompt 'Which user would you like to remove from the system? '
-			Remove-LocalUser -Name $rus -Confirm
-			Write-Host("User " + $rus + " has been removed!")
-			Write-Host("")
-			$remvanthusr = Read-Host -Prompt 'Would you like to remove another user? [y/n] '
-			if ($remvanthusr -eq 'y'){
-				$remvusr = $True
-			} else {
-				$remvusr = $False
-			}
-		}
-        } else {
-		Read-Host -Prompt 'Press any key to continue... '
-		break
-	}
+	    if ($rusyn -eq 'y'){
+		    $remvusr = $True
+		    while ($remvusr -eq $True){
+			    Write-Host(Get-LocalUser)
+			    $rus = Read-Host -Prompt 'Which user would you like to remove from the system? '
+			    Remove-LocalUser -Name $rus -Confirm
+			    Write-Host("User " + $rus + " has been removed!")
+			    Write-Host("")
+			    $remvanthusr = Read-Host -Prompt 'Would you like to remove another user? [y/n] '
+			    if ($remvanthusr -eq 'y'){
+				    $remvusr = $True
+			    } else {
+				    $remvusr = $False
+			    }
+		    } else {
+		    Read-Host -Prompt 'Press any key to continue... '
+            break
+            }
+	    }
     }
+
     if ($usrcommand -eq '3'){
 	$crtgruyn = Read-Host -Prompt 'Do you want to create a new local user group? [y/n] '
-	if ($crtgruyn -eq 'y'){
-		$crtgru = $True
-		while ($crtgru -eq $True){
-			$ngrunm = Read-Host -Prompt 'What is the name of the new group? '
-			New-LocalGroup -Name $ngrunm 
-			Write-Host("New group " + $ngrunm + " has been created!")
-			
-			$anotgru = Read-Host -Prompt '
-		}
-	} else {
-		Read-Host -Prompt 'Press any key to continue... '
-		break
-	}
+	    if ($crtgruyn -eq 'y'){
+		    $crtgru = $True
+		    while ($crtgru -eq $True){
+			    $ngrunm = Read-Host -Prompt 'What is the name of the new group? '
+			    New-LocalGroup -Name $ngrunm 
+			    Write-Host("New group " + $ngrunm + " has been created!")
+                
+			    $anotgru = Read-Host -Prompt 'Would you like to make another local user group? [y/n] '
+		    }
+	    } else {
+		    Read-Host -Prompt 'Press any key to continue... '
+		    break
+	    }
     }
+
     if ($usrcommand -eq '4'){
 
     }
+
     if ($usrcommand -eq '5'){
 
     }
+
     if ($usrcommand -eq '6'){
 
     }
+
     if ($usrcommand -eq '7'){
-	Get-LocalUser
+    Clear-Host
+    Get-LocalUser
 	Read-Host -Prompt 'Press any key to continue... '	
     	usr_grumnu
     }
+
     if ($usrcommand -eq '8'){
-	Get-LocalGroup
+    Clear-Host
+    Get-LocalGroup
 	Read-Host -Prompt 'Press any key to continue... '
 	usr_grumnu
     }
+    
     if ($usrcommand -eq '99'){
         main_menu
     }
