@@ -3,16 +3,16 @@ DISCLAIMER: This project is student made with inspiration from other projects su
 
 FYI- This will be mostly used for a backup location for my scripts and will not always have the most up to date versions.
 
-#Before Use In Powershell
+Usage Instructions:
 
-Run powershell as admin
+1.)Run powershell as admin
 
-Go to location of script file 
+2.)Navigate to location of script file through powershell ex: cd C:\Users\Michael\Downloads\
 
-In powershell tyoe the following: Set-ExecutionPolicy Unrestricted
-Do this to allow the execution of scripts
+3.)In powershell tyoe the following: Set-ExecutionPolicy Unrestricted
+      -Do this to allow the execution of scripts
 
-Once at the location where the script is located type the following: ./cyberWin10.ps1
-Hit Enter
+4.)Once at the location where the script is located type the following: ./cyberWin10.ps1
+    Hit Enter
 
 That is it! Good Luck!
