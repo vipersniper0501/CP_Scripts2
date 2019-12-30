@@ -3,7 +3,7 @@ DISCLAIMER: This project is student made with inspiration from other projects su
 
 FYI- This will be mostly used for a backup location for my scripts and will not always have the most up to date versions.
 
-Usage Instructions:
+Usage Instructions For Powershell Scripts:
 
 1.)Run powershell as admin
 
