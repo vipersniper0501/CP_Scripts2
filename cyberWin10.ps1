@@ -6,45 +6,14 @@
 
 #(3.a)Possibly make command to compare current system to my checklist at https://michael.iansweb.org/win10harden.php 
 
-##########################################################
-######################## Functions #######################
 
-function win10 {
-    Write-Host("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    Write-Host("         ||       ||      ||      ||      |||     ||||||      ")
-    Write-Host("         ||       ||  ||  |||     ||     ||||    ||    ||     ")
-    Write-Host("         ||       ||      ||||    ||    || ||    ||    ||     ")
-    Write-Host("         ||       ||  ||  || ||   ||       ||    ||    ||     ")
-    Write-Host("         ||       ||  ||  ||  ||  ||       ||    ||    ||     ")
-    Write-Host("         ||  |||  ||  ||  ||   || ||       ||    ||    ||     ")
-    Write-Host("         || || || ||  ||  ||    ||||       ||    ||    ||     ")
-    Write-Host("          ||     ||   ||  ||     |||     ||||||   ||||||      ")
-    Write-Host("~~~~~~~~~~~~~~~~~~~~Created by Apple Cidr~~~~~~~~~~~~~~~~~~~~~")
-    Write-Host("")
-}
+#Option to use Microsoft Attack Surface Analyzer
+#The program will come with the initial download of the CP_Scripts from GitHub
+#
 
 
-function srchmdia {
-    get-childitem -Path C:\Users\* -Recurse -Force -Include *.flv, *.mp4, *.avi, *.wmv, *.mov, *.png, *.jpg, *.tif, *.gif, *.mp3, *.wmv, *.wma, *.aif
-}
-
-function winupd {
-    Clear-Host
-    Write-Host("Installing module PSWindowsUpdate if not already installed... ")
-    Install-Module PSWindowsUpdate
-    Get-WindowsUpdate
-    Install-WindowsUpdate -Confirm
-}
-
-function enblbit {
-    Clear-Host
-    manage-bde -status
-    $drv = Read-Host -Prompt 'What drive would you like to enable bit locker on? [Ex: c:   e:  ]   '
-    manage-bde -protectors -add -pw $drv
-    manage-bde -on $drv     
-}
-
-
+#########################################################################################################
+########################### MENUS #######################################################################
 
 #main menu function
 function main_menu{
@@ -53,7 +22,7 @@ function main_menu{
     Write-Host("Commands:")
     Write-Host("")
     Write-Host("(1)Search Media Files                 (2)Windows Update")
-    Write-Host("(3)Enable BitLocker                   (4) ")
+    Write-Host("(3)Enable BitLocker                   (4)Microsoft Attack Surface Analyzer")
     Write-Host("(5)                                   (6)User and Group Settings ")
     Write-Host("(99)Exit                              (100)Reboot")
     Write-Host("")
@@ -196,7 +165,54 @@ function usr_grumnu{
     }
 
 }
-##################################
+#########################################################################################################
+######################## Functions ######################################################################
+
+function win10 {
+    Write-Host("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    Write-Host("         ||       ||      ||      ||      |||     ||||||      ")
+    Write-Host("         ||       ||  ||  |||     ||     ||||    ||    ||     ")
+    Write-Host("         ||       ||      ||||    ||    || ||    ||    ||     ")
+    Write-Host("         ||       ||  ||  || ||   ||       ||    ||    ||     ")
+    Write-Host("         ||       ||  ||  ||  ||  ||       ||    ||    ||     ")
+    Write-Host("         ||  |||  ||  ||  ||   || ||       ||    ||    ||     ")
+    Write-Host("         || || || ||  ||  ||    ||||       ||    ||    ||     ")
+    Write-Host("          ||     ||   ||  ||     |||     ||||||   ||||||      ")
+    Write-Host("~~~~~~~~~~~~~~~~~~~~Created by Apple Cidr~~~~~~~~~~~~~~~~~~~~~")
+    Write-Host("")
+}
+
+function MASA {
+    Clear-Host
+    Write-Host("")
+    Write-Host("This command uses Microsoft's Attack Security Analyzer to audit the system.")
+    $asayn = Read-Host -Prompt 'Would you like to use the Microsoft Attack Security Analyzer to audit this system? [y/n] '
+    if ($asayn -eq 'y'){
+        Write-Host("Starting Microsoft Attack Surface Analyzer...")
+        Start-Process -FilePath "AsaLaunchGui.bat" -WorkingDirectory "E:\Cyber Patriots\Asa-win-2.1.50\Asa-win-2.1.50\" -Verb RunAs
+    }
+}
+
+
+function srchmdia {
+    get-childitem -Path C:\Users\* -Recurse -Force -Include *.flv, *.mp4, *.avi, *.wmv, *.mov, *.png, *.jpg, *.tif, *.gif, *.mp3, *.wmv, *.wma, *.aif
+}
+
+function winupd {
+    Clear-Host
+    Write-Host("Installing module PSWindowsUpdate if not already installed... ")
+    Install-Module PSWindowsUpdate
+    Get-WindowsUpdate
+    Install-WindowsUpdate -Confirm
+}
+
+function enblbit {
+    Clear-Host
+    manage-bde -status
+    $drv = Read-Host -Prompt 'What drive would you like to enable bit locker on? [Ex: c:   e:  ]   '
+    manage-bde -protectors -add -pw $drv
+    manage-bde -on $drv     
+}
 
 function start_script {
     Clear-Host
@@ -221,8 +237,20 @@ function start_script {
     }
 }
 
+function auts {
+    $aus = Read-Host -Prompt 'Would you like to add a user to this system? [y/n] '
+	    if ($aus -eq 'y'){
+		    $nusnm = Read-Host -Prompt 'What would you like the name of the user to be? '
+		    $nuspss = Read-Host -Prompt -AsSecureString 'Please input a new password for the user '
+		    New-LocalUser $nusnm -Password $nuspss -Confirm 
+		    Get-LocalUser 
+	    } else {
+		    Read-Host -Prompt 'Press any key to continue... '
+		    break
+	    }
+}
 
-##########################################################
-######################### Start ##########################
+#########################################################################################################
+######################### Start #########################################################################
 start_script
-##########################################################
+#########################################################################################################
