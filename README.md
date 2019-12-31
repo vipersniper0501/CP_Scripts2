@@ -1,5 +1,6 @@
 # CP_Scripts2
-DISCLAIMER: This project is student made with inspiration from other projects such as the scripts made by Ethan Fowler from TEAM BYTE 
+DISCLAIMERS: This project is student made with inspiration from other projects such as the scripts made by Ethan Fowler from TEAM BYTE 
+This script also uses Microsoft Attack Security Analyzer 2.1 which is owned and created by Microsoft. I do not take any credit in the creation of that program. It will only be used here for the sole purpose of auditing and having a premade audit to compare of a base windows 10 system. 
 
 FYI- This will be mostly used for a backup location for my scripts and will not always have the most up to date versions.
 
