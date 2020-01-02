@@ -24,7 +24,7 @@ function main_menu{
     Write-Host("")
     Write-Host("(1)Search Media Files                 (2)Windows Update")
     Write-Host("(3)Enable BitLocker                   (4)SysInternals Commands*")
-    Write-Host("(5)                                   (6)User and Group Settings*")
+    Write-Host("(5)                                   (6)User and Group Settings")
     Write-Host("(99)Exit                              (100)Reboot")
     Write-Host("")
 
