@@ -21,3 +21,7 @@ Hit Enter
 That is it! Good Luck!
 
 Some of the commands might require for you to execute them twice if they didnot show a list when they should have. I am currently working on fixing this problem.
+
+
+
+LINUX SCRIPT IN PROGRESS
