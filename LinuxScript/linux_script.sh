@@ -3,8 +3,6 @@
 ######## Global Variables ##############
 UserName = $(whoami)
 thedate = $(date)
-logU = Script_logUbu.txt
-logD = Script_logDeb.txt
 dist = distro
 
 ########################################
@@ -19,10 +17,10 @@ function linUbunut {
     echo "            ||    ||  |||||||   ||    ||  || ||  ||      ||      ||    ||              "
     echo "            ||    ||  ||    ||  ||    ||  ||  || ||      ||      ||    ||              "
     echo "            ||    ||  ||    ||  ||    ||  ||   ||||      ||      ||    ||              "
-    echo "             ||||||   ||||||/    ||||||   ||    |||      ||       ||||||               "
+    echo "             \||||/   ||||||/    \||||/   ||    |||      ||       \||||/               "
     echo "                                                                                       "
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Created by Apple Cidr~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    #printf "Log Created $thedate" > $logU
+    echo "Log Created $thedate" > Script_logUbu.txt
 }
 
 function linDebian {
@@ -39,11 +37,27 @@ function linDebian {
     echo "                                                                                       "
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Created by Apple Cidr~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     echo ""
-    #printf "Log Created $thedate" > $logD
+    echo "Log Created $thedate" > Script_logDeb.txt
 }
 
 function updt {
+    if [ $dist = "Ubuntu" ]; then
+        echo "Updates starting... | $thedate" >> Script_logUbu.txt
+    elif [ $dist = "Debian" ]; then
+        echo "Updates starting... | $thedate" >> Script_logDeb.txt
+    else
+        return 
+    fi;
+    
     sudo apt update && apt upgrade -y
+    
+    if [ $dist = "Ubuntu" ]; then
+        echo "Updates completed | $thedate" >> Script_logUbu.txt
+    elif [ $dist = "Debian" ]; then
+        echo "Updates completed | $thedate" >> Script_logDeb.txt
+    else
+        return 
+    fi;
 }
 
 function ubuntu_start {
@@ -56,6 +70,46 @@ function debian_start {
     clear
     sleep 1s
     main_menu
+}
+
+function alyn {
+    if [ $dist = "Ubuntu" ]; then
+        echo "Started install of Lynis | $thedate" >> Script_logUbu.txt
+    elif [ $dist = "Debian" ]; then
+        echo "Started install of Lynis | $thedate" >> Script_logDeb.txt
+    else
+        return 
+    fi;    
+    clear
+    sudo apt install lynis -y 
+    if [ $dist = "Ubuntu" ]; then
+        echo "Install of Lynis completed | $thedate" >> Script_logUbu.txt
+    elif [ $dist = "Debian" ]; then
+        echo "Install of Lynis completed | $thedate" >> Script_logDeb.txt
+    else
+        return 
+    fi;  
+    sleep 1s
+        if [ $dist = "Ubuntu" ]; then
+        echo "Started lynis security audit. For audit results find file LynisLog.txt near where you launched the script | $thedate" >> Script_logUbu.txt
+    elif [ $dist = "Debian" ]; then
+        echo "Started lynis security audit. For audit results find file LynisLog.txt near where you launched the script | $thedate" >> Script_logDeb.txt
+    else
+        return 
+    fi; 
+    
+    #cd /home/$UserName
+    #cd Desktop
+    #touch LynisLog.txt 
+    sudo lynis audit system > LynisLog.txt
+        if [ $dist = "Ubuntu" ]; then
+        echo "Lynis security audit has been completed. For audit results find file LynisLog.txt near where you launched the script | $thedate" >> Script_logUbu.txt
+    elif [ $dist = "Debian" ]; then
+        echo "Lynis security audit has been completed. For audit results find file LynisLog.txt near where you launched the script | $thedate" >> Script_logDeb.txt
+    else
+        return 
+    fi;  
+
 }
 
 ########################################
@@ -76,10 +130,10 @@ function main_menu {
     echo "Main Menu"
     echo ""
     echo "Commands:"
-    echo "1.) Updates                       2.) User Settings "
-    echo "3.) Firewall Settings             4.) Services Settings"
-    echo "5.) Remove Prohibited Software    6.) Malware Removal"
-    echo "7.) Remove Prohibited Software    8.) Audit using Lynis"
+    echo "1.) Updates                       2.) User Settings* "
+    echo "3.) Firewall Settings*             4.) Services Settings*"
+    echo "5.) Remove Prohibited Software*    6.) Malware Removal*"
+    echo "7.) Audit using Lynis"
     echo ""
     echo "85.) Run all at once"
     echo "99.) Quit                         100.) Restart"
@@ -97,6 +151,10 @@ function main_menu {
         main_menu
     elif [ $com = 2 ]; then
 	usr_gru    
+    elif [ $com = 7 ]; then
+	alyn
+	read -p 'Press any key to continue: '
+	main_menu
     elif [ $com = 99 ]; then
 	exit
     elif [ $com = 100 ]; then
@@ -174,6 +232,8 @@ function start_scrpt {
 	exit
     fi;
 
+
+    clear
     echo ""
     echo "What linux distro are you using? [Ex: Ubuntu]  : "; 
     read dist
