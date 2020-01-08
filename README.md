@@ -10,7 +10,7 @@ Usage Instructions For Powershell Scripts:
 
 2.)Navigate to location of script file through powershell ex: cd C:\Users\Michael\Downloads\
 
-3.)In powershell tyoe the following: Set-ExecutionPolicy Unrestricted          
+3.)In powershell type the following: Set-ExecutionPolicy Unrestricted          
 
 Do this to allow the execution of scripts
 
