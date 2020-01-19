@@ -1,10 +1,5 @@
 ######################### To-Do's ########################
-#(0.)Organize script
-#(1.)Make area only for menus
-#(2.)Remake user menu actions into functions
-#(3.)Add more commands to Script
-
-#(3.a)Possibly make command to compare current system to my checklist at https://michael.iansweb.org/win10harden.php 
+#Possibly make command to compare current system to my checklist at https://michael.iansweb.org/win10harden.php 
 
 
 #Option to use Sysinternals Suite
@@ -24,7 +19,9 @@ function main_menu{
     Write-Host("")
     Write-Host("(1)Search Media Files                 (2)Windows Update")
     Write-Host("(3)Enable BitLocker                   (4)SysInternals Commands*")
-    Write-Host("(5)                                   (6)User and Group Settings")
+    Write-Host("(5)Services*                           (6)User and Group Settings")
+    Write-Host("")
+    Write-Host("(85)Run all commands now")
     Write-Host("(99)Exit                              (100)Reboot")
     Write-Host("")
 
@@ -32,30 +29,25 @@ function main_menu{
     if ($com -eq '1'){
         srchmdia
         Read-Host -Prompt 'Press any key to exit... '
-    }
-    if ($com -eq '2'){
+    } elseif ($com -eq '2'){
         winupd
         Read-Host -Prompt 'Press any key to exit... '
-    }
-    if ($com -eq '3'){
+    } elseif ($com -eq '3'){
         enblbit
         Read-Host -Prompt 'Press any key to continue... '
-    }
-    if ($com -eq '4'){
+    } elseif ($com -eq '4'){
         sysintmenu
-    }
-    if ($com -eq '5'){
+    } elseif ($com -eq '5'){
 
-    }
-    if ($com -eq '6'){
+    } elseif ($com -eq '6'){
         usr_grumnu
-    }
-    if ($com -eq '99'){
+    } elseif ($com -eq '85'){
+        rall
+    } elseif ($com -eq '99'){
         Read-Host -Prompt 'Press any key to exit... '
         Clear-Host
         break
-    }
-    if ($com -eq '100'){
+    } elseif ($com -eq '100'){
         Write-Host("")
         Write-Host("")
         Write-Host("!WARNING!")
@@ -67,6 +59,8 @@ function main_menu{
         } else {
             return 
         }
+    } else {
+        return
     }
 
 }
@@ -77,6 +71,21 @@ function sysintmenu {
     Write-Host("")
     Write-Host("This is the menu for use of the Microsoft SysInternals Suite of commands and applications...")
     Write-Host("These commands are currently under contstruction, they will be ready in a future update.")
+    Write-Host("")
+    Write-Host("1.)Handle               2.)Registry Size Usage Reporter")
+    Write-Host("3.)TCP Viewer")
+
+    $com = Read-Host -Prompt 'Which command would you like to use? '
+    if ($com -eq 1){
+        handle
+    } elseif ($com -eq 2) {
+        rotkit
+    } elseif ($com -eq 3) {
+        tcpview
+    } else {
+        return
+    }
+
 }
 
 
@@ -92,6 +101,7 @@ function usr_grumnu{
     Write-Host("(3)Create New User Group        (4)Remove User Group")
     Write-Host("(5)Add User to User Group       (6)Remove User from User Group")
     Write-Host("(7)List Local Users		(8)List Local Groups")
+    Write-Host("")
     Write-Host("(99)Back            ")
     Write-Host("")
 
@@ -157,6 +167,23 @@ function usr_grumnu{
 #########################################################################################################
 ######################## Functions ######################################################################
 
+function serv {
+    Clear-Host
+    Write-Host("")
+    servyn = Read-Host -Prompt 'Would you like to disable services? [y/n] '
+    if ($servyn -eq 'y'){
+        rdpyn = Read-Host -Prompt 'IMPORTANT: Is Remote Desktop Services required from the readme? [y/n] '
+        if ($rdpyn -eq 'y'){
+            $servicelist =
+            Set-Service -Name 
+        } else {
+
+        }
+    } else {
+        main_menu
+    }
+}
+
 function win10 {
     Write-Host("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     Write-Host("        ||       ||  ||||||  ||      ||         /||      /||||\         ")
@@ -182,6 +209,90 @@ function win10 {
 #    }
 #}
 
+function tcpview {
+    Clear-Host
+    Write-Host("")
+    Write-Host("What it does: This application scans the system for open ports and sockets and tells you who the owner is, what made it, and what type it is.")
+    Write-Host("")
+    $tcpviewyn = Read-Host -Prompt "Would you like to use the application TCP Viewer from Microsoft's System Internals Suite?  [y/n]  "
+    if ($tcpviewyn -eq 'y'){
+        $homepath = Get-Location
+        $whoami = $env:USERNAME
+        Set-Location C:\Users\$whoami\Desktop\SysinternalsSuite
+        Write-Host("Starting TCP Viewer...")
+    } else {
+        sysintmenu
+    }
+}
+
+
+function rotkit {
+    Clear-Host
+    Write-Host("")
+    Write-Host("What it does: Finds out the size of each Registry and its usage.")
+    Write-Host("")
+    $rootyn =  Read-Host -Prompt "Would you like to use the application Registry Size Usage Reporter from Microsoft's System Internals Suite?  [y/n]  "
+    if ($rootyn -eq 'y'){
+        $homepath = Get-Location
+        $whoami = $env:USERNAME
+        Set-Location C:\Users\$whoami\Desktop\SysinternalsSuite
+        Write-Host("Starting Root Kit Revealer...")
+        ./ru.exe HKEY_CLASSES_ROOT 
+        ./ru.exe HKEY_CURRENT_USER
+        ./ru.exe HKEY_LOCAL_MACHINE
+        ./ru.exe HKEY_USERS
+        ./ru.exe HKEY_CURRENT_CONFIG
+        Write-Host("")
+        Write-Host("")
+        Write-Host("")
+        $output = Read-Host -Prompt 'Would you like to have this sent to a file on your desktop? [y/n] '
+        if ($output -eq 'y'){
+            ./ru.exe HKEY_CLASSES_ROOT | Out-File C:\Users\$whoami\Desktop\registrysizelog.txt
+            ./ru.exe HKEY_CURRENT_USER | Out-File C:\Users\$whoami\Desktop\registrysizelog.txt
+            ./ru.exe HKEY_LOCAL_MACHINE | Out-File C:\Users\$whoami\Desktop\registrysizelog.txt
+            ./ru.exe HKEY_USERS | Out-File C:\Users\$whoami\Desktop\registrysizelog.txt
+            ./ru.exe HKEY_CURRENT_CONFIG | Out-File C:\Users\$whoami\Desktop\registrysizelog.txt
+            Write-Host("You can now find the output in a log called registrysizelog.txt on your desktop.")
+            Start-Sleep -Seconds 4
+        } else {
+            return
+        }
+        Set-Location $homepath
+    } else {
+        sysintmenu
+    }
+}
+
+
+function handle {
+    Clear-Host
+    Write-Host("")
+    Write-Host("What it does: This handy command-line utility will show you what files are open by which processes, and much more.")
+    Write-Host("")
+    $handyn = Read-Host -Prompt "Would you like to use the command Handle from Microsoft's System Internals Suite?  [y/n]  "
+    if ($handyn -eq 'y'){
+        $homepath = Get-Location
+        $whoami = $env:USERNAME
+        Set-Location C:\Users\$whoami\Desktop\SysinternalsSuite
+        Write-Host("Starting Handle...")
+        ./handle.exe
+        Write-Host("")
+        Write-Host("")
+        Write-Host("")
+        $output = Read-Host -Prompt 'Would you like to have this sent to a file on your desktop? [y/n] '
+        if ($output -eq 'y'){
+            ./handle.exe | Out-File C:\Users\$whoami\Desktop\handlelog.txt
+            Write-Host("You can now find the output in a log called handlelog.txt on your desktop.")
+            Start-Sleep -Seconds 4
+        } else {
+            return
+        }
+        Set-Location $homepath
+    } else {
+        sysintmenu
+    }
+}
+
 
 function srchmdia {
     Clear-Host
@@ -194,9 +305,31 @@ function winupd {
     Install-Module PSWindowsUpdate
     Write-Host("PSWindowsUpdate is now installed.")
     Write-Host("")
+    
     Write-Host("Getting Windows Updates...")
-    Get-WindowsUpdate
-    Install-WindowsUpdate -Confirm
+    Import-Module PSWindowsUpdate
+    $updates = Invoke-Command -ScriptBlock {Get-Wulist -verbose}
+    $updatenumber = ($updates.kb).count
+    if ($null -ne $updates){
+        Get-WindowsUpdate -AcceptAll -Install | Out-File C:\PSWindowsUpdate.log
+        do {$updatestatus = Get-Content c:\PSWindowsUpdate.log
+ 
+            "Currently processing the following update:"
+     
+            Get-Content c:\PSWindowsUpdate.log | select-object -last 1
+     
+            Start-Sleep -Seconds 10
+     
+            $ErrorActionPreference = 'SilentlyContinue'
+     
+            $installednumber = ([regex]::Matches($updatestatus, "Installed" )).count
+     
+            $ErrorActionPreference = ‘Continue’
+     
+        }until ( $installednumber -eq $updatenumber)
+          
+    }
+    Remove-Item -path C:\PSWindowsUpdate.log
 }
 
 function crtgrup {
@@ -221,6 +354,13 @@ function crtgrup {
         usr_grumnu
     }
 }
+
+function rall {
+    srchmdia
+    Write-Host("Please go through output and delete all prohibited media...")
+
+}
+
 
 function rusrfgru {
     Clear-Host
