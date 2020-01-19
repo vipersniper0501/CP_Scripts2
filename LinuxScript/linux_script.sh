@@ -20,7 +20,7 @@ function linUbunut {
     echo "             \||||/   ||||||/    \||||/   ||    |||      ||       \||||/               "
     echo "                                                                                       "
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Created by Apple Cidr~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    echo "Log Created $thedate" > Script_logUbu.txt
+    #echo "Log Created $thedate" > Script_log.txt
 }
 
 function linDebian {
@@ -37,27 +37,13 @@ function linDebian {
     echo "                                                                                       "
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Created by Apple Cidr~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     echo ""
-    echo "Log Created $thedate" > Script_logDeb.txt
+    #echo "Log Created $thedate" > Script_log.txt
 }
 
 function updt {
-    if [ $dist = "Ubuntu" ]; then
-        echo "Updates starting... | $thedate" >> Script_logUbu.txt
-    elif [ $dist = "Debian" ]; then
-        echo "Updates starting... | $thedate" >> Script_logDeb.txt
-    else
-        return 
-    fi;
-    
+    echo "Updates starting... | $thedate" >> Script_log.txt
     sudo apt update && apt upgrade -y
-    
-    if [ $dist = "Ubuntu" ]; then
-        echo "Updates completed | $thedate" >> Script_logUbu.txt
-    elif [ $dist = "Debian" ]; then
-        echo "Updates completed | $thedate" >> Script_logDeb.txt
-    else
-        return 
-    fi;
+    echo "Updates completed | $thedate" >> Script_log.txt
 }
 
 function ubuntu_start {
@@ -72,50 +58,64 @@ function debian_start {
     main_menu
 }
 
+function fwset {
+	clear
+	read -p 'Does this system require SSH functionality? [y/n] : ' ssh
+        read -p 'Does this system require FTP functionality? [y/n] : ' ftp
+	read -p 'Does this system require Webserver functionality? Does it need to host a website? [y/n] : ' web
+	read -p 'Does this system require SMB file sharing? (Ex: School shared drive) Does the system need this? [y/n] : ' smb
+	echo "Started install of UFW if not installed already | $thedate" >> Script_log.txt
+	sudo apt install ufw -y	
+	echo "Completed install of UFW on system | $thedate" >> Script_log.txt
+	sudo ufw enable
+	echo "UFW has been enabled on the system | $thedate" >> Script_log.txt
+	if [ $ssh = 'y' ]; then 
+		sudo ufw allow 22
+		echo "Port 22 has been opened for SSH networking | $thedate" >> Script_log.txt
+	elif [ $ssh = 'n' ]; then
+		sudo ufw deny 22
+		echo "Port 22 has been closed to stop SSH networking | $thedate" >> Script_log.txt
+	elif [ $ftp = 'y' ]; then
+		sudo ufw allow 21
+		echo "Port 21 has been opened for FTP networking | $thedate" >> Script_log.txt
+	elif [ $web = 'y' ]; then
+		sudo ufw allow 80
+		echo "Port 80 has been opened for basic Webserver hosting | $thedate" >> Script_log.txt
+		read -p 'Does the Webserver require ssl or HTTPS? [y/n] : ' https
+		if [ $https -eq 'y' ]; then
+			sudo ufw allow 443
+			echo "Port 443 has been opened for HTTPS or ssl | $thedate" >> Script_log.txt 
+		fi
+	elif [ $smb = 'y' ]; then 
+		sudo ufw allow 139
+		echo "Port 139 has been opened for SMB file sharing | $thedate" >> Script_log.txt
+	else
+		return
+	fi;
+
+}
+
 function alyn {
-    if [ $dist = "Ubuntu" ]; then
-        echo "Started install of Lynis | $thedate" >> Script_logUbu.txt
-    elif [ $dist = "Debian" ]; then
-        echo "Started install of Lynis | $thedate" >> Script_logDeb.txt
-    else
-        return 
-    fi;    
+    echo "Started install of Lynis | $thedate" >> Script_log.txt
     clear
     sudo apt install lynis -y 
-    if [ $dist = "Ubuntu" ]; then
-        echo "Install of Lynis completed | $thedate" >> Script_logUbu.txt
-    elif [ $dist = "Debian" ]; then
-        echo "Install of Lynis completed | $thedate" >> Script_logDeb.txt
-    else
-        return 
-    fi;  
+    echo "Install of Lynis completed | $thedate" >> Script_log.txt
     sleep 1s
-        if [ $dist = "Ubuntu" ]; then
-        echo "Started lynis security audit. For audit results find file LynisLog.txt near where you launched the script | $thedate" >> Script_logUbu.txt
-    elif [ $dist = "Debian" ]; then
-        echo "Started lynis security audit. For audit results find file LynisLog.txt near where you launched the script | $thedate" >> Script_logDeb.txt
-    else
-        return 
-    fi; 
-    
+    echo "Started lynis security audit. For audit results find file LynisLog.txt near where you launched the script | $thedate" >> Script_log.txt
+
     #cd /home/$UserName
     #cd Desktop
     #touch LynisLog.txt 
     sudo lynis audit system > LynisLog.txt
-        if [ $dist = "Ubuntu" ]; then
-        echo "Lynis security audit has been completed. For audit results find file LynisLog.txt near where you launched the script | $thedate" >> Script_logUbu.txt
-    elif [ $dist = "Debian" ]; then
-        echo "Lynis security audit has been completed. For audit results find file LynisLog.txt near where you launched the script | $thedate" >> Script_logDeb.txt
-    else
-        return 
-    fi;  
+    echo "Lynis security audit has been completed. For audit results find file LynisLog.txt near where you launched the script | $thedate" >> Script_log.txt
 
 }
 
 ########################################
 ############## MENU's ##################
 function main_menu {
-    
+    clear
+
     #for determining which title to show
     if [ $dist = "Ubuntu" ]; then
         linUbunut
@@ -131,7 +131,7 @@ function main_menu {
     echo ""
     echo "Commands:"
     echo "1.) Updates                       2.) User Settings* "
-    echo "3.) Firewall Settings*             4.) Services Settings*"
+    echo "3.) Firewall Settings             4.) Services Settings*"
     echo "5.) Remove Prohibited Software*    6.) Malware Removal*"
     echo "7.) Audit using Lynis"
     echo ""
@@ -150,17 +150,22 @@ function main_menu {
         clear
         main_menu
     elif [ $com = 2 ]; then
-	usr_gru    
+	    usr_gru   
+    elif [ $com = 3 ]; then
+	    clear
+	    fwset
+	    main_menu
     elif [ $com = 7 ]; then
-	alyn
+	    alyn
 	read -p 'Press any key to continue: '
-	main_menu
+	    main_menu
     elif [ $com = 99 ]; then
-	exit
+	    clear
+	    exit
     elif [ $com = 100 ]; then
-	sudo reboot
+	    sudo reboot
     else 
-	echo ""
+	    echo ""
     fi
 
 }
@@ -169,11 +174,11 @@ function usr_gru {
     
     #for determining which title to show
     if [ $dist = "Ubuntu" ]; then 
-	linUbuntu
+	    linUbuntu
     elif [ $dist = "Debian" ]; then
-	linDebian
+	    linDebian
     else
-	return
+	    return
     fi;
 
     echo ""
@@ -190,11 +195,11 @@ function usr_gru {
     read -p 'Which command would you like to use? : ' com
     
     if [ $com = 1 ]; then
-	echo ""
+	    echo ""
     elif [ $com = 99 ]; then
-	main_menu
+	    main_menu
     else
-	echo ""
+	  return
     fi
 }
 
@@ -212,6 +217,7 @@ function start_scrpt {
         echo "Starting Script..."
         sleep 3s
         clear
+	echo "Log Created | $thedate" > Script_log.txt
     else
         echo "Must run the script as root for most commands to work..."
         sleep 5s
