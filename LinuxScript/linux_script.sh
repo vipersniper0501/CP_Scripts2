@@ -202,6 +202,16 @@ function alyn {
 #
 #}
 
+function srchmedia {
+  echo "This output will be also be placed in the Script_log.txt for further review..."
+  sleep 2s
+  echo "----------------------------------------------------------------------------- Prohibited Media Search Started -----------------------------------------------------------------------------" | tee Script_log.txt
+  sleep 1s
+  find / -name '*.jpg' -o -name '*.mp4' -o -name '*.flv' -o -name '*.avi' -o -name '*.wmv' -o -name '*.mov' -o -name '*.png' -o -name '*.jpg' -o -name '*.tif' -o -name '*.gif' -o -name '*.mp3' -o -name '*.wmv' -o -name '*.wma' -o -name '*.aif' -o -name '*.jar' | tee Script_log.txt
+  echo "------------------------------------------------------------------------------ Prohibited Media Search Ended ------------------------------------------------------------------------------"
+  sleep 1s
+}
+
 function clamtime {
 	echo "This command will take a long time! Once started you will no longer be able to use this terminal until the command has completed. I recommend that if you need to be able to continue using this script, that you then open a another tab and run the script again from that tab while the scan is running."
 	read -p "Are you sure you want to start this now? [y/n]" clams
@@ -465,6 +475,12 @@ function main_menu {
     elif [ $com = 7 ]; then
       clear
       alyn
+      read -p 'Press Enter key to continue: '
+      clear
+      main_menu
+    elif [ $com = 9 ]; then
+      clear
+      srchmedia
       read -p 'Press Enter key to continue: '
       clear
       main_menu
