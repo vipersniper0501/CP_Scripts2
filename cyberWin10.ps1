@@ -19,7 +19,7 @@ function main_menu{
     Write-Host("")
     Write-Host("(1)Search Media Files                 (2)Windows Update")
     Write-Host("(3)Enable BitLocker                   (4)SysInternals Commands*")
-    Write-Host("(5)                                   (6)User and Group Settings")
+    Write-Host("(5)Services*                           (6)User and Group Settings")
     Write-Host("")
     Write-Host("(85)Run all commands now")
     Write-Host("(99)Exit                              (100)Reboot")
@@ -167,6 +167,23 @@ function usr_grumnu{
 #########################################################################################################
 ######################## Functions ######################################################################
 
+function serv {
+    Clear-Host
+    Write-Host("")
+    servyn = Read-Host -Prompt 'Would you like to disable services? [y/n] '
+    if ($servyn -eq 'y'){
+        rdpyn = Read-Host -Prompt 'IMPORTANT: Is Remote Desktop Services required from the readme? [y/n] '
+        if ($rdpyn -eq 'y'){
+            $servicelist =
+            Set-Service -Name 
+        } else {
+
+        }
+    } else {
+        main_menu
+    }
+}
+
 function win10 {
     Write-Host("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     Write-Host("        ||       ||  ||||||  ||      ||         /||      /||||\         ")
@@ -279,7 +296,7 @@ function handle {
 
 function srchmdia {
     Clear-Host
-    get-childitem -Path C:\Users\* -Recurse -Force -Include *.flv, *.mp4, *.avi, *.wmv, *.mov, *.png, *.jpg, *.tif, *.gif, *.mp3, *.wmv, *.wma, *.aif
+    get-childitem -Path C:\Users\* -Recurse -Force -Include *.flv, *.mp4, *.avi, *.wmv, *.mov, *.png, *.jpg, *.tif, *.gif, *.mp3, *.wmv, *.wma, *.aif, *.jar
 }
 
 function winupd {
