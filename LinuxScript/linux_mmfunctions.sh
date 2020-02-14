@@ -160,7 +160,7 @@ function srchmedia {
   echo "--------------- Prohibited Media Search Started ---------------  | ${thedate}" | tee Script_log.txt
   sleep 1s
   find / -name '*.jpg' -o -name '*.mp4' -o -name '*.flv' -o -name '*.avi' -o -name '*.wmv' -o -name '*.mov' -o -name '*.png' -o -name '*.jpg' -o -name '*.tif' -o -name '*.gif' -o -name '*.mp3' -o -name '*.wmv' -o -name '*.wma' -o -name '*.aif' -o -name '*.jar' | tee media_log
-  echo "----------------- Prohibited Media Search Ended --------------  | ${thedate}"
+  echo "----------------- Prohibited Media Search Ended --------------  | ${thedate}" | tee Script_log.txt
   sleep 1s
 }
 
@@ -211,6 +211,6 @@ function basic_config {
     echo "Apache2 web server settings have been configured  | ${thedate}" | tee Script_log.txt
   fi
   echo "Basic configuration has completed"
-  echo "------------- Basic configuration completed -------------  | ${thedate}" >> Script_log.txt
+  echo "------------- Basic configuration completed -------------  | ${thedate}" | tee Script_log.txt
   sleep 1s
 }
