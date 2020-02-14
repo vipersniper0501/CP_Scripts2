@@ -2,12 +2,23 @@
 #use lynis for more things to add to script
 ################# Imports ##############
 . linux_basicfunctions.sh #location of functions used by start script
-. linux_mmfunctions.sh #location of functions used for main menu 
+. linux_mmfunctions.sh #location of functions used for main menu
 . linux_ugmfunctions.sh #location of functions used for User and Group Settings menu
 ######## Global Variables ##############
 UserName=$(whoami)
 thedate=$(date)
 dist=distro
+##Service Variables##
+ssh='' #basic ssh settings
+ftp='' #basic ftp Settings
+proftp='' #proftp specific settings
+vsftpd='' #vsftpd specific settings
+web='' #basic web settings
+apaweb='' #apache2 specific settings
+nginweb='' #nginx specific settings
+smb='' #basic samba settings
+sql='' #basic sql settings
+rsnc='' #basic rsync settings
 
 ########################################################################################
 ######################################  Functions ######################################
@@ -174,14 +185,13 @@ function start_scrpt {
   sudo chmod 777 Script_log.txt
   read -p 'Have you completed all of the Forensics Questions? [y/n] : ' fqs
   if [ $fqs = y ]; then
-	echo "" #since yes, the script continues.
-  else
-	echo "Please complete the Forensics Questions first before you use this script."
-	sleep 3s
-	exit
+	  echo
+    else
+	  echo "Please complete the Forensics Questions first before you use this script."
+	  sleep 3s
+	  exit
   fi
   distro_select #asks users what distro they are using, then open main menu for that 'distro'
-  read -p 'Press Enter to continue: '
 }
 
 ########################################
