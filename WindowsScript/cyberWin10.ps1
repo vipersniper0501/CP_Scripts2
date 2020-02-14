@@ -1,5 +1,5 @@
 ######################### To-Do's ########################
-#Possibly make command to compare current system to my checklist at https://michael.iansweb.org/win10harden.php 
+#Possibly make command to compare current system to my checklist at https://michael.iansweb.org/win10harden.php
 
 
 #Option to use Sysinternals Suite
@@ -57,7 +57,7 @@ function main_menu{
         if ($rstrtcpu -eq 'y'){
             Restart-Computer -Confirm
         } else {
-            return 
+            return
         }
     } else {
         return
@@ -106,15 +106,15 @@ function usr_grumnu{
     Write-Host("")
 
     $usrcommand = Read-Host -Prompt 'Which command would you like to use? '
-    
+
     if ($usrcommand -eq '1'){
-        #add user to system 
+        #add user to system
         auts
     }
-    
+
     if ($usrcommand -eq '2'){
         #remove user from system
-        rusr 
+        rusr
     }
 
     if ($usrcommand -eq '3'){
@@ -144,7 +144,7 @@ function usr_grumnu{
         Write-Host("")
         Get-LocalUser
         Write-Host("")
-	    Read-Host -Prompt 'Press any key to continue... '	
+	    Read-Host -Prompt 'Press any key to continue... '
         usr_grumnu
     }
 
@@ -158,7 +158,7 @@ function usr_grumnu{
 	    Read-Host -Prompt 'Press any key to continue... '
 	    usr_grumnu
     }
-    
+
     if ($usrcommand -eq '99'){
         main_menu
     }
@@ -175,7 +175,7 @@ function serv {
         rdpyn = Read-Host -Prompt 'IMPORTANT: Is Remote Desktop Services required from the readme? [y/n] '
         if ($rdpyn -eq 'y'){
             $servicelist =
-            Set-Service -Name 
+            Set-Service -Name
         } else {
 
         }
@@ -237,7 +237,7 @@ function rotkit {
         $whoami = $env:USERNAME
         Set-Location C:\Users\$whoami\Desktop\SysinternalsSuite
         Write-Host("Starting Root Kit Revealer...")
-        ./ru.exe HKEY_CLASSES_ROOT 
+        ./ru.exe HKEY_CLASSES_ROOT
         ./ru.exe HKEY_CURRENT_USER
         ./ru.exe HKEY_LOCAL_MACHINE
         ./ru.exe HKEY_USERS
@@ -305,7 +305,7 @@ function winupd {
     Install-Module PSWindowsUpdate
     Write-Host("PSWindowsUpdate is now installed.")
     Write-Host("")
-    
+
     Write-Host("Getting Windows Updates...")
     Import-Module PSWindowsUpdate
     $updates = Invoke-Command -ScriptBlock {Get-Wulist -verbose}
@@ -313,21 +313,21 @@ function winupd {
     if ($null -ne $updates){
         Get-WindowsUpdate -AcceptAll -Install | Out-File C:\PSWindowsUpdate.log
         do {$updatestatus = Get-Content c:\PSWindowsUpdate.log
- 
+
             "Currently processing the following update:"
-     
+
             Get-Content c:\PSWindowsUpdate.log | select-object -last 1
-     
+
             Start-Sleep -Seconds 10
-     
+
             $ErrorActionPreference = 'SilentlyContinue'
-     
+
             $installednumber = ([regex]::Matches($updatestatus, "Installed" )).count
-     
+
             $ErrorActionPreference = ‘Continue’
-     
+
         }until ( $installednumber -eq $updatenumber)
-          
+
     }
     Remove-Item -path C:\PSWindowsUpdate.log
 }
@@ -339,9 +339,9 @@ function crtgrup {
         $crtgru = $True
         while ($crtgru -eq $True){
             $ngrunm = Read-Host -Prompt 'What is the name of the new group? '
-            New-LocalGroup -Name $ngrunm 
+            New-LocalGroup -Name $ngrunm
             Write-Host("New group " + $ngrunm + " has been created!")
-            
+
             $anotgru = Read-Host -Prompt 'Would you like to make another local user group? [y/n] '
             if ($anotgru -eq 'y'){
                 return $True0
@@ -400,14 +400,14 @@ function auts {
             if ($admn -eq 'y'){
                 $nusnm = Read-Host -Prompt 'What would you like the name of the user to be? '
                 $nuspss = Read-Host -Prompt -AsSecureString 'Please input a new password for the user '
-                New-LocalUser $nusnm -Password $nuspss -Confirm 
+                New-LocalUser $nusnm -Password $nuspss -Confirm
                 Add-LocalGroupMember -Group "Administrators" -Member $nusnm
-                Get-LocalUser 
+                Get-LocalUser
             } else {
                 $nusnm = Read-Host -Prompt 'What would you like the name of the user to be? '
                 $nuspss = Read-Host -Prompt -AsSecureString 'Please input a new password for the user '
-                New-LocalUser $nusnm -Password $nuspss -Confirm 
-                Get-LocalUser 
+                New-LocalUser $nusnm -Password $nuspss -Confirm
+                Get-LocalUser
             }
             $augagyn = Read-Host -Prompt 'Would you like to add another user to the system? [y/n] '
             if ($augagyn -eq 'y'){
@@ -488,7 +488,7 @@ function autgru {
             Clear-Host #This is done so it is a gurantee that the list will show
             Get-LocalUser
             $usrnam = Read-Host -Prompt 'What user would you like to add to a group? '
-            Get-LocalGroup 
+            Get-LocalGroup
             Clear-Host #This is done so it is a gurantee that the list will show
             Get-LocalGroup
             $usrgruadd = Read-Host -Prompt 'Which local group would you like to add' + $usrnam + ' to? '
@@ -513,7 +513,7 @@ function enblbit {
     manage-bde -status
     $drv = Read-Host -Prompt 'What drive would you like to enable bit locker on? [Ex: c:   e:  ]   '
     manage-bde -protectors -add -pw $drv
-    manage-bde -on $drv     
+    manage-bde -on $drv
 }
 
 #########################################################################################################
@@ -533,7 +533,7 @@ function start_script {
             Clear-Host
             main_menu
         }
-      
+
     } else {
         Write-Host("You must complete the Forensics first before you use this script.")
         Write-Host("")
