@@ -4,27 +4,23 @@
 . linux_basicfunctions.sh #location of functions used by start script
 . linux_mmfunctions.sh #location of functions used for main menu
 . linux_ugmfunctions.sh #location of functions used for User and Group Settings menu
+. linux_GV.sh
 ######## Global Variables ##############
-UserName=$(whoami)
-thedate=$(date)
-dist=distro
+#UserName=$(whoami)
+#thedate=$(date)
+#dist=distro
 ##Service Variables##
-ssh='' #basic ssh settings
-ftp='' #basic ftp Settings
-proftp='' #proftp specific settings
-vsftpd='' #vsftpd specific settings
-web='' #basic web settings
-apaweb='' #apache2 specific settings
-nginweb='' #nginx specific settings
-smb='' #basic samba settings
-sql='' #basic sql settings
-rsnc='' #basic rsync settings
+#ssh='' #basic ssh settings
+#ftp='' #basic ftp Settings
+#proftp='' #proftp specific settings
+#vsftpd='' #vsftpd specific settings
+#web='' #basic web settings
+#apaweb='' #apache2 specific settings
+#nginweb='' #nginx specific settings
+#smb='' #basic samba settings
+#sql='' #basic sql settings
+#rsnc='' #basic rsync settings
 ########################################################################################
-######################################  Functions ######################################
-
-#been moved to other files to simplify code
-
-####################################################################################
 ###################################### MENU's ######################################
 function main_menu {
   clear

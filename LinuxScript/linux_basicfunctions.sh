@@ -1,5 +1,6 @@
 #!/bin/bash
-
+#####Imports#####
+. linux_GV.sh
 
 ################### Functions #####################
 function linUbunut {
@@ -52,23 +53,28 @@ function distro_select {
 function start_menu {
   clear
   sleep 1s
-  echo ''
-  echo "This script requires a little bit of information about your system's required services and programs..."
-  echo ''
-  read -p 'Does this system require SSH functionality? [y/n] : ' ssh
-  read -p 'Does this system require FTP functionality? [y/n] : ' ftp
-  if [ $ftp = 'y' ]; then
-    read -p 'Does this system use Proftpd? [y/n] : ' proftp
-    read -p 'Does this system use Vsftpd? [y/n] : ' vsftpd
+  if [ -s ScriptSettings ]; then
+  echo
+  else
+    echo ''
+    echo "This script requires a little bit of information about your system's required services and programs..."
+    echo ''
+    read -p 'Does this system require SSH functionality? [y/n] : ' ssh
+    read -p 'Does this system require FTP functionality? [y/n] : ' ftp
+    if [ $ftp = 'y' ]; then
+      read -p 'Does this system use Proftpd? [y/n] : ' proftp
+      read -p 'Does this system use Vsftpd? [y/n] : ' vsftpd
+    fi
+    read -p 'Does this system require Webserver functionality? Does it need to host a website? [y/n] : ' web
+    if [ $web = 'y' ]; then
+      read -p 'Does this system use Apache2 webserver for hosting? [y/n] : ' apaweb
+      read -p 'Does this system use Nginx webserver for hosting? [y/n] : ' nginweb
+      read -p 'Does the Webserver require SSL or HTTPS? [y/n] : ' https
+    fi
+    read -p 'Does this system require Samba (smb) functionality? [y/n] : ' smb
+    read -p 'Does this system require SQL functionality? [y/n] : ' sql
+    read -p 'Does this system require Rsync functionality? [y/n] : ' rsnc
+    echo -e " ${ssh} \n ${ftp} \n ${proftp} \n ${vsftpd} \n ${web} \n ${apaweb} \n ${nginweb} \n ${smb} \n ${sql} \n ${rsnc}" > ScriptSettings
   fi
-  read -p 'Does this system require Webserver functionality? Does it need to host a website? [y/n] : ' web
-  if [ $web = 'y' ]; then
-    read -p 'Does this system use Apache2 webserver for hosting? [y/n] : ' apaweb
-    read -p 'Does this system use Nginx webserver for hosting? [y/n] : ' nginweb
-  fi
-  read -p 'Does this system require Samba (smb) functionality? [y/n] : ' smb
-  read -p 'Does this system require SQL functionality? [y/n] : ' sql
-  read -p 'Does this system require Rsync functionality? [y/n] : ' rsnc
-  echo -e " ${ssh} \n ${ftp} \n ${proftp} \n ${vsftpd} \n ${web} \n ${apaweb} \n ${nginweb} \n ${smb} \n ${sql} \n ${rsnc}" >> Script_log.txt
   main_menu
 }
