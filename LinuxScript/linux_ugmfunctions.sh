@@ -67,7 +67,7 @@ function usrtogru {
     while [ $usrtogru = 1 ]; do
       #eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1  #this prints out the users that are able to sign in (not system users that are used by programs)
       cat /etc/passwd | grep "/home" | cut -d":" -f1
-      
+
       read -p 'Which user would you like to add to a group? : ' name
       getent group | cut -d: -f1
       read -p 'Which group would you like to add user ${name} to? : ' group
@@ -129,7 +129,7 @@ function rmfrogru {
     while [ $rmfrogru = 1 ]; do
       #eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
       cat /etc/passwd | grep "/home" | cut -d":" -f1
-      
+
       read -p 'Which user would you like to remove from a group? : ' name
       getent group | cut -d: -f1
       read -p 'Which group would you like to remove the user from? : ' gruname
@@ -166,18 +166,28 @@ function grumem {
   fi
 }
 
+#change all users passwords
 function chpaswdall {
   read -p 'Would you like to change all of the passwords for the users? [y/n] : ' chpaswdallyn
   if [ $chpaswdallyn = 'y' ]; then
-    userlist = ()
-    mapfile -t $userlist < <( cat /etc/passwd | grep "/home" | cut -d":" -f1 )  #shows users in home directory
-    
-    usersleft = ${#userlist[@]}  #this variable is equivelent to the number of users in list $userlist
-    read -p 'What would you like the new passwords to be?' newpasswd
+    userlist=( $(eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1) )
+    echo ${userlist[@]}
+    usersleft=${#userlist[@]}  #this variable is equivelent to the number of users in list $userlist
+    echo $usersleft
+    read -p 'What would you like the new passwords to be? : ' newpasswd
+    i=0
     while [ $usersleft != 0 ]; do
-      
-      
+      sudo echo "${userlist[$i]}:${newpasswd}" | sudo chpasswd
+      echo "User ${userlist[$i]} password has been changed successfully!" | tee Script_log.txt
+      let i=i+1
+      echo $i
+      let usersleft=usersleft-1
+      echo $usersleft
+      sleep 0.5s
     done
+    echo "${userslist[@]} all users except for the currently logged in user, have had their passwords changed to ${newpasswd}!"
+    echo "All passwords for all users have been changed except the account you are currently logged in as.  | ${thedate}" | tee Script_log.txt
+    sleep 1s
   else
     usr_gru
   fi

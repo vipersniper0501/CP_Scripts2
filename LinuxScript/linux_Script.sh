@@ -19,7 +19,6 @@ nginweb='' #nginx specific settings
 smb='' #basic samba settings
 sql='' #basic sql settings
 rsnc='' #basic rsync settings
-
 ########################################################################################
 ######################################  Functions ######################################
 
@@ -166,6 +165,10 @@ function usr_gru {
     clear
     usrgrumem
     usr_gru
+  elif [ $com = 11 ]; then
+    clear
+    chpaswdall
+    usr_gru
   elif [ $com = 99 ]; then
 	  main_menu
   fi
@@ -186,7 +189,7 @@ function start_scrpt {
   read -p 'Have you completed all of the Forensics Questions? [y/n] : ' fqs
   if [ $fqs = y ]; then
 	  echo
-    else
+  else
 	  echo "Please complete the Forensics Questions first before you use this script."
 	  sleep 3s
 	  exit
