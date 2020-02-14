@@ -1,6 +1,5 @@
 #!/bin/bash
-#####Imports#####
-. linux_GV.sh
+
 
 ################### Functions #####################
 function linUbunut {
@@ -75,6 +74,5 @@ function start_menu {
     read -p 'Does this system require SQL functionality? [y/n] : ' sql
     read -p 'Does this system require Rsync functionality? [y/n] : ' rsnc
     echo -e " ${ssh} \n ${ftp} \n ${proftp} \n ${vsftpd} \n ${web} \n ${apaweb} \n ${nginweb} \n ${smb} \n ${sql} \n ${rsnc}" > ScriptSettings
-  fi
   main_menu
 }

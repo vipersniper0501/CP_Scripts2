@@ -1,6 +1,4 @@
 #!/bin/bash
-#####Imports######
-. linux_GV.sh
 
 function updt {
   echo "-----------------Updates starting-------------- | ${thedate}" >> Script_log.txt
@@ -17,7 +15,6 @@ function fwset {	#Function configures firewall settings
   #read -p 'Does this system require SMB file sharing? (Ex: School shared drive) Does the system need this? [y/n] : ' smb
   #read -p 'Does this system require MySQL or similar services? [y/n] : ' sql
   #read -p 'Does this system require Rsync? [y/n] : ' rsnc
-
   echo "------------- Firewall Settings Has Started ----------------  | ${thedate}" >> Script_log.txt
   echo "Started install of UFW if not installed already | ${thedate}" >> Script_log.txt
   sudo apt install ufw -y
@@ -159,8 +156,8 @@ function srchmedia {
   sleep 2s
   echo "--------------- Prohibited Media Search Started ---------------  | ${thedate}" | tee Script_log.txt
   sleep 1s
-  find / -name '*.jpg' -o -name '*.mp4' -o -name '*.flv' -o -name '*.avi' -o -name '*.wmv' -o -name '*.mov' -o -name '*.png' -o -name '*.jpg' -o -name '*.tif' -o -name '*.gif' -o -name '*.mp3' -o -name '*.wmv' -o -name '*.wma' -o -name '*.aif' -o -name '*.jar' | tee media_log
-  echo "----------------- Prohibited Media Search Ended --------------  | ${thedate}" | tee Script_log.txt
+  find / -name '*.jpg' -o -name '*.mp4' -o -name '*.flv' -o -name '*.avi' -o -name '*.wmv' -o -name '*.mov' -o -name '*.png' -o -name '*.jpg' -o -name '*.tif' -o -name '*.gif' -o -name '*.mp3' -o -name '*.wmv' -o -name '*.wma' -o -name '*.aif' -o -name '*.jar' | tee Script_log.txt
+  echo "----------------- Prohibited Media Search Ended --------------  | ${thedate}"
   sleep 1s
 }
 
@@ -180,18 +177,18 @@ function basic_config {
   echo "Pam.d setting policies have been completed  | ${thedate}" | tee Script_log.txt
   clear
 
-  #read -p 'Does this system use SSH? [y/n] : ' sshconf
-  #read -p 'Does this system use proFTP? [y/n] : ' ftpconf
-  #read -p 'Does this system use Samba? [y/n] : ' smbconf
-  #read -p 'Does this system use Apache2 Web Server? [y/n] : ' webconf
+  read -p 'Does this system use SSH? [y/n] : ' sshconf
+  read -p 'Does this system use proFTP? [y/n] : ' ftpconf
+  read -p 'Does this system use Samba? [y/n] : ' smbconf
+  read -p 'Does this system use Apache2 Web Server? [y/n] : ' webconf
   #SSH
-  if [ $ssh = 'y' ]; then
+  if [ $sshconf = 'y' ]; then
     sudo cp sshConfPatch /etc/ssh/ssh_config  #replacing ssh client configuration files with pre-configured version
     sudo cp sshdConfPatch /etc/ssh/sshd_config  #replacing sshd server configuration files with pre-configured version
     echo "Both ssh client and server settings have been configured  | ${thedate}" | tee Script_log.txt
   fi
   #FTP
-  if [ $ftp = 'y' ]; then
+  if [ $ftpconf = 'y' ]; then
     sudo cp /etc/proftpd/proftpd.conf ~/Desktop/orig_proftpd.conf
     sudo mkdir /etc/proftpd/ssl
     sudo openssl req -new -x509 -days 365 -nodes -out /etc/proftpd/ssl/proftpd.cert.pem -keyout /etc/proftpd/ssl/proftpd.key.pem
@@ -201,16 +198,16 @@ function basic_config {
     echo "Proftpd server settings have been configured  | ${thedate}" | tee Script_log.txt
   fi
   #Samba
-  if [ $smb = 'y' ]; then
+  if [ $smbconf = 'y' ]; then
     sudo cp smbConf_patch.conf /etc/samba/smb.conf #replacing samba configuration files
     echo "Samba server settings have been configured  | ${thedate}" | tee Script_log.txt
   fi
   #Web
-  if [ $web = 'y' ]; then
+  if [ $webocnf = 'y' ]; then
     sudo cp apaConf_patch.conf /etc/apache2/apache2.conf #replacing apache webserver configuration files
     echo "Apache2 web server settings have been configured  | ${thedate}" | tee Script_log.txt
   fi
   echo "Basic configuration has completed"
-  echo "------------- Basic configuration completed -------------  | ${thedate}" | tee Script_log.txt
+  echo "------------- Basic configuration completed -------------  | ${thedate}" >> Script_log.txt
   sleep 1s
 }

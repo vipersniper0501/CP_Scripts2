@@ -4,7 +4,7 @@
 . linux_basicfunctions.sh #location of functions used by start script
 . linux_mmfunctions.sh #location of functions used for main menu
 . linux_ugmfunctions.sh #location of functions used for User and Group Settings menu
-. linux_GV.sh
+. linux_GB.sh
 ######## Global Variables ##############
 #UserName=$(whoami)
 #thedate=$(date)
@@ -30,6 +30,9 @@ function main_menu {
   elif [ $dist = "Debian" ] || [ $dist = "debian" ]; then
     linDebian
   fi
+
+echo -e " ${ssh} \n ${ftp} \n ${proftp} \n ${vsftpd} \n ${web} \n ${apaweb} \n ${nginweb} \n ${smb} \n ${sql} \n ${rsnc}" >> Script_log.txt
+
   #Main Menu for most functions
   echo "If there is a * after the command, then the command has either not been made yet or is not finished."
   echo ""

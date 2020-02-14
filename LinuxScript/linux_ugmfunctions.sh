@@ -1,7 +1,4 @@
 #!/bin/bash
-######Imports#######
-. linux_GV.sh
-
 
 function aduser {
 	read -p 'Would you like to add a user? [y/n] : ' aduseryn
