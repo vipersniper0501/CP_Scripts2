@@ -38,9 +38,9 @@ function distro_select {
 	echo ""
   echo "What linux distro are you using? [Ex: Ubuntu]  : "
   read dist
-  if [ $dist = 'Ubuntu' ]; then
+  if [ $dist = 'Ubuntu' ] || [ $dist = 'ubuntu' ]; then
     ubuntu_start
-  elif [ $dist = 'Debian' ]; then
+  elif [ $dist = 'Debian' ] || [ $dist = 'debian' ]; then
     debian_start
   else
     echo 'That is not an available distro for this script...'

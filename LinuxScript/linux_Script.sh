@@ -29,9 +29,9 @@ rsnc='' #basic rsync settings
 function main_menu {
   clear
   #if statement for determining which title to show
-  if [ $dist = "Ubuntu" ]; then
+  if [ $dist = "Ubuntu" ] || [ $dist = "ubuntu" ]; then
     linUbunut
-  elif [ $dist = "Debian" ]; then
+  elif [ $dist = "Debian" ] || [ $dist = "debian" ]; then
     linDebian
   fi
   #Main Menu for most functions
@@ -103,9 +103,9 @@ function main_menu {
 function usr_gru {
   clear
   #for determining which title to show
-  if [ $dist = "Ubuntu" ]; then
-	  linUbuntu
-  elif [ $dist = "Debian" ]; then
+  if [ $dist = "Ubuntu" ] || [ $dist = "ubuntu" ]; then
+	  linUbunut
+  elif [ $dist = "Debian" ] || [ $dist = "debian" ]; then
 	  linDebian
   else
 	  return
