@@ -1,9 +1,9 @@
 #!/bin/bash
 
 function updt {
-  echo "Updates starting... | ${thedate}" >> Script_log.txt
-  sudo apt update && apt upgrade -y
-  echo "Updates completed | ${thedate}" >> Script_log.txt
+  echo "-----------------Updates starting-------------- | ${thedate}" >> Script_log.txt
+  sudo apt update && apt upgrade -y | tee Script_log.txt
+  echo "-----------------Updates completed------------- | ${thedate}" >> Script_log.txt
 }
 
 function fwset {	#Function configures firewall settings
