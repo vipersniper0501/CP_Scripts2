@@ -1,5 +1,6 @@
 #!/bin/bash
 
+thedate=$(date)
 
 ################### Functions #####################
 function linUbunut {
@@ -34,9 +35,9 @@ function linDebian {
 }
 
 function distro_select {
-	clear
-	echo ""
-  echo "What linux distro are you using? [Ex: Ubuntu]  : "
+  clear
+  echo ""
+  echo 'What linux distro are you using? [Ex: Ubuntu]  : '
   read dist
   if [ $dist = 'Ubuntu' ] || [ $dist = 'ubuntu' ]; then
     start_menu
@@ -45,15 +46,15 @@ function distro_select {
   else
     echo 'That is not an available distro for this script...'
     sleep 2s
-	distro_select
+    distro_select
   fi
 }
 
 function start_menu {
   clear
   sleep 1s
-  if [ -s ScriptSettings ]; then
-  echo
+  if [ -s ScriptSettings.txt ]; then
+    echo
   else
     echo ''
     echo "This script requires a little bit of information about your system's required services and programs..."
@@ -73,6 +74,7 @@ function start_menu {
     read -p 'Does this system require Samba (smb) functionality? [y/n] : ' smb
     read -p 'Does this system require SQL functionality? [y/n] : ' sql
     read -p 'Does this system require Rsync functionality? [y/n] : ' rsnc
-    echo -e " ${ssh} \n ${ftp} \n ${proftp} \n ${vsftpd} \n ${web} \n ${apaweb} \n ${nginweb} \n ${smb} \n ${sql} \n ${rsnc}" > ScriptSettings
+    echo -e "!#/bin/bash \n. linux_Script.sh \n. linux_basicfunctions.sh \n. linux_mmfunctions.sh \n. linux_ugmfunctions.sh \n\UserName=$(whoami) \ndist=distro \nssh=${ssh} \nftp=${ftp} \nproftp=${proftp} \nvsftpd=${vsftpd} \nweb=${web} \napaweb=${apaweb} \nnginweb=${nginweb} \nsmb=${smb} \nsql=${sql} \nrsnc=${rsnc}" > ScriptSettings.sh
+  fi
   main_menu
 }

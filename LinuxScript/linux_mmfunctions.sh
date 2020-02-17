@@ -1,5 +1,8 @@
 #!/bin/bash
 
+thedate=$(date)
+
+
 function updt {
   echo "-----------------Updates starting-------------- | ${thedate}" >> Script_log.txt
   sudo apt update && apt upgrade -y | tee Script_log.txt
@@ -8,6 +11,7 @@ function updt {
 
 function fwset {	#Function configures firewall settings
   clear
+  echo -e " ${ssh} \n ${ftp} \n ${proftp} \n ${vsftpd} \n ${web} \n ${apaweb} \n ${nginweb} \n ${smb} \n ${sql} \n ${rsnc}"
   #move the install of ufw up here and ask user if it is installed already/ or figure out way to check if it is already installed
   #read -p 'Does this system require SSH functionality? [y/n] : ' ssh
   #read -p 'Does this system require FTP functionality? [y/n] : ' ftp
@@ -24,74 +28,74 @@ function fwset {	#Function configures firewall settings
   sudo ufw enable
   echo "UFW has been enabled on the system | ${thedate}" >> Script_log.txt
 #SSH
-  if [ $ssh = 'y' ]; then
+  if [[ $ssh = "y" ]]; then
     sudo ufw allow 22
     echo "Port 22 has been opened for SSH networking | ${thedate}" >> Script_log.txt
-    echo "##"
-  elif [ $ssh = 'n' ]; then
+    echo "## y"
+  elif [[ $ssh = "n" ]]; then
     sudo ufw deny 22
     echo "Port 22 has been closed to stop SSH networking | ${thedate}" >> Script_log.txt
-    echo "##"
+    echo "## n"
   fi
 #Ftp
-  if [ $ftp = 'y' ]; then
+  if [[ $ftp = "y" ]]; then
     sudo ufw allow 21
     echo "Port 21 has been opened for FTP networking | ${thedate}" >> Script_log.txt
-    echo "####"
-  elif [ $ftp = 'n' ]; then
+    echo "#### y"
+  elif [[ $ftp = "n" ]]; then
     sudo ufw deny 21
     echo "Port 21 has been closed to stop FTP networking | ${thedate}" >> Script_log.txt
-    echo "####"
+    echo "#### n"
   fi
 #Web
-  if [ $web = 'y' ]; then
+  if [[ $web = "y" ]]; then
     sudo ufw allow 80
-    echo "######"
+    echo "###### y"
     echo "Port 80 has been opened for basic Webserver hosting | ${thedate}" >> Script_log.txt
-    read -p 'Does the Webserver require SSL or HTTPS? [y/n] : ' https
-    if [ $https = 'y' ]; then
+    #read -p 'Does the Webserver require SSL or HTTPS? [y/n] : ' https
+    if [[ $https = "y" ]]; then
       sudo ufw allow 443
       echo "Port 443 has been opened for HTTPS or SSL | ${thedate}" >> Script_log.txt
-      echo "########"
+      echo "######## y"
     else
       sudo ufw deny 443
       echo "Port 443 has been closed to stop HTTPS or SSL | ${thedate}" >> Script_log.txt
-      echo "########"
+      echo "######## n"
     fi
-  elif [ $web = 'n' ]; then
+  elif [[ $web = "n" ]]; then
 	  sudo ufw deny 80
 	  echo "Port 80 has been closed to stop the use of HTTP | ${thedate}" >> Script_log.txt
-	  echo "######"
+	  echo "###### n"
   fi
 #Samba
-  if [ $smb = 'y' ]; then
+  if [[ $smb = "y" ]]; then
     sudo ufw allow 139
     echo "Port 139 has been opened for SMB file sharing | ${thedate}" >> Script_log.txt
-    echo "########"
-  elif [ $smb = 'n' ]; then
+    echo "######## y"
+  elif [[ $smb = "n" ]]; then
     sudo ufw deny 139
     echo "Port 139 has been closed to stop SMB file sharing | ${thedate}" >> Script_log.txt
-    echo "########"
+    echo "######## n"
   fi
 #SQL
-  if [ $sql = 'y' ]; then
+  if [[ $sql = "y" ]]; then
     sudo ufw allow 3306
     echo "Port 3306 has been opened to provide SQL database functionality | ${thedate}" >> Script_log.txt
-    echo "##########"
-  elif [ $sql = 'n' ]; then
+    echo "########## y"
+  elif [[ $sql = "n" ]]; then
     sudo ufw deny 3306
     echo "Port 3306 has been closed to deny SQL database functionality | ${thedate}" >> Script_log.txt
-    echo "##########"
+    echo "########## n"
   fi
 #Rsync
-  if [ $rsnc = 'y' ]; then
+  if [[ $rsnc = "y" ]]; then
     sudo ufw allow 873
     echo "Port 873 has been opened to allow rsync service functionality  | ${thedate}" >> Script_log.txt
-    echo "############"
-  elif [ $rsnc = 'n' ]; then
+    echo "############ y"
+  elif [[ $rsnc = "n" ]]; then
     sudo ufw deny 873
     echo "Port 873 has been closed to deny rsync service functionality  | ${thedate}" >> Script_log.txt
-    echo "############"
+    echo "############ n"
   fi
 
   echo "------------ The following Ports have been closed automatically ---------------  | ${thedate}" >> Script_log.txt

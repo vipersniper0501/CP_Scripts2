@@ -5,9 +5,10 @@
 . linux_mmfunctions.sh #location of functions used for main menu
 . linux_ugmfunctions.sh #location of functions used for User and Group Settings menu
 . linux_GB.sh
+
 ######## Global Variables ##############
 #UserName=$(whoami)
-#thedate=$(date)
+thedate=$(date)
 #dist=distro
 ##Service Variables##
 #ssh='' #basic ssh settings
@@ -43,7 +44,7 @@ echo -e " ${ssh} \n ${ftp} \n ${proftp} \n ${vsftpd} \n ${web} \n ${apaweb} \n $
   echo "3.) Firewall Settings                  4.) Services Settings*"
   echo "5.) Remove Prohibited Software*        6.) Malware Removal"
   echo "7.) Audit using Lynis                  8.) Basic Configurations*"
-  echo "9.) Search for Prohibited Media*"
+  echo "9.) Search for Prohibited Media"
   echo ""
   echo "85.) Run all at once*"
   echo "99.) Quit                         100.) Restart"
@@ -119,7 +120,7 @@ function usr_gru {
   echo "3.) Add Group                                4.) Remove Group"
   echo "5.) Add user to Group                        6.) Remove user from Group"
   echo "7.) List local users                         8.) List Local Groups"
-  echo "9.) List members of group                    10.) List the groups an user is in*"
+  echo "9.) List members of group                    10.) List the groups an user is in"
   echo "11.) Change all users passwords at once      "
   echo ""
   echo "99.) Back to Main Menu"
@@ -186,8 +187,11 @@ function start_scrpt {
   echo "Log Created ${thedate}" > Script_log.txt
   sudo chmod 777 Script_log.txt
   read -p 'Have you completed all of the Forensics Questions? [y/n] : ' fqs
-  if [ $fqs = y ]; then
+  if [ $fqs = "y" ]; then
 	  echo
+  elif [ $fqs = "debug" ]; then #for debugging
+    set -x #Displays script code while running
+    echo
   else
 	  echo "Please complete the Forensics Questions first before you use this script."
 	  sleep 3s
