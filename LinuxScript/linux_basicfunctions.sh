@@ -53,7 +53,7 @@ function distro_select {
 function start_menu {
   clear
   sleep 1s
-  if [ -s ScriptSettings.txt ]; then
+  if [ -s ScriptSettings.sh ]; then
     echo
   else
     echo ''
