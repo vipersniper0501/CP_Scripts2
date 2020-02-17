@@ -1,20 +1,24 @@
 #!/bin/bash
 
+thedate=$(date)
+
+
 function updt {
-  echo "Updates starting... | ${thedate}" >> Script_log.txt
-  sudo apt update && apt upgrade -y
-  echo "Updates completed | ${thedate}" >> Script_log.txt
+  echo "-----------------Updates starting-------------- | ${thedate}" >> Script_log.txt
+  sudo apt update && apt upgrade -y | tee Script_log.txt
+  echo "-----------------Updates completed------------- | ${thedate}" >> Script_log.txt
 }
 
 function fwset {	#Function configures firewall settings
   clear
+  echo -e " ${ssh} \n ${ftp} \n ${proftp} \n ${vsftpd} \n ${web} \n ${apaweb} \n ${nginweb} \n ${smb} \n ${sql} \n ${rsnc}"
   #move the install of ufw up here and ask user if it is installed already/ or figure out way to check if it is already installed
-  read -p 'Does this system require SSH functionality? [y/n] : ' ssh
-  read -p 'Does this system require FTP functionality? [y/n] : ' ftp
-  read -p 'Does this system require Webserver functionality? Does it need to host a website? [y/n] : ' web
-  read -p 'Does this system require SMB file sharing? (Ex: School shared drive) Does the system need this? [y/n] : ' smb
-  read -p 'Does this system require MySQL or similar services? [y/n] : ' sql
-  read -p 'Does this system require Rsync? [y/n] : ' rsnc  
+  #read -p 'Does this system require SSH functionality? [y/n] : ' ssh
+  #read -p 'Does this system require FTP functionality? [y/n] : ' ftp
+  #read -p 'Does this system require Webserver functionality? Does it need to host a website? [y/n] : ' web
+  #read -p 'Does this system require SMB file sharing? (Ex: School shared drive) Does the system need this? [y/n] : ' smb
+  #read -p 'Does this system require MySQL or similar services? [y/n] : ' sql
+  #read -p 'Does this system require Rsync? [y/n] : ' rsnc
   echo "------------- Firewall Settings Has Started ----------------  | ${thedate}" >> Script_log.txt
   echo "Started install of UFW if not installed already | ${thedate}" >> Script_log.txt
   sudo apt install ufw -y
@@ -22,79 +26,79 @@ function fwset {	#Function configures firewall settings
   sudo ufw reset
   echo "UFW has been reset to factory defaults clearing all settings | ${thedate}" >> Script_log.txt
   sudo ufw enable
-  echo "UFW has been enabled on the system | ${thedate}" >> Script_log.txt  
-#SSH 
-  if [ $ssh = 'y' ]; then
+  echo "UFW has been enabled on the system | ${thedate}" >> Script_log.txt
+#SSH
+  if [[ $ssh = "y" ]]; then
     sudo ufw allow 22
     echo "Port 22 has been opened for SSH networking | ${thedate}" >> Script_log.txt
-    echo "##"
-  elif [ $ssh = 'n' ]; then
+    echo "## y"
+  elif [[ $ssh = "n" ]]; then
     sudo ufw deny 22
     echo "Port 22 has been closed to stop SSH networking | ${thedate}" >> Script_log.txt
-    echo "##"
+    echo "## n"
   fi
 #Ftp
-  if [ $ftp = 'y' ]; then
+  if [[ $ftp = "y" ]]; then
     sudo ufw allow 21
     echo "Port 21 has been opened for FTP networking | ${thedate}" >> Script_log.txt
-    echo "####"
-  elif [ $ftp = 'n' ]; then
+    echo "#### y"
+  elif [[ $ftp = "n" ]]; then
     sudo ufw deny 21
     echo "Port 21 has been closed to stop FTP networking | ${thedate}" >> Script_log.txt
-    echo "####"
+    echo "#### n"
   fi
 #Web
-  if [ $web = 'y' ]; then
+  if [[ $web = "y" ]]; then
     sudo ufw allow 80
-    echo "######"
+    echo "###### y"
     echo "Port 80 has been opened for basic Webserver hosting | ${thedate}" >> Script_log.txt
-    read -p 'Does the Webserver require SSL or HTTPS? [y/n] : ' https
-    if [ $https = 'y' ]; then
+    #read -p 'Does the Webserver require SSL or HTTPS? [y/n] : ' https
+    if [[ $https = "y" ]]; then
       sudo ufw allow 443
       echo "Port 443 has been opened for HTTPS or SSL | ${thedate}" >> Script_log.txt
-      echo "########"
+      echo "######## y"
     else
       sudo ufw deny 443
       echo "Port 443 has been closed to stop HTTPS or SSL | ${thedate}" >> Script_log.txt
-      echo "########"
+      echo "######## n"
     fi
-  elif [ $web = 'n' ]; then
+  elif [[ $web = "n" ]]; then
 	  sudo ufw deny 80
 	  echo "Port 80 has been closed to stop the use of HTTP | ${thedate}" >> Script_log.txt
-	  echo "######"
+	  echo "###### n"
   fi
 #Samba
-  if [ $smb = 'y' ]; then
+  if [[ $smb = "y" ]]; then
     sudo ufw allow 139
     echo "Port 139 has been opened for SMB file sharing | ${thedate}" >> Script_log.txt
-    echo "########"
-  elif [ $smb = 'n' ]; then
+    echo "######## y"
+  elif [[ $smb = "n" ]]; then
     sudo ufw deny 139
     echo "Port 139 has been closed to stop SMB file sharing | ${thedate}" >> Script_log.txt
-    echo "########"
+    echo "######## n"
   fi
 #SQL
-  if [ $sql = 'y' ]; then
+  if [[ $sql = "y" ]]; then
     sudo ufw allow 3306
     echo "Port 3306 has been opened to provide SQL database functionality | ${thedate}" >> Script_log.txt
-    echo "##########"
-  elif [ $sql = 'n' ]; then
+    echo "########## y"
+  elif [[ $sql = "n" ]]; then
     sudo ufw deny 3306
     echo "Port 3306 has been closed to deny SQL database functionality | ${thedate}" >> Script_log.txt
-    echo "##########"
+    echo "########## n"
   fi
 #Rsync
-  if [ $rsnc = 'y' ]; then
+  if [[ $rsnc = "y" ]]; then
     sudo ufw allow 873
     echo "Port 873 has been opened to allow rsync service functionality  | ${thedate}" >> Script_log.txt
-    echo "############"
-  elif [ $rsnc = 'n' ]; then
+    echo "############ y"
+  elif [[ $rsnc = "n" ]]; then
     sudo ufw deny 873
     echo "Port 873 has been closed to deny rsync service functionality  | ${thedate}" >> Script_log.txt
-    echo "############"
+    echo "############ n"
   fi
 
-  echo "------------ The following Ports have been closed automatically ---------------  | ${thedate}" >> Script_log.txt  
+  echo "------------ The following Ports have been closed automatically ---------------  | ${thedate}" >> Script_log.txt
   sudo ufw deny 19
   echo "Port 19 has been closed to stop potential DoS attack | ${thedate}" >> Script_log.txt
   echo "##############"
@@ -141,7 +145,7 @@ function clamtime {
     echo "Installation of clamav is now installed or verified to be installed...  | ${thedate}" >> Script_log.txt
     echo "Starting scan of system...  | ${thedate}" | tee Script_log.txt
     sudo touch clamResult.txt
-    sudo clamscan -r --remove / | tee clamResult.txt 
+    sudo clamscan -r --remove / | tee clamResult.txt
     echo "You can find the output of this saved to a text file called clamResult.txt next to where the script is located"
     echo "Clamscan has finished...  | ${thedate}" | tee Script_log.txt
   else
@@ -161,23 +165,22 @@ function srchmedia {
   sleep 1s
 }
 
-function basic_config {  
+function basic_config {
   #edit the current systems policy's and secure them
   #copy the newly secured policy's to where the linux script is
-  #Use this as a patch to paste over the policy settings in the competition image  
-  echo "Starting basic configuration"
-  echo "-------------- Starting basic configuration -------------  | ${thedate}" >> Script_log.txt
+  #Use this as a patch to paste over the policy settings in the competition image
+  echo "-------------- Starting basic configuration -------------  | ${thedate}" | tee Script_log.txt
   sudo apt install libpam-cracklib -y
   echo "Pam module crack lib has been installed... | ${thedate}" | tee Script_log.txt
   sudo apt install fail2ban -y
   echo "Fail2ban has been installed  | ${thedate}" | tee Script_log.txt
-  sudo cp pamCommonPass_patch /etc/pam.d/common-password
-  sudo cp pamCommonSess_patch /etc/pam.d/common-session
-  sudo cp pamLogin_patch /etc/pam.d/login
-  sudo cp pamOther_patch /etc/pam.d/other
+  sudo cp ../config_files/pamCommonPass_patch /etc/pam.d/common-password
+  sudo cp ../config_files/pamCommonSess_patch /etc/pam.d/common-session
+  sudo cp ../config_files/pamLogin_patch /etc/pam.d/login
+  sudo cp ../config_files/pamOther_patch /etc/pam.d/other
   echo "Pam.d setting policies have been completed  | ${thedate}" | tee Script_log.txt
   clear
-  
+
   read -p 'Does this system use SSH? [y/n] : ' sshconf
   read -p 'Does this system use proFTP? [y/n] : ' ftpconf
   read -p 'Does this system use Samba? [y/n] : ' smbconf
@@ -192,7 +195,7 @@ function basic_config {
   if [ $ftpconf = 'y' ]; then
     sudo cp /etc/proftpd/proftpd.conf ~/Desktop/orig_proftpd.conf
     sudo mkdir /etc/proftpd/ssl
-    sudo openssl req -new -x509 -days 365 -nodes -out /etc/proftpd/ssl/proftpd.cert.pem -keyout /etc/proftpd/ssl/proftpd.key.pem 
+    sudo openssl req -new -x509 -days 365 -nodes -out /etc/proftpd/ssl/proftpd.cert.pem -keyout /etc/proftpd/ssl/proftpd.key.pem
     echo "TLS/SSL keys have been created for ProFTP server  | ${thedate}" | tee Script_log.txt
     sudo cp ftpTls_patch.conf /etc/proftpd/tls.conf #replaces tls configuration files
     sudo cp ftpConf_patch.conf /etc/proftpd/proftpd.conf #replacing proftpd configuration files
@@ -201,7 +204,7 @@ function basic_config {
   #Samba
   if [ $smbconf = 'y' ]; then
     sudo cp smbConf_patch.conf /etc/samba/smb.conf #replacing samba configuration files
-    echo "Samba server settings have been configured  | ${thedate}" | tee Script_log.txt 
+    echo "Samba server settings have been configured  | ${thedate}" | tee Script_log.txt
   fi
   #Web
   if [ $webocnf = 'y' ]; then
@@ -210,5 +213,5 @@ function basic_config {
   fi
   echo "Basic configuration has completed"
   echo "------------- Basic configuration completed -------------  | ${thedate}" >> Script_log.txt
-  sleep 1s 
+  sleep 1s
 }

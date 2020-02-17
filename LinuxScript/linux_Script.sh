@@ -2,28 +2,38 @@
 #use lynis for more things to add to script
 ################# Imports ##############
 . linux_basicfunctions.sh #location of functions used by start script
-. linux_mmfunctions.sh #location of functions used for main menu 
+. linux_mmfunctions.sh #location of functions used for main menu
 . linux_ugmfunctions.sh #location of functions used for User and Group Settings menu
+. linux_GB.sh
+
 ######## Global Variables ##############
-UserName=$(whoami)
+#UserName=$(whoami)
 thedate=$(date)
-dist=distro
-
+#dist=distro
+##Service Variables##
+#ssh='' #basic ssh settings
+#ftp='' #basic ftp Settings
+#proftp='' #proftp specific settings
+#vsftpd='' #vsftpd specific settings
+#web='' #basic web settings
+#apaweb='' #apache2 specific settings
+#nginweb='' #nginx specific settings
+#smb='' #basic samba settings
+#sql='' #basic sql settings
+#rsnc='' #basic rsync settings
 ########################################################################################
-######################################  Functions ######################################
-
-#been moved to other files to simplify code
-
-####################################################################################
 ###################################### MENU's ######################################
 function main_menu {
   clear
   #if statement for determining which title to show
-  if [ $dist = "Ubuntu" ]; then
+  if [ $dist = "Ubuntu" ] || [ $dist = "ubuntu" ]; then
     linUbunut
-  elif [ $dist = "Debian" ]; then
+  elif [ $dist = "Debian" ] || [ $dist = "debian" ]; then
     linDebian
   fi
+
+echo -e " ${ssh} \n ${ftp} \n ${proftp} \n ${vsftpd} \n ${web} \n ${apaweb} \n ${nginweb} \n ${smb} \n ${sql} \n ${rsnc}" >> Script_log.txt
+
   #Main Menu for most functions
   echo "If there is a * after the command, then the command has either not been made yet or is not finished."
   echo ""
@@ -34,7 +44,7 @@ function main_menu {
   echo "3.) Firewall Settings                  4.) Services Settings*"
   echo "5.) Remove Prohibited Software*        6.) Malware Removal"
   echo "7.) Audit using Lynis                  8.) Basic Configurations*"
-  echo "9.) Search for Prohibited Media*"
+  echo "9.) Search for Prohibited Media"
   echo ""
   echo "85.) Run all at once*"
   echo "99.) Quit                         100.) Restart"
@@ -93,9 +103,9 @@ function main_menu {
 function usr_gru {
   clear
   #for determining which title to show
-  if [ $dist = "Ubuntu" ]; then
-	  linUbuntu
-  elif [ $dist = "Debian" ]; then
+  if [ $dist = "Ubuntu" ] || [ $dist = "ubuntu" ]; then
+	  linUbunut
+  elif [ $dist = "Debian" ] || [ $dist = "debian" ]; then
 	  linDebian
   else
 	  return
@@ -110,7 +120,7 @@ function usr_gru {
   echo "3.) Add Group                                4.) Remove Group"
   echo "5.) Add user to Group                        6.) Remove user from Group"
   echo "7.) List local users                         8.) List Local Groups"
-  echo "9.) List members of group                    10.) List the groups an user is in*"
+  echo "9.) List members of group                    10.) List the groups an user is in"
   echo "11.) Change all users passwords at once      "
   echo ""
   echo "99.) Back to Main Menu"
@@ -155,6 +165,10 @@ function usr_gru {
     clear
     usrgrumem
     usr_gru
+  elif [ $com = 11 ]; then
+    clear
+    chpaswdall
+    usr_gru
   elif [ $com = 99 ]; then
 	  main_menu
   fi
@@ -173,15 +187,17 @@ function start_scrpt {
   echo "Log Created ${thedate}" > Script_log.txt
   sudo chmod 777 Script_log.txt
   read -p 'Have you completed all of the Forensics Questions? [y/n] : ' fqs
-  if [ $fqs = y ]; then
-	echo "" #since yes, the script continues.
+  if [ $fqs = "y" ]; then
+	  echo
+  elif [ $fqs = "debug" ]; then #for debugging
+    set -x #Displays script code while running
+    echo
   else
-	echo "Please complete the Forensics Questions first before you use this script."
-	sleep 3s
-	exit
+	  echo "Please complete the Forensics Questions first before you use this script."
+	  sleep 3s
+	  exit
   fi
   distro_select #asks users what distro they are using, then open main menu for that 'distro'
-  read -p 'Press Enter to continue: '
 }
 
 ########################################
