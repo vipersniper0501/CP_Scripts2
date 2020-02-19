@@ -4,7 +4,7 @@
 . linux_basicfunctions.sh #location of functions used by start script
 . linux_mmfunctions.sh #location of functions used for main menu
 . linux_ugmfunctions.sh #location of functions used for User and Group Settings menu
-. linux_GB.sh
+. linux_GV.sh
 
 ######## Global Variables ##############
 #UserName=$(whoami)
