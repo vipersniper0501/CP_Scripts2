@@ -2,6 +2,7 @@
 
 thedate=$(date)
 
+#add user
 function aduser {
 	read -p 'Would you like to add a user? [y/n] : ' aduseryn
 	if [ $aduseryn = 'y' ]; then
@@ -31,6 +32,7 @@ function aduser {
 	fi
 }
 
+#remove users
 function rmuser {
 	read -p 'Would you like to remove a user from this system? [y/n] : ' rmuseryn
 	if [ $rmuseryn = 'y' ]; then
@@ -51,17 +53,20 @@ function rmuser {
 	fi
 }
 
+#list users
 function lsusrs {
   #eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1 #prints users
   cat /etc/passwd | grep "/home" | cut -d":" -f1
   read -p 'Press Enter to continue...'
 }
 
+#list groups
 function lsgrus {
   getent group | cut -d: -f1 #prints out groups to screen
   read -p 'Press Enter to continue...'
 }
 
+#add user to group
 function usrtogru {
   read -p 'Would you like to add a user to a group? [y/n] : ' usrtogruyn
   if [ $usrtogruyn = 'y' ]; then
@@ -85,6 +90,7 @@ function usrtogru {
   fi
 }
 
+#creat group
 function crtgru {
   read -p 'Would you like to create a new group? [y/n] : ' crtgruyn
   if [ $crtgruyn = 'y' ]; then
@@ -104,6 +110,7 @@ function crtgru {
   fi
 }
 
+#remove group
 function rmgru {
   read -p 'Would you like to delete a group? [y/n] : ' rmgruyn
   if [ $rmgruyn = 'y' ]; then
@@ -124,6 +131,7 @@ function rmgru {
   fi
 }
 
+#remove user from group
 function rmfrogru {
   read -p 'Would you like to remove a user from a group? [y/n] : ' rmfrogruyn
   if [ $rmfrogruyn = 'y' ]; then
@@ -147,6 +155,7 @@ function rmfrogru {
   fi
 }
 
+#find out what groups a specific user is in
 function usrgrumem {
   read -p 'Would you like to see what groups a specific user is in? [y/n] : ' usrgrumemyn
   if [ $usrgrumemyn = 'y' ]; then
@@ -157,6 +166,7 @@ function usrgrumem {
   fi
 }
 
+#find out the members of a group
 function grumem {
   read -p 'Would you like to see what members are in a specific group? [y/n] : ' grumemyn
   if [ $grumemyn = 'y' ]; then

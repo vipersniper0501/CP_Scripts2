@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ScriptSettings.sh
+
 thedate=$(date)
 
 
