@@ -1,61 +1,61 @@
 #!/bin/bash
 
+. ScriptSettings.sh
+
 thedate=$(date)
 
 #add user
 function aduser {
-	read -p 'Would you like to add a user? [y/n] : ' aduseryn
-	if [ $aduseryn = 'y' ]; then
-		aduser=1
-		while [ $aduser = 1 ]; do
-			read -p 'What would you like to name this new user? : ' name
-			read -p 'Is this user an Admin? [y/n] : ' adminyn
-			if [ $adminyn = 'y' ]; then
+  read -p 'Would you like to add a user? [y/n] : ' aduseryn
+  if [ $aduseryn = 'y' ]; then
+  	aduser=1
+  	while [ $aduser = 1 ]; do
+  	  read -p 'What would you like to name this new user? : ' name
+  	  read -p 'Is this user an Admin? [y/n] : ' adminyn
+  	  if [ $adminyn = 'y' ]; then
         sudo adduser --force-badname $name
-				sudo usermod -a -G sudo $name		#adds user to sudo group
+  	    sudo usermod -a -G sudo $name		#adds user to sudo group
         sudo usermod -a -G adm $name   #adds user to admin group
-				echo "User ${name} has been created and has been added to admin and sudo groups"
-				echo "User ${name} has been created and has been added to admin and sudo groups  | ${thedate}" >> Script_log.txt
-			else
-				sudo useradd $name
-				echo "User ${name} has been added!"
-				echo "User ${name} has been added!  | ${thedate}" >> Script_log.txt
-			fi
-			read -p 'Would you like to add another user? [y/n] : ' aga
-			if [ $aga = 'n' ]; then
-				$aduser=0
-			fi
-		done
-		sleep 1s
-	else
-		usr_gru
-	fi
+  	    echo "User ${name} has been created and has been added to admin and sudo groups"
+  	    echo "User ${name} has been created and has been added to admin and sudo groups  | ${thedate}" >> Script_log.txt
+  	  else
+  		sudo useradd $name
+  		echo "User ${name} has been added!"
+  		echo "User ${name} has been added!  | ${thedate}" >> Script_log.txt
+  	  fi
+  	  read -p 'Would you like to add another user? [y/n] : ' aga
+  	  if [ $aga = 'n' ]; then
+  	  	$aduser=0
+  	  fi
+  	done
+  	sleep 1s
+  else
+  	usr_gru
+  fi
 }
 
 #remove users
 function rmuser {
-	read -p 'Would you like to remove a user from this system? [y/n] : ' rmuseryn
-	if [ $rmuseryn = 'y' ]; then
-		rmuser=1
-		while [ $rmuser = 1 ]; do
-			#eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1  #this prints out the users that are able to sign in (not system users that are used by programs)
-			cat /etc/passwd | grep "/home" | cut -d":" -f1
+  read -p 'Would you like to remove a user from this system? [y/n] : ' rmuseryn
+  if [ $rmuseryn = 'y' ]; then
+	rmuser=1
+	while [ $rmuser = 1 ]; do
+	  cat /etc/passwd | grep "/home" | cut -d":" -f1
       read -p 'Which user would you like to remove from the system? : ' name
-			userdel -r $name
+      userdel -r $name
       echo "User ${name} has been removed from this system!  | ${thedate}" | tee Script_log.txt
       read -p 'Would you like to remove another user from this system? [y/n] : ' aga
       if [ $aga = 'n' ]; then
         $rmuseryn=0
       fi
-		done
-	else
-		usr_gru
-	fi
+    done
+  else
+    usr_gru
+  fi
 }
 
 #list users
 function lsusrs {
-  #eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1 #prints users
   cat /etc/passwd | grep "/home" | cut -d":" -f1
   read -p 'Press Enter to continue...'
 }
@@ -72,9 +72,7 @@ function usrtogru {
   if [ $usrtogruyn = 'y' ]; then
     usrtogru=1
     while [ $usrtogru = 1 ]; do
-      #eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1  #this prints out the users that are able to sign in (not system users that are used by programs)
       cat /etc/passwd | grep "/home" | cut -d":" -f1
-
       read -p 'Which user would you like to add to a group? : ' name
       getent group | cut -d: -f1
       read -p 'Which group would you like to add user ${name} to? : ' group
@@ -137,9 +135,7 @@ function rmfrogru {
   if [ $rmfrogruyn = 'y' ]; then
     rmfrogru=1
     while [ $rmfrogru = 1 ]; do
-      #eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
       cat /etc/passwd | grep "/home" | cut -d":" -f1
-
       read -p 'Which user would you like to remove from a group? : ' name
       getent group | cut -d: -f1
       read -p 'Which group would you like to remove the user from? : ' gruname

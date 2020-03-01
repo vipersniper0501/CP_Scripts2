@@ -4,14 +4,14 @@
 . linux_basicfunctions.sh #location of functions used by start script
 . linux_mmfunctions.sh #location of functions used for main menu
 . linux_ugmfunctions.sh #location of functions used for User and Group Settings menu
+. ScriptSettings.sh
 
 
 
 ######## Global Variables ##############
-#UserName=$(whoami)
 thedate=$(date)
 
-########################################################################################
+####################################################################################
 ###################################### MENU's ######################################
 function main_menu {
   clear
