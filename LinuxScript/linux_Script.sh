@@ -21,9 +21,9 @@ function main_menu {
   elif [ $dist = "Debian" ] || [ $dist = "debian" ]; then
     linDebian
   fi
-  echo -e "SCRIPT SETTINGS:\n"
+  echo -e "SCRIPT SETTINGS:\n" | tee Script_log.txt
   echo -e " ${ssh} \n ${ftp} \n ${proftp} \n ${vsftpd} \n ${web} \n ${apaweb} \n ${nginweb} \n ${smb} \n ${sql} \n ${rsnc}" >> Script_log.txt
-  echo -e "END OF SCRIPT SETTINGS\n\n"
+  echo -e "END OF SCRIPT SETTINGS\n\n" | tee Script_log.txt
   #Main Menu for most functions
   echo "If there is a * after the command, then the command has either not been made yet or is not finished."
   echo ""
@@ -37,7 +37,7 @@ function main_menu {
   echo "9.) Search for Prohibited Media"
   echo ""
   echo "85.) Run all at once*"
-  echo "99.) Quit                         100.) Restart"
+  echo "99.) Quit                              100.) Restart"
   echo ""
   echo ""
   read -p 'Which command would you like to use? : ' com
