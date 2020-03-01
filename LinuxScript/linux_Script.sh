@@ -10,18 +10,7 @@
 ######## Global Variables ##############
 #UserName=$(whoami)
 thedate=$(date)
-#dist=distro
-##Service Variables##
-#ssh='' #basic ssh settings
-#ftp='' #basic ftp Settings
-#proftp='' #proftp specific settings
-#vsftpd='' #vsftpd specific settings
-#web='' #basic web settings
-#apaweb='' #apache2 specific settings
-#nginweb='' #nginx specific settings
-#smb='' #basic samba settings
-#sql='' #basic sql settings
-#rsnc='' #basic rsync settings
+
 ########################################################################################
 ###################################### MENU's ######################################
 function main_menu {
