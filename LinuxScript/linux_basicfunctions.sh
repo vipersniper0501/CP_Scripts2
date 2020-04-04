@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 thedate=$(date)
 
 ################### Functions #####################
@@ -53,7 +54,7 @@ function distro_select {
 function start_menu {
   clear
   sleep 1s
-  if [ -s ScriptSettings.txt ]; then
+  if [ -s ScriptSettings.sh ]; then
     echo
   else
     echo ''
@@ -74,7 +75,7 @@ function start_menu {
     read -p 'Does this system require Samba (smb) functionality? [y/n] : ' smb
     read -p 'Does this system require SQL functionality? [y/n] : ' sql
     read -p 'Does this system require Rsync functionality? [y/n] : ' rsnc
-    echo -e "!#/bin/bash \n. linux_Script.sh \n. linux_basicfunctions.sh \n. linux_mmfunctions.sh \n. linux_ugmfunctions.sh \n\UserName=$(whoami) \ndist=distro \nssh=${ssh} \nftp=${ftp} \nproftp=${proftp} \nvsftpd=${vsftpd} \nweb=${web} \napaweb=${apaweb} \nnginweb=${nginweb} \nsmb=${smb} \nsql=${sql} \nrsnc=${rsnc}" > ScriptSettings.sh
+    echo -e "!#/bin/bash \n\nUserName=$(whoami) \ndist=distro \nssh=${ssh} \nftp=${ftp} \nproftp=${proftp} \nvsftpd=${vsftpd} \nweb=${web} \napaweb=${apaweb} \nnginweb=${nginweb} \nsmb=${smb} \nsql=${sql} \nrsnc=${rsnc}" > ScriptSettings.sh
   fi
   main_menu
 }

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ScriptSettings.sh
+
 thedate=$(date)
 
 
@@ -27,7 +29,7 @@ function fwset {	#Function configures firewall settings
   echo "UFW has been reset to factory defaults clearing all settings | ${thedate}" >> Script_log.txt
   sudo ufw enable
   echo "UFW has been enabled on the system | ${thedate}" >> Script_log.txt
-#SSH
+  #SSH
   if [[ $ssh = "y" ]]; then
     sudo ufw allow 22
     echo "Port 22 has been opened for SSH networking | ${thedate}" >> Script_log.txt
@@ -37,7 +39,7 @@ function fwset {	#Function configures firewall settings
     echo "Port 22 has been closed to stop SSH networking | ${thedate}" >> Script_log.txt
     echo "## n"
   fi
-#Ftp
+  #Ftp
   if [[ $ftp = "y" ]]; then
     sudo ufw allow 21
     echo "Port 21 has been opened for FTP networking | ${thedate}" >> Script_log.txt
@@ -47,7 +49,7 @@ function fwset {	#Function configures firewall settings
     echo "Port 21 has been closed to stop FTP networking | ${thedate}" >> Script_log.txt
     echo "#### n"
   fi
-#Web
+  #Web
   if [[ $web = "y" ]]; then
     sudo ufw allow 80
     echo "###### y"
@@ -67,7 +69,7 @@ function fwset {	#Function configures firewall settings
 	  echo "Port 80 has been closed to stop the use of HTTP | ${thedate}" >> Script_log.txt
 	  echo "###### n"
   fi
-#Samba
+  #Samba
   if [[ $smb = "y" ]]; then
     sudo ufw allow 139
     echo "Port 139 has been opened for SMB file sharing | ${thedate}" >> Script_log.txt
@@ -77,7 +79,7 @@ function fwset {	#Function configures firewall settings
     echo "Port 139 has been closed to stop SMB file sharing | ${thedate}" >> Script_log.txt
     echo "######## n"
   fi
-#SQL
+  #SQL
   if [[ $sql = "y" ]]; then
     sudo ufw allow 3306
     echo "Port 3306 has been opened to provide SQL database functionality | ${thedate}" >> Script_log.txt
@@ -87,7 +89,7 @@ function fwset {	#Function configures firewall settings
     echo "Port 3306 has been closed to deny SQL database functionality | ${thedate}" >> Script_log.txt
     echo "########## n"
   fi
-#Rsync
+  #Rsync
   if [[ $rsnc = "y" ]]; then
     sudo ufw allow 873
     echo "Port 873 has been opened to allow rsync service functionality  | ${thedate}" >> Script_log.txt
@@ -179,12 +181,24 @@ function basic_config {
   sudo cp ../config_files/pamLogin_patch /etc/pam.d/login
   sudo cp ../config_files/pamOther_patch /etc/pam.d/other
   echo "Pam.d setting policies have been completed  | ${thedate}" | tee Script_log.txt
+  echo "Removing old SSH keys... | ${thedate}" | tee Script_log.txt
+  
+  userlist2=( $(eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1) )
+  usersleft2=${#userlist2[@]}  #this variable is equivelent to the number of users in list $userlist
+  i=0
+  while [ $usersleft2 != 0 ]; do
+    sudo rm -r /home/${userlist2[$i]}/.ssh
+    echo "User ${userlist2[$i]} no longer has any SSH keys | ${thedate}" | tee Script_log.txt
+    let i=i+1
+    echo $i
+    let usersleft2=usersleft2-1
+    echo $usersleft2
+    sleep 0.5s
+  done
+  
+  echo "Old SSH keys have been removed | ${thedate}" | tee Script_log.txt
   clear
 
-  read -p 'Does this system use SSH? [y/n] : ' sshconf
-  read -p 'Does this system use proFTP? [y/n] : ' ftpconf
-  read -p 'Does this system use Samba? [y/n] : ' smbconf
-  read -p 'Does this system use Apache2 Web Server? [y/n] : ' webconf
   #SSH
   if [ $sshconf = 'y' ]; then
     sudo cp sshConfPatch /etc/ssh/ssh_config  #replacing ssh client configuration files with pre-configured version
