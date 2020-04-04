@@ -2,6 +2,8 @@ import glob
 import os
 import subprocess as sub
 from sys import platform
+import getpass
+from threading import *
 # from Script_Runner import scriptrunnerGUI as srg
 
 
@@ -20,25 +22,27 @@ class mmfunc:
             #command = "C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\powershell.exe", ". \"./mmfucntions.ps1\";", "&winupd"
             #sub.Popen(command)
             commands = """ Write-Host("Installing module PSWindowsUpdate if not already installed... ")
-Install-Module PSWindowsUpdate
-Write-Host("PSWindowsUpdate is now installed.")
-Write-Host("")
-Write-Host("Getting Windows Updates...")
-Import-Module PSWindowsUpdate
-$updates = Invoke-Command -ScriptBlock {Get-Wulist -verbose}
-$updatenumber = ($updates.kb).count
-if ($null -ne $updates){
-    Get-WindowsUpdate -AcceptAll -Install | Out-File C:\PSWindowsUpdate.log
-    do {$updatestatus = Get-Content c:\PSWindowsUpdate.log
-        "Currently processing the following update:"
-        Get-Content c:\PSWindowsUpdate.log | select-object -last 1
-        Start-Sleep -Seconds 10
-        $ErrorActionPreference = 'SilentlyContinue'
-        $installednumber = ([regex]::Matches($updatestatus, "Installed" )).count
-        $ErrorActionPreference = ‘Continue’
-    }until ( $installednumber -eq $updatenumber)
-}
-Remove-Item -path C:\PSWindowsUpdate.log"""
+            Install-Module PSWindowsUpdate
+            Write-Host("PSWindowsUpdate is now installed.")
+            Write-Host("")
+            Write-Host("Getting Windows Updates...")
+            Import-Module PSWindowsUpdate
+            $updates = Invoke-Command -ScriptBlock {Get-Wulist -verbose}
+            $updatenumber = ($updates.kb).count
+            if ($null -ne $updates){
+                Get-WindowsUpdate -AcceptAll -Install | Out-File C:\PSWindowsUpdate.log
+                do {$updatestatus = Get-Content c:\PSWindowsUpdate.log
+                    "Currently processing the following update:"
+                    Get-Content c:\PSWindowsUpdate.log | select-object -last 1
+                    Start-Sleep -Seconds 10
+                    $ErrorActionPreference = 'SilentlyContinue'
+                    $installednumber = ([regex]::Matches($updatestatus, "Installed" )).count
+                    $ErrorActionPreference = ‘Continue’
+                }until ( $installednumber -eq $updatenumber)
+            }
+            Remove-Item -path C:\PSWindowsUpdate.log -ErrorAction SilentlyContinue
+            Write-Host("")
+            Write-Host("All updates are installed!")"""
             sub.Popen(["powershell","& {" + commands + "}"])
             # Definitely is executing but it needs to be run as admin. Must figure out a way to do that.
 
@@ -47,22 +51,137 @@ Remove-Item -path C:\PSWindowsUpdate.log"""
             print('This command does not currently support this OS')
 
     def srchmedia():
-        extensions = ('.jpg', '.mp4', '.flv', '.avi', '.wmv', '.mov', '.png', '.tif', '.gif', '.mp3', '.wma', '.aif', '.jar')
-        for root, dirs, files in os.walk('/'):
-            for filename in files:
-                if any(filename.endswith(extension) for extension in extensions):
-                    f = open('Q:\\Cyber Patriots\\my_scripts_and_STIGS\\Scripts\\CP_ScriptsREPAIR\\Script Runner GUI\\logTest.txt', 'a+')
-                    filepath = os.path.join(root, filename)
-                    f.write(filepath + '\n')
-                    f.close()
-                    print(filepath)
-        print('Scan for unapproved media complete.')
+        if platform == 'Debian' or platform == 'Ubuntu':
+            extensions = ('.jpg', '.mp4', '.flv', '.avi', '.wmv', '.mov', '.png', '.tif', '.gif', '.mp3', '.wma', '.aif', '.jar')
+            for root, dirs, files in os.walk('/home/'):
+                for filename in files:
+                    if any(filename.endswith(extension) for extension in extensions):
+                        # f = open('Q:\\Cyber Patriots\\my_scripts_and_STIGS\\Scripts\\CP_ScriptsREPAIR\\Script Runner GUI\\logTest.txt', 'a+')
+                        f = open('/home/' + getpass.getuser() + '/Desktop/LogTest.txt', 'a+')
+                        filepath = os.path.join(root, filename)
+                        f.write(filepath + '\n')
+                        f.close()
+                        print(filepath)
+            print('Scan for unapproved media complete.')
+        elif platform == 'win32':
+            extensions = ('.jpg', '.mp4', '.flv', '.avi', '.wmv', '.mov', '.png', '.tif', '.gif', '.mp3', '.wma', '.aif', '.jar')
+            for root, dirs, files in os.walk('C:\\Users\\'):
+                for filename in files:
+                    if any(filename.endswith(extension) for extension in extensions):
+                        f = open('C:\\Users\\' + getpass.getuser() + '\\Desktop\\logTest.txt', 'a+')
+                        #f = open('/home/' + getpass.getuser() + '/Desktop/LogTest.txt', 'a+')
+                        filepath = os.path.join(root, filename)
+                        f.write(filepath + '\n')
+                        f.close()
+                        print(filepath)
+            print('Scan for unapproved media complete.')
+
+    def fwl():
+        print('This command is currently in developement')
+
+    def servSet():
+        print('This command is currently in developement')
+
+    def malRem():
+        print('This command is currently in developement')
 
     def alyn():
         if platform == 'Ubuntu' or platform == 'Debian':
             command='sudo apt install lynis -y'
-            sub.call(command.split())
+            sub.Popen(command.split())
             command2='sudo lynis audit system'
-            sub.call(command2.split())
+            sub.Popen(command2.split())
+        elif platform == 'darwin':
+            print('This function does not currently support this OS')
         elif platform == 'win32':
             print('This function (alyn) does not currently support this OS.')
+
+    def basConf():
+        print('This command is currently in developement')
+
+    def rmProCont():
+        print('This command is currently in developement')
+
+
+
+class ThreadmmFunc():
+    #def __init__(self, ThreadID, name):
+    #    threading.Thread.__init__(self)
+    #    self.threadID = ThreadID
+    #    self.name = name
+
+    def threaderSRCH(self):
+        scrip = scriptrunnerGUI()
+        # print(scrip.comtorun)
+        # command = scrip.comtorun
+        #commands = [mmfunc.srchmedia, mmfunc.updates, scrip.usrgru]
+        #command = scrip.commands
+        try:
+        #self.threaderRun = _thread.start_new_thread(mmfunc.srchmedia, ("Thread search media", 1))
+            #self.threaderRun = Thread(target = commands[com])
+            #self.threaderRun.start()
+            #print(com)
+        # self.threaderRun.join()
+            #self.threaderRun.isAlive()
+            self.threader = Thread(target=mmfunc.srchmedia)
+            self.threader.start()
+        except Exception as e:
+            print(e)
+            #print(com)
+            print('Could not start thread')
+
+    def threaderUPDT(self):
+        try:
+            self.threader = Thread(target=mmfunc.updates)
+            self.threader.start()
+        except Exception as e:
+            print(e)
+            print('Could not start thread')
+
+    def threaderFWL(self):
+        try:
+            self.threader = Thread(target=mmfunc.fwl)
+            self.threader.start()
+        except Exception as e:
+            print(e)
+            print('Could not start thread')
+
+    def threaderServ(self):
+        try:
+            self.threader = Thread(target=mmfunc.servSet)
+            self.threader.start()
+        except Exception as e:
+            print(e)
+            print('Could not start thread')
+
+    def threaderMALREM(self):
+        try:
+            self.threader = Thread(target=mmfunc.malRem)
+            self.threader.start()
+        except Exception as e:
+            print(e)
+            print('Could not start thread')
+
+    def threaderALYN(self):
+        try:
+            self.threader = Thread(target=mmfunc.alyn)
+            self.threader.start()
+        except Exception as e:
+            print(e)
+            print('Could not start thread')
+
+    def threaderBASEconf(self):
+        try:
+            self.threader = Thread(target=mmfunc.basconf)
+            self.threader.start()
+        except Exception as e:
+            print(e)
+            print('Could not start thread')
+
+    def threaderRMproCont(self):
+        try:
+            self.threader = Thread(target=mmfunc.rmProCont)
+            self.threader.start()
+        except Exception as e:
+            print(e)
+            print('Could not start thread')
