@@ -33,7 +33,7 @@ function winupd {
             $ErrorActionPreference = ‘Continue’
         }until ( $installednumber -eq $updatenumber)
     }
-    Remove-Item -path C:\PSWindowsUpdate.log
+    Remove-Item -path C:\PSWindowsUpdate.log -ErrorAction SilentlyContinue
 }
 
 function serv { #UNCOMPLETED
