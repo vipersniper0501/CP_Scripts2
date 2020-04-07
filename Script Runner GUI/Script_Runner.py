@@ -263,11 +263,6 @@ if __name__ == '__main__':
         root.geometry("735x300")
     else:
         root.geometry("680x350")
-    # frameMain = Frame(root)
-    # frameMain.rowconfigure(1, weight=0)
-    # frameMain.columnconfigure(1, weight=1)
-    # framelabel = LabelFrame(root, text='test')
-    # frameMain.grid()
     # root.resizable(0, 0)
     menubar = Menu(root)
     aboutmenu = Menu(menubar, tearoff=0)

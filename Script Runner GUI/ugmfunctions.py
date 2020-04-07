@@ -27,41 +27,56 @@ class usrGruFuncEXECUTION:
 class usrGruFunc:
 
     # This class will be used for data collection to be used in the execution of the command in usrGruFuncEXECUTION
-    #class globals
-    #name = ""
-    #name.set("Username")
-    #group = StringVar()
-    #group.set("GroupName")
+
 
     def addusr():
         rootusr = Tk()
+        rootusr.title('Add User To System')
         usrgruEXEC = usrGruFuncEXECUTION()
 
         def addusrEXEC():
-            usrgru = usrGruFunc()
+            #usrgru = usrGruFunc()
             username = name.get()
+            passwords = password.get()
+            admin = group.get()
             print(username)
-            print('Not ready yet')
+            print(passwords)
+            print(admin)
+
+            if admin == 'yes' or admin == 'Yes':
+                command = "sudo useradd -m " + username + " -p " + passwords + "; sudo usermod -a -G sudo " + username + "; sudo usermod -a -G adm " + username
+                #command="sudo useradd -m " + username + "; sudo passwd " + username + "; sudo usermod -a -G sudo " + username + "; sudo usermod -a -G adm " + username
+            elif admin == 'no' or admin == 'No':
+                command = "sudo useradd -m " + username + " -p " + passwords
+            # print('Not ready yet')
 
 
         if platform == 'debian' or platform == 'ubuntu' or platform == 'win32' or platform == 'linux':
             useryon = 0
             name = StringVar()
+            password = StringVar()
+            group = StringVar()
+
             userlbl = Label(rootusr, text='What is the name of the user you would like to add?')
             userlbl.grid(row='1', column='1', sticky='W')
-            #usery = Button(rootusr, text='yes', command= lambda: changeVar(usrGruFunc.addusr, useryon, 1))
-            #usery.grid(row='2', column='1', sticky='W')
-
             name = Entry(rootusr, textvariable=name)
-            name.grid(row='2', column='1', sticky='W')
-            #group = Entry(rootusr, textvariable=self.group)
-            #group.grid(row='3', column='1', sticky='W')
+            name.grid(row='2', column='1', sticky='W', padx='5', pady='2')
+
+            passlbl = Label(rootusr, text='Please insert secure password here:')
+            passlbl.grid(row='3', column='1', sticky='W')
+            passwd = Entry(rootusr, textvariable=password, show='*', width='40')
+            passwd.grid(row='4', column='1', sticky='W', padx='5', pady='2')
+
+            grouplbl = Label(rootusr, text='Is this user an admin? [yes/no]')
+            grouplbl.grid(row='5', column='1', sticky='W')
+            group = Entry(rootusr, textvariable=group)
+            group.grid(row='6', column='1', sticky='W', padx='5', pady='2')
 
             Confirm = Button(rootusr, text='Confirm', command=addusrEXEC)
-            Confirm.grid(row='4', column='2', sticky='W')
+            Confirm.grid(row='7', column='2', sticky='W', padx='5', pady='5')
 
             cancel = Button(rootusr, text='Cancel', command=rootusr.destroy)
-            cancel.grid(row='4', column='1', padx='80', sticky='W')
+            cancel.grid(row='7', column='1', sticky='W', padx='5', pady='5')
 
             #while useryon == 1:
             #    print('test')
@@ -72,8 +87,6 @@ class usrGruFunc:
             #usern.grid(row='2', column='1', padx='50', sticky='W')
 
             #print(useryon)
-
-
 
 
             command = """read -p 'Would you like to add a user? [y/n] : ' aduseryn
