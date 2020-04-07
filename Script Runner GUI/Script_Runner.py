@@ -45,14 +45,30 @@ def depend():
     sub.call(command.split())
     print('Screen has been installed due to not already being installed. Screen is required to run most of the commands in this script.')
 
+def aboutHowtoUse():
+    window = Toplevel(root)
+    aboutContent = Label(window, text="""
++----------------------------------------+
+|    H o w  T o  U s e  T h e  P r o g r a m    |
++----------------------------------------+
+
+1.) Run as root
+2.) Choose command that you would like to use
+3.) Click it
+4.) Sit back and relax while the command runs   :)
+
+""", background='lightgreen')
+    aboutContent.grid()
+    window.configure(bg='lightgreen')
+
 
 def aboutDisplay():
     window = Toplevel(root)
-    if platform == 'win32':
-        window.geometry("500x300")
+    #if platform == 'win32':
+        #window.geometry("500x300")
     aboutContent = Label(window, text="""
 +----------------------+
-|   A P P L E    C I D R   |
+|   A P P L E    C I D R     |
 +----------------------+
 
 This program/Application/Script was made by and for the Apple Cidr Cyber Patriot team
@@ -101,7 +117,7 @@ class scriptrunnerGUI():
 
             self.mmenu()
         else:
-            print('Ello')
+            print('Ello, you have some configurations to do!')
             #self.header = Label(text='First Time Configuration')
             #self.header.config(font=24, background='lightblue')
             #self.header.grid(row=0, sticky='W')
@@ -232,6 +248,7 @@ if __name__ == '__main__':
     aboutmenu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label='Help', menu=aboutmenu)
     aboutmenu.add_command(label='About Creator', command=aboutDisplay)
+    aboutmenu.add_command(label='How To Use', command=aboutHowtoUse)
 
 
     main = scriptrunnerGUI()
