@@ -4,46 +4,68 @@ from tkinter.ttk import *
 import subprocess as sub
 from sys import platform
 from mmfunctions import *
+#from ugmfunctions import *
 import time
 from threading import *
-import _thread
 from pathlib import Path
+import ugmfunctions
 
-def osdetect():
-    global OS
-    if platform == 'Ubuntu' or platform == 'Debian':
-        depend()
-        OS = platform
-    elif platform == 'darwin':
-        print('This is a mac, not all functions will work')
-        OS = platform
-    elif platform == 'win32':
-        print('This is a windows machine, not all functions will work')
-        OS = platform
+#def osdetect():
+#    global OS
+#    if platform == 'Ubuntu' or platform == 'Debian':
+#        #depend()
+#        OS = platform
+#    elif platform == 'darwin':
+#        print('This is a mac, not all functions will work')
+#        OS = platform
+#    elif platform == 'win32':
+#        print('This is a windows machine, not all functions will work')
+#        OS = platform
 
 
-def rmvusrgrubutton():
+def rmvusrgrubutton(widget):
+    #scrip = scriptrunnerGUI()
+    #print(scrip.usrd)
+    #scrip.usrd = 1
+    #print(scrip.usrd)
+    print(widget)
+    print('Removing User / Group Settings buttons')
+    #scrip.usrgru()
+    widget.grid_remove()
+
+def chngTOusr():
     scrip = scriptrunnerGUI()
     print(scrip.usrd)
-    scrip.usrd = scrip.usrd + 1
+    print(scrip.mmd)
+    scrip.usrd = 0
+    scrip.mmd = 1
     print(scrip.usrd)
-    print('Removing User / Group Settings buttons')
+    print(scrip.mmd)
     scrip.usrgru()
-
 
 def rmvmmbuttons():
     scrip = scriptrunnerGUI()
     print(scrip.mmd)
-    scrip.mmd = scrip.mmd + 1
+    scrip.mmd = 1
     print(scrip.mmd)
     print('Removing main menu buttons...')
     scrip.mmenu()
 
+def chngTOmm():
+    scrip = scriptrunnerGUI()
+    print(scrip.mmd)
+    print(scrip.usrd)
+    scrip.mmd = 0
+    scrip.usrd = 1
+    print(scrip.mmd)
+    print(scrip.usrd)
+    scrip.usrgru()
 
-def depend():
-    command = 'sudo apt install screen -y'  # installs required dependancies
-    sub.call(command.split())
-    print('Screen has been installed due to not already being installed. Screen is required to run most of the commands in this script.')
+
+#def depend():
+#    command = 'sudo apt install screen -y'  # installs required dependancies
+#    sub.call(command.split())
+#    print('Screen has been installed due to not already being installed. Screen is required to run most of the commands in this script.')
 
 def aboutHowtoUse():
     window = Toplevel(root)
@@ -62,7 +84,7 @@ def aboutHowtoUse():
     window.configure(bg='lightgreen')
 
 
-def aboutDisplay():
+def aboutCreators():
     window = Toplevel(root)
     #if platform == 'win32':
         #window.geometry("500x300")
@@ -118,6 +140,12 @@ class scriptrunnerGUI():
             self.mmenu()
         else:
             print('Ello, you have some configurations to do!')
+
+
+            #Use Radio buttons for the yes or no questions
+
+
+
             #self.header = Label(text='First Time Configuration')
             #self.header.config(font=24, background='lightblue')
             #self.header.grid(row=0, sticky='W')
@@ -153,25 +181,25 @@ class scriptrunnerGUI():
         print('In Main Menu')
         self.header = Label(text='Main Menu')
         self.header.config(font=18, background='lightblue')
-        self.header.grid(row=0)
+        self.header.grid(row=0, sticky='WE')
 
-        buttonNames=['Search For Prohibited Media', 'Updates', 'User / Group Settings', 'Firewall Settings', 'Services Settings', 'Malware Removal', 'Audit System', 'Basic Configurations', 'Remove Prohibited Software']
+        buttonNames = ['Search For Prohibited Media', 'Updates', 'User / Group Settings', 'Firewall Settings', 'Services Settings', 'Malware Removal', 'Audit System', 'Basic Configurations', 'Remove Prohibited Software']
         thred = ThreadmmFunc()
 
-        commands = [thred.threaderSRCH, thred.threaderUPDT, self.usrgru, thred.threaderFWL, thred.threaderServ, thred.threaderMALREM, thred.threaderALYN, thred.threaderBASEconf, thred.threaderRMproCont]
-        #commands = [mmfunc.srchmedia, mmfunc.updates, self.usrgru]
+        commands = [thred.threaderSRCH, thred.threaderUPDT, chngTOusr, thred.threaderFWL, thred.threaderServ, thred.threaderMALREM, thred.threaderALYN, thred.threaderBASEconf, thred.threaderRMproCont]
+        # commands = [mmfunc.srchmedia, mmfunc.updates, self.usrgru]
         gridrow = ['5', '1', '1', '2', '2', '3', '4', '4', '3']
         gridcolumn = ['0', '0', '1', '0', '1', '1', '0', '1', '0']
         # buttons=[]
 
-        #self.threader = Thread(target=self.commands[i]).start()
-        # alyn function will not work until all other functions before it works
-
         for i in range(0, 9):
             #try:
             #self.buttons.append(Button(root, text=buttonNames[i], width='40', command=lambda: Thread(target=self.commands[i]).start()))
-            self.buttons.append(Button(root, text=buttonNames[i], width='40', command=commands[i]))
-            self.buttons[i].grid(row=gridrow[i], column=gridcolumn[i], pady='2', padx='5')
+            self.buttons.append(Button(text=buttonNames[i], width='40', command=commands[i]))
+            if self.mmd == 0:
+                self.buttons[i].grid(row=gridrow[i], column=gridcolumn[i], pady='2', padx='5')
+            else:
+                self.buttons[i].grid_remove()
                 #self.ctr.append(i)
             #except Exception as e:
             #    print(e)
@@ -190,45 +218,42 @@ class scriptrunnerGUI():
         # self.cancelThreds.grid(row=6, column=2, pady='2', padx='5')
 
     def usrgru(self):
-
         buttonNames = ['Back to Main Menu', 'Add User to System', 'Remove User from System', 'Add Group to System', 'Remove Group from System', 'Add User to Group', 'Remove User from Group', 'List Local Users', 'List Local Groups', 'List Members of Group', 'List the Groups an User is in', 'Change all Users Passwords at Once']
-        commands = [rmvusrgrubutton]
         gridrow = ['7', '1', '1', '2', '2', '3', '3', '4', '4', '5', '5', '6']
         gridcolumn = ['0', '0', '1', '0', '1', '0', '1', '0', '1', '0', '1', '0']
+        thredugm = ugmfunctions.ThreadUGMfunc()
+        #commands = [rmvusrgrubutton, thredugm.threaderADDusr, thredugm.threaderRMVusr, thredugm.threaderADDgru, thredugm.threaderRMVgru, thredugm.threaderUSRtoGru, thredugm.threaderUSRfroGru, thredugm.threaderLSusr, thredugm.threaderLSgru, thredugm.threaderLSmemGru, thredugm.threaderLSgruMemin, thredugm.threaderCHNGpassAll]
 
-        self.header2 = Label(root, text='User and Group Settings')
-        self.header2.config(font=18, background='lightblue')
-        if self.usrd == 1:
-            # print('Destroying Header')
-            self.header2.grid_remove()
-        else:
+        #commands = []
+
+        self.header2 = Label(text='User and Group Settings')
+        if self.usrd == 0:
             #print('usrd != 1')
-            self.header2.grid(row=0)
+            self.header2.grid(row=0, sticky='WE')
+            self.header2.config(font=18, background='lightblue')
             print('In Users and Group Settings')
+        else:
+            # print('Destroying Header')
+            rmvusrgrubutton(self.header2)
+            #self.header2.grid_remove()
 
-        for i in range(0, 1):
-            self.usrgrubuttons.append(Button(root, text=buttonNames[i], width='40', command=commands[i]))
-            if self.usrd == 1:
-                # print('Destroying Buttons')
-                self.usrgrubuttons[i].grid_remove()
+        for i in range(0, len(buttonNames)):
+            if self.usrd == 0:
+                self.usrgrubuttons.append(Button(text=buttonNames[i], width='40', command= lambda i=i: thredugm.threader(i)))
+                #self.usrgrubuttons.append(Button(text=buttonNames[i], width='40', command=chngTOmm))
+                self.usrgrubuttons[i].grid(row=gridrow[i], column=gridcolumn[i], pady='2', padx='5')
             else:
+                #print(self.usrgrubuttons[i])
+                print('starting to delete buttons')
+                rmvusrgrubutton(self.usrgrubuttons[i])
+                #for self.usrgrubuttons[i] in root.grid_slaves():
+                #    self.usrgrubuttons[i].grid_forget()
                 # print('usrd != 1')
-                self.usrgrubuttons[i].grid(row=gridrow[i], column=gridcolumn[i], pady='2', padx='5')
-
-        for i in range(1, 11):
-            self.usrgrubuttons.append(Button(root, text=buttonNames[i], width='40'))
-            if self.usrd == 1:
-                # print('Destroying Buttons')
-                self.usrgrubuttons[i].grid_remove()
-            else:
-                #print('usrd != 1')
-                self.usrgrubuttons[i].grid(row=gridrow[i], column=gridcolumn[i], pady='2', padx='5')
 
 ###################################################
 
-
 if __name__ == '__main__':
-    osdetect()
+    # osdetect()
     # creation of GUI
     root = Tk()
     root.title('Apple CIDR Script Runner')
@@ -237,7 +262,7 @@ if __name__ == '__main__':
     elif platform == 'darwin':
         root.geometry("735x300")
     else:
-        root.geometry("565x350")
+        root.geometry("680x350")
     # frameMain = Frame(root)
     # frameMain.rowconfigure(1, weight=0)
     # frameMain.columnconfigure(1, weight=1)
@@ -247,7 +272,7 @@ if __name__ == '__main__':
     menubar = Menu(root)
     aboutmenu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label='Help', menu=aboutmenu)
-    aboutmenu.add_command(label='About Creator', command=aboutDisplay)
+    aboutmenu.add_command(label='About Creator', command=aboutCreators)
     aboutmenu.add_command(label='How To Use', command=aboutHowtoUse)
 
 

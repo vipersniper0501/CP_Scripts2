@@ -9,11 +9,10 @@ from threading import *
 
 class mmfunc:
     def updates():
-        if platform == 'Ubuntu' or platform == 'Debian':
-            command = 'sudo screen -md apt update'
-            command2 = 'sudo screen -md apt upgrade'
+        print(platform)
+        if platform == 'Ubuntu' or platform == 'Debian' or platform == 'linux':
+            command = 'sudo apt update && upgrade -y'
             sub.Popen(command.split())
-            sub.Popen(command2.split())
             print('Updates Completed!')
         elif platform == 'darwin':
             command = 'sudo softwareupdate -i -a'
@@ -111,7 +110,6 @@ class ThreadmmFunc():
     #    self.name = name
 
     def threaderSRCH(self):
-        scrip = scriptrunnerGUI()
         # print(scrip.comtorun)
         # command = scrip.comtorun
         #commands = [mmfunc.srchmedia, mmfunc.updates, scrip.usrgru]
