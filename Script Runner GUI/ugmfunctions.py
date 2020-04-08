@@ -39,7 +39,6 @@ class usrGruFunc:
         group = StringVar()
 
         def addusrEXEC():
-            #usrgru = usrGruFunc()
             if platform == 'linux':
                 username = name.get()
                 passwds = passwd.get()
@@ -73,13 +72,36 @@ class usrGruFunc:
                     print(command)
                     os.system(command)
                     print(pwd.getpwnam(username))
+
             elif platform == 'win32':
                 username = name.get()
                 passwds = passwd.get()
                 admin = group.get()
+                print(username)
+                print(passwds)
+                print(admin)
+                if admin == 'yes' or admin == 'Yes':
+                    print('This user will be an admin')
+                    secureCom = "ConvertTo-SecureString " + passwds + " -AsPlainText -Force"
+                    passSecure = sub.Popen(secureCom.split(), stdout=sub.PIPE)
+                    SecurePass = passSecure.stdout.read()
+                    command = "New-LocalUser " + username + " -Password " + SecurePass + " -Confirm"
+                    command2 = "Add-LocalGroupMember -Group 'Administrators' -Member " + username
+                    print(command)
+                    print(command2)
+                    #os.system(command)
+                    #os.system(command2)
+                    sub.Popen(command.split())
+                    sub.Popen(command2.split())
+                elif admin == 'no' or admin == 'No':
+                    print('This user will not be an admin')
+                    secureCom = "ConvertTo-SecureString " + passwds + " -AsPlainText -Force"
+                    passSecure = sub.Popen(secureCom.split(), stdout=sub.PIPE)
+                    SecurePass = passSecure.stdout.read()
+                    command = "New-LocalUser " + username + " -Password " + SecurePass + " -Confirm"
+                    print(command)
+                    sub.Popen(command.split())
 
-                #will be powershell code here
-                print('This command is not complete yet')
             elif platform == 'darwin':
                 username = name.get()
                 passwds = passwd.get()
