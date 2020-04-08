@@ -2,25 +2,18 @@
 from tkinter import *
 from tkinter.ttk import *
 import subprocess as sub
-from sys import platform
+from sys import platform #for knowing if it is windows
 from mmfunctions import *
 #from ugmfunctions import *
 import time
 from threading import *
 from pathlib import Path
 import ugmfunctions
+import distro #for figuring out what linux distro
 
-#def osdetect():
-#    global OS
-#    if platform == 'Ubuntu' or platform == 'Debian':
-#        #depend()
-#        OS = platform
-#    elif platform == 'darwin':
-#        print('This is a mac, not all functions will work')
-#        OS = platform
-#    elif platform == 'win32':
-#        print('This is a windows machine, not all functions will work')
-#        OS = platform
+#global variables
+OS = distro.linux_distribution()
+ops = OS[0]
 
 
 def rmvusrgrubutton(widget):
@@ -129,7 +122,7 @@ class scriptrunnerGUI():
         cwd = os.getcwd()
         #if platform == 'win32':
         variableCheck = Path(cwd + '/config.py')
-        #elif platform == 'Ubuntu' or platform == 'Debian' or platform == 'darwin':
+        #elif ops == 'Ubuntu' or ops == 'debian' or ops == 'darwin':
         #    variableCheck = Path()
         print(variableCheck)
         print(cwd)
@@ -259,7 +252,7 @@ if __name__ == '__main__':
     root.title('Apple CIDR Script Runner')
     if platform == 'win32':
         root.geometry("565x300")
-    elif platform == 'darwin':
+    elif ops == 'darwin':
         root.geometry("735x300")
     else:
         root.geometry("680x350")
