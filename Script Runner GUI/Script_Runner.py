@@ -213,10 +213,11 @@ class scriptrunnerGUI():
         buttonNames = ['Back to Main Menu', 'Add User to System', 'Remove User from System', 'Add Group to System', 'Remove Group from System', 'Add User to Group', 'Remove User from Group', 'List Local Users', 'List Local Groups', 'List Members of Group', 'List the Groups an User is in', 'Change all Users Passwords at Once']
         gridrow = ['7', '1', '1', '2', '2', '3', '3', '4', '4', '5', '5', '6']
         gridcolumn = ['0', '0', '1', '0', '1', '0', '1', '0', '1', '0', '1', '0']
-        thredugm = ugmfunctions.ThreadUGMfunc()
+        #thredugm = ugmfunctions.ThreadUGMfunc()
+        usrgru = ugmfunctions.usrGruFunc()
         #commands = [rmvusrgrubutton, thredugm.threaderADDusr, thredugm.threaderRMVusr, thredugm.threaderADDgru, thredugm.threaderRMVgru, thredugm.threaderUSRtoGru, thredugm.threaderUSRfroGru, thredugm.threaderLSusr, thredugm.threaderLSgru, thredugm.threaderLSmemGru, thredugm.threaderLSgruMemin, thredugm.threaderCHNGpassAll]
 
-        #commands = []
+        targets = [chngTOmm, usrgru.addusr, usrgru.rmuser, usrgru.adgru, usrgru.rmgru, usrgru.adusrtogru, usrgru.rmusrfrogru, usrgru.lslocausr, usrgru.lslocagru, usrgru.lsmemgru, usrgru.lsgruusrin, usrgru.chngusrspass]
 
         self.header2 = Label(text='User and Group Settings')
         if self.usrd == 0:
@@ -231,16 +232,19 @@ class scriptrunnerGUI():
 
         for i in range(0, len(buttonNames)):
             if self.usrd == 0:
-                self.usrgrubuttons.append(Button(text=buttonNames[i], width='40', command= lambda i=i: thredugm.threader(i)))
-                #self.usrgrubuttons.append(Button(text=buttonNames[i], width='40', command=chngTOmm))
+                self.usrgrubuttons.append(Button(text=buttonNames[i], width='40', command= lambda i=i: threader(i)))
                 self.usrgrubuttons[i].grid(row=gridrow[i], column=gridcolumn[i], pady='2', padx='5')
             else:
-                #print(self.usrgrubuttons[i])
                 print('starting to delete buttons')
                 rmvusrgrubutton(self.usrgrubuttons[i])
-                #for self.usrgrubuttons[i] in root.grid_slaves():
-                #    self.usrgrubuttons[i].grid_forget()
-                # print('usrd != 1')
+        def threader(com):
+            try:
+                print(targets[com])
+                threader = Thread(target=targets[com])
+                threader.start()
+            except Exception as e:
+                print(e)
+                print('Could not start thread')
 
 ###################################################
 

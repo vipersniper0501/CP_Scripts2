@@ -31,7 +31,7 @@ class usrGruFunc:
 
     # This class will be used for data collection to be used in the execution of the command in usrGruFuncEXECUTION
 
-    def addusr():
+    def addusr(self):
         rootusr = Tk()
         rootusr.title('Add User To System')
         name = StringVar()
@@ -73,7 +73,7 @@ class usrGruFunc:
                     os.system(command)
                     print(pwd.getpwnam(username))
 
-            elif platform == 'win32':
+            elif platform == 'win32': #This code is broken
                 username = name.get()
                 passwds = passwd.get()
                 admin = group.get()
@@ -163,7 +163,7 @@ class usrGruFunc:
 
         rootusr.mainloop()
 
-    def rmuser():
+    def rmuser(self):
         if platform == 'linux':
             print('This command is not complete yet')
         elif platform == 'win32':
@@ -173,7 +173,7 @@ class usrGruFunc:
         else:
             print('This command does not yet support this OS')
 
-    def adgru():
+    def adgru(self):
         if platform == 'linux':
             print('This command is not complete yet')
         elif platform == 'win32':
@@ -183,7 +183,7 @@ class usrGruFunc:
         else:
             print('This command does not yet support this OS')
 
-    def rmgru():
+    def rmgru(self):
         if platform == 'linux':
             print('This command is not complete yet')
         elif platform == 'win32':
@@ -193,7 +193,7 @@ class usrGruFunc:
         else:
             print('This command does not yet support this OS')
 
-    def adusrtogru():
+    def adusrtogru(self):
         if platform == 'linux':
             print('This command is not complete yet')
         elif platform == 'win32':
@@ -203,7 +203,7 @@ class usrGruFunc:
         else:
             print('This command does not yet support this OS')
 
-    def rmusrfrogru():
+    def rmusrfrogru(self):
         if platform == 'linux':
             print('This command is not complete yet')
         elif platform == 'win32':
@@ -213,7 +213,7 @@ class usrGruFunc:
         else:
             print('This command does not yet support this OS')
 
-    def lslocausr():
+    def lslocausr(self):
         if platform == 'linux':
             print('This command is not complete yet')
         elif platform == 'win32':
@@ -223,7 +223,7 @@ class usrGruFunc:
         else:
             print('This command does not yet support this OS')
 
-    def lslocagru():
+    def lslocagru(self):
         if platform == 'linux':
             print('This command is not complete yet')
         elif platform == 'win32':
@@ -233,7 +233,7 @@ class usrGruFunc:
         else:
             print('This command does not yet support this OS')
 
-    def lsmemgru():
+    def lsmemgru(self):
         if platform == 'linux':
             print('This command is not complete yet')
         elif platform == 'win32':
@@ -243,7 +243,7 @@ class usrGruFunc:
         else:
             print('This command does not yet support this OS')
 
-    def lsgruusrin():
+    def lsgruusrin(self):
         if platform == 'linux':
             print('This command is not complete yet')
         elif platform == 'win32':
@@ -253,7 +253,7 @@ class usrGruFunc:
         else:
             print('This command does not yet support this OS')
 
-    def chngusrspass():
+    def chngusrspass(self):
         if platform == 'linux':
             print('This command is not complete yet')
         elif platform == 'win32':
@@ -263,17 +263,17 @@ class usrGruFunc:
         else:
             print('This command does not yet support this OS')
 
-targets = [chngTOmm, usrGruFunc.addusr, usrGruFunc.rmuser, usrGruFunc.adgru, usrGruFunc.rmgru, usrGruFunc.adusrtogru, usrGruFunc.rmusrfrogru, usrGruFunc.lslocausr, usrGruFunc.lslocagru, usrGruFunc.lsmemgru, usrGruFunc.lsgruusrin, usrGruFunc.chngusrspass]
+#targets = [chngTOmm, usrGruFunc.addusr, usrGruFunc.rmuser, usrGruFunc.adgru, usrGruFunc.rmgru, usrGruFunc.adusrtogru, usrGruFunc.rmusrfrogru, usrGruFunc.lslocausr, usrGruFunc.lslocagru, usrGruFunc.lsmemgru, usrGruFunc.lsgruusrin, usrGruFunc.chngusrspass]
 
-class ThreadUGMfunc:
-    def threader(self, com):
-        try:
-            print(targets[com])
-            threader = Thread(target=targets[com])
-            threader.start()
-        except Exception as e:
-            print(e)
-            print('Could not start thread')
+#class ThreadUGMfunc:
+#    def threader(self, com):
+#        try:
+#            print(targets[com])
+#            threader = Thread(target=targets[com])
+#            threader.start()
+#        except Exception as e:
+#            print(e)
+#            print('Could not start thread')
 
     #def threaderADDusr(self):
     #    try:
