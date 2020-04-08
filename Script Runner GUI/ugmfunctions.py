@@ -8,6 +8,7 @@ from tkinter import *
 from tkinter.ttk import *
 from Script_Runner import *
 import time
+import random
 if platform == 'linux':
     import crypt
     import pwd
@@ -32,8 +33,9 @@ class usrGruFunc:
     # This class will be used for data collection to be used in the execution of the command in usrGruFuncEXECUTION
 
     def addusr(self):
-        rootusr = Tk()
-        rootusr.title('Add User To System')
+        topusr = Toplevel()
+        #rootusr = Tk()
+        #rootusr.title('Add User To System')
         name = StringVar()
         paswd = StringVar()
         group = StringVar()
@@ -109,69 +111,112 @@ class usrGruFunc:
                 print(username)
                 print(passwds)
                 print(admin)
+                numb = random.randint(1001, 5000)
                 if admin == 'yes' or admin == 'Yes':
                     print('This user will be an admin')
-                    command = 'sudo dscl / -create /Users/' + username
-                    command2 = 'sudo dscl / -passwd /Users/' + username + ' ' + passwds
-                    command3 = 'sudo dscl / -append /Groups/admin GroupMembership ' + username
+                    command = 'sudo dscl . -create /Users/' + username
+                    command2 = 'sudo dscl . -create /Users/' + username + ' NFSHomeDirectory /Users/' + username
+                    command3 = 'sudo dscl . -create /Users/' + username + ' RealName ' + username
+                    command4 = 'sudo dscl . -create /Users/' + username + ' UniqueID ' + str(numb)
+                    command5 = 'sudo dscl . -create /Users/' + username + ' PrimaryGroupID ' + str(numb)
+                    command6 = 'sudo dscl . -passwd /Users/' + username + ' ' + passwds
+                    command7 = 'sudo dscl . -append /Groups/admin GroupMembership ' + username
                     print(command)
                     print(command2)
                     print(command3)
-                    #os.system(command)
-                    #os.system(command2)
-                    #os.system(command3)
+                    print(command4)
+                    print(command5)
+                    print(command6)
+                    print(command7)
                     sub.Popen(command.split())
                     sub.Popen(command2.split())
                     sub.Popen(command3.split())
-                    print(pwd.getpwnam(username))
+                    sub.Popen(command4.split())
+                    sub.Popen(command5.split())
+                    sub.Popen(command6.split())
+                    sub.Popen(command7.split())
                 elif admin == 'no' or admin == 'No':
                     print('This user will not be an admin')
-                    command = 'sudo dscl / -create /Users/' + username
-                    command2 = 'sudo dscl / -passwd /Users/' + username + ' ' + passwds
+                    command = 'sudo dscl . -create /Users/' + username
+                    command2 = 'sudo dscl . -create /Users/' + username + ' NFSHomeDirectory /Users/' + username
+                    command3 = 'sudo dscl . -create /Users/' + username + ' RealName ' + username
+                    command4 = 'sudo dscl . -create /Users/' + username + ' UniqueID ' + str(numb)
+                    command5 = 'sudo dscl . -create /Users/' + username + ' PrimaryGroupID ' + str(numb)
+                    command6 = 'sudo dscl . -passwd /Users/' + username + ' ' + passwds
                     print(command)
                     print(command2)
-                    #os.system(command)
-                    #os.system(command2)
+                    print(command3)
+                    print(command4)
+                    print(command5)
+                    print(command6)
                     sub.Popen(command.split())
                     sub.Popen(command2.split())
-                    print(pwd.getpwnam(username))
+                    sub.Popen(command3.split())
+                    sub.Popen(command4.split())
+                    sub.Popen(command5.split())
+                    sub.Popen(command6.split())
             else:
                 print('This command does not yet support this OS')
 
 
-        userlbl = Label(rootusr, text='What is the name of the user you would like to add?')
+        userlbl = Label(topusr, text='What is the name of the user you would like to add?')
         userlbl.grid(row='1', column='1', sticky='W')
-        name = Entry(rootusr, textvariable=name)
+        name = Entry(topusr, textvariable=name)
         name.grid(row='2', column='1', sticky='W', padx='5', pady='2')
 
-        passlbl = Label(rootusr, text='Please insert secure password here:')
+        passlbl = Label(topusr, text='Please insert secure password here:')
         passlbl.grid(row='3', column='1', sticky='W')
-        passwd = Entry(rootusr, textvariable=paswd)
+        passwd = Entry(topusr, textvariable=paswd)
         passwd.grid(row='4', column='1', sticky='W', padx='5', pady='2')
 
-        grouplbl = Label(rootusr, text='Is this user an admin? [yes/no]')
+        grouplbl = Label(topusr, text='Is this user an admin? [yes/no]')
         grouplbl.grid(row='5', column='1', sticky='W')
-        group = Entry(rootusr, textvariable=group)
+        group = Entry(topusr, textvariable=group)
         group.grid(row='6', column='1', sticky='W', padx='5', pady='2')
 
 
-        Confirm = Button(rootusr, text='Confirm', command=addusrEXEC)
+        Confirm = Button(topusr, text='Confirm', command=addusrEXEC)
         Confirm.grid(row='7', column='2', sticky='W', padx='5', pady='5')
 
-        cancel = Button(rootusr, text='Cancel', command=rootusr.destroy)
+        cancel = Button(topusr, text='Cancel', command=topusr.destroy)
         cancel.grid(row='7', column='1', sticky='W', padx='5', pady='5')
 
-        rootusr.mainloop()
+        #topusr.mainloop()
+        #rootusr.mainloop()
 
     def rmuser(self):
-        if platform == 'linux':
-            print('This command is not complete yet')
-        elif platform == 'win32':
-            print('This command is not complete yet')
-        elif platform == 'darwin':
-            print('This command is not complete yet')
-        else:
-            print('This command does not yet support this OS')
+        topusr = Toplevel()
+        name = StringVar()
+        
+        def rmusrEXEC():
+            if platform == 'linux':
+                username = name.get()
+                command = 'userdel -r ' + username
+                sub.Popen(command.split())
+            elif platform == 'win32':
+                username = name.get()
+                command = 'Remove-LocalUser -Name ' + username
+                sub.Popen(command.split())
+            elif platform == 'darwin':
+                username = name.get()
+                command = 'sudo dscl . delete /Users/' + username
+                command2 = 'sudo rm -r /Users/' + username
+                sub.Popen(command.split())
+                sub.Popen(command2.split())
+            else:
+                print('This command does not yet support this OS')
+
+        userlbl = Label(topusr, text='What is the name of the user you would like to remove?')
+        userlbl.grid(row='1', column='1', sticky='W')
+        name = Entry(topusr, textvariable=name)
+        name.grid(row='2', column='1', sticky='W', padx='5', pady='2')
+
+        Confirm = Button(topusr, text='Confirm', command=rmusrEXEC)
+        Confirm.grid(row='7', column='2', sticky='W', padx='5', pady='5')
+
+        cancel = Button(topusr, text='Cancel', command=topusr.destroy)
+        cancel.grid(row='7', column='1', sticky='W', padx='5', pady='5')
+
 
     def adgru(self):
         if platform == 'linux':
@@ -262,103 +307,3 @@ class usrGruFunc:
             print('This command is not complete yet')
         else:
             print('This command does not yet support this OS')
-
-#targets = [chngTOmm, usrGruFunc.addusr, usrGruFunc.rmuser, usrGruFunc.adgru, usrGruFunc.rmgru, usrGruFunc.adusrtogru, usrGruFunc.rmusrfrogru, usrGruFunc.lslocausr, usrGruFunc.lslocagru, usrGruFunc.lsmemgru, usrGruFunc.lsgruusrin, usrGruFunc.chngusrspass]
-
-#class ThreadUGMfunc:
-#    def threader(self, com):
-#        try:
-#            print(targets[com])
-#            threader = Thread(target=targets[com])
-#            threader.start()
-#        except Exception as e:
-#            print(e)
-#            print('Could not start thread')
-
-    #def threaderADDusr(self):
-    #    try:
-    #        self.threader = Thread(target=usrGruFunc.addusr)
-    #        self.threader.start()
-    #    except Exception as e:
-    #        print(e)
-    #        print('Could not start thread')
-
-    #def threaderRMVusr(self):
-    #    try:
-    #        self.threader = Thread(target=usrGruFunc.rmuser)
-    #        self.threader.start()
-    #    except Exception as e:
-    #        print(e)
-    #        print('Could not start thread')
-
-    #def threaderADDgru(self):
-    #    try:
-    #        self.threader = Thread(target=usrGruFunc.adgru)
-    #        self.threader.start()
-    #    except Exception as e:
-    #        print(e)
-    #        print('Could not start thread')
-
-    #def threaderRMVgru(self):
-    #    try:
-    #        self.threader = Thread(target=usrGruFunc.rmgru)
-    #        self.threader.start()
-    #    except Exception as e:
-    #        print(e)
-    #        print('Could not start thread')
-
-    #def threaderUSRtoGru(self):
-    #    try:
-    #        self.threader = Thread(target=usrGruFunc.adusrtogru)
-    #        self.threader.start()
-    #    except Exception as e:
-    #        print(e)
-    #        print('Could not start thread')
-
-    #def threaderUSRfroGru(self):
-    #    try:
-    #        self.threader = Thread(target=usrGruFunc.rmusrfrogru)
-    #        self.threader.start()
-    #    except Exception as e:
-    #        print(e)
-    #        print('Could not start thread')
-
-    #def threaderLSusr(self):
-    #    try:
-    #        self.threader = Thread(target=usrGruFunc.lslocausr)
-    #        self.threader.start()
-    #    except Exception as e:
-    #        print(e)
-    #        print('Could not start thread')
-
-    #def threaderLSgru(self):
-    #    try:
-    #        self.threader = Thread(target=usrGruFunc.lslocagru)
-    #        self.threader.start()
-    #    except Exception as e:
-    #        print(e)
-    #        print('Could not start thread')
-
-    #def threaderLSmemGru(self):
-    #    try:
-    #        self.threader = Thread(target=usrGruFunc.lsmemgru)
-    #        self.threader.start()
-    #    except Exception as e:
-    #        print(e)
-    #        print('Could not start thread')
-
-    #def threaderLSgruMemin(self):
-    #    try:
-    #        self.threader = Thread(target=usrGruFunc.lsgruusrin)
-    #        self.threader.start()
-    #    except Exception as e:
-    #        print(e)
-    #        print('Could not start thread')
-
-    #def threaderCHNGpassAll(self):
-    #    try:
-    #        self.threader = Thread(target=usrGruFunc.chngusrspass)
-    #        self.threader.start()
-    #    except Exception as e:
-    #        print(e)
-    #        print('Could not start thread')
