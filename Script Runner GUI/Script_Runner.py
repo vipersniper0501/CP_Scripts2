@@ -4,7 +4,6 @@ from tkinter.ttk import *
 import subprocess as sub
 from sys import platform #for knowing if it is windows
 from mmfunctions import *
-#from ugmfunctions import *
 import time
 from threading import *
 from pathlib import Path

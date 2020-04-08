@@ -8,9 +8,11 @@ from tkinter import *
 from tkinter.ttk import *
 from Script_Runner import *
 import time
-import crypt
+if platform == 'linux':
+    import crypt
+    import pwd
 import distro #for figuring out what linux distro
-import pwd
+
 
 #global variables
 OS = distro.linux_distribution()
@@ -75,14 +77,42 @@ class usrGruFunc:
                 username = name.get()
                 passwds = passwd.get()
                 admin = group.get()
+
                 #will be powershell code here
                 print('This command is not complete yet')
             elif platform == 'darwin':
                 username = name.get()
                 passwds = passwd.get()
                 admin = group.get()
-                #no clue what this will be
-                print('This command is not complete yet')
+                print(username)
+                print(passwds)
+                print(admin)
+                if admin == 'yes' or admin == 'Yes':
+                    print('This user will be an admin')
+                    command = 'sudo dscl / -create /Users/' + username
+                    command2 = 'sudo dscl / -passwd /Users/' + username + ' ' + passwds
+                    command3 = 'sudo dscl / -append /Groups/admin GroupMembership ' + username
+                    print(command)
+                    print(command2)
+                    print(command3)
+                    #os.system(command)
+                    #os.system(command2)
+                    #os.system(command3)
+                    sub.Popen(command.split())
+                    sub.Popen(command2.split())
+                    sub.Popen(command3.split())
+                    print(pwd.getpwnam(username))
+                elif admin == 'no' or admin == 'No':
+                    print('This user will not be an admin')
+                    command = 'sudo dscl / -create /Users/' + username
+                    command2 = 'sudo dscl / -passwd /Users/' + username + ' ' + passwds
+                    print(command)
+                    print(command2)
+                    #os.system(command)
+                    #os.system(command2)
+                    sub.Popen(command.split())
+                    sub.Popen(command2.split())
+                    print(pwd.getpwnam(username))
             else:
                 print('This command does not yet support this OS')
 
