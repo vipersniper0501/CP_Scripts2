@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 from tkinter import *
 from tkinter.ttk import *
+import tkinter as tk #used to force certain widget type
+import tkinter.font as tkFont
 import subprocess as sub
 from sys import platform #for knowing if it is windows
 from mmfunctions import *
@@ -53,11 +55,6 @@ def chngTOmm():
     print(scrip.usrd)
     scrip.usrgru()
 
-
-#def depend():
-#    command = 'sudo apt install screen -y'  # installs required dependancies
-#    sub.call(command.split())
-#    print('Screen has been installed due to not already being installed. Screen is required to run most of the commands in this script.')
 
 def aboutHowtoUse():
     window = Toplevel(root)
@@ -170,10 +167,6 @@ class scriptrunnerGUI():
             #self.cont.grid(row=1, column=1, sticky='SW')
 
     def mmenu(self):
-        print('In Main Menu')
-        self.header = Label(text='Main Menu')
-        self.header.config(font=18, background='lightblue')
-        self.header.grid(row=0, sticky='WE')
 
         buttonNames = ['Search For Prohibited Media', 'Updates', 'User / Group Settings', 'Firewall Settings', 'Services Settings', 'Malware Removal', 'Audit System', 'Basic Configurations', 'Remove Prohibited Software']
         thred = ThreadmmFunc()
@@ -182,61 +175,51 @@ class scriptrunnerGUI():
         # commands = [mmfunc.srchmedia, mmfunc.updates, self.usrgru]
         gridrow = ['5', '1', '1', '2', '2', '3', '4', '4', '3']
         gridcolumn = ['0', '0', '1', '0', '1', '1', '0', '1', '0']
-        # buttons=[]
 
-        for i in range(0, 9):
-            #try:
-            #self.buttons.append(Button(root, text=buttonNames[i], width='40', command=lambda: Thread(target=self.commands[i]).start()))
-            self.buttons.append(Button(text=buttonNames[i], width='40', command=commands[i]))
-            if self.mmd == 0:
-                self.buttons[i].grid(row=gridrow[i], column=gridcolumn[i], pady='2', padx='5')
-            else:
-                self.buttons[i].grid_remove()
-                #self.ctr.append(i)
-            #except Exception as e:
-            #    print(e)
-            #    continue
-
-        #for i in range(3, 9):
-            #try:
-        #    self.buttons.append(Button(root, text=buttonNames[i], width='40'))
-        #    self.buttons[i].grid(row=gridrow[i], column=gridcolumn[i], pady='2', padx='5')
-            #except Exception as e:
-            #    print(e)
-            #    continue
-
-
-        # self.cancelThreds = Button(root, text='Cancel Running Threads', width='40', command=thred.killThread)
-        # self.cancelThreds.grid(row=6, column=2, pady='2', padx='5')
-
-    def usrgru(self):
-        buttonNames = ['Back to Main Menu', 'Add User to System', 'Remove User from System', 'Add Group to System', 'Remove Group from System', 'Add User to Group', 'Remove User from Group', 'List Local Users', 'List Local Groups', 'List Members of Group', 'List the Groups an User is in', 'Change all Users Passwords at Once']
-        gridrow = ['7', '1', '1', '2', '2', '3', '3', '4', '4', '5', '5', '6']
-        gridcolumn = ['0', '0', '1', '0', '1', '0', '1', '0', '1', '0', '1', '0']
-        #thredugm = ugmfunctions.ThreadUGMfunc()
-        usrgru = ugmfunctions.usrGruFunc()
-        #commands = [rmvusrgrubutton, thredugm.threaderADDusr, thredugm.threaderRMVusr, thredugm.threaderADDgru, thredugm.threaderRMVgru, thredugm.threaderUSRtoGru, thredugm.threaderUSRfroGru, thredugm.threaderLSusr, thredugm.threaderLSgru, thredugm.threaderLSmemGru, thredugm.threaderLSgruMemin, thredugm.threaderCHNGpassAll]
-
-        targets = [chngTOmm, usrgru.addusr, usrgru.rmuser, usrgru.adgru, usrgru.rmgru, usrgru.adusrtogru, usrgru.rmusrfrogru, usrgru.lslocausr, usrgru.lslocagru, usrgru.lsmemgru, usrgru.lsgruusrin, usrgru.chngusrspass]
-
-        self.header2 = Label(text='User and Group Settings')
-        if self.usrd == 0:
-            #print('usrd != 1')
-            self.header2.grid(row=0, sticky='WE')
-            self.header2.config(font=18, background='lightblue')
-            print('In Users and Group Settings')
-        else:
-            # print('Destroying Header')
-            rmvusrgrubutton(self.header2)
-            #self.header2.grid_remove()
+        fontSize = tkFont.Font(size=24)
 
         for i in range(0, len(buttonNames)):
+            self.quit = Button(footerR, text='Quit', width=20, command=root.destroy)
+            self.header = Label(fHead, text='Main Menu')
+            self.buttons.append(Button(fCont, text=buttonNames[i], width='40', command=commands[i]))
+            if self.mmd == 0:
+                self.quit.grid_rowconfigure(0, weight=1)
+                self.quit.grid(row=0, sticky='E', padx=30, pady=10)
+                self.header.config(font=fontSize, background='lightblue')
+                self.header.grid(row=0, sticky='WE', padx=30, pady=20)
+                self.buttons[i].grid(row=gridrow[i], column=gridcolumn[i], pady='2', padx='5')
+                print('In Main Menu')
+            else:
+                self.quit.grid_remove()
+                self.header.grid_remove()
+                self.buttons[i].grid_remove()
+
+    def usrgru(self):
+        buttonNames = ['Add User to System', 'Remove User from System', 'Add Group to System', 'Remove Group from System', 'Add User to Group', 'Remove User from Group', 'List Local Users', 'List Local Groups', 'List Members of Group', 'List the Groups an User is in', 'Change all Users Passwords at Once']
+        gridrow = ['1', '1', '2', '2', '3', '3', '4', '4', '5', '5', '6']
+        gridcolumn = ['0', '1', '0', '1', '0', '1', '0', '1', '0', '1', '0']
+        usrgru = ugmfunctions.usrGruFunc()
+        targets = [usrgru.addusr, usrgru.rmuser, usrgru.adgru, usrgru.rmgru, usrgru.adusrtogru, usrgru.rmusrfrogru, usrgru.lslocausr, usrgru.lslocagru, usrgru.lsmemgru, usrgru.lsgruusrin, usrgru.chngusrspass]
+
+        fontSize = tkFont.Font(size=24)
+
+        for i in range(0, len(buttonNames)):
+            self.Back = Button(footerL, text='Back to Main Menu', width=20, command=chngTOmm)
+            self.header2 = Label(fHead, text='User and Group Settings')
+            self.usrgrubuttons.append(Button(fCont, text=buttonNames[i], width='40', command= lambda i=i: threader(i)))
             if self.usrd == 0:
-                self.usrgrubuttons.append(Button(text=buttonNames[i], width='40', command= lambda i=i: threader(i)))
+                self.Back.grid(row=0, sticky='W', padx=30, pady=10)
+                self.Back.grid_rowconfigure(1, weight=0)
+                self.header2.grid(row=0, sticky='WE', padx=30, pady=20)
+                self.header2.config(font=fontSize, background='lightblue')
                 self.usrgrubuttons[i].grid(row=gridrow[i], column=gridcolumn[i], pady='2', padx='5')
+                print('In user / group menu')
             else:
                 print('starting to delete buttons')
-                rmvusrgrubutton(self.usrgrubuttons[i])
+                self.Back.grid_remove()
+                self.header2.grid_remove()
+                self.usrgrubuttons[i].grid_remove()
+
         def threader(com):
             try:
                 print(targets[com])
@@ -254,12 +237,29 @@ if __name__ == '__main__':
     root = Tk()
     root.title('Apple CIDR Script Runner')
     if platform == 'win32':
-        root.geometry("565x300")
+        root.geometry("520x350")
     elif ops == 'darwin':
-        root.geometry("735x300")
+        root.geometry("735x350")
     else:
         root.geometry("680x350")
     # root.resizable(0, 0)
+    root.grid_rowconfigure(0, weight=1)
+    root.grid_columnconfigure(0, weight=1)
+
+    fCont = tk.Frame(root, background='black')
+    fCont.grid(row=0, column=0, columnspan=2, sticky='nsew')
+    #fCont.grid_rowconfigure(1, weight=1)
+    #fCont.grid_columnconfigure(0, weight=1)
+
+    fHead = tk.Frame(fCont, background='blue')
+    fHead.grid(row=0, column=0, columnspan=2, sticky='ew')
+
+    footerR = tk.Frame(root, background='red')
+    footerR.grid(row=1, column=1, sticky='se')
+
+    footerL = tk.Frame(root, background='green')
+    footerL.grid(row=1, column=0, sticky='sw')
+
     menubar = Menu(root)
     aboutmenu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label='Help', menu=aboutmenu)
