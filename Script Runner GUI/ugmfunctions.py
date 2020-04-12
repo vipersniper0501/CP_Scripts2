@@ -32,11 +32,9 @@ def changeVar(function, var, change):
 
 class usrGruFunc:
 
-    # This class will be used for data collection to be used in the execution of the command in usrGruFuncEXECUTION
-
     def addusr(self):
         topusr = Toplevel()
-        #rootusr = Tk()
+        topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
         topusr.title('Add User To System')
         name = StringVar()
         paswd = StringVar()
@@ -179,6 +177,7 @@ Get-LocalUser
 
     def rmuser(self):
         topusr = Toplevel()
+        topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
         topusr.title('Remove User From System')
         name = StringVar()
         topusr.geometry('650x450')
@@ -250,6 +249,7 @@ Get-LocalUser
 
     def adgru(self):
         topusr = Toplevel()
+        topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
         topusr.title('Create User Group')
         name = StringVar()
 
@@ -265,7 +265,7 @@ Get-LocalUser
                 gruname = name.get()
                 command = 'New-LocalGroup -Name ' + gruname
                 print(command)
-                exec = sub.Popen(["powershell","& {" + command + "}"])
+                sub.Popen(["powershell","& {" + command + "}"])
                 print('Group ' + gruname + ' has been successfully added!')
                 topusr.destroy()
             elif platform == 'darwin':
@@ -288,6 +288,7 @@ Get-LocalUser
 
     def rmgru(self):
         topusr = Toplevel()
+        topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
         topusr.title('Remove User Group')
         name = StringVar()
 
@@ -296,13 +297,16 @@ Get-LocalUser
                 gruname = name.get()
                 command = 'sudo groupdel ' + gruname
                 sub.Popen(command.split())
+                #os.system(command)
+                print('Group ' + gruname + ' has been successfully removed!')
                 topusr.destroy()
-                print('This command is not complete yet')
             elif platform == 'win32':
                 gruname = name.get()
-                print('This command is not complete yet')
+                command = 'Remove-LocalGroup -Name ' + gruname
+                sub.Popen(["powershell","& {" + command + "}"])
+                print('Group ' + gruname + ' has been successfully removed!')
+                topusr.destroy()
             elif platform == 'darwin':
-                gruname = name.get()
                 print('This command is does not support MacOS')
             else:
                 print('This command does not yet support this OS')
@@ -319,6 +323,12 @@ Get-LocalUser
         cancel.grid(row='7', column='1', sticky='W', padx='5', pady='5')
 
     def adusrtogru(self):
+        topusr = Toplevel()
+        topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
+        topusr.title('Add User to Group')
+        name = StringVar()
+        gruname = StringVar()
+
         def adusrtogruEXEC():
             if platform == 'linux':
                 print('This command is not complete yet')
@@ -328,6 +338,22 @@ Get-LocalUser
                 print('This command is not complete yet')
             else:
                 print('This command does not yet support this OS')
+
+        adlbl = Label(topusr, text='What is the name of the User you\nwould like to add to a group?')
+        adlbl.grid(row=1, column=1, sticky='W')
+        usrname = Entry(topusr, textvariable=name)
+        usrname.grid(row=2, column=1, sticky='W', padx='5', pady='2')
+
+        grulbl = Label(topusr, text='What is the name of the Group you\nwould like to add the User to?')
+        grulbl.grid(row=3, column='1', sticky='W')
+        gruname = Entry(topusr, textvariable=gruname)
+        gruname.grid(row=4, column=1, sticky='W', padx='5', pady='2')
+
+        Confirm = Button(topusr, text='Confirm', command=rmgruEXEC)
+        Confirm.grid(row=5, column=2, sticky='W', padx='5', pady='5')
+
+        cancel = Button(topusr, text='Cancel', command=topusr.destroy)
+        cancel.grid(row=5, column=1, sticky='W', padx='5', pady='5')
 
     def rmusrfrogru(self):
         def rmusrfrogruEXEC():
@@ -342,6 +368,7 @@ Get-LocalUser
 
     def lslocausr(self):
         topusr = Toplevel()
+        topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
         topusr.title('List Local Users')
         topusr.geometry('950x450')
         topusr.rowconfigure(0, weight=1)
@@ -392,6 +419,7 @@ Get-LocalUser
 
     def lslocagru(self):
         topusr = Toplevel()
+        topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
         topusr.title('List Local User Groups')
         topusr.geometry('950x450')
         topusr.rowconfigure(0, weight=1)
