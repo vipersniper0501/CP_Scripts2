@@ -6,6 +6,8 @@ from Script_Runner import *
 from threading import *
 from tkinter import *
 from tkinter.ttk import *
+import tkinter as tk #used to force certain widget type
+import tkinter.font as tkFont
 from Script_Runner import *
 import time
 import random
@@ -35,7 +37,7 @@ class usrGruFunc:
     def addusr(self):
         topusr = Toplevel()
         #rootusr = Tk()
-        #rootusr.title('Add User To System')
+        topusr.title('Add User To System')
         name = StringVar()
         paswd = StringVar()
         group = StringVar()
@@ -60,9 +62,6 @@ class usrGruFunc:
                         command2 = "sudo -S usermod -a -G sudo " + username
                         command3 = "sudo -S usermod -a -G adm " + username
                     userCheck = "sudo id -u " + username
-                    print(command)
-                    print(command2)
-                    print(command3)
                     os.system(command)
                     os.system(command2)
                     os.system(command3)
@@ -71,11 +70,10 @@ class usrGruFunc:
                     print('The user will not be an admin')
                     command = "sudo -S useradd -m " + username + " -p " + encrypted_password
                     userCheck = "sudo id -u " + username
-                    print(command)
                     os.system(command)
                     print(pwd.getpwnam(username))
 
-            elif platform == 'win32': #This code is broken
+            elif platform == 'win32':
                 username = name.get()
                 passwds = passwd.get()
                 admin = group.get()
@@ -84,25 +82,27 @@ class usrGruFunc:
                 print(admin)
                 if admin == 'yes' or admin == 'Yes':
                     print('This user will be an admin')
-                    secureCom = "ConvertTo-SecureString " + passwds + " -AsPlainText -Force"
-                    passSecure = sub.Popen(secureCom.split(), stdout=sub.PIPE)
-                    SecurePass = passSecure.stdout.read()
-                    command = "New-LocalUser " + username + " -Password " + SecurePass + " -Confirm"
-                    command2 = "Add-LocalGroupMember -Group 'Administrators' -Member " + username
+                    print(os.getcwd())
+                    command = """
+$nusnm = """ + '"{}"'.format(username) + """
+$nuspss = ConvertTo-SecureString """ + '"{}"'.format(passwds) + """ -AsPlainText -Force
+New-LocalUser -Name $nusnm -Password $nuspss
+Add-LocalGroupMember -Group "Administrators" -Member $nusnm
+Get-LocalUser
+                    """
                     print(command)
-                    print(command2)
-                    #os.system(command)
-                    #os.system(command2)
-                    sub.Popen(command.split())
-                    sub.Popen(command2.split())
+                    sub.Popen(["powershell","& {" + command + "}"])
+
                 elif admin == 'no' or admin == 'No':
                     print('This user will not be an admin')
-                    secureCom = "ConvertTo-SecureString " + passwds + " -AsPlainText -Force"
-                    passSecure = sub.Popen(secureCom.split(), stdout=sub.PIPE)
-                    SecurePass = passSecure.stdout.read()
-                    command = "New-LocalUser " + username + " -Password " + SecurePass + " -Confirm"
+                    command = """
+$nusnm = """ + '"{}"'.format(username) + """
+$nuspss = ConvertTo-SecureString """ + '"{}"'.format(passwds) + """ -AsPlainText -Force
+New-LocalUser -Name $nusnm -Password $nuspss
+Get-LocalUser
+                    """
                     print(command)
-                    sub.Popen(command.split())
+                    sub.Popen(["powershell","& {" + command + "}"])
 
             elif platform == 'darwin':
                 username = name.get()
@@ -121,13 +121,6 @@ class usrGruFunc:
                     command5 = 'sudo dscl . -create /Users/' + username + ' PrimaryGroupID ' + str(numb)
                     command6 = 'sudo dscl . -passwd /Users/' + username + ' ' + passwds
                     command7 = 'sudo dscl . -append /Groups/admin GroupMembership ' + username
-                    print(command)
-                    print(command2)
-                    print(command3)
-                    print(command4)
-                    print(command5)
-                    print(command6)
-                    print(command7)
                     sub.Popen(command.split())
                     sub.Popen(command2.split())
                     sub.Popen(command3.split())
@@ -143,12 +136,6 @@ class usrGruFunc:
                     command4 = 'sudo dscl . -create /Users/' + username + ' UniqueID ' + str(numb)
                     command5 = 'sudo dscl . -create /Users/' + username + ' PrimaryGroupID ' + str(numb)
                     command6 = 'sudo dscl . -passwd /Users/' + username + ' ' + passwds
-                    print(command)
-                    print(command2)
-                    print(command3)
-                    print(command4)
-                    print(command5)
-                    print(command6)
                     sub.Popen(command.split())
                     sub.Popen(command2.split())
                     sub.Popen(command3.split())
@@ -181,18 +168,25 @@ class usrGruFunc:
         cancel = Button(topusr, text='Cancel', command=topusr.destroy)
         cancel.grid(row='7', column='1', sticky='W', padx='5', pady='5')
 
-        #topusr.mainloop()
-        #rootusr.mainloop()
-
     def rmuser(self):
         topusr = Toplevel()
+        topusr.title('Remove User From System')
         name = StringVar()
-        
+        topusr.geometry('650x450')
+        topusr.rowconfigure(0, weight=1)
+        topusr.columnconfigure(1, weight=1)
+
+        framlabel = tk.LabelFrame(topusr, text='USERS')
+        framlabel.config(bd=5, background='lightgreen')
+        framlabel.grid(row=0, column=1, sticky='nsew')
+        # Needs to show list of users to remove
+
         def rmusrEXEC():
             if platform == 'linux':
                 username = name.get()
                 command = 'userdel -r ' + username
                 sub.Popen(command.split())
+
             elif platform == 'win32':
                 username = name.get()
                 command = 'Remove-LocalUser -Name ' + username
@@ -206,19 +200,47 @@ class usrGruFunc:
             else:
                 print('This command does not yet support this OS')
 
-        userlbl = Label(topusr, text='What is the name of the user you would like to remove?')
-        userlbl.grid(row='1', column='1', sticky='W')
+        userlbl = Label(topusr, text='What is the name of the user\nyou would like to remove?')
+        userlbl.grid(row=0, column=0, sticky='W')
         name = Entry(topusr, textvariable=name)
-        name.grid(row='2', column='1', sticky='W', padx='5', pady='2')
+        name.grid(row=1, column=0, sticky='W', padx='5', pady='2')
+
+        if platform == 'linux':
+            command = """cat /etc/passwd | grep "/home" | cut -d":" -f1 > userlist.txt"""
+            os.system(command)
+            #print(exec)
+            with open("userlist.txt", "r") as f:
+                for line in f:
+                    output = f.read()
+                    os.remove("userlist.txt")
+                    print(output)
+        elif platform == 'win32':
+            command = "Get-LocalUser"
+            exec = sub.Popen(["powershell","& {Get-LocalUser}"], stdout=sub.PIPE)
+            stdout, _ = exec.communicate()
+            output = stdout.decode("utf-8")
+        elif platform == 'darwin':
+            command = "sudo dscl . list /Users | grep -v '_'"
+            exec = sub.Popen(command.split(), stdout=sub.PIPE)
+            stdout, _ = exec.communicate()
+            output = stdout.decode("utf-8")
+
+        outputBOX = Text(framlabel, text=output, background='lightgreen')
+        outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
 
         Confirm = Button(topusr, text='Confirm', command=rmusrEXEC)
-        Confirm.grid(row='7', column='2', sticky='W', padx='5', pady='5')
+        Confirm.grid(row=2, column=1, sticky='e', padx='5', pady='5')
 
         cancel = Button(topusr, text='Cancel', command=topusr.destroy)
-        cancel.grid(row='7', column='1', sticky='W', padx='5', pady='5')
-
+        cancel.grid(row=2, column=0, sticky='e', padx='5', pady='5')
 
     def adgru(self):
+        topusr = Toplevel()
+        topusr.title('Create User Group')
+        name = StringVar()
+        paswd = StringVar()
+        group = StringVar()
+
         if platform == 'linux':
             print('This command is not complete yet')
         elif platform == 'win32':
@@ -259,24 +281,95 @@ class usrGruFunc:
             print('This command does not yet support this OS')
 
     def lslocausr(self):
-        if platform == 'linux':
-            print('This command is not complete yet')
-        elif platform == 'win32':
-            print('This command is not complete yet')
-        elif platform == 'darwin':
-            print('This command is not complete yet')
-        else:
-            print('This command does not yet support this OS')
+        topusr = Toplevel()
+        topusr.title('List Local Users')
+        topusr.geometry('950x450')
+        topusr.rowconfigure(0, weight=1)
+        topusr.columnconfigure(1, weight=1)
+
+        framlabel = tk.LabelFrame(topusr, text='OUTPUT')
+        framlabel.config(bd=5, background='lightgreen')
+        framlabel.grid(row=0, column=1, sticky='nsew')
+
+        def lslocausrEXEC():
+            if platform == 'linux':
+                command = """cat /etc/passwd | grep "/home" | cut -d":" -f1 > userlist.txt"""
+                os.system(command)
+                #print(exec)
+                with open("userlist.txt", "r") as f:
+                    for line in f:
+                        output = f.read()
+                os.remove("userlist.txt")
+                print(output)
+                outputBOX = Text(framlabel, text=output, background='lightgreen')
+                outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+
+            elif platform == 'win32':
+                command = "Get-LocalUser"
+                exec = sub.Popen(["powershell","& {Get-LocalUser}"], stdout=sub.PIPE)
+                output, _ = exec.communicate()
+                print(output.decode("utf-8"))
+
+                OutputBOX = Text(framlabel, text=output.decode("utf-8"), background='lightgreen')
+                outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+            elif platform == 'darwin':
+                command = "sudo dscl . list /Users | grep -v '_'"
+                exec = sub.Popen(command.split(), stdout=sub.PIPE)
+                stdout, _ = exec.communicate()
+                output = stdout.decode("utf-8")
+                OutputBOX = Text(framlabel, text=output.decode("utf-8"), background='lightgreen')
+                outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+            else:
+                print('This command does not yet support this OS')
+
+        fontSize = tkFont.Font(size=14)
+        lsusrs = tk.Button(topusr, text='List all\nusers on system', width=20, command=lslocausrEXEC)
+        lsusrs.config(font=fontSize)
+        lsusrs.grid(row=0, column=0, padx=5, pady=10, sticky='nswe')
+
+        cancel = Button(topusr, text='Cancel', command=topusr.destroy)
+        cancel.grid(row=1, column=1, sticky='w', padx='5', pady='5')
 
     def lslocagru(self):
-        if platform == 'linux':
-            print('This command is not complete yet')
-        elif platform == 'win32':
-            print('This command is not complete yet')
-        elif platform == 'darwin':
-            print('This command is not complete yet')
-        else:
-            print('This command does not yet support this OS')
+        topusr = Toplevel()
+        topusr.title('List Local User Groups')
+        topusr.geometry('950x450')
+        topusr.rowconfigure(0, weight=1)
+        topusr.columnconfigure(1, weight=1)
+
+        framlabel = tk.LabelFrame(topusr, text='Local Groups')
+        framlabel.config(bd=5, background='lightgreen')
+        framlabel.grid(row=0, column=1, sticky='nsew')
+
+        def lsLocaGruEXEC():
+            if platform == 'linux':
+                command = 'getent group | cut -d: -f1'
+                exec = sub.Popen(command.split(), stdout=sub.PIPE)
+                stdout, _ = exec.communicate()
+                output = stdout.decode("utf-8")
+                outputBOX = Text(framlabel, text=output, background='lightgreen')
+                outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+                print('This command is not complete yet')
+            elif platform == 'win32':
+                command = 'Get-LocalGroup'
+                exec = sub.Popen(["powershell","& {" + command + "}"], stdout=sub.PIPE)
+                stdout, _ = exec.communicate()
+                output = stdout.decode("utf-8")
+                outputBOX = Text(framlabel, text=output, background='lightgreen')
+                outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+            elif platform == 'darwin':
+                print('This command is not complete yet')
+            else:
+                print('This command does not yet support this OS')
+
+
+        fontSize = tkFont.Font(size=14)
+        lsgrus = tk.Button(topusr, text='List all\nusers on system', width=20, command=lsLocaGruEXEC)
+        lsgrus.config(font=fontSize)
+        lsgrus.grid(row=0, column=0, padx=5, pady=10, sticky='nswe')
+
+        cancel = Button(topusr, text='Cancel', command=topusr.destroy)
+        cancel.grid(row=1, column=1, sticky='w', padx='5', pady='5')
 
     def lsmemgru(self):
         if platform == 'linux':

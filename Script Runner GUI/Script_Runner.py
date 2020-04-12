@@ -16,6 +16,17 @@ import distro #for figuring out what linux distro
 OS = distro.linux_distribution()
 ops = OS[0]
 
+#print(os.getcwd())
+
+#def findCWD():
+#    print(os.getcwd())
+#    for root, dirs, files, in os.walk('Q:\\'):
+#        if 'Script_Runner.py' in files:
+#            newPath = os.chdir(os.path.join(root, 'Script_Runner.py'))
+#            print(newPath)
+#            print(os.getcwd())
+
+#findCWD()
 
 def rmvusrgrubutton(widget):
     #scrip = scriptrunnerGUI()
@@ -129,6 +140,7 @@ class scriptrunnerGUI():
             self.mmenu()
         else:
             print('Ello, you have some configurations to do!')
+            self.mmenu()
 
 
             #Use Radio buttons for the yes or no questions
