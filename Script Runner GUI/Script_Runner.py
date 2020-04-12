@@ -91,8 +91,6 @@ def aboutHowtoUse():
 def aboutCreators():
     window = Toplevel(root)
     window.iconphoto(False, tk.PhotoImage(file="cup2.png"))
-    #if platform == 'win32':
-        #window.geometry("500x300")
     aboutContent = Label(window, text="""
 +----------------------+
 |   A P P L E    C I D R     |

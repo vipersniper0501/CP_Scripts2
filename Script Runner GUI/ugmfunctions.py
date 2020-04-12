@@ -179,7 +179,9 @@ Get-LocalUser
         topusr = Toplevel()
         topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
         topusr.title('Remove User From System')
+
         name = StringVar()
+
         topusr.geometry('650x450')
         topusr.rowconfigure(0, weight=1)
         topusr.columnconfigure(1, weight=1)
@@ -214,9 +216,9 @@ Get-LocalUser
                 print('This command does not yet support this OS')
 
         userlbl = Label(topusr, text='What is the name of the user\nyou would like to remove?')
-        userlbl.grid(row=0, column=0, sticky='W')
+        userlbl.grid(row=0, column=0, sticky='nw', pady=10)
         name = Entry(topusr, textvariable=name)
-        name.grid(row=1, column=0, sticky='W', padx='5', pady='2')
+        name.grid(row=0, column=0, sticky='nw', padx='5', pady='45')
 
         if platform == 'linux':
             command = """cat /etc/passwd | grep "/home" | cut -d":" -f1 > userlist.txt"""
@@ -276,20 +278,28 @@ Get-LocalUser
                 print('This command does not yet support this OS')
 
         grulbl = Label(topusr, text='What is the name of the Group you would like to add?')
-        grulbl.grid(row='1', column='1', sticky='W')
+        grulbl.grid(row=1, column=1, sticky='W')
         name = Entry(topusr, textvariable=name)
-        name.grid(row='2', column='1', sticky='W', padx='5', pady='2')
+        name.grid(row=2, column=1, sticky='W', padx=5, pady=2)
 
         Confirm = Button(topusr, text='Confirm', command=adgruEXEC)
-        Confirm.grid(row='7', column='2', sticky='W', padx='5', pady='5')
+        Confirm.grid(row=7, column=2, sticky='W', padx=5, pady=5)
 
         cancel = Button(topusr, text='Cancel', command=topusr.destroy)
-        cancel.grid(row='7', column='1', sticky='W', padx='5', pady='5')
+        cancel.grid(row=7, column=1, sticky='W', padx=5, pady=5)
 
     def rmgru(self):
         topusr = Toplevel()
         topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
         topusr.title('Remove User Group')
+        topusr.geometry('950x450')
+        topusr.rowconfigure(0, weight=1)
+        topusr.columnconfigure(1, weight=1)
+
+        framlabel = tk.LabelFrame(topusr, text='Local Groups')
+        framlabel.config(bd=5, background='lightgreen')
+        framlabel.grid(row=0, column=1, sticky='nsew')
+
         name = StringVar()
 
         def rmgruEXEC():
@@ -311,60 +321,269 @@ Get-LocalUser
             else:
                 print('This command does not yet support this OS')
 
+        # Lists groups in box
+        if platform == 'linux':
+            command = 'getent group | cut -d: -f1 > grouplist.txt'
+            os.system(command)
+            with open("grouplist.txt", "r") as f:
+                for line in f:
+                    output = f.read()
+            os.remove("grouplist.txt")
+            print(output)
+
+            outputBOX = Label(framlabel, text=output, background='lightgreen')
+            outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+            print('This command is not complete yet')
+        elif platform == 'win32':
+            command = 'Get-LocalGroup'
+            exec = sub.Popen(["powershell","& {" + command + "}"], stdout=sub.PIPE)
+            stdout, _ = exec.communicate()
+            output = stdout.decode("utf-8")
+            outputBOX = Label(framlabel, text=output, background='lightgreen')
+            outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+        elif platform == 'darwin':
+            print('This command is not complete yet')
+        else:
+            print('This command does not yet support this OS')
+
         grulbl = Label(topusr, text='What is the name of the Group you would like to remove?')
-        grulbl.grid(row='1', column='1', sticky='W')
+        grulbl.grid(row=0, column=0, sticky='nw', pady=10)
         name = Entry(topusr, textvariable=name)
-        name.grid(row='2', column='1', sticky='W', padx='5', pady='2')
+        name.grid(row=0, column=0, sticky='nw', padx=5, pady=30)
 
         Confirm = Button(topusr, text='Confirm', command=rmgruEXEC)
-        Confirm.grid(row='7', column='2', sticky='W', padx='5', pady='5')
+        Confirm.grid(row=7, column=1, sticky='W', padx=5, pady=5)
 
         cancel = Button(topusr, text='Cancel', command=topusr.destroy)
-        cancel.grid(row='7', column='1', sticky='W', padx='5', pady='5')
+        cancel.grid(row=7, column=0, sticky='W', padx=5, pady=5)
 
     def adusrtogru(self):
         topusr = Toplevel()
         topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
         topusr.title('Add User to Group')
+        topusr.rowconfigure(0, weight=1)
+        topusr.columnconfigure(1, weight=1)
+
+        framlabel = tk.LabelFrame(topusr, text='USERS')
+        framlabel.config(bd=5, background='lightgreen')
+        framlabel.grid(row=0, column=0, sticky='nsew')
+
+        framlabel2 = tk.LabelFrame(topusr, text='GROUPS')
+        framlabel2.config(bd=5, background='lightgreen')
+        framlabel2.grid(row=0, column=1, sticky='nsew')
+
         name = StringVar()
         gruname = StringVar()
 
         def adusrtogruEXEC():
             if platform == 'linux':
-                print('This command is not complete yet')
+                username = name.get()
+                group = gruname.get()
+                if ops == 'Manjaro Linux':
+                    command = "sudo -S usermod --append --groups " + group + " " + username
+                else:
+                    command = "sudo -S usermod -a -G " + group + " " + username
+                os.system(command)
+                print("User " + username + " has been successfully add to group " + group)
+                topusr.destroy()
             elif platform == 'win32':
+                username = name.get()
+                group = gruname.get()
+                command = "Add-LocalGroupMember -Name " + username + " -Member " + group
+                sub.Popen(["powershell","& {" + command + "}"])
+                print("User " + username + " has been successfully add to group " + group)
+                topusr.destroy()
                 print('This command is not complete yet')
             elif platform == 'darwin':
-                print('This command is not complete yet')
+                print('This command does not work on MacOS')
             else:
                 print('This command does not yet support this OS')
 
-        adlbl = Label(topusr, text='What is the name of the User you\nwould like to add to a group?')
-        adlbl.grid(row=1, column=1, sticky='W')
+        # Lists Users
+        if platform == 'linux':
+            command = """cat /etc/passwd | grep "/home" | cut -d":" -f1 > userlist.txt"""
+            os.system(command)
+            #print(exec)
+            with open("userlist.txt", "r") as f:
+                for line in f:
+                    output = f.read()
+            os.remove("userlist.txt")
+            print(output)
+            outputBOX = Label(framlabel, text=output, background='lightgreen')
+            outputBOX.grid(row=0, column=0, columnspan=2, padx=5, pady=10, sticky='nsew')
+
+        elif platform == 'win32':
+            command = "Get-LocalUser"
+            exec = sub.Popen(["powershell","& {Get-LocalUser}"], stdout=sub.PIPE)
+            output, _ = exec.communicate()
+            print(output.decode("utf-8"))
+
+            outputBOX = Label(framlabel, text=output.decode("utf-8"), background='lightgreen')
+            outputBOX.grid(row=0, column=0, columnspan=2, padx=5, pady=10, sticky='nsew')
+        elif platform == 'darwin':
+            command = "sudo dscl . list /Users | grep -v '_'"
+            exec = sub.Popen(command.split(), stdout=sub.PIPE)
+            stdout, _ = exec.communicate()
+            output = stdout.decode("utf-8")
+            outputBOX = Label(framlabel, text=output.decode("utf-8"), background='lightgreen')
+            outputBOX.grid(row=0, column=0, columnspan=2, padx=5, pady=10, sticky='nsew')
+        else:
+            print('This command does not yet support this OS')
+
+        # Lists Groups
+        if platform == 'linux':
+            command = 'getent group | cut -d: -f1 > grouplist.txt'
+            os.system(command)
+            with open("grouplist.txt", "r") as f:
+                for line in f:
+                    output = f.read()
+            os.remove("grouplist.txt")
+            print(output)
+
+            outputBOX = Label(framlabel2, text=output, background='lightgreen')
+            outputBOX.grid(row=0, column=0, columnspan=2, padx=5, pady=10, sticky='nsew')
+            print('This command is not complete yet')
+        elif platform == 'win32':
+            command = 'Get-LocalGroup'
+            exec = sub.Popen(["powershell","& {" + command + "}"], stdout=sub.PIPE)
+            stdout, _ = exec.communicate()
+            output = stdout.decode("utf-8")
+            outputBOX = Label(framlabel2, text=output, background='lightgreen')
+            outputBOX.grid(row=0, column=0, columnspan=2, padx=5, pady=10, sticky='nsew')
+        elif platform == 'darwin':
+            print('This command is not complete yet')
+        else:
+            print('This command does not yet support this OS')
+
+
+
+        adlbl = Label(topusr, text='What is the name of the User you would like to add to a group?')
+        adlbl.grid(row=1, column=0, sticky='nw')
         usrname = Entry(topusr, textvariable=name)
-        usrname.grid(row=2, column=1, sticky='W', padx='5', pady='2')
+        usrname.grid(row=2, column=0, sticky='nw', padx='5', pady='2')
 
-        grulbl = Label(topusr, text='What is the name of the Group you\nwould like to add the User to?')
-        grulbl.grid(row=3, column='1', sticky='W')
+        grulbl = Label(topusr, text='What is the name of the Group you would like to add the User to?')
+        grulbl.grid(row=1, column=1, sticky='nw')
         gruname = Entry(topusr, textvariable=gruname)
-        gruname.grid(row=4, column=1, sticky='W', padx='5', pady='2')
+        gruname.grid(row=2, column=1, sticky='nw', padx='5', pady='2')
 
-        Confirm = Button(topusr, text='Confirm', command=rmgruEXEC)
-        Confirm.grid(row=5, column=2, sticky='W', padx='5', pady='5')
+        Confirm = Button(topusr, text='Confirm', command=adusrtogruEXEC)
+        Confirm.grid(row=7, column=0, sticky='w', padx=5, pady=5)
 
         cancel = Button(topusr, text='Cancel', command=topusr.destroy)
-        cancel.grid(row=5, column=1, sticky='W', padx='5', pady='5')
+        cancel.grid(row=7, column=1, sticky='e', padx=5, pady=5)
 
     def rmusrfrogru(self):
+        topusr = Toplevel()
+        topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
+        topusr.title('Add User to Group')
+        topusr.rowconfigure(0, weight=1)
+        topusr.columnconfigure(1, weight=1)
+
+        framlabel = tk.LabelFrame(topusr, text='USERS')
+        framlabel.config(bd=5, background='lightgreen')
+        framlabel.grid(row=0, column=0, sticky='nsew')
+
+        framlabel2 = tk.LabelFrame(topusr, text='GROUPS')
+        framlabel2.config(bd=5, background='lightgreen')
+        framlabel2.grid(row=0, column=1, sticky='nsew')
+
+        name = StringVar()
+        gruname = StringVar()
+
         def rmusrfrogruEXEC():
             if platform == 'linux':
-                print('This command is not complete yet')
+                username = name.get()
+                group = gruname.get()
+                command = 'gpasswd -d ' + username + " " + group
+                os.system(command)
+                print('User ' + username + ' has been removed successfully from group ' + group)
+                topusr.destroy()
             elif platform == 'win32':
-                print('This command is not complete yet')
+                username = name.get()
+                group = gruname.get()
+                command = 'Remove-LocalGroupMember -Group ' + group + ' -Member ' + username
+                sub.Popen(["powershell","& {" + command + "}"])
+                topusr.destroy()
             elif platform == 'darwin':
-                print('This command is not complete yet')
+                print('This command does not work on MacOS')
+                topusr.destroy()
             else:
                 print('This command does not yet support this OS')
+
+        # Lists Users
+        if platform == 'linux':
+            command = """cat /etc/passwd | grep "/home" | cut -d":" -f1 > userlist.txt"""
+            os.system(command)
+            #print(exec)
+            with open("userlist.txt", "r") as f:
+                for line in f:
+                    output = f.read()
+            os.remove("userlist.txt")
+            print(output)
+            outputBOX = Label(framlabel, text=output, background='lightgreen')
+            outputBOX.grid(row=0, column=0, columnspan=2, padx=5, pady=10, sticky='nsew')
+
+        elif platform == 'win32':
+            command = "Get-LocalUser"
+            exec = sub.Popen(["powershell","& {Get-LocalUser}"], stdout=sub.PIPE)
+            output, _ = exec.communicate()
+            print(output.decode("utf-8"))
+
+            outputBOX = Label(framlabel, text=output.decode("utf-8"), background='lightgreen')
+            outputBOX.grid(row=0, column=0, columnspan=2, padx=5, pady=10, sticky='nsew')
+        elif platform == 'darwin':
+            command = "sudo dscl . list /Users | grep -v '_'"
+            exec = sub.Popen(command.split(), stdout=sub.PIPE)
+            stdout, _ = exec.communicate()
+            output = stdout.decode("utf-8")
+            outputBOX = Label(framlabel, text=output.decode("utf-8"), background='lightgreen')
+            outputBOX.grid(row=0, column=0, columnspan=2, padx=5, pady=10, sticky='nsew')
+        else:
+            print('This command does not yet support this OS')
+
+        # Lists Groups
+        if platform == 'linux':
+            command = 'getent group | cut -d: -f1 > grouplist.txt'
+            os.system(command)
+            with open("grouplist.txt", "r") as f:
+                for line in f:
+                    output = f.read()
+            os.remove("grouplist.txt")
+            print(output)
+
+            outputBOX = Label(framlabel2, text=output, background='lightgreen')
+            outputBOX.grid(row=0, column=0, columnspan=2, padx=5, pady=10, sticky='nsew')
+            print('This command is not complete yet')
+        elif platform == 'win32':
+            command = 'Get-LocalGroup'
+            exec = sub.Popen(["powershell","& {" + command + "}"], stdout=sub.PIPE)
+            stdout, _ = exec.communicate()
+            output = stdout.decode("utf-8")
+            outputBOX = Label(framlabel2, text=output, background='lightgreen')
+            outputBOX.grid(row=0, column=0, columnspan=2, padx=5, pady=10, sticky='nsew')
+        elif platform == 'darwin':
+            print('This command is not complete yet')
+        else:
+            print('This command does not yet support this OS')
+
+
+
+        adlbl = Label(topusr, text='What is the name of the User you would like to remove from a group?')
+        adlbl.grid(row=1, column=0, sticky='nw')
+        usrname = Entry(topusr, textvariable=name)
+        usrname.grid(row=2, column=0, sticky='nw', padx='5', pady='2')
+
+        grulbl = Label(topusr, text='What is the name of the Group you would like to remove the User from?')
+        grulbl.grid(row=1, column=1, sticky='nw')
+        gruname = Entry(topusr, textvariable=gruname)
+        gruname.grid(row=2, column=1, sticky='nw', padx='5', pady='2')
+
+        Confirm = Button(topusr, text='Confirm', command=rmusrfrogruEXEC)
+        Confirm.grid(row=7, column=0, sticky='w', padx=5, pady=5)
+
+        cancel = Button(topusr, text='Cancel', command=topusr.destroy)
+        cancel.grid(row=7, column=1, sticky='e', padx=5, pady=5)
 
     def lslocausr(self):
         topusr = Toplevel()
@@ -463,7 +682,19 @@ Get-LocalUser
         cancel = Button(topusr, text='Cancel', command=topusr.destroy)
         cancel.grid(row=1, column=1, sticky='w', padx='5', pady='5')
 
-    def lsmemgru(self):
+    def lsmemgru(self): # Missing commands
+        topusr = Toplevel()
+        topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
+        topusr.title('Add User to Group')
+        topusr.rowconfigure(0, weight=1)
+        topusr.columnconfigure(1, weight=1)
+
+        framlabel = tk.LabelFrame(topusr, text='USERS')
+        framlabel.config(bd=5, background='lightgreen')
+        framlabel.grid(row=0, column=0, sticky='nsew')
+
+        gruname = StringVar()
+
         def lsmemgruEXEC():
             if platform == 'linux':
                 print('This command is not complete yet')
@@ -473,6 +704,36 @@ Get-LocalUser
                 print('This command is not complete yet')
             else:
                 print('This command does not yet support this OS')
+
+        if platform == 'linux':
+            command = 'getent group | cut -d: -f1 > grouplist.txt'
+            os.system(command)
+            with open("grouplist.txt", "r") as f:
+                for line in f:
+                    output = f.read()
+            os.remove("grouplist.txt")
+            print(output)
+            outputBOX = Label(framlabel, text=output, background='lightgreen')
+            outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+            print('This command is not complete yet')
+        elif platform == 'win32':
+            command = 'Get-LocalGroup'
+            exec = sub.Popen(["powershell","& {" + command + "}"], stdout=sub.PIPE)
+            stdout, _ = exec.communicate()
+            output = stdout.decode("utf-8")
+            outputBOX = Label(framlabel, text=output, background='lightgreen')
+            outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+        elif platform == 'darwin':
+            print('This command is not complete yet')
+        else:
+            print('This command does not yet support this OS')
+
+        Confirm = Button(topusr, text='Confirm', command=lsmemgruEXEC)
+        Confirm.grid(row=7, column=0, sticky='w', padx=5, pady=5)
+
+        cancel = Button(topusr, text='Cancel', command=topusr.destroy)
+        cancel.grid(row=7, column=1, sticky='e', padx=5, pady=5)
+
 
     def lsgruusrin(self):
         def lsgruusrinEXEC():
