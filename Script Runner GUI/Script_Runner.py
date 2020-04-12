@@ -16,6 +16,9 @@ import distro #for figuring out what linux distro
 OS = distro.linux_distribution()
 ops = OS[0]
 
+#THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+#print(THIS_FOLDER + '     HELLO')
+
 #print(os.getcwd())
 
 #def findCWD():
@@ -69,6 +72,7 @@ def chngTOmm():
 
 def aboutHowtoUse():
     window = Toplevel(root)
+    window.iconphoto(False, tk.PhotoImage(file="cup2.png"))
     aboutContent = Label(window, text="""
 +----------------------------------------+
 |    H o w  T o  U s e  T h e  P r o g r a m    |
@@ -86,6 +90,7 @@ def aboutHowtoUse():
 
 def aboutCreators():
     window = Toplevel(root)
+    window.iconphoto(False, tk.PhotoImage(file="cup2.png"))
     #if platform == 'win32':
         #window.geometry("500x300")
     aboutContent = Label(window, text="""
@@ -244,10 +249,10 @@ class scriptrunnerGUI():
 ###################################################
 
 if __name__ == '__main__':
-    # osdetect()
     # creation of GUI
     root = Tk()
     root.title('Apple CIDR Script Runner')
+    root.iconphoto(False, tk.PhotoImage(file="cup2.png"))
     if platform == 'win32':
         root.geometry("520x350")
     elif ops == 'darwin':
