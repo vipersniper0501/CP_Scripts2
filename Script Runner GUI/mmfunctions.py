@@ -1,4 +1,3 @@
-import glob
 import os
 import subprocess as sub
 from sys import platform
@@ -6,17 +5,24 @@ import getpass
 from threading import *
 # from Script_Runner import scriptrunnerGUI as srg
 
+import distro #for figuring out what linux distro
+
+#global variables
+OS = distro.linux_distribution()
+ops = OS[0]
+
 
 class mmfunc:
     def updates():
-        if platform == 'Ubuntu' or platform == 'Debian':
-            command = 'sudo screen -md apt update'
-            command2 = 'sudo screen -md apt upgrade'
+        if ops == 'Ubuntu' or ops == 'debian':
+            command = 'sudo apt update && upgrade -y'
             sub.Popen(command.split())
-            sub.Popen(command2.split())
             print('Updates Completed!')
         elif platform == 'darwin':
             command = 'sudo softwareupdate -i -a'
+            sub.Popen(command.split())
+        elif ops == 'Manjaro Linux':
+            command = 'sudo pacman -Syu'
             sub.Popen(command.split())
         elif platform == 'win32':
             #command = "C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\powershell.exe", ". \"./mmfucntions.ps1\";", "&winupd"
@@ -51,7 +57,7 @@ class mmfunc:
             print('This command does not currently support this OS')
 
     def srchmedia():
-        if platform == 'Debian' or platform == 'Ubuntu':
+        if platform == 'linux' or platform == 'darwin':
             extensions = ('.jpg', '.mp4', '.flv', '.avi', '.wmv', '.mov', '.png', '.tif', '.gif', '.mp3', '.wma', '.aif', '.jar')
             for root, dirs, files in os.walk('/home/'):
                 for filename in files:
@@ -86,13 +92,18 @@ class mmfunc:
         print('This command is currently in developement')
 
     def alyn():
-        if platform == 'Ubuntu' or platform == 'Debian':
-            command='sudo apt install lynis -y'
+        if ops == 'Ubuntu' or ops == 'debian':
+            command = 'sudo apt install lynis -y'
             sub.Popen(command.split())
-            command2='sudo lynis audit system'
+            command2 = 'sudo lynis audit system'
             sub.Popen(command2.split())
-        elif platform == 'darwin':
+        elif ops == 'darwin':
             print('This function does not currently support this OS')
+        elif ops == 'Manjaro Linux':
+            command = 'sudo pacman -S lynis'
+            sub.Popen(command.split())
+            command2 = 'sudo lynis audit system'
+            sub.Popen(command2.split())
         elif platform == 'win32':
             print('This function (alyn) does not currently support this OS.')
 
@@ -111,7 +122,6 @@ class ThreadmmFunc():
     #    self.name = name
 
     def threaderSRCH(self):
-        scrip = scriptrunnerGUI()
         # print(scrip.comtorun)
         # command = scrip.comtorun
         #commands = [mmfunc.srchmedia, mmfunc.updates, scrip.usrgru]

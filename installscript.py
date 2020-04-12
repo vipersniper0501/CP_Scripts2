@@ -3,6 +3,7 @@ import errno
 import platform
 import getpass
 import os
+import subprocess as sub
 
 def copy(src, dst):
     try:
@@ -21,9 +22,13 @@ def main():
     if platform == 'win32':
         copy('WindowsScript\\', 'C:\\Users\\' + user + '\\Desktop\\WindowsScript')
         copy('Script Runner GUI\\', 'C:\\User\\' + user + '\\Desktop\\Script Runner GUI')
+        command = "pip install distro"
+        sub.Popen(command.split())
     else:
         copy('Script Runner GUI/', '/home/' + user + '/Desktop/Script Runner GUI')
         copy('LinuxScript/', '/home/' + user + '/Desktop/LinuxScript')
+        command = "sudo pip install distro"
+        sub.Popen(command.split())
 
 
 main()
