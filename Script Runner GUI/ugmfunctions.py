@@ -476,7 +476,7 @@ Get-LocalUser
     def rmusrfrogru(self):
         topusr = Toplevel()
         topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
-        topusr.title('Add User to Group')
+        topusr.title('Remove User from Group')
         topusr.rowconfigure(0, weight=1)
         topusr.columnconfigure(1, weight=1)
 
@@ -682,24 +682,42 @@ Get-LocalUser
         cancel = Button(topusr, text='Cancel', command=topusr.destroy)
         cancel.grid(row=1, column=1, sticky='w', padx='5', pady='5')
 
-    def lsmemgru(self): # Missing commands
+    def lsmemgru(self): # Missing MacOS commands
         topusr = Toplevel()
         topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
-        topusr.title('Add User to Group')
+        topusr.title('List Members of Group')
         topusr.rowconfigure(0, weight=1)
         topusr.columnconfigure(1, weight=1)
 
-        framlabel = tk.LabelFrame(topusr, text='USERS')
+        framlabel = tk.LabelFrame(topusr, text='GROUPS')
         framlabel.config(bd=5, background='lightgreen')
         framlabel.grid(row=0, column=0, sticky='nsew')
+
+        framlabel2 = tk.LabelFrame(topusr, text='GROUP MEMBERS')
+        framlabel2.config(bd=5, background='lightgreen')
+        framlabel2.grid(row=0, column=1, sticky='nsew')
 
         gruname = StringVar()
 
         def lsmemgruEXEC():
             if platform == 'linux':
-                print('This command is not complete yet')
+                group = gruname.get()
+                command = 'grep -i --color ' + group + ' /etc/group'
+                exec = sub.Popen(command.split(), stdout=PIPE)
+                stdout, _ = exec.communicate()
+                ouput = stdout.decode("utf-8")
+                outputBOX = Label(framlabel2, text=output, background='lightgreen')
+                outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+
             elif platform == 'win32':
-                print('This command is not complete yet')
+                group = gruname.get()
+                command = 'Get-LocalGroupMember -Name ' + group
+                exec = sub.Popen(["powershell","& {" + command + "}"], stdout=sub.PIPE)
+                stdout, _ = exec.communicate()
+                output = stdout.decode("utf-8")
+                outputBOX = Label(framlabel2, text=output, background='lightgreen')
+                outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+
             elif platform == 'darwin':
                 print('This command is not complete yet')
             else:
@@ -728,16 +746,125 @@ Get-LocalUser
         else:
             print('This command does not yet support this OS')
 
+        grulbl = Label(topusr, text='What is the name of the Group that you would like to see the Members of?')
+        grulbl.grid(row=1, column=0, sticky='nw')
+        gruname = Entry(topusr, textvariable=gruname)
+        gruname.grid(row=2, column=0, sticky='nw', padx='5', pady='2')
+
         Confirm = Button(topusr, text='Confirm', command=lsmemgruEXEC)
         Confirm.grid(row=7, column=0, sticky='w', padx=5, pady=5)
 
         cancel = Button(topusr, text='Cancel', command=topusr.destroy)
         cancel.grid(row=7, column=1, sticky='e', padx=5, pady=5)
 
+    def lsgruusrin(self): # Missing Windows Commands and MacOS commands
+        topusr = Toplevel()
+        topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
+        topusr.title('List Members of Group')
+        topusr.rowconfigure(0, weight=1)
+        topusr.columnconfigure(1, weight=1)
 
-    def lsgruusrin(self):
+        framlabel = tk.LabelFrame(topusr, text='USERS')
+        framlabel.config(bd=5, background='lightgreen')
+        framlabel.grid(row=0, column=0, sticky='nsew')
+
+        framlabel2 = tk.LabelFrame(topusr, text='USER IS A MEMBER OF THE FOLLOWING GROUPS')
+        framlabel2.config(bd=5, background='lightgreen')
+        framlabel2.grid(row=0, column=1, sticky='nsew')
+
+        name = StringVar()
+
         def lsgruusrinEXEC():
             if platform == 'linux':
+                username = name.get()
+                command = 'groups ' + username + ' > groupsuserin.txt'
+                os.system(command)
+                with open("groupsuserin.txt", "r") as f:
+                    for line in f:
+                        output = f.read()
+                os.remove("groupsuserin.txt")
+                outputBOX = Label(framlabel2, text=output, background='lightgreen')
+                outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+            elif platform == 'win32':
+                username = name.get()
+                print('This command is not complete yet')
+            elif platform == 'darwin':
+                username = name.get()
+                print('This command is not complete yet')
+            else:
+                print('This command does not yet support this OS')
+
+        # Lists Users
+        if platform == 'linux':
+            command = """cat /etc/passwd | grep "/home" | cut -d":" -f1 > userlist.txt"""
+            os.system(command)
+            #print(exec)
+            with open("userlist.txt", "r") as f:
+                for line in f:
+                    output = f.read()
+            os.remove("userlist.txt")
+            print(output)
+            outputBOX = Label(framlabel, text=output, background='lightgreen')
+            outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+
+        elif platform == 'win32':
+            command = "Get-LocalUser"
+            exec = sub.Popen(["powershell","& {Get-LocalUser}"], stdout=sub.PIPE)
+            output, _ = exec.communicate()
+            print(output.decode("utf-8"))
+
+            outputBOX = Label(framlabel, text=output.decode("utf-8"), background='lightgreen')
+            outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+        elif platform == 'darwin':
+            command = "sudo dscl . list /Users | grep -v '_'"
+            exec = sub.Popen(command.split(), stdout=sub.PIPE)
+            stdout, _ = exec.communicate()
+            output = stdout.decode("utf-8")
+            outputBOX = Label(framlabel, text=output.decode("utf-8"), background='lightgreen')
+            outputBOX.grid(row=0, column=1, columnspan=2, padx=5, pady=10, sticky='nsew')
+        else:
+            print('This command does not yet support this OS')
+
+        userlbl = Label(topusr, text='What is the name of the User you would like to add?')
+        userlbl.grid(row=1, column=0, sticky='W')
+        name = Entry(topusr, textvariable=name)
+        name.grid(row=2, column=0, sticky='W', padx='5', pady='2')
+
+        Confirm = Button(topusr, text='Confirm', command=lsgruusrinEXEC)
+        Confirm.grid(row=7, column=1, sticky='W', padx='5', pady='5')
+
+        cancel = Button(topusr, text='Cancel', command=topusr.destroy)
+        cancel.grid(row=7, column=0, sticky='W', padx='5', pady='5')
+
+    def chngusrspass(self): # Missing windows and MacOS commands
+        topusr = Toplevel()
+        topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
+        topusr.title('Add User To System')
+
+        paswd = StringVar()
+
+        def chngusrspassEXEC():
+            if platform == 'linux':
+                passwds = paswd.get()
+                command = """
+userlist=( $(eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1) )
+echo ${userlist[@]}
+usersleft=${#userlist[@]}
+echo $usersleft
+newpasswd=""" + passwds + """
+i=0
+while [ $usersleft != 0 ]; do
+    sudo echo "${userlist[$i]}:${newpasswd}" | sudo chpasswd
+    echo "User ${userlist[$i]} password has been changed successfully!"
+    let i=i+1
+    echo $i
+    let usersleft=usersleft-1
+    echo $usersleft
+    sleep 0.5s
+done
+                """
+                os.system(command)
+
                 print('This command is not complete yet')
             elif platform == 'win32':
                 print('This command is not complete yet')
@@ -746,13 +873,13 @@ Get-LocalUser
             else:
                 print('This command does not yet support this OS')
 
-    def chngusrspass(self):
-        def chngusrspassEXEC():
-            if platform == 'linux':
-                print('This command is not complete yet')
-            elif platform == 'win32':
-                print('This command is not complete yet')
-            elif platform == 'darwin':
-                print('This command is not complete yet')
-            else:
-                print('This command does not yet support this OS')
+        passlbl = Label(topusr, text='Please insert secure password here:')
+        passlbl.grid(row=0, column=0, sticky='w')
+        passwd = Entry(topusr, textvariable=paswd)
+        passwd.grid(row=1, column=0, sticky='w', padx=5, pady=2)
+
+        Confirm = Button(topusr, text='Confirm', command=chngusrspassEXEC)
+        Confirm.grid(row=7, column=1, sticky='W', padx=5, pady=5)
+
+        cancel = Button(topusr, text='Cancel', command=topusr.destroy)
+        cancel.grid(row=7, column=0, sticky='W', padx='5', pady='5')
