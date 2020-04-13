@@ -825,7 +825,7 @@ Get-LocalUser
         else:
             print('This command does not yet support this OS')
 
-        userlbl = Label(topusr, text='What is the name of the User you would like to add?')
+        userlbl = Label(topusr, text='What is the name of the User that you would like to see the groups that they are in?')
         userlbl.grid(row=1, column=0, sticky='W')
         name = Entry(topusr, textvariable=name)
         name.grid(row=2, column=0, sticky='W', padx='5', pady='2')
