@@ -13,177 +13,270 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(603, 436)
+        MainWindow.resize(604, 427)
+        MainWindow.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.102273 rgba(0, 105, 173, 255), stop:0.926136 rgba(0, 173, 155, 255))")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.mmtab = QtWidgets.QTabWidget(self.centralwidget)
-        self.mmtab.setGeometry(QtCore.QRect(0, 0, 611, 411))
+        self.menulist = QtWidgets.QTabWidget(self.centralwidget)
+        self.menulist.setGeometry(QtCore.QRect(0, 0, 611, 411))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.mmtab.setFont(font)
-        self.mmtab.setIconSize(QtCore.QSize(12, 12))
+        self.menulist.setFont(font)
+        self.menulist.setStyleSheet("color: white;")
+        self.menulist.setTabPosition(QtWidgets.QTabWidget.North)
+        self.menulist.setTabShape(QtWidgets.QTabWidget.Triangular)
+        self.menulist.setIconSize(QtCore.QSize(12, 12))
+        self.menulist.setTabBarAutoHide(False)
+        self.menulist.setObjectName("menulist")
+        self.mmtab = QtWidgets.QWidget()
         self.mmtab.setObjectName("mmtab")
-        self.tab = QtWidgets.QWidget()
-        self.tab.setObjectName("tab")
-        self.fwlbutton = QtWidgets.QPushButton(self.tab)
-        self.fwlbutton.setGeometry(QtCore.QRect(50, 90, 221, 31))
+        self.fwlbutton = QtWidgets.QPushButton(self.mmtab)
+        self.fwlbutton.setGeometry(QtCore.QRect(50, 130, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.fwlbutton.setFont(font)
+        self.fwlbutton.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.fwlbutton.setObjectName("fwlbutton")
-        self.auditbutton = QtWidgets.QPushButton(self.tab)
-        self.auditbutton.setGeometry(QtCore.QRect(50, 170, 221, 31))
+        self.auditbutton = QtWidgets.QPushButton(self.mmtab)
+        self.auditbutton.setGeometry(QtCore.QRect(50, 210, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.auditbutton.setFont(font)
+        self.auditbutton.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.auditbutton.setObjectName("auditbutton")
-        self.servsetbutton = QtWidgets.QPushButton(self.tab)
-        self.servsetbutton.setGeometry(QtCore.QRect(330, 50, 221, 31))
+        self.servsetbutton = QtWidgets.QPushButton(self.mmtab)
+        self.servsetbutton.setGeometry(QtCore.QRect(330, 90, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.servsetbutton.setFont(font)
+        self.servsetbutton.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.servsetbutton.setObjectName("servsetbutton")
-        self.rmvprosoftbutton = QtWidgets.QPushButton(self.tab)
-        self.rmvprosoftbutton.setGeometry(QtCore.QRect(50, 130, 221, 31))
+        self.rmvprosoftbutton = QtWidgets.QPushButton(self.mmtab)
+        self.rmvprosoftbutton.setGeometry(QtCore.QRect(50, 170, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rmvprosoftbutton.setFont(font)
+        self.rmvprosoftbutton.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.rmvprosoftbutton.setObjectName("rmvprosoftbutton")
-        self.malrembutton = QtWidgets.QPushButton(self.tab)
-        self.malrembutton.setGeometry(QtCore.QRect(330, 90, 221, 31))
+        self.malrembutton = QtWidgets.QPushButton(self.mmtab)
+        self.malrembutton.setGeometry(QtCore.QRect(330, 130, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.malrembutton.setFont(font)
+        self.malrembutton.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.malrembutton.setObjectName("malrembutton")
-        self.srchmedbutton = QtWidgets.QPushButton(self.tab)
-        self.srchmedbutton.setGeometry(QtCore.QRect(330, 170, 221, 31))
+        self.srchmedbutton = QtWidgets.QPushButton(self.mmtab)
+        self.srchmedbutton.setGeometry(QtCore.QRect(330, 210, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.srchmedbutton.setFont(font)
+        self.srchmedbutton.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.srchmedbutton.setObjectName("srchmedbutton")
-        self.quit_button = QtWidgets.QPushButton(self.tab)
-        self.quit_button.setGeometry(QtCore.QRect(500, 320, 91, 41))
+        self.quit_button = QtWidgets.QPushButton(self.mmtab)
+        self.quit_button.setGeometry(QtCore.QRect(490, 320, 91, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.quit_button.setFont(font)
+        self.quit_button.setStyleSheet("color: black;")
         self.quit_button.setObjectName("quit_button")
-        self.mmlbl = QtWidgets.QLabel(self.tab)
-        self.mmlbl.setGeometry(QtCore.QRect(10, 0, 131, 41))
+        self.mmlbl = QtWidgets.QLabel(self.mmtab)
+        self.mmlbl.setGeometry(QtCore.QRect(230, 30, 131, 41))
         font = QtGui.QFont()
         font.setPointSize(24)
         font.setItalic(False)
         self.mmlbl.setFont(font)
+        self.mmlbl.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.mmlbl.setObjectName("mmlbl")
-        self.Updates_button = QtWidgets.QPushButton(self.tab)
-        self.Updates_button.setGeometry(QtCore.QRect(50, 50, 221, 31))
+        self.Updates_button = QtWidgets.QPushButton(self.mmtab)
+        self.Updates_button.setEnabled(True)
+        self.Updates_button.setGeometry(QtCore.QRect(50, 90, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.Updates_button.setFont(font)
         self.Updates_button.setAcceptDrops(False)
+        self.Updates_button.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.Updates_button.setObjectName("Updates_button")
-        self.basicConfbutton = QtWidgets.QPushButton(self.tab)
-        self.basicConfbutton.setGeometry(QtCore.QRect(330, 130, 221, 31))
+        self.basicConfbutton = QtWidgets.QPushButton(self.mmtab)
+        self.basicConfbutton.setGeometry(QtCore.QRect(330, 170, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.basicConfbutton.setFont(font)
+        self.basicConfbutton.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.basicConfbutton.setObjectName("basicConfbutton")
-        self.mmtab.addTab(self.tab, "")
+        self.menulist.addTab(self.mmtab, "")
         self.usrgrutab = QtWidgets.QWidget()
         self.usrgrutab.setObjectName("usrgrutab")
         self.usrgrulbl = QtWidgets.QLabel(self.usrgrutab)
-        self.usrgrulbl.setGeometry(QtCore.QRect(10, 0, 231, 41))
+        self.usrgrulbl.setGeometry(QtCore.QRect(180, 30, 241, 41))
         font = QtGui.QFont()
         font.setPointSize(24)
         font.setItalic(False)
         self.usrgrulbl.setFont(font)
+        self.usrgrulbl.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.usrgrulbl.setObjectName("usrgrulbl")
         self.lslocausr = QtWidgets.QPushButton(self.usrgrutab)
-        self.lslocausr.setGeometry(QtCore.QRect(50, 170, 221, 31))
+        self.lslocausr.setGeometry(QtCore.QRect(50, 210, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.lslocausr.setFont(font)
+        self.lslocausr.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.lslocausr.setObjectName("lslocausr")
         self.rmvusrfrogru = QtWidgets.QPushButton(self.usrgrutab)
-        self.rmvusrfrogru.setGeometry(QtCore.QRect(330, 130, 221, 31))
+        self.rmvusrfrogru.setGeometry(QtCore.QRect(330, 170, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rmvusrfrogru.setFont(font)
+        self.rmvusrfrogru.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.rmvusrfrogru.setObjectName("rmvusrfrogru")
         self.adgrutosys = QtWidgets.QPushButton(self.usrgrutab)
-        self.adgrutosys.setGeometry(QtCore.QRect(50, 90, 221, 31))
+        self.adgrutosys.setGeometry(QtCore.QRect(50, 130, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.adgrutosys.setFont(font)
+        self.adgrutosys.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.adgrutosys.setObjectName("adgrutosys")
         self.rmvgrufrosys = QtWidgets.QPushButton(self.usrgrutab)
-        self.rmvgrufrosys.setGeometry(QtCore.QRect(330, 90, 221, 31))
+        self.rmvgrufrosys.setGeometry(QtCore.QRect(330, 130, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rmvgrufrosys.setFont(font)
+        self.rmvgrufrosys.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.rmvgrufrosys.setObjectName("rmvgrufrosys")
         self.quit_button_3 = QtWidgets.QPushButton(self.usrgrutab)
-        self.quit_button_3.setGeometry(QtCore.QRect(500, 320, 91, 41))
+        self.quit_button_3.setGeometry(QtCore.QRect(490, 320, 91, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.quit_button_3.setFont(font)
+        self.quit_button_3.setStyleSheet("color: black;")
         self.quit_button_3.setObjectName("quit_button_3")
         self.adusrtosys = QtWidgets.QPushButton(self.usrgrutab)
-        self.adusrtosys.setGeometry(QtCore.QRect(50, 50, 221, 31))
+        self.adusrtosys.setGeometry(QtCore.QRect(50, 90, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.adusrtosys.setFont(font)
         self.adusrtosys.setAcceptDrops(False)
+        self.adusrtosys.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.adusrtosys.setObjectName("adusrtosys")
         self.lslocagru = QtWidgets.QPushButton(self.usrgrutab)
-        self.lslocagru.setGeometry(QtCore.QRect(330, 170, 221, 31))
+        self.lslocagru.setGeometry(QtCore.QRect(330, 210, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.lslocagru.setFont(font)
+        self.lslocagru.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.lslocagru.setObjectName("lslocagru")
         self.adusrtogru = QtWidgets.QPushButton(self.usrgrutab)
-        self.adusrtogru.setGeometry(QtCore.QRect(50, 130, 221, 31))
+        self.adusrtogru.setGeometry(QtCore.QRect(50, 170, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.adusrtogru.setFont(font)
+        self.adusrtogru.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.adusrtogru.setObjectName("adusrtogru")
         self.rmvusrfrosys = QtWidgets.QPushButton(self.usrgrutab)
-        self.rmvusrfrosys.setGeometry(QtCore.QRect(330, 50, 221, 31))
+        self.rmvusrfrosys.setGeometry(QtCore.QRect(330, 90, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rmvusrfrosys.setFont(font)
+        self.rmvusrfrosys.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.rmvusrfrosys.setObjectName("rmvusrfrosys")
         self.lsmemgru = QtWidgets.QPushButton(self.usrgrutab)
-        self.lsmemgru.setGeometry(QtCore.QRect(50, 210, 221, 31))
+        self.lsmemgru.setGeometry(QtCore.QRect(50, 250, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.lsmemgru.setFont(font)
+        self.lsmemgru.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.lsmemgru.setObjectName("lsmemgru")
         self.lsgruusrin = QtWidgets.QPushButton(self.usrgrutab)
-        self.lsgruusrin.setGeometry(QtCore.QRect(330, 210, 221, 31))
+        self.lsgruusrin.setGeometry(QtCore.QRect(330, 250, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.lsgruusrin.setFont(font)
+        self.lsgruusrin.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.lsgruusrin.setObjectName("lsgruusrin")
         self.chngusrpas = QtWidgets.QPushButton(self.usrgrutab)
-        self.chngusrpas.setGeometry(QtCore.QRect(50, 250, 221, 31))
+        self.chngusrpas.setGeometry(QtCore.QRect(50, 290, 221, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.chngusrpas.setFont(font)
+        self.chngusrpas.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
         self.chngusrpas.setObjectName("chngusrpas")
-        self.mmtab.addTab(self.usrgrutab, "")
+        self.menulist.addTab(self.usrgrutab, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 603, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 604, 23))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.menubar.setFont(font)
+        self.menubar.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px;")
         self.menubar.setObjectName("menubar")
         self.menuAbout = QtWidgets.QMenu(self.menubar)
         self.menuAbout.setObjectName("menuAbout")
         MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
         self.actionAbout_Creator = QtWidgets.QAction(MainWindow)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -196,7 +289,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuAbout.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.mmtab.setCurrentIndex(0)
+        self.menulist.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -213,7 +306,7 @@ class Ui_MainWindow(object):
         self.mmlbl.setText(_translate("MainWindow", "Main Menu"))
         self.Updates_button.setText(_translate("MainWindow", "Updates"))
         self.basicConfbutton.setText(_translate("MainWindow", "Basic Configurations"))
-        self.mmtab.setTabText(self.mmtab.indexOf(self.tab), _translate("MainWindow", "Main Menu"))
+        self.menulist.setTabText(self.menulist.indexOf(self.mmtab), _translate("MainWindow", "Main Menu"))
         self.usrgrulbl.setText(_translate("MainWindow", "User / Group Settings"))
         self.lslocausr.setText(_translate("MainWindow", "List Local Users"))
         self.rmvusrfrogru.setText(_translate("MainWindow", "Remove User from Group"))
@@ -228,7 +321,7 @@ class Ui_MainWindow(object):
         self.lsmemgru.setText(_translate("MainWindow", "List Members of Group"))
         self.lsgruusrin.setText(_translate("MainWindow", "List Groups an User is in"))
         self.chngusrpas.setText(_translate("MainWindow", "Change all Users Passwords at Once"))
-        self.mmtab.setTabText(self.mmtab.indexOf(self.usrgrutab), _translate("MainWindow", "User / Group Settings"))
+        self.menulist.setTabText(self.menulist.indexOf(self.usrgrutab), _translate("MainWindow", "User / Group Settings"))
         self.menuAbout.setTitle(_translate("MainWindow", "Help"))
         self.actionAbout_Creator.setText(_translate("MainWindow", "About Creator"))
         self.actionHow_To_Use.setText(_translate("MainWindow", "How To Use"))

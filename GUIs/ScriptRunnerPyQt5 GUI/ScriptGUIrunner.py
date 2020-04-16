@@ -22,17 +22,22 @@ def resource_path(relative_path):
 
 #this is where all of the python logic will be.
 
-class MainWstart(QMainWindow, Ui_MainWindow):
+class Mainstart(QMainWindow, Ui_MainWindow):
     def __init__(self):
         print('Script Runner has started')
         QMainWindow.__init__(self)
         self.setupUi(self)
+        self.setFixedSize(604, 427)
         self.setWindowIcon(QtGui.QIcon('cup2.png'))
         #self.actionAbout_Creator.clicked.connect(self.Ui_AboutCreator)
         self.actionAbout_Creator.triggered.connect(self.aboutCre)
         #self.quit_button.clicked.connect(self.quitButon)
 
-    def aboutCre(Ui_AboutCreator):
+    def aboutCre(self):
+        self.hide()
+        #self.about = Ui_AboutCreator()
+        #self.about.show()
+
         #QMainWindow.__init__(self)
         #self.setupUi(self)
         print('Showing about creator window')
@@ -60,6 +65,6 @@ if __name__ == "__main__":
     #ui = Ui_MainWindow()
     #ui.setupUi(MainWindow)
     #MainWindow.show()
-    main = MainWstart()
+    main = Mainstart()
     main.show()
     sys.exit(app.exec_())
