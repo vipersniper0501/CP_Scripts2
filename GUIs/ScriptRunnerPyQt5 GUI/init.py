@@ -10,6 +10,15 @@ from PyQt5.QtCore import *
 from scripFunc.scripEXEC import *
 
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 #this is where all of the python logic will be.
 
@@ -18,6 +27,7 @@ class MainWstart(QMainWindow, Ui_MainWindow):
         print('Script Runner has started')
         QMainWindow.__init__(self)
         self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon('cup2.png'))
         #self.actionAbout_Creator.clicked.connect(self.Ui_AboutCreator)
         self.actionAbout_Creator.triggered.connect(self.aboutCre)
         #self.quit_button.clicked.connect(self.quitButon)
