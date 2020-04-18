@@ -16,8 +16,39 @@ FYI- This will be mostly used for a backup location for my scripts and will not 
 - Linux Scripts
   - Admin access
 
+# How to compile GUI
+Make sure you have the correct version of Pyinstaller:
+	pip install https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz
 
-#Usage Instructions For CLI Powershell Scripts:
+
+Run 'pip install auto-py-to-exe' to install the compiler.
+
+for executables that work on Windows:	Run auto-py-to-exe on a windows machine
+for executables that work with linux: Run auto-py-to-exe on a Linux/Unix machine
+
+
+
+1.) Move all files that are to be converted into a .exe onto the desktop.
+
+2.) open powershell/terminal as admin and type :   auto-py-to-exe
+
+3.) In Script Location, put in the location of the .py file that launches the script
+
+4.) Under Additional files you can add folders, other .py files, and other files that are to be used in the script
+
+5.) Under Advanced, change Output Directory to the desktop to easily locate the newly created .exe file
+
+6.) Hit Convert .PY TO .EXE
+
+7.) your newly created .exe file should now have been created and added to the desktop
+
+
+
+https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-
+
+
+
+# Usage Instructions For CLI Powershell Scripts:
 
 1.)Run Powershell as Admin
 
@@ -35,7 +66,7 @@ That is it! Good Luck!
 
 Some of the commands might require for you to execute them twice if they did not show a list when they should have. I am currently working on fixing this problem.
 
-#Usage Instructions For Linux CLI Scripts
+# Usage Instructions For Linux CLI Scripts
 
 1.) Navigate to directory where script is located in terminal
 
