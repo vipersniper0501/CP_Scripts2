@@ -44,7 +44,7 @@ for executables that work with linux: Run auto-py-to-exe on a Linux/Unix machine
 
 
 
-https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-
+https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-3cfi
 
 
 
