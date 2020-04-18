@@ -8,8 +8,6 @@ FYI- This will be mostly used for a backup location for my scripts and will not 
 
 - GUI
   - Admin access
-  - python3 (pre-installed on most Linux distros)
-  - distro module (automatically installed with installer.py)
 
 - Powershell Script
   - Admin access
@@ -19,18 +17,9 @@ FYI- This will be mostly used for a backup location for my scripts and will not 
   - Admin access
 
 
-### Usage Instructions For GUI
+#Usage Instructions For CLI Powershell Scripts:
 
-1.) Navigate to Script_Runner.py as Administrator in either Powershell (windows) or Terminal (Linux)
-
-2.) run ```python3 .\Script_Runner.py``` in Powershell or ```sudo python3 Script_Runner.py``` in Terminal
-
-If you do not do it this way then quite a few commands will not work.
-
-
-#Usage Instructions For Powershell Scripts:
-
-1.)Run powershell as admin
+1.)Run Powershell as Admin
 
 2.)Navigate to location of script file through powershell ex: cd C:\Users\Michael\Downloads\
 
@@ -46,7 +35,7 @@ That is it! Good Luck!
 
 Some of the commands might require for you to execute them twice if they did not show a list when they should have. I am currently working on fixing this problem.
 
-#Usage Instructions For Linux Scripts
+#Usage Instructions For Linux CLI Scripts
 
 1.) Navigate to directory where script is located in terminal
 

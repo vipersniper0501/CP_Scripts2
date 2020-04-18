@@ -1,7 +1,7 @@
 import sys
 from main import *
 from aboutcreator import *
-from init import *
+from ScriptGUIrunner import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 

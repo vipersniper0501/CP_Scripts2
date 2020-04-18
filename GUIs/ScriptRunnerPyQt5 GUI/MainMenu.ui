@@ -6,15 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>603</width>
-    <height>436</height>
+    <width>604</width>
+    <height>427</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Apple CIDR Script Runner</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.102273 rgba(0, 105, 173, 255), stop:0.926136 rgba(0, 173, 155, 255))</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="mmtab">
+   <widget class="QTabWidget" name="menulist">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -28,6 +31,15 @@
       <pointsize>12</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;</string>
+    </property>
+    <property name="tabPosition">
+     <enum>QTabWidget::North</enum>
+    </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Triangular</enum>
+    </property>
     <property name="currentIndex">
      <number>0</number>
     </property>
@@ -37,65 +49,14 @@
       <height>12</height>
      </size>
     </property>
-    <widget class="QWidget" name="tab">
+    <property name="tabBarAutoHide">
+     <bool>false</bool>
+    </property>
+    <widget class="QWidget" name="mmtab">
      <attribute name="title">
       <string>Main Menu</string>
      </attribute>
      <widget class="QPushButton" name="fwlbutton">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>90</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Firewall Settings</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="auditbutton">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>170</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Audit System</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="servsetbutton">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>50</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Services Settings</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="rmvprosoftbutton">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -109,11 +70,49 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
       <property name="text">
-       <string>Remove Prohibited Software</string>
+       <string>Firewall Settings</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="malrembutton">
+     <widget class="QPushButton" name="auditbutton">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>210</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
+      <property name="text">
+       <string>Audit System</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="servsetbutton">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -127,14 +126,24 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
       <property name="text">
-       <string>Malware Removal</string>
+       <string>Services Settings</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="srchmedbutton">
+     <widget class="QPushButton" name="rmvprosoftbutton">
       <property name="geometry">
        <rect>
-        <x>330</x>
+        <x>50</x>
         <y>170</y>
         <width>221</width>
         <height>31</height>
@@ -145,6 +154,72 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
+      <property name="text">
+       <string>Remove Prohibited Software</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="malrembutton">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>130</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
+      <property name="text">
+       <string>Malware Removal</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="srchmedbutton">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>210</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
       <property name="text">
        <string>Search For Prohibited Media</string>
       </property>
@@ -152,7 +227,7 @@
      <widget class="QPushButton" name="quit_button">
       <property name="geometry">
        <rect>
-        <x>500</x>
+        <x>490</x>
         <y>320</y>
         <width>91</width>
         <height>41</height>
@@ -162,6 +237,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: black;</string>
       </property>
       <property name="text">
        <string>Quit</string>
@@ -173,8 +251,8 @@
      <widget class="QLabel" name="mmlbl">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>0</y>
+        <x>230</x>
+        <y>30</y>
         <width>131</width>
         <height>41</height>
        </rect>
@@ -185,15 +263,24 @@
         <italic>false</italic>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-width: 1px;
+background-color: lightblue;
+border-radius: 10px; color: black;</string>
+      </property>
       <property name="text">
        <string>Main Menu</string>
       </property>
      </widget>
      <widget class="QPushButton" name="Updates_button">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>50</y>
+        <y>90</y>
         <width>221</width>
         <height>31</height>
        </rect>
@@ -206,15 +293,31 @@
       <property name="acceptDrops">
        <bool>false</bool>
       </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
       <property name="text">
        <string>Updates</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
       </property>
      </widget>
      <widget class="QPushButton" name="basicConfbutton">
       <property name="geometry">
        <rect>
         <x>330</x>
-        <y>130</y>
+        <y>170</y>
         <width>221</width>
         <height>31</height>
        </rect>
@@ -223,6 +326,16 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Basic Configurations</string>
@@ -236,9 +349,9 @@
      <widget class="QLabel" name="usrgrulbl">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>231</width>
+        <x>180</x>
+        <y>30</y>
+        <width>241</width>
         <height>41</height>
        </rect>
       </property>
@@ -248,6 +361,12 @@
         <italic>false</italic>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-width: 1px;
+background-color: lightblue;
+border-radius: 10px; color: black;</string>
+      </property>
       <property name="text">
        <string>User / Group Settings</string>
       </property>
@@ -256,6 +375,34 @@
       <property name="geometry">
        <rect>
         <x>50</x>
+        <y>210</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
+      <property name="text">
+       <string>List Local Users</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="rmvusrfrogru">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
         <y>170</y>
         <width>221</width>
         <height>31</height>
@@ -266,11 +413,49 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
       <property name="text">
-       <string>List Local Users</string>
+       <string>Remove User from Group</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="rmvusrfrogru">
+     <widget class="QPushButton" name="adgrutosys">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>130</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
+      <property name="text">
+       <string>Add Group to System</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="rmvgrufrosys">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -284,41 +469,15 @@
         <pointsize>12</pointsize>
        </font>
       </property>
-      <property name="text">
-       <string>Remove User from Group</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="adgrutosys">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>90</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Add Group to System</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="rmvgrufrosys">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>90</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Remove Group from System</string>
@@ -327,7 +486,7 @@
      <widget class="QPushButton" name="quit_button_3">
       <property name="geometry">
        <rect>
-        <x>500</x>
+        <x>490</x>
         <y>320</y>
         <width>91</width>
         <height>41</height>
@@ -337,6 +496,9 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: black;</string>
       </property>
       <property name="text">
        <string>Quit</string>
@@ -349,7 +511,7 @@
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>50</y>
+        <y>90</y>
         <width>221</width>
         <height>31</height>
        </rect>
@@ -362,6 +524,16 @@
       <property name="acceptDrops">
        <bool>false</bool>
       </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
       <property name="text">
        <string>Add User to System</string>
       </property>
@@ -370,6 +542,34 @@
       <property name="geometry">
        <rect>
         <x>330</x>
+        <y>210</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
+      <property name="text">
+       <string>List Local Groups</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="adusrtogru">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
         <y>170</y>
         <width>221</width>
         <height>31</height>
@@ -380,23 +580,15 @@
         <pointsize>12</pointsize>
        </font>
       </property>
-      <property name="text">
-       <string>List Local Groups</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="adusrtogru">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>130</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Add User to Group</string>
@@ -406,7 +598,7 @@
       <property name="geometry">
        <rect>
         <x>330</x>
-        <y>50</y>
+        <y>90</y>
         <width>221</width>
         <height>31</height>
        </rect>
@@ -415,48 +607,22 @@
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Remove User From System</string>
       </property>
      </widget>
      <widget class="QPushButton" name="lsmemgru">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>210</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>List Members of Group</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="lsgruusrin">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>210</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>List Groups an User is in</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="chngusrpas">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -470,6 +636,72 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
+      <property name="text">
+       <string>List Members of Group</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="lsgruusrin">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>250</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
+      <property name="text">
+       <string>List Groups an User is in</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="chngusrpas">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>290</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
+background-color: lightblue;
+border-radius: 10px;
+color: black;
+</string>
+      </property>
       <property name="text">
        <string>Change all Users Passwords at Once</string>
       </property>
@@ -482,14 +714,20 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>603</width>
-     <height>21</height>
+     <width>604</width>
+     <height>23</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <pointsize>11</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border: 2px solid;
+border-width: 1px;
+background-color: lightblue;
+border-radius: 10px;</string>
    </property>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
@@ -500,7 +738,6 @@
    </widget>
    <addaction name="menuAbout"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionAbout_Creator">
    <property name="text">
     <string>About Creator</string>
