@@ -125,23 +125,8 @@ class mmfunc:
 
 
 class ThreadmmFunc():
-    #def __init__(self, ThreadID, name):
-    #    threading.Thread.__init__(self)
-    #    self.threadID = ThreadID
-    #    self.name = name
-
     def threaderSRCH(self):
-        # print(scrip.comtorun)
-        # command = scrip.comtorun
-        #commands = [mmfunc.srchmedia, mmfunc.updates, scrip.usrgru]
-        #command = scrip.commands
         try:
-        #self.threaderRun = _thread.start_new_thread(mmfunc.srchmedia, ("Thread search media", 1))
-            #self.threaderRun = Thread(target = commands[com])
-            #self.threaderRun.start()
-            #print(com)
-        # self.threaderRun.join()
-            #self.threaderRun.isAlive()
             self.threader = Thread(target=mmfunc.srchmedia)
             self.threader.start()
         except Exception as e:

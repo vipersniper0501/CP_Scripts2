@@ -75,10 +75,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
 
 
-
-
-
-
         self.quit_button.clicked.connect(self.quitButton)
         self.Updates_button.clicked.connect(lambda: threader(scripfunc.updateos))
         self.servsetbutton.clicked.connect(lambda: threader(scripfunc.servSet))
@@ -96,16 +92,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             except Exception as e:
                 print(e)
                 print('Could not start thread')
-
-
-
-
-
-
-
-
-
-
 
 
 
