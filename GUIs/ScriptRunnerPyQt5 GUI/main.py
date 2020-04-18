@@ -36,9 +36,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.fwlbutton.setFont(font)
         self.fwlbutton.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.fwlbutton.setObjectName("fwlbutton")
         self.auditbutton = QtWidgets.QPushButton(self.mmtab)
         self.auditbutton.setGeometry(QtCore.QRect(50, 210, 221, 31))
@@ -46,9 +50,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.auditbutton.setFont(font)
         self.auditbutton.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.auditbutton.setObjectName("auditbutton")
         self.servsetbutton = QtWidgets.QPushButton(self.mmtab)
         self.servsetbutton.setGeometry(QtCore.QRect(330, 90, 221, 31))
@@ -56,9 +64,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.servsetbutton.setFont(font)
         self.servsetbutton.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.servsetbutton.setObjectName("servsetbutton")
         self.rmvprosoftbutton = QtWidgets.QPushButton(self.mmtab)
         self.rmvprosoftbutton.setGeometry(QtCore.QRect(50, 170, 221, 31))
@@ -66,9 +78,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.rmvprosoftbutton.setFont(font)
         self.rmvprosoftbutton.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.rmvprosoftbutton.setObjectName("rmvprosoftbutton")
         self.malrembutton = QtWidgets.QPushButton(self.mmtab)
         self.malrembutton.setGeometry(QtCore.QRect(330, 130, 221, 31))
@@ -76,9 +92,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.malrembutton.setFont(font)
         self.malrembutton.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.malrembutton.setObjectName("malrembutton")
         self.srchmedbutton = QtWidgets.QPushButton(self.mmtab)
         self.srchmedbutton.setGeometry(QtCore.QRect(330, 210, 221, 31))
@@ -86,9 +106,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.srchmedbutton.setFont(font)
         self.srchmedbutton.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.srchmedbutton.setObjectName("srchmedbutton")
         self.quit_button = QtWidgets.QPushButton(self.mmtab)
         self.quit_button.setGeometry(QtCore.QRect(490, 320, 91, 41))
@@ -116,9 +140,15 @@ class Ui_MainWindow(object):
         self.Updates_button.setFont(font)
         self.Updates_button.setAcceptDrops(False)
         self.Updates_button.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
+        self.Updates_button.setCheckable(False)
+        self.Updates_button.setDefault(False)
         self.Updates_button.setObjectName("Updates_button")
         self.basicConfbutton = QtWidgets.QPushButton(self.mmtab)
         self.basicConfbutton.setGeometry(QtCore.QRect(330, 170, 221, 31))
@@ -126,9 +156,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.basicConfbutton.setFont(font)
         self.basicConfbutton.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.basicConfbutton.setObjectName("basicConfbutton")
         self.menulist.addTab(self.mmtab, "")
         self.usrgrutab = QtWidgets.QWidget()
@@ -150,9 +184,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.lslocausr.setFont(font)
         self.lslocausr.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.lslocausr.setObjectName("lslocausr")
         self.rmvusrfrogru = QtWidgets.QPushButton(self.usrgrutab)
         self.rmvusrfrogru.setGeometry(QtCore.QRect(330, 170, 221, 31))
@@ -160,9 +198,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.rmvusrfrogru.setFont(font)
         self.rmvusrfrogru.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.rmvusrfrogru.setObjectName("rmvusrfrogru")
         self.adgrutosys = QtWidgets.QPushButton(self.usrgrutab)
         self.adgrutosys.setGeometry(QtCore.QRect(50, 130, 221, 31))
@@ -170,9 +212,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.adgrutosys.setFont(font)
         self.adgrutosys.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.adgrutosys.setObjectName("adgrutosys")
         self.rmvgrufrosys = QtWidgets.QPushButton(self.usrgrutab)
         self.rmvgrufrosys.setGeometry(QtCore.QRect(330, 130, 221, 31))
@@ -180,9 +226,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.rmvgrufrosys.setFont(font)
         self.rmvgrufrosys.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.rmvgrufrosys.setObjectName("rmvgrufrosys")
         self.quit_button_3 = QtWidgets.QPushButton(self.usrgrutab)
         self.quit_button_3.setGeometry(QtCore.QRect(490, 320, 91, 41))
@@ -198,9 +248,13 @@ class Ui_MainWindow(object):
         self.adusrtosys.setFont(font)
         self.adusrtosys.setAcceptDrops(False)
         self.adusrtosys.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.adusrtosys.setObjectName("adusrtosys")
         self.lslocagru = QtWidgets.QPushButton(self.usrgrutab)
         self.lslocagru.setGeometry(QtCore.QRect(330, 210, 221, 31))
@@ -208,9 +262,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.lslocagru.setFont(font)
         self.lslocagru.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.lslocagru.setObjectName("lslocagru")
         self.adusrtogru = QtWidgets.QPushButton(self.usrgrutab)
         self.adusrtogru.setGeometry(QtCore.QRect(50, 170, 221, 31))
@@ -218,9 +276,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.adusrtogru.setFont(font)
         self.adusrtogru.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.adusrtogru.setObjectName("adusrtogru")
         self.rmvusrfrosys = QtWidgets.QPushButton(self.usrgrutab)
         self.rmvusrfrosys.setGeometry(QtCore.QRect(330, 90, 221, 31))
@@ -228,9 +290,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.rmvusrfrosys.setFont(font)
         self.rmvusrfrosys.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.rmvusrfrosys.setObjectName("rmvusrfrosys")
         self.lsmemgru = QtWidgets.QPushButton(self.usrgrutab)
         self.lsmemgru.setGeometry(QtCore.QRect(50, 250, 221, 31))
@@ -238,9 +304,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.lsmemgru.setFont(font)
         self.lsmemgru.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.lsmemgru.setObjectName("lsmemgru")
         self.lsgruusrin = QtWidgets.QPushButton(self.usrgrutab)
         self.lsgruusrin.setGeometry(QtCore.QRect(330, 250, 221, 31))
@@ -248,9 +318,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.lsgruusrin.setFont(font)
         self.lsgruusrin.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.lsgruusrin.setObjectName("lsgruusrin")
         self.chngusrpas = QtWidgets.QPushButton(self.usrgrutab)
         self.chngusrpas.setGeometry(QtCore.QRect(50, 290, 221, 31))
@@ -258,9 +332,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.chngusrpas.setFont(font)
         self.chngusrpas.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
+"border-color: grey;\n"
+"border-style: outset;\n"
+"border-width: 2.5px;\n"
 "background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+"border-radius: 10px;\n"
+"color: black;\n"
+"")
         self.chngusrpas.setObjectName("chngusrpas")
         self.menulist.addTab(self.usrgrutab, "")
         MainWindow.setCentralWidget(self.centralwidget)

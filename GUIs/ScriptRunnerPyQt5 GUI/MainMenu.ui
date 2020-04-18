@@ -72,9 +72,13 @@
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Firewall Settings</string>
@@ -96,9 +100,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Audit System</string>
@@ -120,9 +128,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Services Settings</string>
@@ -144,9 +156,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Remove Prohibited Software</string>
@@ -168,9 +184,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Malware Removal</string>
@@ -192,9 +212,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Search For Prohibited Media</string>
@@ -271,12 +295,22 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Updates</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
       </property>
      </widget>
      <widget class="QPushButton" name="basicConfbutton">
@@ -295,9 +329,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Basic Configurations</string>
@@ -349,9 +387,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>List Local Users</string>
@@ -373,9 +415,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Remove User from Group</string>
@@ -397,9 +443,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Add Group to System</string>
@@ -421,9 +471,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Remove Group from System</string>
@@ -472,9 +526,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Add User to System</string>
@@ -496,9 +554,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>List Local Groups</string>
@@ -520,9 +582,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Add User to Group</string>
@@ -544,9 +610,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Remove User From System</string>
@@ -568,9 +638,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>List Members of Group</string>
@@ -592,9 +666,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>List Groups an User is in</string>
@@ -616,9 +694,13 @@ border-radius: 10px; color: black;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border: 2px solid;
-border-width: 1px;
+border-color: grey;
+border-style: outset;
+border-width: 2.5px;
 background-color: lightblue;
-border-radius: 10px; color: black;</string>
+border-radius: 10px;
+color: black;
+</string>
       </property>
       <property name="text">
        <string>Change all Users Passwords at Once</string>
