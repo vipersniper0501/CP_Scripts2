@@ -73,9 +73,12 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
 
 
+        def quitButton():
+            print('Closing program')
+            sys.exit()
 
 
-        self.quit_button.clicked.connect(self.quitButton)
+        self.quit_button.clicked.connect(quitButton)
         self.Updates_button.clicked.connect(lambda: threader(scripfunc.updateos))
         self.servsetbutton.clicked.connect(lambda: threader(scripfunc.servSet))
         self.fwlbutton.clicked.connect(lambda: threader(scripfunc.fwl))
@@ -131,12 +134,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
 
 ######################
-    def updatebuttonTemp(self):
-        print('Update test')
-
-    def quitButton():
-        print('Closing program')
-        sys.exit()
 
 
 
