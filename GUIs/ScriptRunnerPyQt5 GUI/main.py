@@ -354,6 +354,8 @@ class Ui_MainWindow(object):
         self.menubar.setObjectName("menubar")
         self.menuAbout = QtWidgets.QMenu(self.menubar)
         self.menuAbout.setObjectName("menuAbout")
+        self.menuChange_Configurations = QtWidgets.QMenu(self.menubar)
+        self.menuChange_Configurations.setObjectName("menuChange_Configurations")
         MainWindow.setMenuBar(self.menubar)
         self.actionAbout_Creator = QtWidgets.QAction(MainWindow)
         font = QtGui.QFont()
@@ -365,6 +367,7 @@ class Ui_MainWindow(object):
         self.menuAbout.addAction(self.actionAbout_Creator)
         self.menuAbout.addAction(self.actionHow_To_Use)
         self.menubar.addAction(self.menuAbout.menuAction())
+        self.menubar.addAction(self.menuChange_Configurations.menuAction())
 
         self.retranslateUi(MainWindow)
         self.menulist.setCurrentIndex(0)
@@ -401,6 +404,7 @@ class Ui_MainWindow(object):
         self.chngusrpas.setText(_translate("MainWindow", "Change all Users Passwords at Once"))
         self.menulist.setTabText(self.menulist.indexOf(self.usrgrutab), _translate("MainWindow", "User / Group Settings"))
         self.menuAbout.setTitle(_translate("MainWindow", "Help"))
+        self.menuChange_Configurations.setTitle(_translate("MainWindow", "Change Configurations"))
         self.actionAbout_Creator.setText(_translate("MainWindow", "About Creator"))
         self.actionHow_To_Use.setText(_translate("MainWindow", "How To Use"))
 

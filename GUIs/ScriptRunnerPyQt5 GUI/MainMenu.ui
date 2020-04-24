@@ -736,7 +736,13 @@ border-radius: 10px;</string>
     <addaction name="actionAbout_Creator"/>
     <addaction name="actionHow_To_Use"/>
    </widget>
+   <widget class="QMenu" name="menuChange_Configurations">
+    <property name="title">
+     <string>Change Configurations</string>
+    </property>
+   </widget>
    <addaction name="menuAbout"/>
+   <addaction name="menuChange_Configurations"/>
   </widget>
   <action name="actionAbout_Creator">
    <property name="text">
