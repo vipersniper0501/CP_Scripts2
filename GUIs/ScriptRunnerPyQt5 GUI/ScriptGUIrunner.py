@@ -239,8 +239,6 @@ class fconfStart(QMainWindow, Ui_firstConf):
                 RESTART.setStandardButtons(QMessageBox.Close)
                 RESTART.buttonClicked.connect(lambda: sys.exit(0))
                 x = RESTART.exec_()
-
-
             else:
                 HEY = QMessageBox()
                 HEY.setWindowTitle('Hey! Listen!')
