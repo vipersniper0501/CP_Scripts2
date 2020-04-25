@@ -509,6 +509,48 @@ class Ui_firstConf(object):
 "background-color: lightblue;\n"
 "border-radius: 10px; color: black;")
         self.rsyncy.setObjectName("rsyncy")
+        self.frame_10 = QtWidgets.QFrame(firstConf)
+        self.frame_10.setGeometry(QtCore.QRect(410, 290, 251, 41))
+        self.frame_10.setStyleSheet("border: 2px solid;\n"
+"border-width: 3px;\n"
+"background: transparent;\n"
+"border-radius: 10px; \n"
+"color: black;")
+        self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_10.setObjectName("frame_10")
+        self.rdp = QtWidgets.QLabel(self.frame_10)
+        self.rdp.setGeometry(QtCore.QRect(10, 10, 101, 21))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.rdp.setFont(font)
+        self.rdp.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.rdp.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
+        self.rdp.setAlignment(QtCore.Qt.AlignCenter)
+        self.rdp.setObjectName("rdp")
+        self.rdpn = QtWidgets.QRadioButton(self.frame_10)
+        self.rdpn.setGeometry(QtCore.QRect(200, 10, 41, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.rdpn.setFont(font)
+        self.rdpn.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
+        self.rdpn.setObjectName("rdpn")
+        self.rdpy = QtWidgets.QRadioButton(self.frame_10)
+        self.rdpy.setGeometry(QtCore.QRect(150, 10, 41, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.rdpy.setFont(font)
+        self.rdpy.setStyleSheet("border: 2px solid;\n"
+"border-width: 1px;\n"
+"background-color: lightblue;\n"
+"border-radius: 10px; color: black;")
+        self.rdpy.setObjectName("rdpy")
 
         self.retranslateUi(firstConf)
         QtCore.QMetaObject.connectSlotsByName(firstConf)
@@ -553,6 +595,9 @@ class Ui_firstConf(object):
         self.rsync.setText(_translate("firstConf", "Rsync"))
         self.rsyncn.setText(_translate("firstConf", "No"))
         self.rsyncy.setText(_translate("firstConf", "Yes"))
+        self.rdp.setText(_translate("firstConf", "Remote Desktop"))
+        self.rdpn.setText(_translate("firstConf", "No"))
+        self.rdpy.setText(_translate("firstConf", "Yes"))
 
 
 if __name__ == "__main__":

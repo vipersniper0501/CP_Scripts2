@@ -1,19 +1,25 @@
+import os
 import sys
 import time
 from main import Ui_MainWindow
 from aboutcreator import *
 from firstconf import *
-
-# from button_logic import *
-# from PyQt5 import QtCore, QtGui, QtWidgets
-# from Auto import Ui_MainWindow
-
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from scripFunc.scripEXEC import *
 from threading import *
 from pathlib import Path
+import configparser
+
+
+
+###################
+#Ideas:
+# Universal Commands Section/Windows 10 Section/Linux Section/MacOS X Section
+# Command that finds Hash Value of file
+# 
+###################
 
 
 def resource_path(relative_path):
@@ -31,17 +37,6 @@ def resource_path(relative_path):
 
 
 class fconfStart(QMainWindow, Ui_firstConf):
-    ssh = ''
-    ftp = ''
-    proftpd = ''
-    vsftpd = ''
-    web = ''
-    apaweb = ''
-    nginweb = ''
-    https = ''
-    smb = ''
-    sql = ''
-    rsnc = ''
 
     def __init__(self):
         print('Script Runner First Time Configurations')
@@ -219,17 +214,42 @@ class fconfStart(QMainWindow, Ui_firstConf):
                 print('rsnc No')
                 self.rsnc = 'no'
 
+        def rdpYES(selected):
+            if selected:
+                print('RDP Yes')
+                self.rdp = 'yes'
+
+        def rdpNO(selected):
+            if selected:
+                print('RDP No')
+                self.rdp = 'no'
+
         def quitButton():
             print('Closing program')
             sys.exit()
 
         def confirmBTTN():
-            if self.ssh != '' and self.ftp != '' and self.proftpd != '' and self.vsftpd != '' and self.web != '' and self.apaweb != '' and self.nginweb != '' and self.https != '' and self.smb != '' and self.sql != '' and self.rsnc != '':
+            if self.ssh != '' and self.ftp != '' and self.proftpd != '' and self.vsftpd != '' and self.web != '' and self.apaweb != '' and self.nginweb != '' and self.https != '' and self.smb != '' and self.sql != '' and self.rsnc != '' and self.rdp != '':
                 print('saving configurations\n')
-                print("ssh=" + self.ssh + ", ftp=" + self.ftp + ", proftpd=" + self.proftpd + ", vsftpd=" + self.vsftpd + ", web=" + self.web + ", apaweb=" + self.apaweb + ", nginweb=" + self.nginweb + ", https=" + self.https + ", smb=" + self.smb + ", sql=" + self.sql + ", rsnc=" + self.rsnc)
-                f = open("./config.py", "a+")
-                f.write("ssh = " + '"{}"'.format(self.ssh) + "\nftp = " + '"{}"'.format(self.ftp) + "\nproftpd = " + '"{}"'.format(self.proftpd) + "\nvsftpd = " + '"{}"'.format(self.vsftpd) + "\nweb = " + '"{}"'.format(self.web) + "\napaweb = " + '"{}"'.format(self.apaweb) + "\nnginweb = " + '"{}"'.format(self.nginweb) + "\nhttps = " + '"{}"'.format(self.https) + "\nsmb = " + '"{}"'.format(self.smb) + "\nsql = " + '"{}"'.format(self.sql) + "\nrsnc = " + '"{}"'.format(self.rsnc))
-                f.close()
+                print("ssh=" + self.ssh + ", ftp=" + self.ftp + ", proftpd=" + self.proftpd + ", vsftpd=" + self.vsftpd + ", web=" + self.web + ", apaweb=" + self.apaweb + ", nginweb=" + self.nginweb + ", https=" + self.https + ", smb=" + self.smb + ", sql=" + self.sql + ", rsnc=" + self.rsnc + ", RDP=" + self.rdp)
+
+                filename = "config.ini"
+
+                config = configparser.ConfigParser()
+                config['Services'] = {'ssh': self.ssh,
+                                      'ftp': self.ftp,
+                                      'proftpd': self.proftpd,
+                                      'vsftpd': self.vsftpd,
+                                      'web': self.web,
+                                      'apaweb': self.apaweb,
+                                      'nginweb': self.nginweb,
+                                      'https': self.https,
+                                      'smb': self.smb,
+                                      'sql': self.sql,
+                                      'rsnc': self.rsnc,
+                                      'rdp': self.rdp}
+                with open('config.ini', 'w') as configfile:
+                    config.write(configfile)
 
                 RESTART = QMessageBox()
                 RESTART.setWindowTitle("Hey! Listen!")
@@ -269,6 +289,8 @@ class fconfStart(QMainWindow, Ui_firstConf):
         self.sqln.toggled.connect(sqlNO)
         self.rsyncy.toggled.connect(rsncYES)
         self.rsyncn.toggled.connect(rsncNO)
+        self.rdpy.toggled.connect(rdpYES)
+        self.rdpn.toggled.connect(rdpNO)
         self.confirmbtn.clicked.connect(confirmBTTN)
         self.quit_buttonConf.clicked.connect(quitButton)
 
@@ -328,6 +350,10 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         self.auditbutton.clicked.connect(lambda: threader(scripfunc.alyn))
         self.srchmedbutton.clicked.connect(lambda: threader(scripfunc.srchmedia))
 
+
+        #User/Group Menu Buttons
+        self.quit_button_3.clicked.connect(quitButton)
+
         def threader(com):
             try:
                 threader = Thread(target=com)
@@ -335,6 +361,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             except Exception as e:
                 print(e)
                 print('Could not start thread')
+
 
         # def buttonPress(button):
         # print('button pressed')
@@ -367,16 +394,24 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 ######################
 
 
+
+
+
+
+
 if __name__ == "__main__":
 
     cwd = os.getcwd()
-    variableCheck = Path(cwd + '/config.py')
+    variableCheck = Path(cwd + '/config.ini')
     print(variableCheck)
     print(cwd)
     variableCheck.is_file()
     if variableCheck.is_file():
-        from config import *
-        print("ssh = " + ssh + "\nftp = " + ftp + "\nproftpd = " + proftpd + "\nvsftpd = " + vsftpd + "\nweb = " + web + "\napaweb = " + apaweb + "\nnginweb = " + nginweb + "\nhttps = " + https + "\nsmb = " + smb + "\nsql = " + sql + "\nrsnc = " + rsnc)
+
+        config = configparser.ConfigParser()
+        config.read('config.ini')
+        x = config.get('Services', 'ssh')
+        print(x)
 
         print('Configuration file has been loaded...')
 
