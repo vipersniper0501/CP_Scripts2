@@ -2,7 +2,7 @@ import os
 import sys
 import time
 from main import Ui_MainWindow
-from aboutcreator import *
+from aboutcreator import Ui_AboutCreator
 from firstconf import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -255,7 +255,7 @@ class fconfStart(QMainWindow, Ui_firstConf):
                 RESTART.setWindowTitle("Hey! Listen!")
                 RESTART.setText("Reopen the program to continue.")
                 RESTART.setIcon(QMessageBox.Information)
-                RESTART.setWindowIcon(QtGui.QIcon('HEY.png'))
+                RESTART.setWindowIcon(QtGui.QIcon('./pictures/HEY.png'))
                 RESTART.setStandardButtons(QMessageBox.Close)
                 RESTART.buttonClicked.connect(lambda: sys.exit(0))
                 x = RESTART.exec_()
@@ -264,7 +264,7 @@ class fconfStart(QMainWindow, Ui_firstConf):
                 HEY.setWindowTitle('Hey! Listen!')
                 HEY.setText("Hey! You have not finished filling in all of the choices!")
                 HEY.setIcon(QMessageBox.Critical)
-                HEY.setWindowIcon(QtGui.QIcon('HEY.png'))
+                HEY.setWindowIcon(QtGui.QIcon('./pictures/HEY.png'))
                 x = HEY.exec_()
 
         self.sshy.toggled.connect(sshYES)
@@ -295,6 +295,7 @@ class fconfStart(QMainWindow, Ui_firstConf):
         self.quit_buttonConf.clicked.connect(quitButton)
 
 
+
 class Mainstart(QMainWindow, Ui_MainWindow):
 
     def __init__(self):
@@ -302,57 +303,76 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         QMainWindow.__init__(self)
         self.setupUi(self)
-        self.setFixedSize(604, 427)
+        #self.setFixedSize(604, 427)
         self.setWindowIcon(QtGui.QIcon('cup2.png'))
         self.mmfuncassign()
 
-    #####################################
+
     def mmfuncassign(self):
         print('Assigning functions')
 
-
-
-
-
-
+        self.header_title.setWordWrap(True)
+        self.descriptions.setWordWrap(True)
         scripfunc = ScriptRunnerFunc()
 
-        # self.menubarButtons = [self.actionAbout_Creator]
-        # self.menubarActions = [self.aboutCre]
 
-        # buttons = {self.Updates_button:scripfunc.updateos}
-
-        # self.buttonNames = [self.Updates_button, self.servsetbutton, self.fwlbutton, self.malrembutton, self.rmvprosoftbutton, self.basicConfbutton, self.auditbutton, self.srchmedbutton]
-        # targets = [scripfunc.updateos, scripfunc.servSet, scripfunc.fwl, scripfunc.malRem, scripfunc.rmProCont, scripfunc.basConf, scripfunc.alyn, scripfunc.srchmedia]
-
-        # menubar
-        # for i in range(0, len(self.menubarButtons)):
-        #    self.menubarButtons[i].triggered.connect(self.menubarActions[i])
-
-        # for i in range(0, len(self.buttonNames)):
-        #    self.buttonNames[i].setCheckable(True)
-        #    self.buttonNames[i].clicked.connect(lambda i=i: threader(i))
-        #    self.buttonNames[i].pressed.connect(lambda i=i: buttonPress(i))
-        # self.quit_button.clicked.connect(self.quitButon)
 
         def quitButton():
             print('Closing program')
-            sys.exit()
+            sys.exit(0)
 
-        # Main Menu Buttons
-        self.quit_button.clicked.connect(quitButton)
-        self.Updates_button.clicked.connect(lambda: threader(scripfunc.updateos))
-        self.servsetbutton.clicked.connect(lambda: threader(scripfunc.servSet))
-        self.fwlbutton.clicked.connect(lambda: threader(scripfunc.fwl))
-        self.malrembutton.clicked.connect(lambda: threader(scripfunc.malRem))
-        self.rmvprosoftbutton.clicked.connect(lambda: threader(scripfunc.rmProCont))
-        self.basicConfbutton.clicked.connect(lambda: threader(scripfunc.basConf))
-        self.auditbutton.clicked.connect(lambda: threader(scripfunc.alyn))
-        self.srchmedbutton.clicked.connect(lambda: threader(scripfunc.srchmedia))
+        def display(i):
+            self.stackedWidget.setCurrentIndex(i)
+            if i == 0:
+                self.header_title.setText('Universal Commands')
+            elif i == 1:
+                self.header_title.setText('Windows 10 Commands')
+            elif i == 2:
+                self.header_title.setText('Linux Commands')
+            elif i == 3: self.header_title.setText('MacOS X Commands')
+
+            print('Changed stacked widget to index ' + str(i))
+
+        display(0)
+
+        #def showAbout(self):
+            #aboutcre = Ui_AboutCreator()
+            #aboutcre.show()
+            #aboutCre = QDialog()
+            #ui = Ui_AboutCreator()
+            #ui.setupUI(aboutCre)
+            #aboutCre.exec_()
+
+        def light_darkMODE(i):
+            print('Mode change')
+            if i == 0:
+                print('Dark Mode')
+            elif i == 1:
+                print('Light Mode')
 
 
-        #User/Group Menu Buttons
+        self.uniCom.clicked.connect(lambda: display(0))
+        self.winCom.clicked.connect(lambda: display(1))
+        self.linCom.clicked.connect(lambda: display(2))
+        self.macCom.clicked.connect(lambda: display(3))
+        #self.actionAbout_Creator.triggered.connect(showAbout)
+        self.actionLight_Mode.triggered.connect(lambda: light_darkMODE(1))
+        self.actionDark_Mode.triggered.connect(lambda: light_darkMODE(0))
         self.quit_button_3.clicked.connect(quitButton)
+
+        # Universal Buttons
+        self.Updates_buttonUNI.clicked.connect(lambda: threader(scripfunc.updateos))
+        self.rmvprosoftbuttonUNI.clicked.connect(lambda: threader(scripfunc.rmProCont))
+        self.srchmedbuttonUNI.clicked.connect(lambda: threader(scripfunc.srchmedia))
+
+        # Windows Commands
+
+        #self.fwlbuttonUNI.clicked.connect(lambda: threader(scripfunc.fwl))
+        #self.malrembutton.clicked.connect(lambda: threader(scripfunc.malRem))
+        #self.basicConfbutton.clicked.connect(lambda: threader(scripfunc.basConf))
+        #self.auditbutton.clicked.connect(lambda: threader(scripfunc.alyn))
+
+        #Universal User/Group Menu Buttons
 
         def threader(com):
             try:
@@ -363,53 +383,24 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                 print('Could not start thread')
 
 
-        # def buttonPress(button):
-        # print('button pressed')
-        # print(self.buttonNames[button])
-        #    if self.buttonNames[button].isChecked():
-        #        self.buttonNames[button].setStyleSheet("""
-
-
-# border: 2px solid;
-# border-color: grey;
-# border-style: inset;
-# border-width: 2.5px;
-# background-color: lightblue;
-# border-radius: 10px;
-# color: black;
-#                """)
-
-#            else:
-#               self.buttonNames[button].setStyleSheet("""
-# border: 2px solid;
-# border-color: grey;
-# border-style: outset;
-# border-width: 2.5px;
-# background-color: lightblue;
-# border-radius: 10px;
-# color: black;
-#                """)
-
-
-######################
-
-
-
-
-
-
 
 if __name__ == "__main__":
+    config_name = 'config.ini'
+    if getattr(sys, 'frozen', False):
+        application_Path = os.path.dirname(sys.executable)
+    elif __file__:
+        application_Path = os.path.dirname(__file__)
 
-    cwd = os.getcwd()
-    variableCheck = Path(cwd + '/config.ini')
-    print(variableCheck)
-    print(cwd)
-    variableCheck.is_file()
+    config_path = os.path.join(application_Path, config_name)
+
+    print(config_path)
+
+    variableCheck = Path(config_path)
+
     if variableCheck.is_file():
 
         config = configparser.ConfigParser()
-        config.read('config.ini')
+        config.read(variableCheck)
         x = config.get('Services', 'ssh')
         print(x)
 
@@ -425,5 +416,3 @@ if __name__ == "__main__":
         main = fconfStart()
         main.show()
         sys.exit(app.exec_())
-
-

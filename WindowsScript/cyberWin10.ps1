@@ -3,7 +3,7 @@
 
 
 #Option to use Sysinternals Suite
-#The program will come with the initial download of the CP_Scripts from GitHub
+#The programs will come with the initial download of the CP_Scripts from GitHub
 #
 
 

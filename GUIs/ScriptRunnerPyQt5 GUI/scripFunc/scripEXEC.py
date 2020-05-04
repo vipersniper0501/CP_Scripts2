@@ -27,6 +27,7 @@ class ScriptRunnerFunc:
     def test():
         print('Hello World')
 
+    #Universal Updates
     def updateos(self):
         if ops == 'Ubuntu' or ops == 'debian':
             command = 'sudo apt update && upgrade -y'
@@ -70,6 +71,7 @@ class ScriptRunnerFunc:
         else:
             print('This command does not currently support this OS')
 
+    #Universal Search Media
     def srchmedia(self):
         if platform == 'linux' or platform == 'darwin':
             extensions = ('.jpg', '.mp4', '.flv', '.avi', '.wmv', '.mov', '.png', '.tif', '.gif', '.mp3', '.wma', '.aif', '.jar')
@@ -96,6 +98,7 @@ class ScriptRunnerFunc:
                         print(filepath)
             print('Scan for unapproved media complete.')
 
+    #linux and windows firewall settings. Can only change Mac firewall through GUI
     def fwl(self):
         if platform == 'linux':
 
@@ -210,140 +213,183 @@ class ScriptRunnerFunc:
             print('--------------------Firewall Settings Have Finished-----------------------')
 
         elif platform == 'win32':
-             print('-----------------------Firewall Settings Has Started-----------------------')
-             ssh = config.get('Services', 'ssh')
-             if ssh == 'yes':
-                command = "netsh advfirewall firewall add rule name='ssh' dir=in action=allow protocol=TCP localport=22"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='ssh' dir=out action=allow protocol=TCP localport=22"
-                sub.Popen(["powershell","& {" + command + "}"])
-             elif ssh == 'no':
-                command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=22"
-                sub.call(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='ssh' dir=in action=block protocol=TCP localport=22"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='ssh' dir=out action=block protocol=TCP localport=22"
-                sub.Popen(["powershell","& {" + command + "}"])
+            print('-----------------------Firewall Settings Has Started-----------------------')
+            ssh = config.get('Services', 'ssh')
+            if ssh == 'yes':
+               command = "netsh advfirewall firewall add rule name='ssh' dir=in action=allow protocol=TCP localport=22"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='ssh' dir=out action=allow protocol=TCP localport=22"
+               sub.Popen(["powershell","& {" + command + "}"])
+            elif ssh == 'no':
+               command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=22"
+               sub.call(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='ssh' dir=in action=block protocol=TCP localport=22"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='ssh' dir=out action=block protocol=TCP localport=22"
+               sub.Popen(["powershell","& {" + command + "}"])
             #FTP
-             ftp = config.get('Services', 'ftp')
-             if ftp == 'yes':
-                command = "netsh advfirewall firewall add rule name='ftp' dir=in action=allow protocol=TCP localport=21"
+            ftp = config.get('Services', 'ftp')
+            if ftp == 'yes':
+               command = "netsh advfirewall firewall add rule name='ftp' dir=in action=allow protocol=TCP localport=21"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='ftp' dir=out action=allow protocol=TCP localport=21"
+               sub.Popen(["powershell","& {" + command + "}"])
+            elif ftp == 'no':
+               command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=21"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='ftp' dir=in action=block protocol=TCP localport=21"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='ftp' dir=in action=block protocol=TCP localport=21"
+               sub.Popen(["powershell","& {" + command + "}"])
+            #WEB
+            web = config.get('Services', 'web')
+            if web == 'yes':
+               command = "netsh advfirewall firewall add rule name='webserver' dir=in action=allow protocol=TCP localport=80"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='webserver' dir=out action=allow protocol=TCP localport=80"
+               sub.Popen(["powershell","& {" + command + "}"])
+            elif web == 'no':
+               command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=80"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='webserver' dir=in action=block protocol=TCP localport=80"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='webserver' dir=out action=block protocol=TCP localport=80"
+               sub.Popen(["powershell","& {" + command + "}"])
+            #HTTPS
+            https = config.get('Services', 'https')
+            if https == 'yes':
+               command = "netsh advfirewall firewall add rule name='https' dir=in action=allow protocol=TCP localport=443"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='https' dire=out action=allow protocol=TCP localport=443"
+               sub.Popen(["powershell","& {" + command + "}"])
+            elif https == 'no':
+               command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=443"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='https' dir=in action=block protocol=TCP localport=443"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='https' dire=out action=block protocol=TCP localport=443"
+               sub.Popen(["powershell","& {" + command + "}"])
+            #Samba
+            smb = config.get('Services', 'smb')
+            if smb == 'yes':
+               command = "netsh advfirewall firewall add rule name='SAMBA' dir=in action=allow protocol=TCP localport=139"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='SAMBA' dire=out action=allow protocol=TCP localport=139"
+               sub.Popen(["powershell","& {" + command + "}"])
+            elif smb == 'no':
+               command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=139"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='SAMBA' dir=in action=block protocol=TCP localport=139"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='SAMBA' dire=out action=block protocol=TCP localport=139"
+               sub.Popen(["powershell","& {" + command + "}"])
+            #SQL
+            sql = config.get('Services', 'sql')
+            if sql == 'yes':
+               command = "netsh advfirewall firewall add rule name='SQLserver' dir=in action=allow protocol=TCP localport=3306"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='SQLserver' dir=out action=allow protocol=TCP localport=3306"
+               sub.Popen(["powershell","& {" + command + "}"])
+            elif sql == 'no':
+               command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=3306"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='SQLserver' dir=in action=block protocol=TCP localport=3306"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='SQLserver' dir=out action=block protocol=TCP localport=3306"
+               sub.Popen(["powershell","& {" + command + "}"])
+            #Rsync
+            rsnc = config.get('Services', 'rsnc')
+            if rsnc == 'yes':
+               command = "netsh advfirewall firewall add rule name='RSYNC' dir=in action=allow protocol=TCP localport=873"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='RSYNC' dir=out action=allow protocol=TCP localport=873"
+               sub.Popen(["powershell","& {" + command + "}"])
+            elif rsnc == 'no':
+               command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=873"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='RSYNC' dir=in action=block protocol=TCP localport=873"
+               sub.Popen(["powershell","& {" + command + "}"])
+               command = "netsh advfirewall firewall add rule name='RSYNC' dir=out action=block protocol=TCP localport=873"
+               sub.Popen(["powershell","& {" + command + "}"])
+            #RDP
+            rdp = config.get('Services', 'rdp') #must block/allow port 5985 and 3389
+            if rdp == 'yes':
+                command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=allow protocol=TCP localport=5985"
                 sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='ftp' dir=out action=allow protocol=TCP localport=21"
+                command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=allow protocol=TCP localport=3389"
                 sub.Popen(["powershell","& {" + command + "}"])
-             elif ftp == 'no':
-                command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=21"
+                command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=allow protocol=TCP localport=5985"
                 sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='ftp' dir=in action=block protocol=TCP localport=21"
+                command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=allow protocol=TCP localport=3389"
                 sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='ftp' dir=in action=block protocol=TCP localport=21"
+            elif rdp == 'no':
+                command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=5985"
                 sub.Popen(["powershell","& {" + command + "}"])
-             #WEB
-             web = config.get('Services', 'web')
-             if web == 'yes':
-                command = "netsh advfirewall firewall add rule name='webserver' dir=in action=allow protocol=TCP localport=80"
+                command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=3389"
                 sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='webserver' dir=out action=allow protocol=TCP localport=80"
+                command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=block protocol=TCP localport=5985"
                 sub.Popen(["powershell","& {" + command + "}"])
-             elif web == 'no':
-                command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=80"
+                command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=block protocol=TCP localport=3389"
                 sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='webserver' dir=in action=block protocol=TCP localport=80"
+                command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=block protocol=TCP localport=5985"
                 sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='webserver' dir=out action=block protocol=TCP localport=80"
+                command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=block protocol=TCP localport=3389"
                 sub.Popen(["powershell","& {" + command + "}"])
-             #HTTPS
-             https = config.get('Services', 'https')
-             if https == 'yes':
-                command = "netsh advfirewall firewall add rule name='https' dir=in action=allow protocol=TCP localport=443"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='https' dire=out action=allow protocol=TCP localport=443"
-                sub.Popen(["powershell","& {" + command + "}"])
-             elif https == 'no':
-                command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=443"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='https' dir=in action=block protocol=TCP localport=443"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='https' dire=out action=block protocol=TCP localport=443"
-                sub.Popen(["powershell","& {" + command + "}"])
-             #Samba
-             smb = config.get('Services', 'smb')
-             if smb == 'yes':
-                command = "netsh advfirewall firewall add rule name='SAMBA' dir=in action=allow protocol=TCP localport=139"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='SAMBA' dire=out action=allow protocol=TCP localport=139"
-                sub.Popen(["powershell","& {" + command + "}"])
-             elif smb == 'no':
-                command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=139"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='SAMBA' dir=in action=block protocol=TCP localport=139"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='SAMBA' dire=out action=block protocol=TCP localport=139"
-                sub.Popen(["powershell","& {" + command + "}"])
-             #SQL
-             sql = config.get('Services', 'sql')
-             if sql == 'yes':
-                command = "netsh advfirewall firewall add rule name='SQLserver' dir=in action=allow protocol=TCP localport=3306"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='SQLserver' dir=out action=allow protocol=TCP localport=3306"
-                sub.Popen(["powershell","& {" + command + "}"])
-             elif sql == 'no':
-                command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=3306"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='SQLserver' dir=in action=block protocol=TCP localport=3306"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='SQLserver' dir=out action=block protocol=TCP localport=3306"
-                sub.Popen(["powershell","& {" + command + "}"])
-             #Rsync
-             rsnc = config.get('Services', 'rsnc')
-             if rsnc == 'yes':
-                command = "netsh advfirewall firewall add rule name='RSYNC' dir=in action=allow protocol=TCP localport=873"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='RSYNC' dir=out action=allow protocol=TCP localport=873"
-                sub.Popen(["powershell","& {" + command + "}"])
-             elif rsnc == 'no':
-                command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=873"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='RSYNC' dir=in action=block protocol=TCP localport=873"
-                sub.Popen(["powershell","& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='RSYNC' dir=out action=block protocol=TCP localport=873"
-                sub.Popen(["powershell","& {" + command + "}"])
-             #RDP
-             rdp = config.get('Services', 'rdp') #must block/allow port 5985 and 3389
-             if rdp == 'yes':
-                 command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=allow protocol=TCP localport=5985"
-                 sub.Popen(["powershell","& {" + command + "}"])
-                 command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=allow protocol=TCP localport=3389"
-                 sub.Popen(["powershell","& {" + command + "}"])
-                 command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=allow protocol=TCP localport=5985"
-                 sub.Popen(["powershell","& {" + command + "}"])
-                 command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=allow protocol=TCP localport=3389"
-                 sub.Popen(["powershell","& {" + command + "}"])
-             elif rdp == 'no':
-                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=5985"
-                 sub.Popen(["powershell","& {" + command + "}"])
-                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=3389"
-                 sub.Popen(["powershell","& {" + command + "}"])
-                 command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=block protocol=TCP localport=5985"
-                 sub.Popen(["powershell","& {" + command + "}"])
-                 command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=block protocol=TCP localport=3389"
-                 sub.Popen(["powershell","& {" + command + "}"])
-                 command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=block protocol=TCP localport=5985"
-                 sub.Popen(["powershell","& {" + command + "}"])
-                 command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=block protocol=TCP localport=3389"
-                 sub.Popen(["powershell","& {" + command + "}"])
+
+
+            print('------------------The Following Ports Have Been Closed Automatically-----------------')
+            print('Port 19 has been closed to stop potential DoS attack')
+            command = "netsh advfirewall firewall add rule name='port19BLOCK' dir=in action=block protocol=TCP localport=19"
+            sub.Popen(["powershell","& {" + command + "}"])
+            command = "netsh advfirewall firewall add rule name='port19BLOCK' dir=out action=block protocol=TCP localport=19"
+            sub.Popen(["powershell","& {" + command + "}"])
+
+            print('Port 123 has been closed to stop potential trojans (NetController)')
+            command = "netsh advfirewall firewall add rule name='port123BLOCK' dir=in action=block protocol=TCP localport=123"
+            sub.Popen(["powershell","& {" + command + "}"])
+            command = "netsh advfirewall firewall add rule name='port123BLOCK' dir=out action=block protocol=TCP localport=123"
+            sub.Popen(["powershell","& {" + command + "}"])
+
+            print('Port 161 has been closed to stop SNMP functionality')
+            command = "netsh advfirewall firewall add rule name='port161BLOCK' dir=in action=block protocol=TCP localport=161"
+            sub.Popen(["powershell","& {" + command + "}"])
+            command = "netsh advfirewall firewall add rule name='port161BLOCK' dir=out action=block protocol=TCP localport=161"
+            sub.Popen(["powershell","& {" + command + "}"])
+
+            print('Port 162 has been closed to stop SNMPtrap functionality')
+            command = "netsh advfirewall firewall add rule name='port162BLOCK' dir=in action=block protocol=TCP localport=162"
+            sub.Popen(["powershell","& {" + command + "}"])
+            command = "netsh advfirewall firewall add rule name='port162BLOCK' dir=out action=block protocol=TCP localport=162"
+            sub.Popen(["powershell","& {" + command + "}"])
+
+            print('Port 1434 has been blocked to stop potential DoS attack')
+            command = "netsh advfirewall firewall add rule name='port1434BLOCK' dir=in action=block protocol=TCP localport=1434"
+            sub.Popen(["powershell","& {" + command + "}"])
+            command = "netsh advfirewall firewall add rule name='port1434BLOCK' dir=out action=block protocol=TCP localport=1434"
+            sub.Popen(["powershell","& {" + command + "}"])
+
+            print('Port 23 has been denied due to Telnet functionality is not necessary')
+            command = "netsh advfirewall firewall add rule name='port23BLOCK' dir=in action=block protocol=TCP localport=23"
+            sub.Popen(["powershell","& {" + command + "}"])
+            command = "netsh advfirewall firewall add rule name='port23BLOCK' dir=out action=block protocol=TCP localport=23"
+            sub.Popen(["powershell","& {" + command + "}"])
+
+            print('--------------------Firewall Settings Have Finished-----------------------')
 
         elif platform == 'darwin':
              print('This command is currently in developement')
         else:
             print('This command is currently in developement')
 
+    #seperate command for each menu (Not Universal)
     def servSet(self):
         print('This command is currently in developement')
 
+    #Only works with linux. Other OS's must use a third party Ex: Malwarebytes
     def malRem(self):
         print('This command is currently in developement')
 
+    #Only works on Linux (Maybe Mac. Need to test)
     def alyn(self):
         if ops == 'Ubuntu' or ops == 'debian':
             command = 'sudo apt install lynis -y'
@@ -360,8 +406,10 @@ class ScriptRunnerFunc:
         elif platform == 'win32':
             print('This function (alyn) does not currently support this OS.')
 
+    #will only work on Linux based systems.
     def basConf(self):
         print('This command is currently in developement')
 
+    #Needs tobe developed further to know.
     def rmProCont(self):
         print('This command is currently in developement')

@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="Pictures">
+    <file>pictures/linuxICON(1).png</file>
+    <file>pictures/MacOSx.png</file>
+    <file>pictures/Universal-partner-icon(1).png</file>
+    <file>pictures/windows-8-png-icon-7(1).png</file>
+  </qresource>
+</RCC>
