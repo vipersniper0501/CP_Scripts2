@@ -2,7 +2,6 @@ import os
 import sys
 import time
 from main import Ui_MainWindow
-from aboutcreator import Ui_AboutCreator
 from firstconf import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -296,6 +295,7 @@ class fconfStart(QMainWindow, Ui_firstConf):
 
 
 
+
 class Mainstart(QMainWindow, Ui_MainWindow):
 
     def __init__(self):
@@ -306,6 +306,24 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         #self.setFixedSize(604, 427)
         self.setWindowIcon(QtGui.QIcon('cup2.png'))
         self.mmfuncassign()
+
+
+    def showAbout(self):
+        ABOUT = QMessageBox()
+        ABOUT.setWindowTitle('Hey! About Creators')
+        ABOUT.setText("""
++--------------------------+
+|     A P P L E    C I D R       |
++--------------------------+
+
+This program/Application/Script was made by and for the Apple CIDR Cyber Patriot team
+
+Creator: Michael Brenner
+Color Design: Charlotte Roscoe
+        """)
+        ABOUT.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
+        ABOUT.setStyleSheet('background-color: #414E6E; color: #CCD2E6')
+        x = ABOUT.exec_()
 
 
     def mmfuncassign(self):
@@ -329,33 +347,26 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                 self.header_title.setText('Windows 10 Commands')
             elif i == 2:
                 self.header_title.setText('Linux Commands')
-            elif i == 3: self.header_title.setText('MacOS X Commands')
-
-            print('Changed stacked widget to index ' + str(i))
-
+            elif i == 3:
+                self.header_title.setText('MacOS X Commands')
+            #print('Changed stacked widget to index ' + str(i))
         display(0)
 
-        #def showAbout(self):
-            #aboutcre = Ui_AboutCreator()
-            #aboutcre.show()
-            #aboutCre = QDialog()
-            #ui = Ui_AboutCreator()
-            #ui.setupUI(aboutCre)
-            #aboutCre.exec_()
+        
 
         def light_darkMODE(i):
             print('Mode change')
             if i == 0:
-                print('Dark Mode')
+                print('Dark Mode in developement')
             elif i == 1:
-                print('Light Mode')
+                print('Light Mode in developement')
 
 
         self.uniCom.clicked.connect(lambda: display(0))
         self.winCom.clicked.connect(lambda: display(1))
         self.linCom.clicked.connect(lambda: display(2))
         self.macCom.clicked.connect(lambda: display(3))
-        #self.actionAbout_Creator.triggered.connect(showAbout)
+        self.actionAbout_Creator.triggered.connect(lambda: threader(self.showAbout()))
         self.actionLight_Mode.triggered.connect(lambda: light_darkMODE(1))
         self.actionDark_Mode.triggered.connect(lambda: light_darkMODE(0))
         self.quit_button_3.clicked.connect(quitButton)
