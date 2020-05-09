@@ -1,10 +1,10 @@
 import os
 import sys
 import time
-from main import Ui_MainWindow
-from firstconf import *
-from comdescript import Ui_comDescript
-from progabout import Ui_About
+from PyUIs.main import Ui_MainWindow
+from PyUIs.firstconf import *
+from PyUIs.comdescript import Ui_comDescript
+from PyUIs.progabout import Ui_About
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -24,7 +24,6 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, relative_path)
-
 
 
 # Button logic (calls functions in module and connects to other parts of GUI. Does not actually do anything to system)
@@ -240,7 +239,8 @@ class fconfStart(QDialog, Ui_firstConf):
         def confirmBTTN():
             if self.ssh != '' and self.ftp != '' and self.proftpd != '' and self.vsftpd != '' and self.web != '' and self.apaweb != '' and self.nginweb != '' and self.https != '' and self.smb != '' and self.sql != '' and self.rsnc != '' and self.rdp != '':
                 print('saving configurations\n')
-                print("ssh=" + self.ssh + ", ftp=" + self.ftp + ", proftpd=" + self.proftpd + ", vsftpd=" + self.vsftpd + ", web=" + self.web + ", apaweb=" + self.apaweb + ", nginweb=" + self.nginweb + ", https=" + self.https + ", smb=" + self.smb + ", sql=" + self.sql + ", rsnc=" + self.rsnc + ", RDP=" + self.rdp)
+                print(
+                    "ssh=" + self.ssh + ", ftp=" + self.ftp + ", proftpd=" + self.proftpd + ", vsftpd=" + self.vsftpd + ", web=" + self.web + ", apaweb=" + self.apaweb + ", nginweb=" + self.nginweb + ", https=" + self.https + ", smb=" + self.smb + ", sql=" + self.sql + ", rsnc=" + self.rsnc + ", RDP=" + self.rdp)
 
                 filename = "config.ini"
 
@@ -304,8 +304,6 @@ class fconfStart(QDialog, Ui_firstConf):
         self.quit_buttonConf.clicked.connect(quitButton)
 
 
-
-
 class Mainstart(QMainWindow, Ui_MainWindow):
 
     def __init__(self, parent=None):
@@ -340,8 +338,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         ###################
 
-        
-
     def mmfuncassign(self):
         print('Assigning functions')
 
@@ -356,19 +352,22 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         def display(i):
             if i == 0:
                 self.header_title.setText('Universal Commands')
-                self.descriptions.setText('Description: These commands will work on most Operating Systems\nE.g. Windows, MacOS X, and Linux (Debian, Ubuntu, certain Arch distros)')
+                self.descriptions.setText(
+                    'Description: These commands will work on most Operating Systems\nE.g. Windows, MacOS X, and Linux (Debian, Ubuntu, certain Arch distros)')
                 self.stackedWidget.setCurrentIndex(i)
             elif i == 1:
                 if platform == 'win32':
                     self.header_title.setText('Windows 10 Commands')
-                    self.descriptions.setText('Description: These commands will work on the following Windows systems: 10, 8.x, and 7')
+                    self.descriptions.setText(
+                        'Description: These commands will work on the following Windows systems: 10, 8.x, and 7')
                     self.stackedWidget.setCurrentIndex(i)
                 else:
                     wrongos()
             elif i == 2:
                 if platform == 'linux' or platform == 'Linux':
                     self.header_title.setText('Linux Commands')
-                    self.descriptions.setText('Description: These commands will work on the following Linux systems: Debian based systems, Ubuntu, and Manjaro')
+                    self.descriptions.setText(
+                        'Description: These commands will work on the following Linux systems: Debian based systems, Ubuntu, and Manjaro')
                     self.stackedWidget.setCurrentIndex(i)
                 else:
                     wrongos()
@@ -379,14 +378,15 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                     self.stackedWidget.setCurrentIndex(i)
                 else:
                     wrongos()
+
         display(0)
 
         def light_darkMODE(i):
             print('Mode change')
             if i == 0:
-                print('Dark Mode in developement')
+                print('Dark Mode in development')
             elif i == 1:
-                print('Light Mode in developement')
+                print('Light Mode in development')
 
         def showHOWTO():
             HOWTO = QMessageBox()
@@ -403,7 +403,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 """)
             HOWTO.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
             HOWTO.setStyleSheet('background-color: #414E6E; color: #CCD2E6')
-            x = HOWTO.exec_() #change to QDialog
+            x = HOWTO.exec_()  # change to QDialog
 
         def runCOMDESCRIPT():
             class showComDescript(QDialog, Ui_comDescript):
@@ -412,9 +412,11 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                     self.setupUi(self)
                     self.setFixedSize(531, 360)
                     self.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
+
             def callCOMdescript():
                 widget = showComDescript()
                 widget.exec_()
+
             callCOMdescript()
 
         def runABOUTPROG():
@@ -424,17 +426,17 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                     self.setupUi(self)
                     self.setFixedSize(330, 182)
                     self.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
+
             def callaboutprog():
                 widget = showAboutProg()
                 widget.exec_()
+
             callaboutprog()
-
-
 
         def indev():
             INDEV = QMessageBox()
             INDEV.setWindowTitle('Hey! Listen!')
-            INDEV.setText('Hey! This command is not yet complete and in developement!')
+            INDEV.setText('Hey! This command is not yet complete and in development!')
             INDEV.setIcon(QMessageBox.Critical)
             INDEV.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
             x = INDEV.exec_()
@@ -447,7 +449,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             WRONGOS.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
             x = WRONGOS.exec_()
 
-
         def chngconf():
             widget = fconfStart()
             widget.exec_()
@@ -459,7 +460,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         self.actionLight_Mode.triggered.connect(lambda: light_darkMODE(1))
         self.actionDark_Mode.triggered.connect(lambda: light_darkMODE(0))
 
-        #Menubar Buttons
+        # Menubar Buttons
         self.actionHow_To_Use_Program.triggered.connect(lambda: threader(showHOWTO()))
         self.actionAbout_Creator.triggered.connect(lambda: threader(runABOUTPROG()))
         self.actionCommand_Descriptions.triggered.connect(lambda: threader(runCOMDESCRIPT()))
@@ -467,35 +468,42 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         # Universal Buttons
         self.Updates_buttonUNI.clicked.connect(lambda: threader(scripfunc.updateos))
-        self.rmvprosoftbuttonUNI.clicked.connect(lambda: threader(indev())) #
+        self.rmvprosoftbuttonUNI.clicked.connect(lambda: threader(indev()))  #
         self.srchmedbuttonUNI.clicked.connect(lambda: threader(scripfunc.srchmedia))
         self.chkhashfile_buttonUNI.clicked.connect(lambda: threader(scripfunc.HASHFILE))
 
         # Windows Main Menu Commands
 
         self.fwlbutton_2.clicked.connect(lambda: threader(scripfunc.fwl))
-        self.basicConfbutton_2.clicked.connect(lambda: threader(indev())) #
-        self.rmvprosoftbutton_2.clicked.connect(lambda: threader(indev())) #
-        self.servicesConfButton.clicked.connect(lambda: threader(indev())) #
-        #Windows User Group Commands
-        self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3, self.chngusrpas_3, self.lsgruusrin_3, self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3, self.rmvgrufrosys_3, self.rmvusrfrogru_3, self.rmvusrfrosys_3]
+        self.basicConfbutton_2.clicked.connect(lambda: threader(indev()))  #
+        self.rmvprosoftbutton_2.clicked.connect(lambda: threader(indev()))  #
+        self.servicesConfButton.clicked.connect(lambda: threader(indev()))  #
+        # Windows User Group Commands
+        self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3, self.chngusrpas_3,
+                                self.lsgruusrin_3, self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
+                                self.rmvgrufrosys_3, self.rmvusrfrogru_3, self.rmvusrfrosys_3]
         for i in range(0, 11):
-            self.WINUSRGRUBUTTON[i].clicked.connect(lambda: threader(indev())) #
+            self.WINUSRGRUBUTTON[i].clicked.connect(lambda: threader(indev()))  #
 
-        #Linux Main Menu Commands
+        # Linux Main Menu Commands
         self.fwlbutton_3.clicked.connect(lambda: threader(scripfunc.fwl))
         self.auditbutton_3.clicked.connect(lambda: threader(scripfunc.alyn))
-        self.malrembutton_3.clicked.connect(lambda: threader(scripfunc.malrem())) #
-        self.rmvprosoftbutton_3.clicked.connect(lambda: threader(indev())) #
-        self.basicConfbutton_3.clicked.connect(lambda: threader(indev())) #
-        self.servicesConfButton_2.clicked.connect(lambda: threader(indev())) #
-        #Linux User Group Commands
-        self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4, self.adusrtosys_4, self.chngusrpas_4, self.lsgruusrin_4, self.lslocagru_4, self.lslocausr_4, self.lsmemgru_4, self.rmvgrufrosys_4, self.rmvusrfrogru_4, self.rmvusrfrosys_4]
+        self.malrembutton_3.clicked.connect(lambda: threader(scripfunc.malrem()))  #
+        self.rmvprosoftbutton_3.clicked.connect(lambda: threader(indev()))  #
+        self.basicConfbutton_3.clicked.connect(lambda: threader(indev()))  #
+        self.servicesConfButton_2.clicked.connect(lambda: threader(indev()))  #
+        # Linux User Group Commands
+        self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4, self.adusrtosys_4, self.chngusrpas_4,
+                                   self.lsgruusrin_4, self.lslocagru_4, self.lslocausr_4, self.lsmemgru_4,
+                                   self.rmvgrufrosys_4, self.rmvusrfrogru_4, self.rmvusrfrosys_4]
         for i in range(0, 11):
-            self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: threader(indev())) #
+            self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: threader(indev()))  #
 
-        #MacOS Buttons
-        self.MACBUTTONS = [self.rmvprosoftbutton_4, self.malrembutton_4, self.basicConfbutton_4, self.servicesConfButton_3, self.adgrutosys_5, self.adusrtogru_5, self.adusrtosys_5, self.chngusrpas_5, self.lsgruusrin_5, self.lslocagru_5, self.lslocausr_5, self.lsmemgru_5, self.rmvgrufrosys_5, self.rmvusrfrogru_5, self.rmvusrfrosys_5]
+        # MacOS Buttons
+        self.MACBUTTONS = [self.rmvprosoftbutton_4, self.malrembutton_4, self.basicConfbutton_4,
+                           self.servicesConfButton_3, self.adgrutosys_5, self.adusrtogru_5, self.adusrtosys_5,
+                           self.chngusrpas_5, self.lsgruusrin_5, self.lslocagru_5, self.lslocausr_5, self.lsmemgru_5,
+                           self.rmvgrufrosys_5, self.rmvusrfrogru_5, self.rmvusrfrosys_5]
         for i in range(0, 15):
             self.MACBUTTONS[i].clicked.connect(lambda: threader(indev()))
 
