@@ -16,7 +16,7 @@ FYI- This will be mostly used for a backup location for my scripts and will not 
 - Linux Scripts
   - Admin access
 
-# How to compile GUI
+### How to compile GUI
 Make sure you have the correct version of Pyinstaller:
 	pip install https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz
 
@@ -48,7 +48,7 @@ https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-3cfi
 
 
 
-# Usage Instructions For CLI Powershell Scripts:
+### Usage Instructions For CLI Powershell Scripts:
 
 1.)Run Powershell as Admin
 
@@ -66,7 +66,7 @@ That is it! Good Luck!
 
 Some of the commands might require for you to execute them twice if they did not show a list when they should have. I am currently working on fixing this problem.
 
-# Usage Instructions For Linux CLI Scripts
+### Usage Instructions For Linux CLI Scripts
 
 1.) Navigate to directory where script is located in terminal
 

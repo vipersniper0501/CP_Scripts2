@@ -97,7 +97,7 @@ class ScriptRunnerFunc:
                         f.close()
                         print(filepath)
             print('Scan for unapproved media complete.')
-
+            
     #linux and windows firewall settings. Can only change Mac firewall through GUI
     def fwl(self):
         if platform == 'linux':
@@ -381,35 +381,65 @@ class ScriptRunnerFunc:
         else:
             print('This command is currently in developement')
 
-    #seperate command for each menu (Not Universal)
+    
     def servSet(self):
         print('This command is currently in developement')
 
     #Only works with linux. Other OS's must use a third party Ex: Malwarebytes
     def malRem(self):
-        print('This command is currently in developement')
+        if platform == 'linux':
+            if ops == 'Manjaro Linux':
+                command = 'sudo pacman -S clamav -y'
+                sub.Popen(command.split())
+            else:
+                command = 'sudo apt install clamav -y'
+                sub.Popen(command.split())
+            command = ['sudo freshclam', 'sudo touch CLAMresults.txt', 'sudo clamscan -r --remove / | tee CLAMresults.txt']
+            for i in range(0, 3):
+                sub.Popen(command[i].split())
+        else:
+            print('This command is currently in developement')
 
     #Only works on Linux (Maybe Mac. Need to test)
     def alyn(self):
         if ops == 'Ubuntu' or ops == 'debian':
             command = 'sudo apt install lynis -y'
             sub.Popen(command.split())
-            command2 = 'sudo lynis audit system'
+            command = 'sudo touch auditRESULTS.txt'
+            sub.Popen(command.split())
+            command2 = 'sudo lynis audit system | tee auditRESULTS.txt'
             sub.Popen(command2.split())
         elif ops == 'darwin':
             print('This function does not currently support this OS')
         elif ops == 'Manjaro Linux':
             command = 'sudo pacman -S lynis --noconfirm'
             sub.Popen(command.split())
-            command2 = 'sudo lynis audit system'
+            command = 'sudo touch auditRESULTS.txt'
+            sub.Popen(command.split())
+            command2 = 'sudo lynis audit system | tee auditRESULTS.txt'
             sub.Popen(command2.split())
         elif platform == 'win32':
-            print('This function (alyn) does not currently support this OS.')
+            print('This function does not currently support this OS.')
 
     #will only work on Linux based systems.
     def basConf(self):
         print('This command is currently in developement')
 
-    #Needs tobe developed further to know.
-    def rmProCont(self):
+    '''
+    Removal of Prohibited Software.
+    Before running through list of software to remove, you must ask user if there are any required applications.
+    Give a list that pops up and have them check of programs from the list that they want to keep. 
+    '''
+    def rmProSoft(self):
         print('This command is currently in developement')
+
+    def hashCheck(self, hash, path):
+        linhashtypes = ['MD5', 'sha1sum', 'sha256sum', 'sha384sum', 'sha512sum']
+        winhashtypes = ['SHA1', 'SHA256', 'SHA384', 'SHA512', 'MD5']
+
+        if platform == 'linux' or platform == 'darwin':
+            command = 'sudo ' + linhashtypes[hash] + ' ' + path
+            sub.Popen(command.split())
+        elif platform == 'win32':
+            command = 'Get-Filehash ' + path + '-Algorithm ' + winhashtypes[hash] + ' | Format-List'
+            sub.Popen(["powershell","& {" + command + "}"])

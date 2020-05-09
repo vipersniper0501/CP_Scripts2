@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+
 from tkinter import *
 from tkinter.ttk import *
 import tkinter as tk #used to force certain widget type

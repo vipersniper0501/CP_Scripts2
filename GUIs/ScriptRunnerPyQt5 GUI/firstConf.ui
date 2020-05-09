@@ -14,7 +14,8 @@
    <string>First Time Configuration</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.102273 rgba(0, 105, 173, 255), stop:0.926136 rgba(0, 173, 155, 255))</string>
+   <string notr="true">background-color: #212434
+</string>
   </property>
   <widget class="QPushButton" name="quit_buttonConf">
    <property name="geometry">
@@ -31,10 +32,10 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: black;</string>
+    <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
    </property>
    <property name="text">
-    <string>Quit</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="confirmbtn">
@@ -52,7 +53,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: black;</string>
+    <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
    </property>
    <property name="text">
     <string>Confirm</string>
@@ -72,15 +73,12 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>24</pointsize>
+     <pointsize>18</pointsize>
      <italic>false</italic>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px;color: black;</string>
+    <string notr="true">color: #CCD2E6; backgorund-color:</string>
    </property>
    <property name="text">
     <string>First Time Configurations</string>
@@ -91,20 +89,17 @@ border-radius: 10px;color: black;</string>
     <rect>
      <x>20</x>
      <y>70</y>
-     <width>351</width>
+     <width>361</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>15</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+    <string notr="true">color: #CCD2E6; backgorund-color:</string>
    </property>
    <property name="text">
     <string>Does the system require the following services?</string>
@@ -149,14 +144,11 @@ color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>Yes</string>
@@ -173,17 +165,17 @@ border-radius: 10px; color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>No</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="ssh">
@@ -197,17 +189,14 @@ border-radius: 10px; color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>10</pointsize>
      </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>SSH</string>
@@ -268,17 +257,17 @@ color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>No</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="vsftpdy">
@@ -292,14 +281,11 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>Yes</string>
@@ -316,17 +302,14 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>Vsftpd</string>
@@ -365,17 +348,17 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>No</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="proftpdy">
@@ -389,14 +372,11 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>Yes</string>
@@ -413,17 +393,14 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>Proftpd</string>
@@ -462,17 +439,17 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>No</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="ftpy">
@@ -486,16 +463,13 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
        <weight>50</weight>
        <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>Yes</string>
@@ -512,17 +486,14 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>FTP</string>
@@ -584,14 +555,11 @@ color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>Yes</string>
@@ -608,17 +576,14 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>Webserver Functionality</string>
@@ -638,17 +603,17 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>No</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -681,17 +646,14 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>Apache2</string>
@@ -711,14 +673,11 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>Yes</string>
@@ -735,17 +694,17 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>No</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -778,14 +737,11 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>Yes</string>
@@ -802,17 +758,17 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>No</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QLabel" name="nginx">
@@ -826,17 +782,14 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>Nginx</string>
@@ -875,17 +828,14 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>HTTPS</string>
@@ -905,17 +855,17 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>No</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="httpsy">
@@ -929,14 +879,11 @@ border-radius: 10px; color: black;</string>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+      <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
       <string>Yes</string>
@@ -977,17 +924,14 @@ color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>10</pointsize>
      </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>SMB</string>
@@ -1007,17 +951,17 @@ border-radius: 10px; color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>No</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QRadioButton" name="smby">
@@ -1031,14 +975,11 @@ border-radius: 10px; color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>Yes</string>
@@ -1078,17 +1019,17 @@ color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>No</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QRadioButton" name="sqly">
@@ -1102,14 +1043,11 @@ border-radius: 10px; color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>Yes</string>
@@ -1126,17 +1064,14 @@ border-radius: 10px; color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>10</pointsize>
      </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>SQL</string>
@@ -1179,17 +1114,14 @@ color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>10</pointsize>
      </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>Rsync</string>
@@ -1209,17 +1141,17 @@ border-radius: 10px; color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>No</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QRadioButton" name="rsyncy">
@@ -1233,14 +1165,11 @@ border-radius: 10px; color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>Yes</string>
@@ -1280,17 +1209,14 @@ color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>Remote Desktop</string>
@@ -1310,17 +1236,17 @@ border-radius: 10px; color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>No</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QRadioButton" name="rdpy">
@@ -1334,14 +1260,11 @@ border-radius: 10px; color: black;</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid;
-border-width: 1px;
-background-color: lightblue;
-border-radius: 10px; color: black;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
     </property>
     <property name="text">
      <string>Yes</string>

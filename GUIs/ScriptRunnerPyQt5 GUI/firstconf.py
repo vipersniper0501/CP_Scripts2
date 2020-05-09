@@ -14,42 +14,38 @@ class Ui_firstConf(object):
     def setupUi(self, firstConf):
         firstConf.setObjectName("firstConf")
         firstConf.resize(723, 448)
-        firstConf.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.102273 rgba(0, 105, 173, 255), stop:0.926136 rgba(0, 173, 155, 255))")
+        firstConf.setStyleSheet("background-color: #212434\n"
+"")
         self.quit_buttonConf = QtWidgets.QPushButton(firstConf)
         self.quit_buttonConf.setGeometry(QtCore.QRect(610, 390, 91, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.quit_buttonConf.setFont(font)
-        self.quit_buttonConf.setStyleSheet("color: black;")
+        self.quit_buttonConf.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.quit_buttonConf.setText("")
         self.quit_buttonConf.setObjectName("quit_buttonConf")
         self.confirmbtn = QtWidgets.QPushButton(firstConf)
         self.confirmbtn.setGeometry(QtCore.QRect(510, 390, 91, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.confirmbtn.setFont(font)
-        self.confirmbtn.setStyleSheet("color: black;")
+        self.confirmbtn.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.confirmbtn.setDefault(True)
         self.confirmbtn.setObjectName("confirmbtn")
         self.fconflbl = QtWidgets.QLabel(firstConf)
         self.fconflbl.setGeometry(QtCore.QRect(20, 20, 281, 41))
         font = QtGui.QFont()
-        font.setPointSize(24)
+        font.setPointSize(18)
         font.setItalic(False)
         self.fconflbl.setFont(font)
-        self.fconflbl.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px;color: black;")
+        self.fconflbl.setStyleSheet("color: #CCD2E6; backgorund-color:")
         self.fconflbl.setObjectName("fconflbl")
         self.fconfqalbl = QtWidgets.QLabel(firstConf)
-        self.fconfqalbl.setGeometry(QtCore.QRect(20, 70, 351, 31))
+        self.fconfqalbl.setGeometry(QtCore.QRect(20, 70, 361, 31))
         font = QtGui.QFont()
-        font.setPointSize(15)
+        font.setPointSize(12)
         self.fconfqalbl.setFont(font)
-        self.fconfqalbl.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.fconfqalbl.setStyleSheet("color: #CCD2E6; backgorund-color:")
         self.fconfqalbl.setAlignment(QtCore.Qt.AlignCenter)
         self.fconfqalbl.setObjectName("fconfqalbl")
         self.frame = QtWidgets.QFrame(firstConf)
@@ -66,33 +62,25 @@ class Ui_firstConf(object):
         self.sshy = QtWidgets.QRadioButton(self.frame)
         self.sshy.setGeometry(QtCore.QRect(90, 10, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.sshy.setFont(font)
-        self.sshy.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.sshy.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
         self.sshy.setObjectName("sshy")
         self.sshn = QtWidgets.QRadioButton(self.frame)
         self.sshn.setGeometry(QtCore.QRect(140, 10, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.sshn.setFont(font)
-        self.sshn.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.sshn.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
+        self.sshn.setChecked(True)
         self.sshn.setObjectName("sshn")
         self.ssh = QtWidgets.QLabel(self.frame)
         self.ssh.setGeometry(QtCore.QRect(10, 10, 41, 21))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(10)
         self.ssh.setFont(font)
         self.ssh.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.ssh.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.ssh.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
         self.ssh.setAlignment(QtCore.Qt.AlignCenter)
         self.ssh.setObjectName("ssh")
         self.ftpfrm = QtWidgets.QFrame(firstConf)
@@ -114,33 +102,25 @@ class Ui_firstConf(object):
         self.vsftpdn = QtWidgets.QRadioButton(self.vsftpdynfrm)
         self.vsftpdn.setGeometry(QtCore.QRect(130, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.vsftpdn.setFont(font)
-        self.vsftpdn.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.vsftpdn.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.vsftpdn.setChecked(True)
         self.vsftpdn.setObjectName("vsftpdn")
         self.vsftpdy = QtWidgets.QRadioButton(self.vsftpdynfrm)
         self.vsftpdy.setGeometry(QtCore.QRect(80, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.vsftpdy.setFont(font)
-        self.vsftpdy.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.vsftpdy.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.vsftpdy.setObjectName("vsftpdy")
         self.vsfptd = QtWidgets.QLabel(self.vsftpdynfrm)
         self.vsfptd.setGeometry(QtCore.QRect(0, 0, 51, 21))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.vsfptd.setFont(font)
         self.vsfptd.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.vsfptd.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.vsfptd.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.vsfptd.setAlignment(QtCore.Qt.AlignCenter)
         self.vsfptd.setObjectName("vsfptd")
         self.proftpdynfrm = QtWidgets.QFrame(self.ftpfrm)
@@ -152,33 +132,25 @@ class Ui_firstConf(object):
         self.proftpdn = QtWidgets.QRadioButton(self.proftpdynfrm)
         self.proftpdn.setGeometry(QtCore.QRect(130, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.proftpdn.setFont(font)
-        self.proftpdn.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.proftpdn.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.proftpdn.setChecked(True)
         self.proftpdn.setObjectName("proftpdn")
         self.proftpdy = QtWidgets.QRadioButton(self.proftpdynfrm)
         self.proftpdy.setGeometry(QtCore.QRect(80, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.proftpdy.setFont(font)
-        self.proftpdy.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.proftpdy.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.proftpdy.setObjectName("proftpdy")
         self.proftpd = QtWidgets.QLabel(self.proftpdynfrm)
         self.proftpd.setGeometry(QtCore.QRect(0, 0, 51, 21))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.proftpd.setFont(font)
         self.proftpd.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.proftpd.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.proftpd.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.proftpd.setAlignment(QtCore.Qt.AlignCenter)
         self.proftpd.setObjectName("proftpd")
         self.ftpynfrm = QtWidgets.QFrame(self.ftpfrm)
@@ -190,35 +162,27 @@ class Ui_firstConf(object):
         self.ftpn = QtWidgets.QRadioButton(self.ftpynfrm)
         self.ftpn.setGeometry(QtCore.QRect(130, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.ftpn.setFont(font)
-        self.ftpn.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.ftpn.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.ftpn.setChecked(True)
         self.ftpn.setObjectName("ftpn")
         self.ftpy = QtWidgets.QRadioButton(self.ftpynfrm)
         self.ftpy.setGeometry(QtCore.QRect(80, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         font.setBold(False)
         font.setWeight(50)
         self.ftpy.setFont(font)
-        self.ftpy.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.ftpy.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.ftpy.setObjectName("ftpy")
         self.ftp = QtWidgets.QLabel(self.ftpynfrm)
         self.ftp.setGeometry(QtCore.QRect(0, 0, 41, 21))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(10)
         self.ftp.setFont(font)
         self.ftp.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.ftp.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.ftp.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.ftp.setAlignment(QtCore.Qt.AlignCenter)
         self.ftp.setObjectName("ftp")
         self.frame_2 = QtWidgets.QFrame(firstConf)
@@ -240,34 +204,26 @@ class Ui_firstConf(object):
         self.weby = QtWidgets.QRadioButton(self.frame_6)
         self.weby.setGeometry(QtCore.QRect(180, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.weby.setFont(font)
-        self.weby.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.weby.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.weby.setObjectName("weby")
         self.web = QtWidgets.QLabel(self.frame_6)
         self.web.setGeometry(QtCore.QRect(0, 0, 141, 21))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.web.setFont(font)
         self.web.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.web.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.web.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.web.setAlignment(QtCore.Qt.AlignCenter)
         self.web.setObjectName("web")
         self.webn = QtWidgets.QRadioButton(self.frame_6)
         self.webn.setGeometry(QtCore.QRect(230, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.webn.setFont(font)
-        self.webn.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.webn.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.webn.setChecked(True)
         self.webn.setObjectName("webn")
         self.frame_7 = QtWidgets.QFrame(self.frame_2)
         self.frame_7.setGeometry(QtCore.QRect(60, 40, 171, 21))
@@ -278,34 +234,26 @@ class Ui_firstConf(object):
         self.apache = QtWidgets.QLabel(self.frame_7)
         self.apache.setGeometry(QtCore.QRect(0, 0, 61, 21))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(10)
         self.apache.setFont(font)
         self.apache.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.apache.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.apache.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.apache.setAlignment(QtCore.Qt.AlignCenter)
         self.apache.setObjectName("apache")
         self.apachey = QtWidgets.QRadioButton(self.frame_7)
         self.apachey.setGeometry(QtCore.QRect(80, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.apachey.setFont(font)
-        self.apachey.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.apachey.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.apachey.setObjectName("apachey")
         self.apachen = QtWidgets.QRadioButton(self.frame_7)
         self.apachen.setGeometry(QtCore.QRect(130, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.apachen.setFont(font)
-        self.apachen.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.apachen.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.apachen.setChecked(True)
         self.apachen.setObjectName("apachen")
         self.frame_8 = QtWidgets.QFrame(self.frame_2)
         self.frame_8.setGeometry(QtCore.QRect(60, 70, 171, 21))
@@ -316,33 +264,25 @@ class Ui_firstConf(object):
         self.nginxy = QtWidgets.QRadioButton(self.frame_8)
         self.nginxy.setGeometry(QtCore.QRect(80, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.nginxy.setFont(font)
-        self.nginxy.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.nginxy.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.nginxy.setObjectName("nginxy")
         self.nginxn = QtWidgets.QRadioButton(self.frame_8)
         self.nginxn.setGeometry(QtCore.QRect(130, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.nginxn.setFont(font)
-        self.nginxn.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.nginxn.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.nginxn.setChecked(True)
         self.nginxn.setObjectName("nginxn")
         self.nginx = QtWidgets.QLabel(self.frame_8)
         self.nginx.setGeometry(QtCore.QRect(0, 0, 51, 21))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(10)
         self.nginx.setFont(font)
         self.nginx.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.nginx.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.nginx.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.nginx.setAlignment(QtCore.Qt.AlignCenter)
         self.nginx.setObjectName("nginx")
         self.frame_9 = QtWidgets.QFrame(self.frame_2)
@@ -354,34 +294,26 @@ class Ui_firstConf(object):
         self.https = QtWidgets.QLabel(self.frame_9)
         self.https.setGeometry(QtCore.QRect(0, 0, 51, 21))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(10)
         self.https.setFont(font)
         self.https.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.https.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.https.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.https.setAlignment(QtCore.Qt.AlignCenter)
         self.https.setObjectName("https")
         self.httpsn = QtWidgets.QRadioButton(self.frame_9)
         self.httpsn.setGeometry(QtCore.QRect(130, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.httpsn.setFont(font)
-        self.httpsn.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.httpsn.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.httpsn.setChecked(True)
         self.httpsn.setObjectName("httpsn")
         self.httpsy = QtWidgets.QRadioButton(self.frame_9)
         self.httpsy.setGeometry(QtCore.QRect(80, 0, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.httpsy.setFont(font)
-        self.httpsy.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.httpsy.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.httpsy.setObjectName("httpsy")
         self.frame_3 = QtWidgets.QFrame(firstConf)
         self.frame_3.setGeometry(QtCore.QRect(410, 120, 191, 41))
@@ -396,34 +328,26 @@ class Ui_firstConf(object):
         self.smb = QtWidgets.QLabel(self.frame_3)
         self.smb.setGeometry(QtCore.QRect(10, 10, 41, 21))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(10)
         self.smb.setFont(font)
         self.smb.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.smb.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.smb.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
         self.smb.setAlignment(QtCore.Qt.AlignCenter)
         self.smb.setObjectName("smb")
         self.smbn = QtWidgets.QRadioButton(self.frame_3)
         self.smbn.setGeometry(QtCore.QRect(140, 10, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.smbn.setFont(font)
-        self.smbn.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.smbn.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
+        self.smbn.setChecked(True)
         self.smbn.setObjectName("smbn")
         self.smby = QtWidgets.QRadioButton(self.frame_3)
         self.smby.setGeometry(QtCore.QRect(90, 10, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.smby.setFont(font)
-        self.smby.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.smby.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
         self.smby.setObjectName("smby")
         self.frame_4 = QtWidgets.QFrame(firstConf)
         self.frame_4.setGeometry(QtCore.QRect(410, 170, 191, 41))
@@ -438,33 +362,25 @@ class Ui_firstConf(object):
         self.sqln = QtWidgets.QRadioButton(self.frame_4)
         self.sqln.setGeometry(QtCore.QRect(140, 10, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.sqln.setFont(font)
-        self.sqln.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.sqln.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
+        self.sqln.setChecked(True)
         self.sqln.setObjectName("sqln")
         self.sqly = QtWidgets.QRadioButton(self.frame_4)
         self.sqly.setGeometry(QtCore.QRect(90, 10, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.sqly.setFont(font)
-        self.sqly.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.sqly.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
         self.sqly.setObjectName("sqly")
         self.sql = QtWidgets.QLabel(self.frame_4)
         self.sql.setGeometry(QtCore.QRect(10, 10, 41, 21))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(10)
         self.sql.setFont(font)
         self.sql.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.sql.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.sql.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
         self.sql.setAlignment(QtCore.Qt.AlignCenter)
         self.sql.setObjectName("sql")
         self.frame_5 = QtWidgets.QFrame(firstConf)
@@ -480,34 +396,26 @@ class Ui_firstConf(object):
         self.rsync = QtWidgets.QLabel(self.frame_5)
         self.rsync.setGeometry(QtCore.QRect(10, 10, 41, 21))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(10)
         self.rsync.setFont(font)
         self.rsync.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.rsync.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.rsync.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
         self.rsync.setAlignment(QtCore.Qt.AlignCenter)
         self.rsync.setObjectName("rsync")
         self.rsyncn = QtWidgets.QRadioButton(self.frame_5)
         self.rsyncn.setGeometry(QtCore.QRect(140, 10, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.rsyncn.setFont(font)
-        self.rsyncn.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.rsyncn.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
+        self.rsyncn.setChecked(True)
         self.rsyncn.setObjectName("rsyncn")
         self.rsyncy = QtWidgets.QRadioButton(self.frame_5)
         self.rsyncy.setGeometry(QtCore.QRect(90, 10, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.rsyncy.setFont(font)
-        self.rsyncy.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.rsyncy.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
         self.rsyncy.setObjectName("rsyncy")
         self.frame_10 = QtWidgets.QFrame(firstConf)
         self.frame_10.setGeometry(QtCore.QRect(410, 290, 251, 41))
@@ -522,34 +430,26 @@ class Ui_firstConf(object):
         self.rdp = QtWidgets.QLabel(self.frame_10)
         self.rdp.setGeometry(QtCore.QRect(10, 10, 101, 21))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.rdp.setFont(font)
         self.rdp.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.rdp.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.rdp.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
         self.rdp.setAlignment(QtCore.Qt.AlignCenter)
         self.rdp.setObjectName("rdp")
         self.rdpn = QtWidgets.QRadioButton(self.frame_10)
         self.rdpn.setGeometry(QtCore.QRect(200, 10, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.rdpn.setFont(font)
-        self.rdpn.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.rdpn.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
+        self.rdpn.setChecked(True)
         self.rdpn.setObjectName("rdpn")
         self.rdpy = QtWidgets.QRadioButton(self.frame_10)
         self.rdpy.setGeometry(QtCore.QRect(150, 10, 41, 20))
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(9)
         self.rdpy.setFont(font)
-        self.rdpy.setStyleSheet("border: 2px solid;\n"
-"border-width: 1px;\n"
-"background-color: lightblue;\n"
-"border-radius: 10px; color: black;")
+        self.rdpy.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
         self.rdpy.setObjectName("rdpy")
 
         self.retranslateUi(firstConf)
@@ -558,7 +458,6 @@ class Ui_firstConf(object):
     def retranslateUi(self, firstConf):
         _translate = QtCore.QCoreApplication.translate
         firstConf.setWindowTitle(_translate("firstConf", "First Time Configuration"))
-        self.quit_buttonConf.setText(_translate("firstConf", "Quit"))
         self.confirmbtn.setText(_translate("firstConf", "Confirm"))
         self.fconflbl.setText(_translate("firstConf", "First Time Configurations"))
         self.fconfqalbl.setText(_translate("firstConf", "Does the system require the following services?"))

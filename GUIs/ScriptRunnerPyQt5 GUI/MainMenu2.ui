@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>850</width>
-    <height>610</height>
+    <width>848</width>
+    <height>603</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -68,14 +68,14 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
-      <string>Windows Commands</string>
+      <string>Windows Only Commands</string>
      </property>
     </widget>
     <widget class="QPushButton" name="linCom">
@@ -89,14 +89,14 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
      </property>
      <property name="text">
-      <string>Linux Commands</string>
+      <string>Linux Only Commands</string>
      </property>
     </widget>
     <widget class="QPushButton" name="macCom">
@@ -110,7 +110,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -239,7 +239,7 @@
       <string notr="true">color: #8B93B2;</string>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Description: These commands will work on most Operating Systems &lt;/p&gt;&lt;p&gt;(Windows, MacOS X, and Linux (Debian, Ubuntu, certain Arch distros))&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </widget>
@@ -258,7 +258,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #414E6E;color: #8B93B2;</string>
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
     </property>
     <property name="text">
      <string>Quit</string>
@@ -284,16 +284,16 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>310</y>
+        <y>350</y>
         <width>511</width>
-        <height>81</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">color: #8B93B2;</string>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;All Commands here will work across all Operating Systems&lt;/p&gt;&lt;p&gt;It is recommended that you use the commands that goes with the system that you are using.&lt;/p&gt;&lt;p&gt;Ex: If you are using a Windows PC, use the Windows Commands&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;All Commands here will work across all Operating Systems&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="wordWrap">
        <bool>true</bool>
@@ -305,7 +305,7 @@
         <x>0</x>
         <y>20</y>
         <width>541</width>
-        <height>291</height>
+        <height>311</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -330,6 +330,9 @@
         <font>
          <pointsize>12</pointsize>
         </font>
+       </property>
+       <property name="toolTip">
+        <string/>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
@@ -356,7 +359,7 @@
         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
        </property>
        <property name="text">
-        <string>Remove Prohibited Software</string>
+        <string>Remove Prohibited Software*</string>
        </property>
       </widget>
       <widget class="QPushButton" name="Updates_buttonUNI">
@@ -379,6 +382,9 @@
        <property name="acceptDrops">
         <bool>false</bool>
        </property>
+       <property name="toolTip">
+        <string/>
+       </property>
        <property name="styleSheet">
         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
        </property>
@@ -390,6 +396,27 @@
        </property>
        <property name="default">
         <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="chkhashfile_buttonUNI">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>50</y>
+         <width>221</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+       </property>
+       <property name="text">
+        <string>Check the Hash of a File*</string>
        </property>
       </widget>
      </widget>
@@ -425,27 +452,6 @@
        <attribute name="title">
         <string>Main Commands</string>
        </attribute>
-       <widget class="QPushButton" name="srchmedbutton_2">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>50</y>
-          <width>221</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-        </property>
-        <property name="text">
-         <string>Search For Prohibited Media</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="basicConfbutton_2">
         <property name="geometry">
          <rect>
@@ -464,7 +470,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Basic Configurations</string>
+         <string>Basic Configurations*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvprosoftbutton_2">
@@ -528,6 +534,48 @@
          <bool>true</bool>
         </property>
        </widget>
+       <widget class="QPushButton" name="servicesConfButton">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>50</y>
+          <width>221</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+        </property>
+        <property name="text">
+         <string>Services Configurations*</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="enblBitLockerbutton">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>90</y>
+          <width>221</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+        </property>
+        <property name="text">
+         <string>Enable BitLocker*</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="windows_usrgruCOM">
        <attribute name="title">
@@ -551,7 +599,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>List Members of Group</string>
+         <string>List Members of Group*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="chngusrpas_3">
@@ -572,7 +620,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Change all Users Passwords at Once</string>
+         <string>Change all Users Passwords at Once*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvusrfrosys_3">
@@ -593,7 +641,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Remove User From System</string>
+         <string>Remove User From System*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="adusrtosys_3">
@@ -617,7 +665,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Add User to System</string>
+         <string>Add User to System*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvusrfrogru_3">
@@ -638,7 +686,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Remove User from Group</string>
+         <string>Remove User from Group*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="adgrutosys_3">
@@ -659,7 +707,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Add Group to System</string>
+         <string>Add Group to System*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="lslocausr_3">
@@ -680,7 +728,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>List Local Users</string>
+         <string>List Local Users*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvgrufrosys_3">
@@ -701,7 +749,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Remove Group from System</string>
+         <string>Remove Group from System*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="lslocagru_3">
@@ -722,7 +770,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>List Local Groups</string>
+         <string>List Local Groups*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="lsgruusrin_3">
@@ -743,7 +791,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>List Groups an User is in</string>
+         <string>List Groups an User is in*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="adusrtogru_3">
@@ -764,7 +812,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Add User to Group</string>
+         <string>Add User to Group*</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_14">
@@ -835,27 +883,6 @@
          <string>Audit System</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="srchmedbutton_3">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>90</y>
-          <width>221</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-        </property>
-        <property name="text">
-         <string>Search For Prohibited Media</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="basicConfbutton_3">
         <property name="geometry">
          <rect>
@@ -874,7 +901,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Basic Configurations</string>
+         <string>Basic Configurations*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvprosoftbutton_3">
@@ -895,7 +922,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Remove Prohibited Software</string>
+         <string>Remove Prohibited Software*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="malrembutton_3">
@@ -916,7 +943,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Malware Removal</string>
+         <string>Malware Removal*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="fwlbutton_3">
@@ -937,7 +964,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Firewall Settings</string>
+         <string>Linux Firewall Settings</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_15">
@@ -957,6 +984,27 @@
         </property>
         <property name="wordWrap">
          <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="servicesConfButton_2">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>90</y>
+          <width>221</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+        </property>
+        <property name="text">
+         <string>Services Configurations*</string>
         </property>
        </widget>
       </widget>
@@ -982,7 +1030,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>List Members of Group</string>
+         <string>List Members of Group*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="chngusrpas_4">
@@ -1003,7 +1051,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Change all Users Passwords at Once</string>
+         <string>Change all Users Passwords at Once*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvusrfrosys_4">
@@ -1024,7 +1072,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Remove User From System</string>
+         <string>Remove User From System*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="adusrtosys_4">
@@ -1048,7 +1096,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Add User to System</string>
+         <string>Add User to System*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvusrfrogru_4">
@@ -1069,7 +1117,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Remove User from Group</string>
+         <string>Remove User from Group*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="adgrutosys_4">
@@ -1090,7 +1138,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Add Group to System</string>
+         <string>Add Group to System*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="lslocausr_4">
@@ -1111,7 +1159,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>List Local Users</string>
+         <string>List Local Users*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvgrufrosys_4">
@@ -1132,7 +1180,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Remove Group from System</string>
+         <string>Remove Group from System*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="lslocagru_4">
@@ -1153,7 +1201,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>List Local Groups</string>
+         <string>List Local Groups*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="lsgruusrin_4">
@@ -1174,7 +1222,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>List Groups an User is in</string>
+         <string>List Groups an User is in*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="adusrtogru_4">
@@ -1195,7 +1243,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Add User to Group</string>
+         <string>Add User to Group*</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_16">
@@ -1248,48 +1296,6 @@
        <attribute name="title">
         <string>Main Commands</string>
        </attribute>
-       <widget class="QPushButton" name="auditbutton_4">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>50</y>
-          <width>221</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-        </property>
-        <property name="text">
-         <string>Audit System*</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="srchmedbutton_4">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>90</y>
-          <width>221</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-        </property>
-        <property name="text">
-         <string>Search For Prohibited Media</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="basicConfbutton_4">
         <property name="geometry">
          <rect>
@@ -1308,7 +1314,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Basic Configurations</string>
+         <string>Basic Configurations*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvprosoftbutton_4">
@@ -1329,7 +1335,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Remove Prohibited Software</string>
+         <string>Remove Prohibited Software*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="malrembutton_4">
@@ -1350,7 +1356,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Malware Removal</string>
+         <string>Malware Removal*</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_17">
@@ -1370,6 +1376,27 @@
         </property>
         <property name="wordWrap">
          <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="servicesConfButton_3">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>50</y>
+          <width>221</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+        </property>
+        <property name="text">
+         <string>Services Configurations*</string>
         </property>
        </widget>
       </widget>
@@ -1395,7 +1422,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>List Members of Group</string>
+         <string>List Members of Group*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="chngusrpas_5">
@@ -1416,7 +1443,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Change all Users Passwords at Once</string>
+         <string>Change all Users Passwords at Once*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvusrfrosys_5">
@@ -1437,7 +1464,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Remove User From System</string>
+         <string>Remove User From System*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="adusrtosys_5">
@@ -1461,7 +1488,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Add User to System</string>
+         <string>Add User to System*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvusrfrogru_5">
@@ -1482,7 +1509,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Remove User from Group</string>
+         <string>Remove User from Group*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="adgrutosys_5">
@@ -1503,7 +1530,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Add Group to System</string>
+         <string>Add Group to System*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="lslocausr_5">
@@ -1524,7 +1551,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>List Local Users</string>
+         <string>List Local Users*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvgrufrosys_5">
@@ -1545,7 +1572,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Remove Group from System</string>
+         <string>Remove Group from System*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="lslocagru_5">
@@ -1566,7 +1593,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>List Local Groups</string>
+         <string>List Local Groups*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="lsgruusrin_5">
@@ -1587,7 +1614,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>List Groups an User is in</string>
+         <string>List Groups an User is in*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="adusrtogru_5">
@@ -1608,7 +1635,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Add User to Group</string>
+         <string>Add User to Group*</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_18">
@@ -1634,20 +1661,20 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QLabel" name="label_7">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>540</y>
-      <width>291</width>
-      <height>41</height>
+      <width>311</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #8B93B2;</string>
+     <string notr="true">color: #CCD2E6</string>
     </property>
     <property name="text">
-     <string>&lt;Running Commands Progress Bar will be here&gt;</string>
+     <string>Note: any command with a * is not completed yet</string>
     </property>
    </widget>
   </widget>
@@ -1656,7 +1683,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>850</width>
+     <width>848</width>
      <height>21</height>
     </rect>
    </property>
@@ -1677,11 +1704,8 @@
     </property>
     <addaction name="actionAbout_Creator"/>
     <addaction name="actionHow_To_Use_Program"/>
-   </widget>
-   <widget class="QMenu" name="menuChange_Configurations">
-    <property name="title">
-     <string>Change Configurations</string>
-    </property>
+    <addaction name="actionCommand_Descriptions"/>
+    <addaction name="actionChange_Configurations"/>
    </widget>
    <widget class="QMenu" name="menuLighting_Mode">
     <property name="title">
@@ -1691,12 +1715,11 @@
     <addaction name="actionDark_Mode"/>
    </widget>
    <addaction name="menuHelp"/>
-   <addaction name="menuChange_Configurations"/>
    <addaction name="menuLighting_Mode"/>
   </widget>
   <action name="actionAbout_Creator">
    <property name="text">
-    <string>About Creator</string>
+    <string>About Creators</string>
    </property>
   </action>
   <action name="actionHow_To_Use_Program">
@@ -1714,6 +1737,16 @@
     <string>Dark Mode</string>
    </property>
   </action>
+  <action name="actionCommand_Descriptions">
+   <property name="text">
+    <string>Command Descriptions</string>
+   </property>
+  </action>
+  <action name="actionChange_Configurations">
+   <property name="text">
+    <string>Change Configurations</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>uniCom</tabstop>
@@ -1723,7 +1756,7 @@
  </tabstops>
  <resources>
   <include location="resources.qrc"/>
-  <include location="C:/Users/Michael/.designer/backup/resources.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>
