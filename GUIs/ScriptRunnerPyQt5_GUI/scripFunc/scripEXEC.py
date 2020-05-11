@@ -511,6 +511,14 @@ class ScriptRunnerFunc:
                 #for i in range(0,5):
                 #    name[i].toggled.connect(func[i])
 
+
+                def fileselection():
+                    dialog = QFileDialog.getOpenFileName(self, 'Select file')
+                    self.fpath.setText(dialog[0])
+                    print(dialog[0])
+
+                self.browsebutton.clicked.connect(fileselection)
+
                 def hashMD5(selected):
                     if selected:
                         print('test')
@@ -538,7 +546,14 @@ class ScriptRunnerFunc:
                 self.SHA384radio.toggled.connect(hashsha384)
                 self.SHA512radio.toggled.connect(hashsha512)
 
-
+                def OUTPUTBOX(text):
+                    OUTPUT = QMessageBox()
+                    OUTPUT.setWindowTitle('Hey! Listen!')
+                    OUTPUT.setText("Hash has been successfully created.\nYou can copy the hash in Details.\n\n" + text)
+                    OUTPUT.setDetailedText(text)
+                    OUTPUT.setIcon(QMessageBox.Information)
+                    OUTPUT.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
+                    x = OUTPUT.exec_()
 
                 def hashchk(hashnumber):
                     linhashtypes = ['MD5', 'sha1sum', 'sha256sum', 'sha384sum', 'sha512sum']
@@ -546,8 +561,11 @@ class ScriptRunnerFunc:
 
                     if platform == 'linux' or platform == 'darwin':
                         filepath = self.fpath.text()
-                        command = 'sudo ' + linhashtypes[hashnumber] + ' ' + filepath
-                        sub.Popen(command.split())
+                        command = r'sudo ' + linhashtypes[hashnumber] + ' ' + filepath
+                        exec = sub.Popen(command.split(), stdout=sub.PIPE)
+                        stdout, _ = exec.communicate()
+                        output = stdout.decode("utf-8")
+                        OUTPUTBOX(output)
                     elif platform == 'win32':
                         print(winhashtypes[hashnumber])
                         filepath = self.fpath.text()
@@ -556,7 +574,7 @@ class ScriptRunnerFunc:
                         exec = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
                         stdout, _ = exec.communicate()
                         output = stdout.decode("utf-8")
-                        print(output)
+                        OUTPUTBOX(output)
 
                 self.genhash.clicked.connect(lambda: hashchk(self.hashnumber))
 
