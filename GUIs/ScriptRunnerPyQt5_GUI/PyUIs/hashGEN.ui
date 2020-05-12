@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>340</width>
-    <height>180</height>
+    <width>431</width>
+    <height>179</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
     <rect>
      <x>70</x>
      <y>10</y>
-     <width>261</width>
+     <width>281</width>
      <height>20</height>
     </rect>
    </property>
@@ -43,7 +43,7 @@
     <string notr="true">color: #8B93B2;</string>
    </property>
    <property name="text">
-    <string>File Path: </string>
+    <string>File Path:</string>
    </property>
   </widget>
   <widget class="QPushButton" name="genhash">
@@ -51,13 +51,13 @@
     <rect>
      <x>110</x>
      <y>50</y>
-     <width>211</width>
+     <width>301</width>
      <height>101</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>23</pointsize>
+     <pointsize>20</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -119,6 +119,9 @@ color: black;</string>
     </property>
     <property name="text">
      <string>MD5</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QRadioButton" name="SHA512radio">
@@ -185,6 +188,22 @@ color: black;</string>
      <string>SHA 384</string>
     </property>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="browsebutton">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>10</y>
+     <width>61</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+   </property>
+   <property name="text">
+    <string>Browse</string>
+   </property>
   </widget>
  </widget>
  <resources/>

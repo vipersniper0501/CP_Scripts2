@@ -5,7 +5,7 @@ import getpass
 from threading import *
 import distro  # for figuring out what linux distro
 import configparser
-
+import shutil
 from PyQt5 import QtGui
 from PyUIs.hashgen import Ui_hashGEN
 from PyQt5.QtGui import *
@@ -433,12 +433,28 @@ class ScriptRunnerFunc:
         if platform == 'win32':
             if rdp == 'yes':
                 path = 'win10StigsRDPn/Windows10Template11_17.inf'
+                try:
+                    shutil.copy('./winCONF/win10StigsRDPy/Machine', r'c:\Windows\System32\GroupPolicy\Machine')
+                    shutil.copy('./winCONF/win10StigsRDPy/User', r'c:\Windows\System32\GroupPolicy\User')
+                    shutil.copy('../winCONF/win10StigsRDPy/gpt.ini', r'c:\Windows\System32\GroupPolicy\GPT.INI')
+                except IOError as e:
+                    print("Unable to copy file. %s" % e)
             elif rdp == 'no':
                 path = 'win10StigsRDPy/win10secRDPallowed.inf'
+                try:
+                    shutil.copy('../winCONF/win10StigsRDPn/Machine', r'c:\Windows\System32\GroupPolicy\Machine')
+                    shutil.copy('../winCONF/win10StigsRDPn/User', r'c:\Windows\System32\GroupPolicy\User')
+                    shutil.copy('../winCONF/win10StigsRDPn/gpt.ini', r'c:\Windows\System32\GroupPolicy\GPT.INI')
+                    print('Successfully installed Group Policy Settings')
+                except IOError as e:
+                    print('Unable to copy file. %s' % e)
             else:
                 raise ValueError('rdp should be either yes or no!')
             command = 'secedit.exe /configure /db %windir%\\security\\local.sdb /cfg ../winCONF/' + path
             sub.Popen(command.split())
+
+
+
         print('This command is currently in developement')
 
     '''

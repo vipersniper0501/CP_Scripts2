@@ -13,11 +13,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_hashGEN(object):
     def setupUi(self, hashGEN):
         hashGEN.setObjectName("hashGEN")
-        hashGEN.resize(340, 180)
+        hashGEN.resize(431, 179)
         hashGEN.setStyleSheet("background-color: #212434\n"
 "")
         self.fpath = QtWidgets.QLineEdit(hashGEN)
-        self.fpath.setGeometry(QtCore.QRect(70, 10, 261, 20))
+        self.fpath.setGeometry(QtCore.QRect(70, 10, 281, 20))
         self.fpath.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
         self.fpath.setObjectName("fpath")
         self.label = QtWidgets.QLabel(hashGEN)
@@ -25,9 +25,9 @@ class Ui_hashGEN(object):
         self.label.setStyleSheet("color: #8B93B2;")
         self.label.setObjectName("label")
         self.genhash = QtWidgets.QPushButton(hashGEN)
-        self.genhash.setGeometry(QtCore.QRect(110, 50, 211, 101))
+        self.genhash.setGeometry(QtCore.QRect(110, 50, 301, 101))
         font = QtGui.QFont()
-        font.setPointSize(23)
+        font.setPointSize(20)
         self.genhash.setFont(font)
         self.genhash.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
         self.genhash.setObjectName("genhash")
@@ -48,6 +48,7 @@ class Ui_hashGEN(object):
         self.MD5radio = QtWidgets.QRadioButton(self.frame)
         self.MD5radio.setGeometry(QtCore.QRect(10, 30, 62, 14))
         self.MD5radio.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;")
+        self.MD5radio.setChecked(True)
         self.MD5radio.setObjectName("MD5radio")
         self.SHA512radio = QtWidgets.QRadioButton(self.frame)
         self.SHA512radio.setGeometry(QtCore.QRect(10, 110, 62, 14))
@@ -65,6 +66,10 @@ class Ui_hashGEN(object):
         self.SHA384radio.setGeometry(QtCore.QRect(10, 90, 62, 14))
         self.SHA384radio.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
         self.SHA384radio.setObjectName("SHA384radio")
+        self.browsebutton = QtWidgets.QPushButton(hashGEN)
+        self.browsebutton.setGeometry(QtCore.QRect(360, 10, 61, 21))
+        self.browsebutton.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.browsebutton.setObjectName("browsebutton")
 
         self.retranslateUi(hashGEN)
         QtCore.QMetaObject.connectSlotsByName(hashGEN)
@@ -72,7 +77,7 @@ class Ui_hashGEN(object):
     def retranslateUi(self, hashGEN):
         _translate = QtCore.QCoreApplication.translate
         hashGEN.setWindowTitle(_translate("hashGEN", "File Hash Generator"))
-        self.label.setText(_translate("hashGEN", "File Path: "))
+        self.label.setText(_translate("hashGEN", "File Path:"))
         self.genhash.setText(_translate("hashGEN", "Generate Hash"))
         self.HashLbl.setText(_translate("hashGEN", "Hash Type:"))
         self.MD5radio.setText(_translate("hashGEN", "MD5"))
@@ -80,6 +85,7 @@ class Ui_hashGEN(object):
         self.SHA1radio.setText(_translate("hashGEN", "SHA 1"))
         self.SHA256radio.setText(_translate("hashGEN", "SHA 256"))
         self.SHA384radio.setText(_translate("hashGEN", "SHA 384"))
+        self.browsebutton.setText(_translate("hashGEN", "Browse"))
 
 
 if __name__ == "__main__":

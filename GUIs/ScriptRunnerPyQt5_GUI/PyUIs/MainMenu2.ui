@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>848</width>
-    <height>603</height>
+    <height>598</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -328,7 +328,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>11</pointsize>
         </font>
        </property>
        <property name="toolTip">
@@ -352,7 +352,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>11</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -416,7 +416,7 @@
         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
        </property>
        <property name="text">
-        <string>Check the Hash of a File*</string>
+        <string>Check the Hash of a File</string>
        </property>
       </widget>
      </widget>
@@ -915,7 +915,7 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>10</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -1328,7 +1328,7 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>10</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -1757,7 +1757,7 @@
  <resources>
   <include location="../resources.qrc"/>
   <include location="../resources.qrc"/>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>
