@@ -943,7 +943,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Malware Removal*</string>
+         <string>Malware Removal</string>
         </property>
        </widget>
        <widget class="QPushButton" name="fwlbutton_3">

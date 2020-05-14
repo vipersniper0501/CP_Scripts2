@@ -657,7 +657,7 @@ class Ui_MainWindow(object):
         self.auditbutton_3.setText(_translate("MainWindow", "Audit System"))
         self.basicConfbutton_3.setText(_translate("MainWindow", "Basic Configurations*"))
         self.rmvprosoftbutton_3.setText(_translate("MainWindow", "Remove Prohibited Software*"))
-        self.malrembutton_3.setText(_translate("MainWindow", "Malware Removal*"))
+        self.malrembutton_3.setText(_translate("MainWindow", "Malware Removal"))
         self.fwlbutton_3.setText(_translate("MainWindow", "Linux Firewall Settings"))
         self.label_15.setText(_translate("MainWindow", "All Commands here will work on Debian/Ubuntu/Manjaro Linux distributions"))
         self.servicesConfButton_2.setText(_translate("MainWindow", "Services Configurations*"))

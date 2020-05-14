@@ -8,6 +8,7 @@ import configparser
 import shutil
 from PyQt5 import QtGui
 from PyUIs.hashgen import Ui_hashGEN
+from PyUIs.enblebit import Ui_bitlockerGUI
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -82,7 +83,7 @@ class ScriptRunnerFunc:
     def srchmedia(self):
         if platform == 'linux' or platform == 'darwin':
             extensions = (
-            '.jpg', '.mp4', '.flv', '.avi', '.wmv', '.mov', '.png', '.tif', '.gif', '.mp3', '.wma', '.aif', '.jar')
+                '.jpg', '.mp4', '.flv', '.avi', '.wmv', '.mov', '.png', '.tif', '.gif', '.mp3', '.wma', '.aif', '.jar')
             for root, dirs, files in os.walk('/home/'):
                 for filename in files:
                     if any(filename.endswith(extension) for extension in extensions):
@@ -95,7 +96,7 @@ class ScriptRunnerFunc:
             print('Scan for unapproved media complete.')
         elif platform == 'win32':
             extensions = (
-            '.jpg', '.mp4', '.flv', '.avi', '.wmv', '.mov', '.png', '.tif', '.gif', '.mp3', '.wma', '.aif', '.jar')
+                '.jpg', '.mp4', '.flv', '.avi', '.wmv', '.mov', '.png', '.tif', '.gif', '.mp3', '.wma', '.aif', '.jar')
             for root, dirs, files in os.walk('C:\\Users\\'):
                 for filename in files:
                     if any(filename.endswith(extension) for extension in extensions):
@@ -112,8 +113,8 @@ class ScriptRunnerFunc:
         if platform == 'linux':
 
             commandtest = 'sudo ufw status'
-            exec = sub.Popen(commandtest.split(), stdout=sub.PIPE)
-            stdout, _ = exec.communicate()
+            EXEC = sub.Popen(commandtest.split(), stdout=sub.PIPE)
+            stdout, _ = EXEC.communicate()
             output = stdout.decode('utf-8')
 
             if output == 'sudo: ufw: command not found':
@@ -428,7 +429,7 @@ class ScriptRunnerFunc:
         elif platform == 'win32':
             print('This function does not currently support this OS.')
 
-
+    # Still needs Linux configurations
     def basConf(self, rdp):
         if platform == 'win32':
             if rdp == 'yes':
@@ -452,8 +453,18 @@ class ScriptRunnerFunc:
                 raise ValueError('rdp should be either yes or no!')
             command = 'secedit.exe /configure /db %windir%\\security\\local.sdb /cfg ../winCONF/' + path
             sub.Popen(command.split())
+            command = 'Enable-WindowsOptionalFeature –FeatureName "Internet-Explorer-Optional-amd64" -All –Online'
+            sub.Popen(["powershell", "& {" + command + "}"])
 
+            # Must also uninstall all other prohibited features
 
+        elif platform == 'linux':
+            if rdp == 'yes':
+                print('Settings that include remote desktops will be configured')
+            elif rdp == 'no':
+                print('Settings that do not include remote desktops will be configured.')
+            else:
+                raise NameError('There has been an error in the Configuration file. RDP mus be either yes or no')
 
         print('This command is currently in developement')
 
@@ -465,8 +476,8 @@ class ScriptRunnerFunc:
 
     def rmProSoft(self):
 
-        #Get-WmiObject -Class Win32_Product | Select-Object -Property Name
-        #^ will print out list of all installed programs.
+        # Get-WmiObject -Class Win32_Product | Select-Object -Property Name
+        # ^ will print out list of all installed programs.
 
         index = ['uTorrent',
                  'BitTorrent',
@@ -522,11 +533,10 @@ class ScriptRunnerFunc:
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/cup2.png'))
                 self.setupUi(self)
 
-                #name = [self.MD5radio, self.SHA1radio, self.SHA256radio, self.SHA384radio, self.SHA512radio]
-                #func = [self.MD5, self.sha1, self.sha256, self.sha384, self.sha512]
-                #for i in range(0,5):
+                # name = [self.MD5radio, self.SHA1radio, self.SHA256radio, self.SHA384radio, self.SHA512radio]
+                # func = [self.MD5, self.sha1, self.sha256, self.sha384, self.sha512]
+                # for i in range(0,5):
                 #    name[i].toggled.connect(func[i])
-
 
                 def fileselection():
                     dialog = QFileDialog.getOpenFileName(self, 'Select file')
@@ -578,17 +588,18 @@ class ScriptRunnerFunc:
                     if platform == 'linux' or platform == 'darwin':
                         filepath = self.fpath.text()
                         command = r'sudo ' + linhashtypes[hashnumber] + ' ' + filepath
-                        exec = sub.Popen(command.split(), stdout=sub.PIPE)
-                        stdout, _ = exec.communicate()
+                        EXEC = sub.Popen(command.split(), stdout=sub.PIPE)
+                        stdout, _ = EXEC.communicate()
                         output = stdout.decode("utf-8")
                         OUTPUTBOX(output)
                     elif platform == 'win32':
                         print(winhashtypes[hashnumber])
                         filepath = self.fpath.text()
-                        command = r'Get-Filehash ' + filepath + ' -Algorithm ' + winhashtypes[hashnumber] + ' | Format-List'
+                        command = r'Get-Filehash ' + filepath + ' -Algorithm ' + winhashtypes[
+                            hashnumber] + ' | Format-List'
                         print(command)
-                        exec = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
-                        stdout, _ = exec.communicate()
+                        EXEC = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
+                        stdout, _ = EXEC.communicate()
                         output = stdout.decode("utf-8")
                         OUTPUTBOX(output)
 
@@ -599,3 +610,122 @@ class ScriptRunnerFunc:
             widget.exec_()
 
         callhash()
+
+    ######### Windows Only Functions ########
+
+    # NEED TO TEST 
+    def BITLOCKER(self):
+
+        class bitRUN(QDialog, Ui_bitlockerGUI):
+            def __init__(self, parent=None):
+                super(bitRUN, self).__init__(parent)
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/cup2.png'))
+                self.setupUi(self)
+                self.EXECUTE()
+
+            def EXECUTE(self):
+
+                def ENCRYPT(x):
+                    command = """
+$pass = ConvertTo-SecureString '""" + self.encrypPASS.text() + """' -AsPlainText -Force
+Enable-BitLocker """ + x + """ -PasswordProtector $pass"""
+                    print(command)
+                    #sub.Popen(["powershell", "& {" + command + "}"])
+
+                decryptSTATUS = []
+                command = 'Get-BitLockerVolume'
+                EXEC = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
+                stdout, _ = EXEC.communicate()
+                output = stdout.decode("utf-8")
+                output2 = output.split('\n')
+                i = 7
+                while True:
+                    try:
+                        # print(output2[i])
+                        output3 = output2[i].split()
+                        # print(output3)
+                        decryptSTATUS.append(output3[1])
+                        decryptSTATUS.append(output3[3])
+                        i = i + 1
+                    except Exception as e:
+                        # print('Controlled exit of loop: ' + str(e))
+                        break
+                print(decryptSTATUS)
+                buttons = [self.radioButton, self.radioButton_2, self.radioButton_3, self.radioButton_4,
+                           self.radioButton_5, self.radioButton_6, self.radioButton_7]
+
+                self.selectedDRIVE = ''
+
+                def STATUSCHECK(i):
+                    # print(i)
+                    self.selectedDRIVE = i
+                    # print('selected drive: ' + self.selectedDRIVE)
+                    index = decryptSTATUS.index(i)
+                    status = index + 1
+                    if decryptSTATUS[status] == 'FullyDecrypted':
+                        self.label_4.setText('FullyDecrypted')
+                        self.label_4.setStyleSheet('Color: red')
+                    else:
+                        self.label_4.setText('Encrypted')
+                        self.label_4.setStyleSheet('Color: green')
+
+                driveLETTER = []
+
+                def cancelbutton():
+                    self.close()
+
+                self.radioButton.toggled.connect(lambda: STATUSCHECK(driveLETTER[0]))
+                self.radioButton_2.toggled.connect(lambda: STATUSCHECK(driveLETTER[1]))
+                self.radioButton_3.toggled.connect(lambda: STATUSCHECK(driveLETTER[2]))
+                self.radioButton_4.toggled.connect(lambda: STATUSCHECK(driveLETTER[3]))
+                self.radioButton_5.toggled.connect(lambda: STATUSCHECK(driveLETTER[4]))
+                self.radioButton_6.toggled.connect(lambda: STATUSCHECK(driveLETTER[5]))
+                self.enblBIT.clicked.connect(lambda: threader(ENCRYPT(self.selectedDRIVE)))
+                self.cancelbutton.clicked.connect(cancelbutton)
+
+                i = 0
+                x = 0
+                while True:
+                    try:
+                        buttons[i].setText(decryptSTATUS[x])
+                        # print('i: ' + str(i))
+                        # print('x: ' + str(x))
+                        # print(decryptSTATUS[x])
+                        # print(len(decryptSTATUS))
+                        driveLETTER.append(decryptSTATUS[x])
+                        # print(driveLETTER[i])
+                        x = x + 2
+                        i = i + 1
+                        if x == len(decryptSTATUS):
+                            while i != len(buttons):
+                                # print('if')
+                                buttons[i].setText('<No Drive Found>')
+                                buttons[i].setEnabled(False)
+                                i = i + 1
+                        else:
+                            continue
+
+                    except Exception as e:
+                        # print('Controlled exit of loop: ' + str(e))
+                        break
+
+                ''' 
+                command = """
+                $drv = Read-Host -Prompt 'What drive would you like to enable bit locker on? [Ex: c:   e:  ]   '
+                manage-bde -protectors -add -pw $drv
+                manage-bde -on $drv"""
+                '''
+
+        def threader(com):
+            try:
+                threader = Thread(target=com)
+                threader.start()
+            except Exception as e:
+                print(e)
+                print('Could not start thread')
+
+        def callBITRUN():
+            widget = bitRUN()
+            widget.exec_()
+
+        callBITRUN()

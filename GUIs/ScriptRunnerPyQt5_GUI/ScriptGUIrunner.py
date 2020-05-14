@@ -44,7 +44,7 @@ class fconfStart(QDialog, Ui_firstConf):
     def fcFuncts(self):
         print('Assigning First Time Configurations Functions')
 
-        #sets default values
+        # sets default values
         self.ssh = 'no'
         self.ftp = 'no'
         self.proftpd = 'no'
@@ -56,7 +56,7 @@ class fconfStart(QDialog, Ui_firstConf):
         self.smb = 'no'
         self.sql = 'no'
         self.rsnc = 'no'
-        self.rdp ='no'
+        self.rdp = 'no'
 
         config_name = 'config.ini'
         if getattr(sys, 'frozen', False):
@@ -255,7 +255,8 @@ class fconfStart(QDialog, Ui_firstConf):
         def confirmBTTN():
             if self.ssh != '' and self.ftp != '' and self.proftpd != '' and self.vsftpd != '' and self.web != '' and self.apaweb != '' and self.nginweb != '' and self.https != '' and self.smb != '' and self.sql != '' and self.rsnc != '' and self.rdp != '':
                 print('saving configurations\n')
-                print("ssh=" + self.ssh + ", ftp=" + self.ftp + ", proftpd=" + self.proftpd + ", vsftpd=" + self.vsftpd + ", web=" + self.web + ", apaweb=" + self.apaweb + ", nginweb=" + self.nginweb + ", https=" + self.https + ", smb=" + self.smb + ", sql=" + self.sql + ", rsnc=" + self.rsnc + ", RDP=" + self.rdp)
+                print(
+                    "ssh=" + self.ssh + ", ftp=" + self.ftp + ", proftpd=" + self.proftpd + ", vsftpd=" + self.vsftpd + ", web=" + self.web + ", apaweb=" + self.apaweb + ", nginweb=" + self.nginweb + ", https=" + self.https + ", smb=" + self.smb + ", sql=" + self.sql + ", rsnc=" + self.rsnc + ", RDP=" + self.rdp)
 
                 filename = "config.ini"
 
@@ -337,8 +338,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         if variableCheck.is_file():
             config = configparser.ConfigParser()
             config.read(variableCheck)
-            #x = config.get('Services', 'ssh')
-            #print(x)
+            # x = config.get('Services', 'ssh')
+            # print(x)
             print('Configuration file has been loaded...')
 
             QMainWindow.__init__(self)
@@ -470,8 +471,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             widget = fconfStart()
             widget.exec_()
 
-
-
         self.uniCom.clicked.connect(lambda: display(0))
         self.winCom.clicked.connect(lambda: display(1))
         self.linCom.clicked.connect(lambda: display(2))
@@ -494,9 +493,11 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         # Windows Main Menu Commands
 
         self.fwlbutton_2.clicked.connect(lambda: threader(scripfunc.fwl))
-        #self.basicConfbutton_2.clicked.connect(lambda: threader(lambda: scripfunc.basConf(config.get('Services', ''))))  #
+        self.basicConfbutton_2.clicked.connect(
+            lambda: threader(lambda: scripfunc.basConf(config.get('Services', 'rdp'))))  #
         self.rmvprosoftbutton_2.clicked.connect(lambda: threader(indev()))  #
         self.servicesConfButton.clicked.connect(lambda: threader(indev()))  #
+        self.enblBitLockerbutton.clicked.connect(lambda: threader(scripfunc.BITLOCKER()))
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3, self.chngusrpas_3,
                                 self.lsgruusrin_3, self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
@@ -507,7 +508,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         # Linux Main Menu Commands
         self.fwlbutton_3.clicked.connect(lambda: threader(scripfunc.fwl))
         self.auditbutton_3.clicked.connect(lambda: threader(scripfunc.alyn))
-        self.malrembutton_3.clicked.connect(lambda: threader(scripfunc.malrem()))  #
+        self.malrembutton_3.clicked.connect(lambda: threader(scripfunc.malRem()))  #
         self.rmvprosoftbutton_3.clicked.connect(lambda: threader(indev()))  #
         self.basicConfbutton_3.clicked.connect(lambda: threader(indev()))  #
         self.servicesConfButton_2.clicked.connect(lambda: threader(indev()))  #
