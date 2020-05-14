@@ -40,7 +40,7 @@ class funcWINONLY:
         class bitRUN(QDialog, Ui_bitlockerGUI):
             def __init__(self, parent=None):
                 super(bitRUN, self).__init__(parent)
-                self.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/cup2.png'))
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setupUi(self)
                 self.EXECUTE()
 

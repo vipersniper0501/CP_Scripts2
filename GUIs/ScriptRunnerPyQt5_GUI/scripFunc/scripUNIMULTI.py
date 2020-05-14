@@ -493,7 +493,7 @@ class ScriptRunnerFunc:
 
             def __init__(self, parent=None):
                 super(hashRUN, self).__init__(parent)
-                self.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/cup2.png'))
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setupUi(self)
 
                 # name = [self.MD5radio, self.SHA1radio, self.SHA256radio, self.SHA384radio, self.SHA512radio]
@@ -541,7 +541,7 @@ class ScriptRunnerFunc:
                     OUTPUT.setText("Hash has been successfully created.\nYou can copy the hash in Details.\n\n" + text)
                     OUTPUT.setDetailedText(text)
                     OUTPUT.setIcon(QMessageBox.Information)
-                    OUTPUT.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
+                    OUTPUT.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                     x = OUTPUT.exec_()
 
                 def hashchk(hashnumber):

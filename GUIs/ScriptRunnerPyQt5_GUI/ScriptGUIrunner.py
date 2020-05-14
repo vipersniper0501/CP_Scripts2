@@ -39,7 +39,7 @@ class fconfStart(QDialog, Ui_firstConf):
         super(fconfStart, self).__init__(parent)
         print('Script Runner First Time Configurations')
         self.setFixedSize(721, 441)
-        self.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/cup2.png'))
+        self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
         self.setupUi(self)
         self.fcFuncts()
 
@@ -282,7 +282,7 @@ class fconfStart(QDialog, Ui_firstConf):
                 RESTART.setWindowTitle("Hey! Listen!")
                 RESTART.setText("Configurations have been sucessfully saved.")
                 RESTART.setIcon(QMessageBox.Information)
-                RESTART.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
+                RESTART.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                 RESTART.setStandardButtons(QMessageBox.Close)
                 RESTART.buttonClicked.connect(lambda: self.close())
                 x = RESTART.exec_()
@@ -291,7 +291,7 @@ class fconfStart(QDialog, Ui_firstConf):
                 HEY.setWindowTitle('Hey! Listen!')
                 HEY.setText("Hey! You have not finished filling in all of the choices!")
                 HEY.setIcon(QMessageBox.Critical)
-                HEY.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
+                HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                 x = HEY.exec_()
 
         self.sshy.toggled.connect(sshYES)
@@ -347,7 +347,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             QMainWindow.__init__(self)
             self.setupUi(self)
             self.setFixedSize(848, 603)
-            self.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/cup2.png'))
+            self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
             self.mmfuncassign(variableCheck)
         else:
             print('Ello, you have some configurations to do!')
@@ -423,7 +423,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 3.) Click it
 4.) Sit back and relax while the command runs   :)
 """)
-            HOWTO.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
+            HOWTO.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             HOWTO.setStyleSheet('background-color: #414E6E; color: #CCD2E6')
             x = HOWTO.exec_()  # change to QDialog
 
@@ -433,7 +433,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                     super(showComDescript, self).__init__(parent)
                     self.setupUi(self)
                     self.setFixedSize(531, 360)
-                    self.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
+                    self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
 
             def callCOMdescript():
                 widget = showComDescript()
@@ -447,7 +447,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                     super(showAboutProg, self).__init__(parent)
                     self.setupUi(self)
                     self.setFixedSize(330, 182)
-                    self.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
+                    self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
 
             def callaboutprog():
                 widget = showAboutProg()
@@ -460,7 +460,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             INDEV.setWindowTitle('Hey! Listen!')
             INDEV.setText('Hey! This command is not yet complete and in development!')
             INDEV.setIcon(QMessageBox.Critical)
-            INDEV.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
+            INDEV.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             x = INDEV.exec_()
 
         def wrongos():
@@ -468,7 +468,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             WRONGOS.setWindowTitle('Hey! Listen!')
             WRONGOS.setText('Hey! These commands do not support this Operating System!')
             WRONGOS.setIcon(QMessageBox.Critical)
-            WRONGOS.setWindowIcon(QtGui.QIcon(':/Pictures/pictures/HEY.png'))
+            WRONGOS.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             x = WRONGOS.exec_()
 
         def chngconf():
