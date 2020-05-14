@@ -10,7 +10,9 @@ from PyUIs.progabout import Ui_About
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
-from scripFunc.scripEXEC import *
+from scripFunc.scripUNIMULTI import *
+from scripFunc.scripWINONLY import *
+from scripFunc.scripLINUXONLY import *
 from threading import *
 from pathlib import Path
 import configparser
@@ -362,6 +364,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         self.header_title.setWordWrap(True)
         self.descriptions.setWordWrap(True)
         scripfunc = ScriptRunnerFunc()
+        funcWIN = funcWINONLY()
+        funcLIN = funcLINUX()
 
         def quitButton():
             print('Closing program')
@@ -497,7 +501,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             lambda: threader(lambda: scripfunc.basConf(config.get('Services', 'rdp'))))  #
         self.rmvprosoftbutton_2.clicked.connect(lambda: threader(indev()))  #
         self.servicesConfButton.clicked.connect(lambda: threader(indev()))  #
-        self.enblBitLockerbutton.clicked.connect(lambda: threader(scripfunc.BITLOCKER()))
+        self.enblBitLockerbutton.clicked.connect(lambda: threader(funcWIN.BITLOCKER()))
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3, self.chngusrpas_3,
                                 self.lsgruusrin_3, self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
@@ -507,8 +511,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         # Linux Main Menu Commands
         self.fwlbutton_3.clicked.connect(lambda: threader(scripfunc.fwl))
-        self.auditbutton_3.clicked.connect(lambda: threader(scripfunc.alyn))
-        self.malrembutton_3.clicked.connect(lambda: threader(scripfunc.malRem()))  #
+        self.auditbutton_3.clicked.connect(lambda: threader(funcLIN.alyn))
+        self.malrembutton_3.clicked.connect(lambda: threader(funcLIN.malRem()))  #
         self.rmvprosoftbutton_3.clicked.connect(lambda: threader(indev()))  #
         self.basicConfbutton_3.clicked.connect(lambda: threader(indev()))  #
         self.servicesConfButton_2.clicked.connect(lambda: threader(indev()))  #
