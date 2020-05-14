@@ -130,10 +130,10 @@
       </rect>
      </property>
      <property name="text">
-      <string/>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/Pictures/images/Universal-partner-icon(1).png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="pixmap">
-      <pixmap resource="../resources.qrc">:/Pictures/pictures/Universal-partner-icon(1).png</pixmap>
+      <pixmap>:/Pictures/pictures/Universal-partner-icon(1).png</pixmap>
      </property>
     </widget>
     <widget class="QLabel" name="winPIC">
@@ -146,10 +146,10 @@
       </rect>
      </property>
      <property name="text">
-      <string/>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/Pictures/images/windows-8-png-icon-7(1).png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="pixmap">
-      <pixmap resource="../resources.qrc">:/Pictures/pictures/windows-8-png-icon-7(1).png</pixmap>
+      <pixmap>:/Pictures/pictures/windows-8-png-icon-7(1).png</pixmap>
      </property>
     </widget>
     <widget class="QLabel" name="linPIC">
@@ -162,10 +162,10 @@
       </rect>
      </property>
      <property name="text">
-      <string/>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/Pictures/images/linuxICON(1).png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="pixmap">
-      <pixmap resource="../resources.qrc">:/Pictures/pictures/linuxICON(1).png</pixmap>
+      <pixmap>:/Pictures/pictures/linuxICON(1).png</pixmap>
      </property>
     </widget>
     <widget class="QLabel" name="macPIC">
@@ -178,10 +178,10 @@
       </rect>
      </property>
      <property name="text">
-      <string/>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/Pictures/images/MacOSx.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="pixmap">
-      <pixmap resource="../resources.qrc">:/Pictures/pictures/MacOSx.png</pixmap>
+      <pixmap>:/Pictures/pictures/MacOSx.png</pixmap>
      </property>
     </widget>
    </widget>
