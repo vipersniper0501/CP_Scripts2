@@ -14,7 +14,8 @@ function createWindow () {
             label: 'Help',
             submenu: [
                 {label:'About Creators'},
-                {label:'How to use program'}
+                {label:'How to use program'},
+                {label:'Supported Commands'}
             ]
         }
     ])
