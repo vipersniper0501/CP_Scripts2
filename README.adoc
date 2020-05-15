@@ -25,8 +25,8 @@ IMPORTANT: Before using any of these scripts for the CyberPatriot Challenges, pl
 
 I currently have two Command Line scripts:
 
-- link:./CLI_Scripts/WindowsScript/README.adoc[Powershell Script] for Windows machines
-- link:./CLI_Scripts/LinuxScript/README.adoc[Bash Script] for Linux machines
+- link:./CLI_Scripts/WindowsScript/[Powershell Script] for Windows machines
+- link:./CLI_Scripts/LinuxScript/[Bash Script] for Linux machines
 
 These two scripts currently have around 10-20 commands each. They do most of the basic commands that you would use in competition, but, they are not good enough that they could get you a ton of points by just using them alone.
 
@@ -34,13 +34,13 @@ NOTE: The Command Line Script are on hold for now as currently I am spending all
 
 I currently have available three GUI's. Of the three, only two are very developed. The following list are the available GUI's to choose from:
 
-* link:./GUIs/ScriptRunnerTkinter_GUI/README.adoc[Script Runner Tkinter]
+* link:./GUIs/ScriptRunnerTkinter_GUI/[Script Runner Tkinter]
 ** Built on the TKinter framework so it looks like it was made in the 90's
 
-* link:./GUIs/ScriptRunnerElectron/README.adoc[Script Runner Electron]
+* link:./GUIs/ScriptRunnerElectron/[Script Runner Electron]
 ** This GUI is built on the same framework that applications like Discord, Slack, and Atom. Although due to it using website code (HTML, CSS, JavaScript) I am still having trouble attempting to connect it to python code that will actually execute the commands
 
-* link:./GUIs/ScriptRunnerPyQt5_GUI/README.adoc[Script Runner PyQt5]
+* link:./GUIs/ScriptRunnerPyQt5_GUI/[Script Runner PyQt5]
 ** This GUI is built on the PyQt frame work. This is the newest best version of all of the GUI's and Scripts Combined. It is the most modern looking and has the most commands, platform support, and Ease of Use.
 
 == How to compile GUI
