@@ -1,0 +1,23 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<policyComments xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/CommentDefinitions">
+  <policyNamespaces>
+    <using prefix="ns0" namespace="Microsoft.Policies.MediaPlayer"></using>
+    <using prefix="ns1" namespace="Microsoft.Policies.PowerShell"></using>
+    <using prefix="ns2" namespace="Microsoft.Policies.RemoteAssistance"></using>
+    <using prefix="ns3" namespace="Microsoft.Policies.RemoteProcedureCalls"></using>
+    <using prefix="ns4" namespace="Microsoft.Policies.RemovableStorageAccess"></using>
+    <using prefix="ns5" namespace="Microsoft.Policies.TerminalServer"></using>
+    <using prefix="ns6" namespace="Microsoft.Policies.WindowsRemoteShell"></using>
+    <using prefix="ns7" namespace="Microsoft.Policies.WindowsUpdate"></using>
+  </policyNamespaces>
+  <comments>
+    <admTemplate>
+      <comment policyRef="ns7:DeferFeatureUpdates" commentText="$(resource.ns7_DeferFeatureUpdates)"></comment>
+    </admTemplate>
+  </comments>
+  <resources minRequiredRevision="1.0">
+    <stringTable>
+      <string id="ns7_DeferFeatureUpdates">no feature updates allowed.</string>
+    </stringTable>
+  </resources>
+</policyComments>

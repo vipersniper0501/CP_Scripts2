@@ -1,0 +1,9 @@
+= Script Runner GUI (Electron)
+
+== Description
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed elementum mauris. Aliquam egestas rhoncus augue ut pharetra. Sed ac efficitur ipsum, vel porta nisi. Aenean ultricies vitae justo vitae eleifend.
+
+== Supported Commands
+
+Nulla malesuada sodales ligula ut dapibus. Donec luctus lectus a risus pretium rutrum. Curabitur ut tempus est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean ac congue massa, quis fermentum odio. Suspendisse vel dapibus ex, quis viverra mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis malesuada mauris dui, sit amet dapibus orci egestas sit amet. Proin egestas nulla quis lacus elementum, et laoreet diam malesuada. Vivamus tristique vulputate purus, vel scelerisque libero dignissim ac. Proin accumsan, ex id porttitor pretium, turpis metus ultricies ex, ut tempus tortor augue ut augue. Vivamus blandit hendrerit mauris a mattis. Sed dapibus tincidunt nisl.
