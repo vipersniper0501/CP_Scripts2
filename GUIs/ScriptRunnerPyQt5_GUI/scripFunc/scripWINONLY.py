@@ -46,13 +46,23 @@ class funcWINONLY:
 
             def EXECUTE(self):
 
+                # Executes encryption command
                 def ENCRYPT(x):
-                    command = """
+                    if self.encrypPASS.text() == '':
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! You don't have a password!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    else:
+                        command = """
 $pass = ConvertTo-SecureString '""" + self.encrypPASS.text() + """' -AsPlainText -Force
 Enable-BitLocker """ + x + """ -PasswordProtector $pass"""
-                    print(command)
-                    #sub.Popen(["powershell", "& {" + command + "}"])
+                        print(command)
+                        #sub.Popen(["powershell", "& {" + command + "}"])
 
+                # Gets list of drives and encryption status'
                 decryptSTATUS = []
                 command = 'Get-BitLockerVolume'
                 EXEC = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
@@ -77,6 +87,7 @@ Enable-BitLocker """ + x + """ -PasswordProtector $pass"""
 
                 self.selectedDRIVE = ''
 
+                # Displays the encryption status of a drive
                 def STATUSCHECK(i):
                     # print(i)
                     self.selectedDRIVE = i
@@ -104,6 +115,10 @@ Enable-BitLocker """ + x + """ -PasswordProtector $pass"""
                 self.enblBIT.clicked.connect(lambda: threader(ENCRYPT(self.selectedDRIVE)))
                 self.cancelbutton.clicked.connect(cancelbutton)
 
+                # Sets default status check to the C: Drive
+                STATUSCHECK("C:")
+
+                # adds the drive letters to the available radio buttons
                 i = 0
                 x = 0
                 while True:
@@ -130,13 +145,20 @@ Enable-BitLocker """ + x + """ -PasswordProtector $pass"""
                         # print('Controlled exit of loop: ' + str(e))
                         break
 
+                # Sets the C: Drive as the default choice
+                i = 0
+                while i < len(buttons):
+                    if buttons[i].text() == "C:":
+                        buttons[i].setChecked(True)
+                    i = i + 1
+
                 ''' 
                 command = """
                 $drv = Read-Host -Prompt 'What drive would you like to enable bit locker on? [Ex: c:   e:  ]   '
                 manage-bde -protectors -add -pw $drv
                 manage-bde -on $drv"""
                 '''
-
+        # Allows for program to continue running while the function executes.
         def threader(com):
             try:
                 threader = Thread(target=com)

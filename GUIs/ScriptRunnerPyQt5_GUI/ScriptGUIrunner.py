@@ -497,10 +497,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         # Windows Main Menu Commands
 
         self.fwlbutton_2.clicked.connect(lambda: threader(scripfunc.fwl))
-        self.basicConfbutton_2.clicked.connect(
-            lambda: threader(lambda: scripfunc.basConf(config.get('Services', 'rdp'))))  #
-        self.rmvprosoftbutton_2.clicked.connect(lambda: threader(indev()))  #
-        self.servicesConfButton.clicked.connect(lambda: threader(indev()))  #
+        self.basicConfbutton_2.clicked.connect(lambda: threader(lambda: scripfunc.basConf(config.get('Services', 'rdp'))))  #
+        self.rmvprosoftbutton_2.clicked.connect(lambda: threader(scripfunc.servSet(config.get('Services', 'ssh'), config.get('Services', 'smb'), config.get('Services', 'web'), config.get('Services', 'apaweb'), config.get('Services', 'nginweb'))))
         self.enblBitLockerbutton.clicked.connect(lambda: threader(funcWIN.BITLOCKER()))
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3, self.chngusrpas_3,

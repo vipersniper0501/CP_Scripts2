@@ -4,6 +4,7 @@ from sys import platform
 import getpass
 from threading import *
 import distro  # for figuring out what linux distro
+import pwd
 import configparser
 import shutil
 from PyQt5 import QtGui
@@ -386,10 +387,43 @@ class ScriptRunnerFunc:
         else:
             print('This command is currently in developement')
 
-    def servSet(self):
-        print('This command is currently in developement')
+    def servSet(self, ssh, samba, web, apaweb, nginweb):
+        if platform == 'linux':
+            if ops == 'Ubuntu' or ops == 'Debian':
+                command = 'sudo apt install libpam-cracklib'
+                sub.Popen(command.split())
+                command = 'sudo apt install wenglish'
+                sub.Popen(command.split())
+            elif ops == 'Manjaro Linux':
+                command = 'sudo pacman -S libpam-cracklib'
+                sub.Popen(command.split())
+                command = 'sudo pacman -S wenglish'
+                sub.Popen(command.split())
+            if ssh == 'yes':
+                command = """sudo cp /etc/proftpd/proftpd.conf ~/Desktop/orig_proftpd.conf
+            sudo mkdir /etc/proftpd/ssl
+            sudo openssl req -new -x509 -days 365 -nodes -out /etc/proftpd/ssl/proftpd.cert.pem -keyout /etc/proftpd/ssl/proftpd.key.pem
+            echo "TLS/SSL keys have been created for ProFTP server  | ${thedate}"
+            """
+                sub.Popen(command.split())
+                shutil.copy('../linux_config_files/proftpd.conf', '/etc/proftpd/proftpd.conf')
+                shutil.copy('../linux_config_files/proftpTls_patch.conf', '/etc/proftpd/tls.conf')
 
-    # Only works on Linux (Maybe Mac. Need to test)
+            if samba == 'yes':
+                shutil.copy('../linux_config_files/smb.conf', '/etc/samba/smb.conf')
+
+            if web == 'yes':
+                if apaweb == 'yes':
+                    shutil.copy('../linux_config_files/apache2.conf', '/etc/apache2/apache2.conf')
+                elif nginweb == 'yes':
+                    shutil.copy('../linux_config_files/nginx.conf', '/etc/nginx/nginx.conf')
+                else:
+                    try:
+                        raise ImportError('Web setting is set to yes but neither Apache or Nginx were selected. No web settings were configured.')
+                    except ImportError:
+                        pass
+        elif platform == 'win32':
+            pass
 
 
     # Still needs Linux configurations
@@ -416,20 +450,73 @@ class ScriptRunnerFunc:
                 raise ValueError('rdp should be either yes or no!')
             command = 'secedit.exe /configure /db %windir%\\security\\local.sdb /cfg ../winCONF/' + path
             sub.Popen(command.split())
-            command = 'Enable-WindowsOptionalFeature –FeatureName "Internet-Explorer-Optional-amd64" -All –Online'
+            command = 'Enable-WindowsOptionalFeature –FeatureName "Internet-Explorer-Optional-amd64" -All –Online ' \
+                      '-NoRestart '
             sub.Popen(["powershell", "& {" + command + "}"])
+            disableCOM = ["SimpleTCP",
+                          "SMB1Protocol",
+                          "SMB1Protocol-Client",
+                          "SMB1Protocol-Server",
+                          "SMB1Protocol-Deprecation",
+                          "TFTP",
+                          "TelnetClient",
+                          "IIS-FTPServer",
+                          "IIS-WebDAV",
+                          "IIS-WebServer",
+                          "WorkFolders-Client"]
+            for i in range(0, 10):
+                command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[i] + ' -NoRestart'
+                sub.Popen(["powershell", "& {" + command + "}"])
 
-            # Must also uninstall all other prohibited features
+            HEY = QMessageBox()
+            HEY.setWindowTitle('Hey! Listen!')
+            HEY.setText("Hey! For the changes to take full effect please restart the computer!")
+            HEY.setIcon(QMessageBox.Critical)
+            HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+            x = HEY.exec_()
 
         elif platform == 'linux':
-            if rdp == 'yes':
-                print('Settings that include remote desktops will be configured')
-            elif rdp == 'no':
-                print('Settings that do not include remote desktops will be configured.')
-            else:
-                raise NameError('There has been an error in the Configuration file. RDP mus be either yes or no')
+            if ops == 'Ubuntu' or ops == 'Debian':
+                command = 'sudo apt install fail2ban'
+                sub.Popen(command.split())
+            elif ops == 'Manjaro Linux':
+                command = 'sudo pacman -S fail2ban'
+                sub.Popen(command.split())
 
-        print('This command is currently in developement')
+            shutil.copy('../linux_config_files/common-password', '/etc/pam.d/common-password')
+            shutil.copy('../linux_config_files/common-session', '/etc/pam.d/common-session')
+            shutil.copy('../linux_config_files/login', '/etc/pam.d/login')
+            shutil.copy('../linux_config_files/other', '/etc/pam.d/other')
+            #Removal of old ssh keys
+            command = """thedate=$(date)
+  userlist2=( $(eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1) )
+  usersleft2=${#userlist2[@]}  #this variable is equivelent to the number of users in list $userlist
+  i=0
+  while [ $usersleft2 != 0 ]; do
+    sudo rm -r /home/${userlist2[$i]}/.ssh
+    echo "User ${userlist2[$i]} no longer has any SSH keys | ${thedate}"
+    let i=i+1
+    echo $i
+    let usersleft2=usersleft2-1
+    echo $usersleft2
+    sleep 0.5s
+  done"""
+            sub.Popen(command.split())
+            gruname = 'wheel'
+            command = 'sudo groupadd ' + gruname
+            print(command)
+            sub.Popen(command.split())
+
+            username = pwd.getpwuid(os.getuid()).pw_name
+            group = 'wheel'
+            if ops == 'Manjaro Linux':
+                command = "sudo -S usermod --append --groups " + group + " " + username
+            else:
+                command = "sudo -S usermod -a -G " + group + " " + username
+            os.system(command)
+            shutil.copy('../linux_config_files/su', '/etc/pam.d/su')
+
+
 
     '''
     Removal of Prohibited Software.
@@ -495,11 +582,6 @@ class ScriptRunnerFunc:
                 super(hashRUN, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setupUi(self)
-
-                # name = [self.MD5radio, self.SHA1radio, self.SHA256radio, self.SHA384radio, self.SHA512radio]
-                # func = [self.MD5, self.sha1, self.sha256, self.sha384, self.sha512]
-                # for i in range(0,5):
-                #    name[i].toggled.connect(func[i])
 
                 def fileselection():
                     dialog = QFileDialog.getOpenFileName(self, 'Select file')

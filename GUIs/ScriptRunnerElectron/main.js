@@ -13,9 +13,13 @@ function createWindow () {
         {
             label: 'Help',
             submenu: [
-                {label:'About Creators'},
+                {label:'About Creators', click(){
+                    console.log('About Creator Window Open')
+                        //Goes to the about_creators  page
+                    }},
                 {label:'How to use program'},
-                {label:'Supported Commands'}
+                {label:'Command Descriptions'},
+                {label:'Change Configurations'}
             ]
         }
     ])
@@ -23,7 +27,7 @@ function createWindow () {
 
     window.loadFile('./index.html')
 
-    window.webContents.openDevTools()
+    //window.webContents.openDevTools()
 
 }
 

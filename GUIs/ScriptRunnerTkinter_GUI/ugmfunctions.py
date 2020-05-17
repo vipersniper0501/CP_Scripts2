@@ -6,20 +6,21 @@ from Script_Runner import *
 from threading import *
 from tkinter import *
 from tkinter.ttk import *
-import tkinter as tk #used to force certain widget type
+import tkinter as tk  # used to force certain widget type
 import tkinter.font as tkFont
 from Script_Runner import *
 import time
 import random
+
 if platform == 'linux':
     import crypt
     import pwd
-import distro #for figuring out what linux distro
+import distro  # for figuring out what linux distro
 
-
-#global variables
+# global variables
 OS = distro.linux_distribution()
 ops = OS[0]
+
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -31,6 +32,7 @@ def resource_path(relative_path):
 
     return os.path.join(base_path, relative_path)
 
+
 def changeVar(function, var, change):
     var = change
     print(var)
@@ -38,8 +40,10 @@ def changeVar(function, var, change):
     function
 
 
-
 class usrGruFunc:
+
+    def __init__(self):
+        pass
 
     def addusr(self):
         topusr = Toplevel()
@@ -101,7 +105,7 @@ Add-LocalGroupMember -Group "Administrators" -Member $nusnm
 Get-LocalUser
                     """
                     print(command)
-                    sub.Popen(["powershell","& {" + command + "}"])
+                    sub.Popen(["powershell", "& {" + command + "}"])
                     print('User ' + username + " has been successfully added!")
                     topusr.destroy()
                 elif admin == 'no' or admin == 'No':
@@ -113,7 +117,7 @@ New-LocalUser -Name $nusnm -Password $nuspss
 Get-LocalUser
                     """
                     print(command)
-                    sub.Popen(["powershell","& {" + command + "}"])
+                    sub.Popen(["powershell", "& {" + command + "}"])
                     print('User ' + username + " has been successfully added!")
                     topusr.destroy()
             elif platform == 'darwin':
@@ -161,7 +165,6 @@ Get-LocalUser
             else:
                 print('This command does not yet support this OS')
 
-
         userlbl = Label(topusr, text='What is the name of the User you would like to add?')
         userlbl.grid(row='1', column='1', sticky='W')
         name = Entry(topusr, textvariable=name)
@@ -176,7 +179,6 @@ Get-LocalUser
         grouplbl.grid(row='5', column='1', sticky='W')
         group = Entry(topusr, textvariable=group)
         group.grid(row='6', column='1', sticky='W', padx='5', pady='2')
-
 
         Confirm = Button(topusr, text='Confirm', command=addusrEXEC)
         Confirm.grid(row='7', column='2', sticky='W', padx='5', pady='5')
@@ -198,6 +200,7 @@ Get-LocalUser
         framlabel = tk.LabelFrame(topusr, text='USERS')
         framlabel.config(bd=5, background='lightgreen')
         framlabel.grid(row=0, column=1, sticky='nsew')
+
         # Needs to show list of users to remove
 
         def rmusrEXEC():
@@ -232,7 +235,7 @@ Get-LocalUser
         if platform == 'linux':
             command = """cat /etc/passwd | grep "/home" | cut -d":" -f1 > userlist.txt"""
             os.system(command)
-            #print(exec)
+            # print(exec)
             with open("userlist.txt", "r") as f:
                 for line in f:
                     output = f.read()
@@ -240,7 +243,7 @@ Get-LocalUser
                     print(output)
         elif platform == 'win32':
             command = "Get-LocalUser"
-            exec = sub.Popen(["powershell","& {Get-LocalUser}"], stdout=sub.PIPE)
+            exec = sub.Popen(["powershell", "& {Get-LocalUser}"], stdout=sub.PIPE)
             stdout, _ = exec.communicate()
             output = stdout.decode("utf-8")
         elif platform == 'darwin':
@@ -276,7 +279,7 @@ Get-LocalUser
                 gruname = name.get()
                 command = 'New-LocalGroup -Name ' + gruname
                 print(command)
-                sub.Popen(["powershell","& {" + command + "}"])
+                sub.Popen(["powershell", "& {" + command + "}"])
                 print('Group ' + gruname + ' has been successfully added!')
                 topusr.destroy()
             elif platform == 'darwin':
@@ -316,13 +319,13 @@ Get-LocalUser
                 gruname = name.get()
                 command = 'sudo groupdel ' + gruname
                 sub.Popen(command.split())
-                #os.system(command)
+                # os.system(command)
                 print('Group ' + gruname + ' has been successfully removed!')
                 topusr.destroy()
             elif platform == 'win32':
                 gruname = name.get()
                 command = 'Remove-LocalGroup -Name ' + gruname
-                sub.Popen(["powershell","& {" + command + "}"])
+                sub.Popen(["powershell", "& {" + command + "}"])
                 print('Group ' + gruname + ' has been successfully removed!')
                 topusr.destroy()
             elif platform == 'darwin':
@@ -345,7 +348,7 @@ Get-LocalUser
             print('This command is not complete yet')
         elif platform == 'win32':
             command = 'Get-LocalGroup'
-            exec = sub.Popen(["powershell","& {" + command + "}"], stdout=sub.PIPE)
+            exec = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
             stdout, _ = exec.communicate()
             output = stdout.decode("utf-8")
             outputBOX = Label(framlabel, text=output, background='lightgreen')
@@ -399,7 +402,7 @@ Get-LocalUser
                 username = name.get()
                 group = gruname.get()
                 command = "Add-LocalGroupMember -Name " + username + " -Member " + group
-                sub.Popen(["powershell","& {" + command + "}"])
+                sub.Popen(["powershell", "& {" + command + "}"])
                 print("User " + username + " has been successfully add to group " + group)
                 topusr.destroy()
                 print('This command is not complete yet')
@@ -412,7 +415,7 @@ Get-LocalUser
         if platform == 'linux':
             command = """cat /etc/passwd | grep "/home" | cut -d":" -f1 > userlist.txt"""
             os.system(command)
-            #print(exec)
+            # print(exec)
             with open("userlist.txt", "r") as f:
                 for line in f:
                     output = f.read()
@@ -423,7 +426,7 @@ Get-LocalUser
 
         elif platform == 'win32':
             command = "Get-LocalUser"
-            exec = sub.Popen(["powershell","& {Get-LocalUser}"], stdout=sub.PIPE)
+            exec = sub.Popen(["powershell", "& {Get-LocalUser}"], stdout=sub.PIPE)
             output, _ = exec.communicate()
             print(output.decode("utf-8"))
 
@@ -454,7 +457,7 @@ Get-LocalUser
             print('This command is not complete yet')
         elif platform == 'win32':
             command = 'Get-LocalGroup'
-            exec = sub.Popen(["powershell","& {" + command + "}"], stdout=sub.PIPE)
+            exec = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
             stdout, _ = exec.communicate()
             output = stdout.decode("utf-8")
             outputBOX = Label(framlabel2, text=output, background='lightgreen')
@@ -463,8 +466,6 @@ Get-LocalUser
             print('This command is not complete yet')
         else:
             print('This command does not yet support this OS')
-
-
 
         adlbl = Label(topusr, text='What is the name of the User you would like to add to a group?')
         adlbl.grid(row=1, column=0, sticky='nw')
@@ -512,7 +513,7 @@ Get-LocalUser
                 username = name.get()
                 group = gruname.get()
                 command = 'Remove-LocalGroupMember -Group ' + group + ' -Member ' + username
-                sub.Popen(["powershell","& {" + command + "}"])
+                sub.Popen(["powershell", "& {" + command + "}"])
                 topusr.destroy()
             elif platform == 'darwin':
                 print('This command does not work on MacOS')
@@ -524,7 +525,7 @@ Get-LocalUser
         if platform == 'linux':
             command = """cat /etc/passwd | grep "/home" | cut -d":" -f1 > userlist.txt"""
             os.system(command)
-            #print(exec)
+            # print(exec)
             with open("userlist.txt", "r") as f:
                 for line in f:
                     output = f.read()
@@ -535,7 +536,7 @@ Get-LocalUser
 
         elif platform == 'win32':
             command = "Get-LocalUser"
-            exec = sub.Popen(["powershell","& {Get-LocalUser}"], stdout=sub.PIPE)
+            exec = sub.Popen(["powershell", "& {Get-LocalUser}"], stdout=sub.PIPE)
             output, _ = exec.communicate()
             print(output.decode("utf-8"))
 
@@ -566,7 +567,7 @@ Get-LocalUser
             print('This command is not complete yet')
         elif platform == 'win32':
             command = 'Get-LocalGroup'
-            exec = sub.Popen(["powershell","& {" + command + "}"], stdout=sub.PIPE)
+            exec = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
             stdout, _ = exec.communicate()
             output = stdout.decode("utf-8")
             outputBOX = Label(framlabel2, text=output, background='lightgreen')
@@ -575,8 +576,6 @@ Get-LocalUser
             print('This command is not complete yet')
         else:
             print('This command does not yet support this OS')
-
-
 
         adlbl = Label(topusr, text='What is the name of the User you would like to remove from a group?')
         adlbl.grid(row=1, column=0, sticky='nw')
@@ -610,7 +609,7 @@ Get-LocalUser
             if platform == 'linux':
                 command = """cat /etc/passwd | grep "/home" | cut -d":" -f1 > userlist.txt"""
                 os.system(command)
-                #print(exec)
+                # print(exec)
                 with open("userlist.txt", "r") as f:
                     for line in f:
                         output = f.read()
@@ -621,7 +620,7 @@ Get-LocalUser
 
             elif platform == 'win32':
                 command = "Get-LocalUser"
-                exec = sub.Popen(["powershell","& {Get-LocalUser}"], stdout=sub.PIPE)
+                exec = sub.Popen(["powershell", "& {Get-LocalUser}"], stdout=sub.PIPE)
                 output, _ = exec.communicate()
                 print(output.decode("utf-8"))
 
@@ -672,7 +671,7 @@ Get-LocalUser
                 print('This command is not complete yet')
             elif platform == 'win32':
                 command = 'Get-LocalGroup'
-                exec = sub.Popen(["powershell","& {" + command + "}"], stdout=sub.PIPE)
+                exec = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
                 stdout, _ = exec.communicate()
                 output = stdout.decode("utf-8")
                 outputBOX = Label(framlabel, text=output, background='lightgreen')
@@ -682,7 +681,6 @@ Get-LocalUser
             else:
                 print('This command does not yet support this OS')
 
-
         fontSize = tkFont.Font(size=14)
         lsgrus = tk.Button(topusr, text='List all\nusers on system', width=20, command=lsLocaGruEXEC)
         lsgrus.config(font=fontSize)
@@ -691,7 +689,7 @@ Get-LocalUser
         cancel = Button(topusr, text='Cancel', command=topusr.destroy)
         cancel.grid(row=1, column=1, sticky='w', padx='5', pady='5')
 
-    def lsmemgru(self): # Missing MacOS commands
+    def lsmemgru(self):  # Missing MacOS commands
         topusr = Toplevel()
         topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
         topusr.title('List Members of Group')
@@ -721,7 +719,7 @@ Get-LocalUser
             elif platform == 'win32':
                 group = gruname.get()
                 command = 'Get-LocalGroupMember -Name ' + group
-                exec = sub.Popen(["powershell","& {" + command + "}"], stdout=sub.PIPE)
+                exec = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
                 stdout, _ = exec.communicate()
                 output = stdout.decode("utf-8")
                 outputBOX = Label(framlabel2, text=output, background='lightgreen')
@@ -745,7 +743,7 @@ Get-LocalUser
             print('This command is not complete yet')
         elif platform == 'win32':
             command = 'Get-LocalGroup'
-            exec = sub.Popen(["powershell","& {" + command + "}"], stdout=sub.PIPE)
+            exec = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
             stdout, _ = exec.communicate()
             output = stdout.decode("utf-8")
             outputBOX = Label(framlabel, text=output, background='lightgreen')
@@ -766,7 +764,7 @@ Get-LocalUser
         cancel = Button(topusr, text='Cancel', command=topusr.destroy)
         cancel.grid(row=7, column=1, sticky='e', padx=5, pady=5)
 
-    def lsgruusrin(self): # Missing Windows Commands and MacOS commands
+    def lsgruusrin(self):  # Missing Windows Commands and MacOS commands
         topusr = Toplevel()
         topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
         topusr.title('List Members of Group')
@@ -807,7 +805,7 @@ Get-LocalUser
         if platform == 'linux':
             command = """cat /etc/passwd | grep "/home" | cut -d":" -f1 > userlist.txt"""
             os.system(command)
-            #print(exec)
+            # print(exec)
             with open("userlist.txt", "r") as f:
                 for line in f:
                     output = f.read()
@@ -818,7 +816,7 @@ Get-LocalUser
 
         elif platform == 'win32':
             command = "Get-LocalUser"
-            exec = sub.Popen(["powershell","& {Get-LocalUser}"], stdout=sub.PIPE)
+            exec = sub.Popen(["powershell", "& {Get-LocalUser}"], stdout=sub.PIPE)
             output, _ = exec.communicate()
             print(output.decode("utf-8"))
 
@@ -834,7 +832,8 @@ Get-LocalUser
         else:
             print('This command does not yet support this OS')
 
-        userlbl = Label(topusr, text='What is the name of the User that you would like to see the groups that they are in?')
+        userlbl = Label(topusr,
+                        text='What is the name of the User that you would like to see the groups that they are in?')
         userlbl.grid(row=1, column=0, sticky='W')
         name = Entry(topusr, textvariable=name)
         name.grid(row=2, column=0, sticky='W', padx='5', pady='2')
@@ -845,7 +844,7 @@ Get-LocalUser
         cancel = Button(topusr, text='Cancel', command=topusr.destroy)
         cancel.grid(row=7, column=0, sticky='W', padx='5', pady='5')
 
-    def chngusrspass(self): # Missing windows and MacOS commands
+    def chngusrspass(self):  # Missing windows and MacOS commands
         topusr = Toplevel()
         topusr.iconphoto(False, tk.PhotoImage(file="cup2.png"))
         topusr.title('Add User To System')

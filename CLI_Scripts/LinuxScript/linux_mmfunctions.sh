@@ -182,7 +182,8 @@ function basic_config {
   sudo cp ../config_files/pamOther_patch /etc/pam.d/other
   echo "Pam.d setting policies have been completed  | ${thedate}" | tee Script_log.txt
   echo "Removing old SSH keys... | ${thedate}" | tee Script_log.txt
-  
+
+  thedate=$(date)
   userlist2=( $(eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1) )
   usersleft2=${#userlist2[@]}  #this variable is equivelent to the number of users in list $userlist
   i=0
