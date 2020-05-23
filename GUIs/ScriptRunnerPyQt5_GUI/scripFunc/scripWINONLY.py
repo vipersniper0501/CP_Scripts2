@@ -59,8 +59,13 @@ class funcWINONLY:
                         command = """
 $pass = ConvertTo-SecureString '""" + self.encrypPASS.text() + """' -AsPlainText -Force
 Enable-BitLocker """ + x + """ -PasswordProtector $pass"""
+                        '''
+                        Only works if 'Allow BitLocker without compatible TPM' is enabled in the Group Policy
+                        Also does not encrypt right away. If you type 'Get-BitlockerVolume' in powershell, it will tell
+                        you how much has been encrypted so far.
+                        '''
                         print(command)
-                        #sub.Popen(["powershell", "& {" + command + "}"])
+                        sub.Popen(["powershell", "& {" + command + "}"])
 
                 # Gets list of drives and encryption status'
                 decryptSTATUS = []

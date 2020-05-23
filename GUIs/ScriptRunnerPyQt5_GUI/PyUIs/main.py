@@ -631,7 +631,7 @@ class Ui_MainWindow(object):
         self.rmvprosoftbutton_2.setText(_translate("MainWindow", "Remove Prohibited Software*"))
         self.fwlbutton_2.setText(_translate("MainWindow", "Windows Firewall Settings"))
         self.label_13.setText(_translate("MainWindow", "All Commands here will work on Windows 10"))
-        self.enblBitLockerbutton.setText(_translate("MainWindow", "Enable BitLocker*"))
+        self.enblBitLockerbutton.setText(_translate("MainWindow", "Enable BitLocker"))
         self.winTAB.setTabText(self.winTAB.indexOf(self.windows_mainCOM), _translate("MainWindow", "Main Commands"))
         self.lsmemgru_3.setText(_translate("MainWindow", "List Members of Group*"))
         self.chngusrpas_3.setText(_translate("MainWindow", "Change all Users Passwords at Once*"))

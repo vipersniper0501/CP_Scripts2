@@ -278,14 +278,20 @@ class fconfStart(QDialog, Ui_firstConf):
                 with open('config.ini', 'w') as configfile:
                     config.write(configfile)
 
+                def closing():
+                    print('closing')
+                    self.close()
+
+
                 RESTART = QMessageBox()
                 RESTART.setWindowTitle("Hey! Listen!")
                 RESTART.setText("Configurations have been sucessfully saved.")
                 RESTART.setIcon(QMessageBox.Information)
                 RESTART.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                 RESTART.setStandardButtons(QMessageBox.Close)
-                RESTART.buttonClicked.connect(lambda: self.close())
+                #RESTART.buttonClicked.connect(lambda: closing())
                 x = RESTART.exec_()
+                self.close()
             else:
                 HEY = QMessageBox()
                 HEY.setWindowTitle('Hey! Listen!')
@@ -324,6 +330,14 @@ class fconfStart(QDialog, Ui_firstConf):
 
 class Mainstart(QMainWindow, Ui_MainWindow):
 
+    def threader(self, com):
+        try:
+            threader = Thread(target=com)
+            threader.start()
+        except Exception as e:
+            print(e)
+            print('Could not start thread')
+
     def __init__(self, parent=None):
         super(Mainstart, self).__init__(parent)
         print('Script Runner has started')
@@ -351,8 +365,12 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             self.mmfuncassign(variableCheck)
         else:
             print('Ello, you have some configurations to do!')
-            widget = fconfStart()
-            widget.exec_()
+
+            def firstCONF():
+                widget = fconfStart()
+                widget.exec_()
+
+            self.threader(firstCONF())
 
         ###################
 
@@ -483,43 +501,43 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         self.actionDark_Mode.triggered.connect(lambda: light_darkMODE(0))
 
         # Menubar Buttons
-        self.actionHow_To_Use_Program.triggered.connect(lambda: threader(showHOWTO()))
-        self.actionAbout_Creator.triggered.connect(lambda: threader(runABOUTPROG()))
-        self.actionCommand_Descriptions.triggered.connect(lambda: threader(runCOMDESCRIPT()))
-        self.actionChange_Configurations.triggered.connect(lambda: threader(chngconf()))
+        self.actionHow_To_Use_Program.triggered.connect(lambda: self.threader(showHOWTO()))
+        self.actionAbout_Creator.triggered.connect(lambda: self.threader(runABOUTPROG()))
+        self.actionCommand_Descriptions.triggered.connect(lambda: self.threader(runCOMDESCRIPT()))
+        self.actionChange_Configurations.triggered.connect(lambda: self.threader(chngconf()))
 
         # Universal Buttons
-        self.Updates_buttonUNI.clicked.connect(lambda: threader(scripfunc.updateos()))
-        self.rmvprosoftbuttonUNI.clicked.connect(lambda: threader(indev()))  #
-        self.srchmedbuttonUNI.clicked.connect(lambda: threader(scripfunc.srchmedia))
-        self.chkhashfile_buttonUNI.clicked.connect(lambda: threader(scripfunc.hashCheck()))
+        self.Updates_buttonUNI.clicked.connect(lambda: self.threader(scripfunc.updateos()))
+        self.rmvprosoftbuttonUNI.clicked.connect(lambda: self.threader(indev()))  #
+        self.srchmedbuttonUNI.clicked.connect(lambda: self.threader(scripfunc.srchmedia))
+        self.chkhashfile_buttonUNI.clicked.connect(lambda: self.threader(scripfunc.hashCheck()))
 
         # Windows Main Menu Commands
 
-        self.fwlbutton_2.clicked.connect(lambda: threader(scripfunc.fwl))
-        self.basicConfbutton_2.clicked.connect(lambda: threader(lambda: scripfunc.basConf(config.get('Services', 'rdp'))))  #
-        self.rmvprosoftbutton_2.clicked.connect(lambda: threader(scripfunc.servSet(config.get('Services', 'ssh'), config.get('Services', 'smb'), config.get('Services', 'web'), config.get('Services', 'apaweb'), config.get('Services', 'nginweb'))))
-        self.enblBitLockerbutton.clicked.connect(lambda: threader(funcWIN.BITLOCKER()))
+        self.fwlbutton_2.clicked.connect(lambda: self.threader(scripfunc.fwl))
+        self.basicConfbutton_2.clicked.connect(lambda: self.threader(lambda: scripfunc.basConf(config.get('Services', 'rdp'))))  #
+        self.rmvprosoftbutton_2.clicked.connect(lambda: self.threader(scripfunc.servSet(config.get('Services', 'ssh'), config.get('Services', 'smb'), config.get('Services', 'web'), config.get('Services', 'apaweb'), config.get('Services', 'nginweb'))))
+        self.enblBitLockerbutton.clicked.connect(lambda: self.threader(funcWIN.BITLOCKER()))
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3, self.chngusrpas_3,
                                 self.lsgruusrin_3, self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
                                 self.rmvgrufrosys_3, self.rmvusrfrogru_3, self.rmvusrfrosys_3]
         for i in range(0, 11):
-            self.WINUSRGRUBUTTON[i].clicked.connect(lambda: threader(indev()))  #
+            self.WINUSRGRUBUTTON[i].clicked.connect(lambda: self.threader(indev()))  #
 
         # Linux Main Menu Commands
-        self.fwlbutton_3.clicked.connect(lambda: threader(scripfunc.fwl))
-        self.auditbutton_3.clicked.connect(lambda: threader(funcLIN.alyn))
-        self.malrembutton_3.clicked.connect(lambda: threader(funcLIN.malRem()))  #
-        self.rmvprosoftbutton_3.clicked.connect(lambda: threader(indev()))  #
-        self.basicConfbutton_3.clicked.connect(lambda: threader(indev()))  #
-        self.servicesConfButton_2.clicked.connect(lambda: threader(indev()))  #
+        self.fwlbutton_3.clicked.connect(lambda: self.threader(scripfunc.fwl))
+        self.auditbutton_3.clicked.connect(lambda: self.threader(funcLIN.alyn))
+        self.malrembutton_3.clicked.connect(lambda: self.threader(funcLIN.malRem()))  #
+        self.rmvprosoftbutton_3.clicked.connect(lambda: self.threader(indev()))  #
+        self.basicConfbutton_3.clicked.connect(lambda: self.threader(indev()))  #
+        self.servicesConfButton_2.clicked.connect(lambda: self.threader(indev()))  #
         # Linux User Group Commands
         self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4, self.adusrtosys_4, self.chngusrpas_4,
                                    self.lsgruusrin_4, self.lslocagru_4, self.lslocausr_4, self.lsmemgru_4,
                                    self.rmvgrufrosys_4, self.rmvusrfrogru_4, self.rmvusrfrosys_4]
         for i in range(0, 11):
-            self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: threader(indev()))  #
+            self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: self.threader(indev()))  #
 
         # MacOS Buttons
         self.MACBUTTONS = [self.rmvprosoftbutton_4, self.malrembutton_4, self.basicConfbutton_4,
@@ -527,17 +545,11 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                            self.chngusrpas_5, self.lsgruusrin_5, self.lslocagru_5, self.lslocausr_5, self.lsmemgru_5,
                            self.rmvgrufrosys_5, self.rmvusrfrogru_5, self.rmvusrfrosys_5]
         for i in range(0, 15):
-            self.MACBUTTONS[i].clicked.connect(lambda: threader(indev()))
+            self.MACBUTTONS[i].clicked.connect(lambda: self.threader(indev()))
 
         self.quit_button_3.clicked.connect(quitButton)
 
-        def threader(com):
-            try:
-                threader = Thread(target=com)
-                threader.start()
-            except Exception as e:
-                print(e)
-                print('Could not start thread')
+
 
 
 if __name__ == "__main__":

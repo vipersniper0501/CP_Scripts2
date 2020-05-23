@@ -22,7 +22,7 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 class mmfunc:
-    def updates():
+    def updates(self):
         if ops == 'Ubuntu' or ops == 'debian':
             command = 'sudo apt update && upgrade -y'
             sub.Popen(command.split())
@@ -65,7 +65,7 @@ class mmfunc:
         else:
             print('This command does not currently support this OS')
 
-    def srchmedia():
+    def srchmedia(self):
         if platform == 'linux' or platform == 'darwin':
             extensions = ('.jpg', '.mp4', '.flv', '.avi', '.wmv', '.mov', '.png', '.tif', '.gif', '.mp3', '.wma', '.aif', '.jar')
             for root, dirs, files in os.walk('/home/'):
@@ -91,16 +91,16 @@ class mmfunc:
                         print(filepath)
             print('Scan for unapproved media complete.')
 
-    def fwl():
+    def fwl(self):
         print('This command is currently in developement')
 
-    def servSet():
+    def servSet(self):
         print('This command is currently in developement')
 
-    def malRem():
+    def malRem(self):
         print('This command is currently in developement')
 
-    def alyn():
+    def alyn(self):
         if ops == 'Ubuntu' or ops == 'debian':
             command = 'sudo apt install lynis -y'
             sub.Popen(command.split())
@@ -116,10 +116,10 @@ class mmfunc:
         elif platform == 'win32':
             print('This function (alyn) does not currently support this OS.')
 
-    def basConf():
+    def basConf(self):
         print('This command is currently in developement')
 
-    def rmProCont():
+    def rmProCont(self):
         print('This command is currently in developement')
 
 
@@ -136,7 +136,7 @@ class ThreadmmFunc():
 
     def threaderUPDT(self):
         try:
-            self.threader = Thread(target=mmfunc.updates)
+            self.threader = Thread(target=lambda: mmfunc.updates(self))
             self.threader.start()
         except Exception as e:
             print(e)
@@ -144,7 +144,7 @@ class ThreadmmFunc():
 
     def threaderFWL(self):
         try:
-            self.threader = Thread(target=mmfunc.fwl)
+            self.threader = Thread(target=lambda: mmfunc.fwl(self))
             self.threader.start()
         except Exception as e:
             print(e)
@@ -152,7 +152,7 @@ class ThreadmmFunc():
 
     def threaderServ(self):
         try:
-            self.threader = Thread(target=mmfunc.servSet)
+            self.threader = Thread(target=lambda: mmfunc.servSet(self))
             self.threader.start()
         except Exception as e:
             print(e)
@@ -160,7 +160,7 @@ class ThreadmmFunc():
 
     def threaderMALREM(self):
         try:
-            self.threader = Thread(target=mmfunc.malRem)
+            self.threader = Thread(target=lambda: mmfunc.malRem(self))
             self.threader.start()
         except Exception as e:
             print(e)
@@ -168,7 +168,7 @@ class ThreadmmFunc():
 
     def threaderALYN(self):
         try:
-            self.threader = Thread(target=mmfunc.alyn)
+            self.threader = Thread(target=lambda: mmfunc.alyn(self))
             self.threader.start()
         except Exception as e:
             print(e)
@@ -176,7 +176,7 @@ class ThreadmmFunc():
 
     def threaderBASEconf(self):
         try:
-            self.threader = Thread(target=mmfunc.basconf)
+            self.threader = Thread(target=lambda: mmfunc.basconf(self))
             self.threader.start()
         except Exception as e:
             print(e)
@@ -184,7 +184,7 @@ class ThreadmmFunc():
 
     def threaderRMproCont(self):
         try:
-            self.threader = Thread(target=mmfunc.rmProCont)
+            self.threader = Thread(target=lambda: mmfunc.rmProCont(self))
             self.threader.start()
         except Exception as e:
             print(e)

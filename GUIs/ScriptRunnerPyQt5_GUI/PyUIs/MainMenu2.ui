@@ -552,7 +552,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Enable BitLocker*</string>
+         <string>Enable BitLocker</string>
         </property>
        </widget>
       </widget>
