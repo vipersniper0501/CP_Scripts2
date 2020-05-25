@@ -426,7 +426,25 @@ class ScriptRunnerFunc:
                     except ImportError:
                         pass
         elif platform == 'win32':
-            pass
+            if samba == 'yes':
+                featuresSMB = ["SmbDirect",
+                               "SMB1Protocol",
+                               "SMB1Protocol-Client",
+                               "SMB1Protocol-Server",
+                               "SMB1Protocol-Deprecation"]
+                for i in range(0, len(featuresSMB)):
+                    command = 'Enable-WindowsOptionalFeature -Online -FeatureName ' + featuresSMB[i] + ' -NoRestart'
+                    sub.Popen(["powershell", "& {" + command + "}"])
+                if ssh == 'yes':
+                    command = "Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
+                    sub.Popen(["powershell", "& {" + command + "}"])
+                    command = "Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
+                    sub.Popen(["powershell", "& {" + command + "}"])
+                elif ssh == 'no':
+                    command = "Remove-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
+                    sub.Popen(["powershell", "& {" + command + "}"])
+                    command = "Remove-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
+                    sub.Popen(["powershell", "& {" + command + "}"])
 
     # Still needs Linux configurations
 
@@ -438,6 +456,7 @@ class ScriptRunnerFunc:
                     shutil.copy('../winCONF/win10StigsRDPy/Machine', r'c:\Windows\System32\GroupPolicy\Machine')
                     shutil.copy('../winCONF/win10StigsRDPy/User', r'c:\Windows\System32\GroupPolicy\User')
                     shutil.copy('../winCONF/win10StigsRDPy/gpt.ini', r'c:\Windows\System32\GroupPolicy\GPT.INI')
+                    print('Successfully copied Group Policy Settings')
                 except IOError as e:
                     print("Unable to copy file. %s" % e)
                 path = 'C:/win10secRDPallowed.inf'
@@ -447,7 +466,7 @@ class ScriptRunnerFunc:
                     shutil.copy('../winCONF/win10StigsRDPn/Machine', r'c:\Windows\System32\GroupPolicy\Machine')
                     shutil.copy('../winCONF/win10StigsRDPn/User', r'c:\Windows\System32\GroupPolicy\User')
                     shutil.copy('../winCONF/win10StigsRDPn/gpt.ini', r'c:\Windows\System32\GroupPolicy\GPT.INI')
-                    print('Successfully installed Group Policy Settings')
+                    print('Successfully copied Group Policy Settings')
                 except IOError as e:
                     print('Unable to copy file. %s' % e)
                 path = 'C:/Windows10Template11_17.inf'
@@ -461,19 +480,28 @@ class ScriptRunnerFunc:
                       '-NoRestart '
             sub.Popen(["powershell", "& {" + command + "}"])
             disableCOM = ["SimpleTCP",
-                          "SMB1Protocol",
-                          "SMB1Protocol-Client",
-                          "SMB1Protocol-Server",
-                          "SMB1Protocol-Deprecation",
                           "TFTP",
                           "TelnetClient",
                           "IIS-FTPServer",
                           "IIS-WebDAV",
                           "IIS-WebServer",
-                          "WorkFolders-Client"]
+                          "WCF-Services45",
+                          "WCF-TCP-PortSharing45",
+                          "Printing-Foundation-Features",
+                          "Printing-Foundation-InternetPrinting-Client",
+                          "WorkFolders-Client",
+                          "MicrosoftWindowsPowershellV2",
+                          "MicrosoftWindowsPowershellV2Root"]
             for i in range(0, len(disableCOM)):
                 command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[i] + ' -NoRestart'
                 sub.Popen(["powershell", "& {" + command + "}"])
+
+                windowsCapabilitesDisable = ["RIP.Listener~~~~0.0.1.0",
+                                             "SNMP.Client~~~~0.0.1.0"]
+
+                for i in range(0, len(windowsCapabilitesDisable)):
+                    command = "Remove-WindowsCapability -Online -Name " + windowsCapabilitesDisable[i]
+                    sub.Popen(["powershell", "& {" + command + "}"])
 
             HEY = QMessageBox()
             HEY.setWindowTitle('Hey! Listen!')

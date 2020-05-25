@@ -463,14 +463,14 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>11</pointsize>
          </font>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Basic Configurations*</string>
+         <string>Security Policies Configurations*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvprosoftbutton_2">
@@ -555,6 +555,27 @@
          <string>Enable BitLocker</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="servicesConfButton_4">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>90</y>
+          <width>221</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+        </property>
+        <property name="text">
+         <string>Services Configurations*</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="windows_usrgruCOM">
        <attribute name="title">
@@ -599,7 +620,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Change all Users Passwords at Once*</string>
+         <string>Change all User Passwords at Once*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvusrfrosys_3">
@@ -1030,7 +1051,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Change all Users Passwords at Once*</string>
+         <string>Change all User Passwords at Once*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvusrfrosys_4">
@@ -1422,7 +1443,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Change all Users Passwords at Once*</string>
+         <string>Change all User Passwords at Once*</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvusrfrosys_5">

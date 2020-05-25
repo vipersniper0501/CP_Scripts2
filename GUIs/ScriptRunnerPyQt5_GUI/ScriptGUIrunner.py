@@ -516,8 +516,9 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         self.fwlbutton_2.clicked.connect(lambda: self.threader(scripfunc.fwl))
         self.basicConfbutton_2.clicked.connect(lambda: self.threader(lambda: scripfunc.basConf(config.get('Services', 'rdp'))))  #
-        self.rmvprosoftbutton_2.clicked.connect(lambda: self.threader(scripfunc.servSet(config.get('Services', 'ssh'), config.get('Services', 'smb'), config.get('Services', 'web'), config.get('Services', 'apaweb'), config.get('Services', 'nginweb'))))
+        self.rmvprosoftbutton_2.clicked.connect(lambda: self.threader(scripfunc.rmProSoft()))
         self.enblBitLockerbutton.clicked.connect(lambda: self.threader(funcWIN.BITLOCKER()))
+        self.servicesConfButton_4.clicked.connect(lambda: self.threader(scripfunc.servSet(config.get('Services', 'ssh'), config.get('Services', 'smb'), config.get('Services', 'web'), config.get('Services', 'apaweb'), config.get('Services', 'nginweb'))))
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3, self.chngusrpas_3,
                                 self.lsgruusrin_3, self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
