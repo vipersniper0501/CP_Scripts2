@@ -389,7 +389,7 @@ class ScriptRunnerFunc:
         else:
             print('This command is currently in developement')
 
-    def servSet(self, ssh, samba, web, apaweb, nginweb):
+    def servSet(self, ssh, samba, web, apaweb, nginweb, ftp):
         if platform == 'linux':
             if ops == 'Ubuntu' or ops == 'Debian':
                 command = 'sudo apt install libpam-cracklib'
@@ -408,6 +408,7 @@ class ScriptRunnerFunc:
             echo "TLS/SSL keys have been created for ProFTP server  | ${thedate}"
             """
                 sub.Popen(command.split())
+            if ftp == 'yes':
                 shutil.copy('../linux_config_files/proftpd.conf', '/etc/proftpd/proftpd.conf')
                 shutil.copy('../linux_config_files/proftpTls_patch.conf', '/etc/proftpd/tls.conf')
 

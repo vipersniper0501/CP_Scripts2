@@ -901,7 +901,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Basic Configurations*</string>
+         <string>Basic Configurations</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvprosoftbutton_3">
@@ -1004,7 +1004,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Services Configurations*</string>
+         <string>Services Configurations</string>
         </property>
        </widget>
       </widget>
