@@ -6,6 +6,7 @@ import getpass
 from threading import *
 import distro  # for figuring out what linux distro
 from shlex import quote as shlex_quote
+from distutils.dir_util import copy_tree
 
 if platform == 'linux':
     import pwd
@@ -451,35 +452,50 @@ class ScriptRunnerFunc:
 
     def basConf(self, rdp):
         if platform == 'win32':
+            def cptree(src, dst, symlinks=False, ignore=None):
+                for item in os.listdir(src):
+                    s = os.path.join(src, item)
+                    d = os.path.join(dst, item)
+                if os.path.isdir(s):
+                    shutil.copytree(s, d, symlinks, ignore)
+                else:
+                    shutil.copy2(s, d)
+
             if rdp == 'yes':
                 try:
-                    shutil.copy('../winCONF/win10StigsRDPy/win10secRDPallowed.inf', 'C:/win10secRDPallowed.inf')
-                    shutil.copy('../winCONF/win10StigsRDPy/Machine', r'c:\Windows\System32\GroupPolicy\Machine')
-                    shutil.copy('../winCONF/win10StigsRDPy/User', r'c:\Windows\System32\GroupPolicy\User')
-                    shutil.copy('../winCONF/win10StigsRDPy/gpt.ini', r'c:\Windows\System32\GroupPolicy\GPT.INI')
+                    shutil.copy('./winCONF/win10StigsRDPy/win10secRDPallowed.inf', 'C:/win10secRDPallowed2.inf')
+                    copy_tree('./winCONF/win10StigsRDPy/Group_Policy_Files/MachineC',
+                              r'c:\Windows\System32\GroupPolicy\Machine')
+                    copy_tree('./winCONF/win10StigsRDPy/Group_Policy_Files/UserC',
+                              r'c:\Windows\System32\GroupPolicy\User')
+                    shutil.copy('./winCONF/win10StigsRDPy/Group_Policy_Files/gpt.ini',
+                                r'c:\Windows\System32\GroupPolicy\GPT.INI')
                     print('Successfully copied Group Policy Settings')
                 except IOError as e:
                     print("Unable to copy file. %s" % e)
-                path = 'C:/win10secRDPallowed.inf'
+                path = 'C:/win10secRDPallowed2.inf'
             elif rdp == 'no':
                 try:
-                    shutil.copy('../winCONF/win10StigsRDPn/Windows10Template11_17.inf', 'C:/Windows10Template11_17.inf')
-                    shutil.copy('../winCONF/win10StigsRDPn/Machine', r'c:\Windows\System32\GroupPolicy\Machine')
-                    shutil.copy('../winCONF/win10StigsRDPn/User', r'c:\Windows\System32\GroupPolicy\User')
-                    shutil.copy('../winCONF/win10StigsRDPn/gpt.ini', r'c:\Windows\System32\GroupPolicy\GPT.INI')
+                    shutil.copy('./winCONF/win10StigsRDPn/Windows10Template11_17.inf', 'C:/Windows10Template11_172.inf')
+                    copy_tree('./winCONF/win10StigsRDPn/Windows10GroupPolicyFiles11_17/MachineC',
+                              r'c:\Windows\System32\GroupPolicy\Machine')
+                    copy_tree('./winCONF/win10StigsRDPn/Windows10GroupPolicyFiles11_17/UserC',
+                              r'c:\Windows\System32\GroupPolicy\User')
+                    shutil.copy('./winCONF/win10StigsRDPn/Windows10GroupPolicyFiles11_17/gpt.ini',
+                                r'c:\Windows\System32\GroupPolicy\GPT.INI')
                     print('Successfully copied Group Policy Settings')
                 except IOError as e:
                     print('Unable to copy file. %s' % e)
-                path = 'C:/Windows10Template11_17.inf'
+                path = 'C:/Windows10Template11_172.inf'
             else:
                 raise ValueError('rdp should be either yes or no!')
             command = r"secedit /configure /db C:\\windows\\security\\local.sdb /cfg {0}".format(path)
-            sub.Popen(command.split())
+            sub.call(command.split())
             command = 'gpupdate'
-            sub.Popen(command)
+            sub.call(command)
             command = 'Enable-WindowsOptionalFeature –FeatureName "Internet-Explorer-Optional-amd64" -All –Online ' \
                       '-NoRestart '
-            sub.Popen(["powershell", "& {" + command + "}"])
+            sub.call(["powershell", "& {" + command + "}"])
             disableCOM = ["SimpleTCP",
                           "TFTP",
                           "TelnetClient",
@@ -495,21 +511,25 @@ class ScriptRunnerFunc:
                           "MicrosoftWindowsPowershellV2Root"]
             for i in range(0, len(disableCOM)):
                 command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[i] + ' -NoRestart'
-                sub.Popen(["powershell", "& {" + command + "}"])
+                sub.call(["powershell", "& {" + command + "}"])
 
                 windowsCapabilitesDisable = ["RIP.Listener~~~~0.0.1.0",
                                              "SNMP.Client~~~~0.0.1.0"]
 
                 for i in range(0, len(windowsCapabilitesDisable)):
                     command = "Remove-WindowsCapability -Online -Name " + windowsCapabilitesDisable[i]
-                    sub.Popen(["powershell", "& {" + command + "}"])
+                    sub.call(["powershell", "& {" + command + "}"])
 
-            HEY = QMessageBox()
-            HEY.setWindowTitle('Hey! Listen!')
-            HEY.setText("Hey! For the changes to take full effect please restart the computer!")
-            HEY.setIcon(QMessageBox.Critical)
-            HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            x = HEY.exec_()
+            '''
+            def completed():
+                HEY = QMessageBox()
+                HEY.setWindowTitle('Hey! Listen!')
+                HEY.setText("Hey! For the changes to take full effect please restart the computer!")
+                HEY.setIcon(QMessageBox.Critical)
+                HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                x = HEY.exec_()
+            completed()
+            '''
 
         elif platform == 'linux':
             if ops == 'Ubuntu' or ops == 'Debian':

@@ -282,14 +282,12 @@ class fconfStart(QDialog, Ui_firstConf):
                     print('closing')
                     self.close()
 
-
                 RESTART = QMessageBox()
                 RESTART.setWindowTitle("Hey! Listen!")
                 RESTART.setText("Configurations have been sucessfully saved.")
                 RESTART.setIcon(QMessageBox.Information)
                 RESTART.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                 RESTART.setStandardButtons(QMessageBox.Close)
-                #RESTART.buttonClicked.connect(lambda: closing())
                 x = RESTART.exec_()
                 self.close()
             else:
@@ -493,6 +491,20 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             widget = fconfStart()
             widget.exec_()
 
+        def confirmation(com):
+            CONFIRM = QMessageBox()
+            CONFIRM.setWindowTitle('Hey! Listen!')
+            CONFIRM.setText("Hey! Are you sure you want to do this?")
+            CONFIRM.setIcon(QMessageBox.Critical)
+            CONFIRM.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
+            CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+            x = CONFIRM.exec_()
+            if x == QMessageBox.Yes:
+                print('Starting...')
+                com()
+            elif x == QMessageBox.No:
+                print('Cancelling...')
+
         self.uniCom.clicked.connect(lambda: display(0))
         self.winCom.clicked.connect(lambda: display(1))
         self.linCom.clicked.connect(lambda: display(2))
@@ -515,13 +527,21 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         # Windows Main Menu Commands
 
         self.fwlbutton_2.clicked.connect(lambda: self.threader(scripfunc.fwl))
-        self.basicConfbutton_2.clicked.connect(lambda: self.threader(lambda: scripfunc.basConf(config.get('Services', 'rdp'))))  #
+        self.basicConfbutton_2.clicked.connect(
+            lambda: self.threader(confirmation(lambda: scripfunc.basConf(config.get('Services', 'rdp')))))  #
         self.rmvprosoftbutton_2.clicked.connect(lambda: self.threader(scripfunc.rmProSoft()))
         self.enblBitLockerbutton.clicked.connect(lambda: self.threader(funcWIN.BITLOCKER()))
-        self.servicesConfButton_4.clicked.connect(lambda: self.threader(
-            scripfunc.servSet(config.get('Services', 'ssh'), config.get('Services', 'smb'),
-                              config.get('Services', 'web'), config.get('Services', 'apaweb'),
-                              config.get('Services', 'nginweb'), config.get('Services', 'ftp'))))
+        self.servicesConfButton_4.clicked.connect(lambda: self.threader(confirmation(lambda:
+                                                                                     scripfunc.servSet(
+                                                                                         config.get('Services', 'ssh'),
+                                                                                         config.get('Services', 'smb'),
+                                                                                         config.get('Services', 'web'),
+                                                                                         config.get('Services',
+                                                                                                    'apaweb'),
+                                                                                         config.get('Services',
+                                                                                                    'nginweb'),
+                                                                                         config.get('Services',
+                                                                                                    'ftp')))))
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3, self.chngusrpas_3,
                                 self.lsgruusrin_3, self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
@@ -552,8 +572,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             self.MACBUTTONS[i].clicked.connect(lambda: self.threader(indev()))
 
         self.quit_button_3.clicked.connect(quitButton)
-
-
 
 
 if __name__ == "__main__":
