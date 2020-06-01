@@ -14,23 +14,35 @@ function createWindow () {
             label: 'Help',
             submenu: [
                 {label:'About Creators', click(){
-                    console.log('About Creator Window Open')
-                        //Goes to the about_creators  page
+                    console.log('About Creator Window Opened')
+                    //window.location.href = '../menu_files/about_creators.html'
+                        window.loadFile('./menu_files/about_creators.html')
                     }},
                 {label:'How to use program'},
                 {label:'Command Descriptions'},
-                {label:'Change Configurations'}
+                {label:'Change Configurations', click(){
+
+                }},
+                //Use this label as an example as to how to make the GUI execute a python command. Use arguments to
+                //  decide what function is to be executed.
+                {label:'Python Test', click(){
+                    var python = require('child_process').spawn('python', ['./PythonAPI/scriptEXECUTOR.py', 'hello']);
+                    python.stdout.on('data', function(data){
+                        console.log("data: ",data.toString('utf8'));
+                    });
+                }}
             ]
         }
     ])
     Menu.setApplicationMenu(menu);
 
     window.loadFile('./index.html')
-
     //window.webContents.openDevTools()
-
 }
 
+function changeconfTEST(){
+
+}
 
 app.whenReady().then(createWindow)
 

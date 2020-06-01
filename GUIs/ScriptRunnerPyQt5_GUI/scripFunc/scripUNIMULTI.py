@@ -1,10 +1,14 @@
 import os
 import subprocess as sub
+import sys
 from sys import platform
 import getpass
 from threading import *
 import distro  # for figuring out what linux distro
-import pwd
+from shlex import quote as shlex_quote
+
+if platform == 'linux':
+    import pwd
 import configparser
 import shutil
 from PyQt5 import QtGui
@@ -46,8 +50,6 @@ class ScriptRunnerFunc:
             command = 'sudo pacman -Syu'
             sub.Popen(command.split())
         elif platform == 'win32':
-            # command = "C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\powershell.exe", ". \"./mmfucntions.ps1\";", "&winupd"
-            # sub.Popen(command)
             commands = """ Write-Host("Installing module PSWindowsUpdate if not already installed... ")
             Install-Module PSWindowsUpdate
             Write-Host("PSWindowsUpdate is now installed.")
@@ -125,7 +127,7 @@ class ScriptRunnerFunc:
                 sub.Popen(command.split())
 
             commandlog = 'sudo ufw status > firewallLOG.txt'
-            os.system(commandlog)
+            os.system(shlex_quote(commandlog))
             with open('firewall.txt', 'r') as f:
                 for line in f:
                     output = f.read()
@@ -387,7 +389,7 @@ class ScriptRunnerFunc:
         else:
             print('This command is currently in developement')
 
-    def servSet(self, ssh, samba, web, apaweb, nginweb):
+    def servSet(self, ssh, samba, web, apaweb, nginweb, ftp):
         if platform == 'linux':
             if ops == 'Ubuntu' or ops == 'Debian':
                 command = 'sudo apt install libpam-cracklib'
@@ -406,6 +408,7 @@ class ScriptRunnerFunc:
             echo "TLS/SSL keys have been created for ProFTP server  | ${thedate}"
             """
                 sub.Popen(command.split())
+            if ftp == 'yes':
                 shutil.copy('../linux_config_files/proftpd.conf', '/etc/proftpd/proftpd.conf')
                 shutil.copy('../linux_config_files/proftpTls_patch.conf', '/etc/proftpd/tls.conf')
 
@@ -419,54 +422,87 @@ class ScriptRunnerFunc:
                     shutil.copy('../linux_config_files/nginx.conf', '/etc/nginx/nginx.conf')
                 else:
                     try:
-                        raise ImportError('Web setting is set to yes but neither Apache or Nginx were selected. No web settings were configured.')
+                        raise ImportError(
+                            'Web setting is set to yes but neither Apache or Nginx were selected. No web settings were configured.')
                     except ImportError:
                         pass
         elif platform == 'win32':
-            pass
-
+            if samba == 'yes':
+                featuresSMB = ["SmbDirect",
+                               "SMB1Protocol",
+                               "SMB1Protocol-Client",
+                               "SMB1Protocol-Server",
+                               "SMB1Protocol-Deprecation"]
+                for i in range(0, len(featuresSMB)):
+                    command = 'Enable-WindowsOptionalFeature -Online -FeatureName ' + featuresSMB[i] + ' -NoRestart'
+                    sub.Popen(["powershell", "& {" + command + "}"])
+                if ssh == 'yes':
+                    command = "Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
+                    sub.Popen(["powershell", "& {" + command + "}"])
+                    command = "Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
+                    sub.Popen(["powershell", "& {" + command + "}"])
+                elif ssh == 'no':
+                    command = "Remove-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
+                    sub.Popen(["powershell", "& {" + command + "}"])
+                    command = "Remove-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
+                    sub.Popen(["powershell", "& {" + command + "}"])
 
     # Still needs Linux configurations
+
     def basConf(self, rdp):
         if platform == 'win32':
             if rdp == 'yes':
-                path = 'win10StigsRDPn/Windows10Template11_17.inf'
                 try:
-                    shutil.copy('./winCONF/win10StigsRDPy/Machine', r'c:\Windows\System32\GroupPolicy\Machine')
-                    shutil.copy('./winCONF/win10StigsRDPy/User', r'c:\Windows\System32\GroupPolicy\User')
+                    shutil.copy('../winCONF/win10StigsRDPy/win10secRDPallowed.inf', 'C:/win10secRDPallowed.inf')
+                    shutil.copy('../winCONF/win10StigsRDPy/Machine', r'c:\Windows\System32\GroupPolicy\Machine')
+                    shutil.copy('../winCONF/win10StigsRDPy/User', r'c:\Windows\System32\GroupPolicy\User')
                     shutil.copy('../winCONF/win10StigsRDPy/gpt.ini', r'c:\Windows\System32\GroupPolicy\GPT.INI')
+                    print('Successfully copied Group Policy Settings')
                 except IOError as e:
                     print("Unable to copy file. %s" % e)
+                path = 'C:/win10secRDPallowed.inf'
             elif rdp == 'no':
-                path = 'win10StigsRDPy/win10secRDPallowed.inf'
                 try:
+                    shutil.copy('../winCONF/win10StigsRDPn/Windows10Template11_17.inf', 'C:/Windows10Template11_17.inf')
                     shutil.copy('../winCONF/win10StigsRDPn/Machine', r'c:\Windows\System32\GroupPolicy\Machine')
                     shutil.copy('../winCONF/win10StigsRDPn/User', r'c:\Windows\System32\GroupPolicy\User')
                     shutil.copy('../winCONF/win10StigsRDPn/gpt.ini', r'c:\Windows\System32\GroupPolicy\GPT.INI')
-                    print('Successfully installed Group Policy Settings')
+                    print('Successfully copied Group Policy Settings')
                 except IOError as e:
                     print('Unable to copy file. %s' % e)
+                path = 'C:/Windows10Template11_17.inf'
             else:
                 raise ValueError('rdp should be either yes or no!')
-            command = 'secedit.exe /configure /db %windir%\\security\\local.sdb /cfg ../winCONF/' + path
+            command = r"secedit /configure /db C:\\windows\\security\\local.sdb /cfg {0}".format(path)
             sub.Popen(command.split())
+            command = 'gpupdate'
+            sub.Popen(command)
             command = 'Enable-WindowsOptionalFeature –FeatureName "Internet-Explorer-Optional-amd64" -All –Online ' \
                       '-NoRestart '
             sub.Popen(["powershell", "& {" + command + "}"])
             disableCOM = ["SimpleTCP",
-                          "SMB1Protocol",
-                          "SMB1Protocol-Client",
-                          "SMB1Protocol-Server",
-                          "SMB1Protocol-Deprecation",
                           "TFTP",
                           "TelnetClient",
                           "IIS-FTPServer",
                           "IIS-WebDAV",
                           "IIS-WebServer",
-                          "WorkFolders-Client"]
-            for i in range(0, 10):
+                          "WCF-Services45",
+                          "WCF-TCP-PortSharing45",
+                          "Printing-Foundation-Features",
+                          "Printing-Foundation-InternetPrinting-Client",
+                          "WorkFolders-Client",
+                          "MicrosoftWindowsPowershellV2",
+                          "MicrosoftWindowsPowershellV2Root"]
+            for i in range(0, len(disableCOM)):
                 command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[i] + ' -NoRestart'
                 sub.Popen(["powershell", "& {" + command + "}"])
+
+                windowsCapabilitesDisable = ["RIP.Listener~~~~0.0.1.0",
+                                             "SNMP.Client~~~~0.0.1.0"]
+
+                for i in range(0, len(windowsCapabilitesDisable)):
+                    command = "Remove-WindowsCapability -Online -Name " + windowsCapabilitesDisable[i]
+                    sub.Popen(["powershell", "& {" + command + "}"])
 
             HEY = QMessageBox()
             HEY.setWindowTitle('Hey! Listen!')
@@ -487,7 +523,7 @@ class ScriptRunnerFunc:
             shutil.copy('../linux_config_files/common-session', '/etc/pam.d/common-session')
             shutil.copy('../linux_config_files/login', '/etc/pam.d/login')
             shutil.copy('../linux_config_files/other', '/etc/pam.d/other')
-            #Removal of old ssh keys
+            # Removal of old ssh keys
             command = """thedate=$(date)
   userlist2=( $(eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1) )
   usersleft2=${#userlist2[@]}  #this variable is equivelent to the number of users in list $userlist
@@ -513,10 +549,8 @@ class ScriptRunnerFunc:
                 command = "sudo -S usermod --append --groups " + group + " " + username
             else:
                 command = "sudo -S usermod -a -G " + group + " " + username
-            os.system(command)
+            os.system(shlex_quote(command))
             shutil.copy('../linux_config_files/su', '/etc/pam.d/su')
-
-
 
     '''
     Removal of Prohibited Software.
@@ -655,4 +689,3 @@ class ScriptRunnerFunc:
             widget.exec_()
 
         callhash()
-
