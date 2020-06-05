@@ -1,18 +1,14 @@
+import configparser
+import itertools
 import os
 import subprocess as sub
-from sys import platform
-import getpass
-import itertools
 from threading import *
+
 import distro  # for figuring out what linux distro
-import configparser
-import shutil
 from PyQt5 import QtGui
-from PyUIs.hashgen import Ui_hashGEN
-from PyUIs.enblebit import Ui_bitlockerGUI
-from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
+
+from PyUIs.enblebit import Ui_bitlockerGUI
 
 OS = distro.linux_distribution()
 ops = OS[0]

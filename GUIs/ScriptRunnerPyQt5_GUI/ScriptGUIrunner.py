@@ -1,22 +1,15 @@
-import os
-import sys
-import time
+import configparser
+from pathlib import Path
+from sys import platform
+from threading import *
 
-from PyQt5 import QtGui
-from PyUIs.main import Ui_MainWindow
-from PyUIs.firstconf import *
 from PyUIs.comdescript import Ui_comDescript
+from PyUIs.firstconf import *
+from PyUIs.main import Ui_MainWindow
 from PyUIs.progabout import Ui_About
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
+from scripFunc.scripLINUXONLY import *
 from scripFunc.scripUNIMULTI import *
 from scripFunc.scripWINONLY import *
-from scripFunc.scripLINUXONLY import *
-from threading import *
-from pathlib import Path
-import configparser
-from sys import platform
 
 
 def resource_path(relative_path):
