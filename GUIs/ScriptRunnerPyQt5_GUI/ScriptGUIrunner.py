@@ -534,7 +534,11 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                                                                                          config.get('Services',
                                                                                                     'nginweb'),
                                                                                          config.get('Services',
-                                                                                                    'ftp')))))
+                                                                                                    'ftp'),
+                                                                                         config.get('Services',
+                                                                                                    'proftpd'),
+                                                                                         config.get('Services',
+                                                                                                    'vsftpd')))))
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3, self.chngusrpas_3,
                                 self.lsgruusrin_3, self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,

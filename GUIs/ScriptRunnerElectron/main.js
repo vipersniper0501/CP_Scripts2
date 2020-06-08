@@ -41,7 +41,7 @@ function createWindow () {
 }
 
 function changeconfTEST(){
-
+    console.log('test')
 }
 
 app.whenReady().then(createWindow)

@@ -37,6 +37,7 @@ def resource_path(relative_path):
 class ScriptRunnerFunc:
     # Universal Updates
     def updateos(self):
+        # TODO: Have function also update all drivers
         if ops == 'Ubuntu' or ops == 'debian':
             command = 'sudo apt update && upgrade -y'
             sub.Popen(command.split())
@@ -387,7 +388,8 @@ class ScriptRunnerFunc:
         else:
             print('This command is currently in developement')
 
-    def servSet(self, ssh, samba, web, apaweb, nginweb, ftp):
+    def servSet(self, ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
+        # TODO: Testing and making sure everything works correctly
         if platform == 'linux':
             if ops == 'Ubuntu' or ops == 'Debian':
                 command = 'sudo apt install libpam-cracklib'
@@ -400,15 +402,22 @@ class ScriptRunnerFunc:
                 command = 'sudo pacman -S wenglish'
                 sub.Popen(command.split())
             if ssh == 'yes':
-                command = """sudo cp /etc/proftpd/proftpd.conf ~/Desktop/orig_proftpd.conf
-            sudo mkdir /etc/proftpd/ssl
-            sudo openssl req -new -x509 -days 365 -nodes -out /etc/proftpd/ssl/proftpd.cert.pem -keyout /etc/proftpd/ssl/proftpd.key.pem
-            echo "TLS/SSL keys have been created for ProFTP server  | ${thedate}"
-            """
-                sub.Popen(command.split())
+                shutil.copy('../configurations/linux_config_files/ssh_config', '/etc/ssh/ssh_config')
+                shutil.copy('../configurations/linux_config_files/sshd_config', '/etc/ssh/sshd_config')
             if ftp == 'yes':
-                shutil.copy('../configurations/linux_config_files/proftpd.conf', '/etc/proftpd/proftpd.conf')
-                shutil.copy('../configurations/linux_config_files/proftpTls_patch.conf', '/etc/proftpd/tls.conf')
+                if proftpd == 'yes':
+                    # first line of command creates a backup of the original configurations
+                    command = """sudo cp /etc/proftpd/proftpd.conf ~/Desktop/orig_proftpd.conf 
+                                 sudo mkdir /etc/proftpd/ssl
+                                 sudo openssl req -new -x509 -days 365 -nodes -out /etc/proftpd/ssl/proftpd.cert.pem -keyout /etc/proftpd/ssl/proftpd.key.pem
+                                 sudo systemctl restart proftpd.service
+                                 echo "TLS/SSL keys have been created for ProFTP server  | ${thedate}"
+                              """
+                    sub.Popen(command.split())
+                    shutil.copy('../configurations/linux_config_files/proftpd.conf', '/etc/proftpd/proftpd.conf')
+                    shutil.copy('../configurations/linux_config_files/proftpTls_patch.conf', '/etc/proftpd/tls.conf')
+                if vsftpd == 'yes':
+                    pass
 
             if samba == 'yes':
                 shutil.copy('../configurations/linux_config_files/smb.conf', '/etc/samba/smb.conf')

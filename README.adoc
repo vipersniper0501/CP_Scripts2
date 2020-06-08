@@ -95,19 +95,19 @@ I am currently working on fixing this problem.
 
 3.) The script is now running and you are now free to choose the commands to execute
 
-
 == Version Numbers
 
 1.2.3.4
 
-**First Number:** used for releases
+**First Number:** used for noting number of os's completely supported
 
-**Second Number:** used for Feature Updates Ex: New command has been completed and works as supposed to.
+**Second Number:** Number of completed commands regardless of OS type or section of program.
 
-**Third Number:** used for patches and updates that are working towards a new feature.Also updated when code has been
-edited to become more efficient.
+**Third Number:** used for patches and updates that are working towards a new feature.
+Also updated when code has been edited to become more efficient.
 
-**Fourth Number:** used for minor updates.Usually finding a typo or quick edits.Or, if a file was forgotten when pushing
-to GitHub.
+**Fourth Number:** used for minor updates.
+Usually come from finding a typo or quick edits.
+Also, occurs if a file was forgotten when pushing to the repository.
 
 NOTE: When ever a version number has been updated, all of the numbers to the right of the changed number is set to zero.

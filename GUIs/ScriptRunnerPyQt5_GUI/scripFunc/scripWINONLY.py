@@ -35,7 +35,7 @@ This file is used to store commands that are to only be used on Windows machines
 
 class funcWINONLY:
     def BITLOCKER(self):
-
+        # TODO: must Notify the user if the command has run successfully and tell them that for encryption to start the user must reboot the computer
         class bitRUN(QDialog, Ui_bitlockerGUI):
             def __init__(self, parent=None):
                 super(bitRUN, self).__init__(parent)
@@ -170,16 +170,27 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                         '''
                         print(command)
 
-                        # sub.Popen(["powershell", "& {" + command + "}"])
+                        sub.Popen(["powershell", "& {" + command + "}"])
 
-                        def restartyn(i):
-                            print(i)
+                        def restart():
+                            print('Restart is now happening')
+                            command = 'Restart-Computer'
+                            sub.Popen(["powershell", "& {" + command + "}"])
 
                         COMPLETE = QMessageBox()
                         COMPLETE.setIcon(QMessageBox.Question)
                         COMPLETE.setWindowTitle('Hey! Listen!')
-                        COMPLETE.setText('Restart for encryption to begin on the drive.')
+                        COMPLETE.setText('You must restart the computer for encryption to begin on the drive. '
+                                         '\nWould you like to restart now?')
+                        COMPLETE.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
                         x = COMPLETE.exec_()
+
+                        if x == QMessageBox.Yes:
+                            print('Restarting...')
+                            restart()
+                        elif x == QMessageBox.No:
+                            print('Closing...')
+                            self.close()
 
                 # Gets list of drives and encryption status'
                 decryptSTATUS = []

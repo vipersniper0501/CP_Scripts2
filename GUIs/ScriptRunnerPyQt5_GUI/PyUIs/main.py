@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
         MainWindow.setEnabled(True)
         MainWindow.resize(848, 598)
         MainWindow.setStyleSheet("background-color: #212434\n"
-                                 "")
+                                 "            ")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.cmdCHNG = QtWidgets.QFrame(self.centralwidget)
@@ -623,35 +623,37 @@ class Ui_MainWindow(object):
         MainWindow.setTabOrder(self.linCom, self.macCom)
 
     def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Apple CIDR Script Runner"))
-        self.uniCom.setText(_translate("MainWindow", "Universal Commands"))
-        self.winCom.setText(_translate("MainWindow", "Windows Only Commands"))
-        self.linCom.setText(_translate("MainWindow", "Linux Only Commands"))
-        self.macCom.setText(_translate("MainWindow", "MacOS Only Commands"))
-        self.univPIC.setText(_translate("MainWindow",
-                                        "<html><head/><body><p><img src=\":/Pictures/images/Universal-partner-icon(1).png\"/></p></body></html>"))
-        self.winPIC.setText(_translate("MainWindow",
-                                       "<html><head/><body><p><img src=\":/Pictures/images/windows-8-png-icon-7(1).png\"/></p></body></html>"))
-        self.linPIC.setText(_translate("MainWindow",
-                                       "<html><head/><body><p><img src=\":/Pictures/images/linuxICON(1).png\"/></p></body></html>"))
-        self.macPIC.setText(_translate("MainWindow",
-                                       "<html><head/><body><p><img src=\":/Pictures/images/MacOSx.png\"/></p></body></html>"))
-        self.descriptions.setText(_translate("MainWindow", "<html><head/><body><p><br/></p></body></html>"))
-        self.quit_button_3.setText(_translate("MainWindow", "Quit"))
-        self.quit_button_3.setShortcut(_translate("MainWindow", "Ctrl+Q"))
-        self.label_8.setText(_translate("MainWindow",
-                                        "<html><head/><body><p>All Commands here will work across all Operating Systems</p></body></html>"))
-        self.srchmedbuttonUNI.setText(_translate("MainWindow", "Search For Prohibited Media"))
-        self.rmvprosoftbuttonUNI.setText(_translate("MainWindow", "Remove Prohibited Software*"))
-        self.Updates_buttonUNI.setText(_translate("MainWindow", "Update System"))
-        self.chkhashfile_buttonUNI.setText(_translate("MainWindow", "Check the Hash of a File"))
-        self.basicConfbutton_2.setText(_translate("MainWindow", "Security Policies Configurations"))
-        self.rmvprosoftbutton_2.setText(_translate("MainWindow", "Remove Prohibited Software*"))
-        self.fwlbutton_2.setText(_translate("MainWindow", "Windows Firewall Settings"))
-        self.label_13.setText(_translate("MainWindow", "All Commands here will work on Windows 10"))
-        self.enblBitLockerbutton.setText(_translate("MainWindow", "Enable BitLocker"))
-        self.servicesConfButton_4.setText(_translate("MainWindow", "Services Configurations*"))
+            _translate = QtCore.QCoreApplication.translate
+            MainWindow.setWindowTitle(_translate("MainWindow", "Apple CIDR Script Runner"))
+            self.uniCom.setText(_translate("MainWindow", "Universal Commands"))
+            self.winCom.setText(_translate("MainWindow", "Windows Only Commands"))
+            self.linCom.setText(_translate("MainWindow", "Linux Only Commands"))
+            self.macCom.setText(_translate("MainWindow", "MacOS Only Commands"))
+            self.univPIC.setText(_translate("MainWindow",
+                                            "<html><head/><body><p><img src=\":/Pictures/images/Universal-partner-icon(1).png\"/></p></body></html>"))
+            self.winPIC.setText(_translate("MainWindow",
+                                           "<html><head/><body><p><img src=\":/Pictures/images/windows-8-png-icon-7(1).png\"/></p></body></html>"))
+            self.linPIC.setText(_translate("MainWindow",
+                                           "<html><head/><body><p><img src=\":/Pictures/images/linuxICON(1).png\"/></p></body></html>"))
+            self.macPIC.setText(_translate("MainWindow",
+                                           "<html><head/><body><p><img src=\":/Pictures/images/MacOSx.png\"/></p></body></html>"))
+            self.descriptions.setText(_translate("MainWindow", "<html><head/><body><p><br/></p></body></html>"))
+            self.quit_button_3.setText(_translate("MainWindow", "Quit"))
+            self.quit_button_3.setShortcut(_translate("MainWindow", "Ctrl+Q"))
+            self.label_8.setText(
+                    _translate("MainWindow", "<html><head/><body><p>All Commands here will work across all\n"
+                                             "                                Operating Systems</p></body></html>\n"
+                                             "                            "))
+            self.srchmedbuttonUNI.setText(_translate("MainWindow", "Search For Prohibited Media"))
+            self.rmvprosoftbuttonUNI.setText(_translate("MainWindow", "Remove Prohibited Software*"))
+            self.Updates_buttonUNI.setText(_translate("MainWindow", "Update System"))
+            self.chkhashfile_buttonUNI.setText(_translate("MainWindow", "Check the Hash of a File"))
+            self.basicConfbutton_2.setText(_translate("MainWindow", "Security Policies Configurations"))
+            self.rmvprosoftbutton_2.setText(_translate("MainWindow", "Remove Prohibited Software*"))
+            self.fwlbutton_2.setText(_translate("MainWindow", "Windows Firewall Settings"))
+            self.label_13.setText(_translate("MainWindow", "All Commands here will work on Windows 10"))
+            self.enblBitLockerbutton.setText(_translate("MainWindow", "Enable BitLocker"))
+            self.servicesConfButton_4.setText(_translate("MainWindow", "Services Configurations*"))
         self.browserConf.setText(_translate("MainWindow", "Configure Browser Settings [Firefox and IE]*"))
         self.winTAB.setTabText(self.winTAB.indexOf(self.windows_mainCOM), _translate("MainWindow", "Main Commands"))
         self.lsmemgru_3.setText(_translate("MainWindow", "List Members of Group*"))
@@ -662,46 +664,48 @@ class Ui_MainWindow(object):
         self.adgrutosys_3.setText(_translate("MainWindow", "Add Group to System*"))
         self.lslocausr_3.setText(_translate("MainWindow", "List Local Users*"))
         self.rmvgrufrosys_3.setText(_translate("MainWindow", "Remove Group from System*"))
-        self.lslocagru_3.setText(_translate("MainWindow", "List Local Groups*"))
-        self.lsgruusrin_3.setText(_translate("MainWindow", "List Groups an User is in*"))
-        self.adusrtogru_3.setText(_translate("MainWindow", "Add User to Group*"))
-        self.label_14.setText(_translate("MainWindow", "All Commands here will work on Windows 10"))
-        self.winTAB.setTabText(self.winTAB.indexOf(self.windows_usrgruCOM),
-                               _translate("MainWindow", "User / Group Settings"))
-        self.auditbutton_3.setText(_translate("MainWindow", "Audit System"))
-        self.basicConfbutton_3.setText(_translate("MainWindow", "Basic Configurations"))
-        self.rmvprosoftbutton_3.setText(_translate("MainWindow", "Remove Prohibited Software*"))
-        self.malrembutton_3.setText(_translate("MainWindow", "Malware Removal"))
-        self.fwlbutton_3.setText(_translate("MainWindow", "Linux Firewall Settings"))
-        self.label_15.setText(
-            _translate("MainWindow", "All Commands here will work on Debian/Ubuntu/Manjaro Linux distributions"))
-        self.servicesConfButton_2.setText(_translate("MainWindow", "Services Configurations"))
-        self.linTAB.setTabText(self.linTAB.indexOf(self.linux_mainCOM), _translate("MainWindow", "Main Commands"))
-        self.lsmemgru_4.setText(_translate("MainWindow", "List Members of Group*"))
-        self.chngusrpas_4.setText(_translate("MainWindow", "Change all User Passwords at Once*"))
-        self.rmvusrfrosys_4.setText(_translate("MainWindow", "Remove User From System*"))
-        self.adusrtosys_4.setText(_translate("MainWindow", "Add User to System*"))
-        self.rmvusrfrogru_4.setText(_translate("MainWindow", "Remove User from Group*"))
-        self.adgrutosys_4.setText(_translate("MainWindow", "Add Group to System*"))
-        self.lslocausr_4.setText(_translate("MainWindow", "List Local Users*"))
-        self.rmvgrufrosys_4.setText(_translate("MainWindow", "Remove Group from System*"))
-        self.lslocagru_4.setText(_translate("MainWindow", "List Local Groups*"))
-        self.lsgruusrin_4.setText(_translate("MainWindow", "List Groups an User is in*"))
-        self.adusrtogru_4.setText(_translate("MainWindow", "Add User to Group*"))
-        self.label_16.setText(
-            _translate("MainWindow", "All Commands here will work on Debian/Ubuntu/Manjaro Linux distrobutions"))
-        self.linTAB.setTabText(self.linTAB.indexOf(self.linux_usrgruCOM),
-                               _translate("MainWindow", "User / Group Settings"))
-        self.basicConfbutton_4.setText(_translate("MainWindow", "Basic Configurations*"))
-        self.rmvprosoftbutton_4.setText(_translate("MainWindow", "Remove Prohibited Software*"))
-        self.malrembutton_4.setText(_translate("MainWindow", "Malware Removal*"))
-        self.label_17.setText(_translate("MainWindow", "All Commands here will work on MacOS X"))
-        self.servicesConfButton_3.setText(_translate("MainWindow", "Services Configurations*"))
-        self.macTAB.setTabText(self.macTAB.indexOf(self.mac_mainCOM), _translate("MainWindow", "Main Commands"))
-        self.lsmemgru_5.setText(_translate("MainWindow", "List Members of Group*"))
-        self.chngusrpas_5.setText(_translate("MainWindow", "Change all User Passwords at Once*"))
-        self.rmvusrfrosys_5.setText(_translate("MainWindow", "Remove User From System*"))
-        self.adusrtosys_5.setText(_translate("MainWindow", "Add User to System*"))
+            self.lslocagru_3.setText(_translate("MainWindow", "List Local Groups*"))
+            self.lsgruusrin_3.setText(_translate("MainWindow", "List Groups an User is in*"))
+            self.adusrtogru_3.setText(_translate("MainWindow", "Add User to Group*"))
+            self.label_14.setText(_translate("MainWindow", "All Commands here will work on Windows 10"))
+            self.winTAB.setTabText(self.winTAB.indexOf(self.windows_usrgruCOM),
+                                   _translate("MainWindow", "User / Group Settings"))
+            self.auditbutton_3.setText(_translate("MainWindow", "Audit System"))
+            self.basicConfbutton_3.setText(_translate("MainWindow", "Basic Configurations"))
+            self.rmvprosoftbutton_3.setText(_translate("MainWindow", "Remove Prohibited Software*"))
+            self.malrembutton_3.setText(_translate("MainWindow", "Malware Removal"))
+            self.fwlbutton_3.setText(_translate("MainWindow", "Linux Firewall Settings"))
+            self.label_15.setText(_translate("MainWindow",
+                                             "All Commands here will work on Debian/Ubuntu/Manjaro Linux distributions\n"
+                                             "                                    "))
+            self.servicesConfButton_2.setText(_translate("MainWindow", "Services Configurations"))
+            self.linTAB.setTabText(self.linTAB.indexOf(self.linux_mainCOM), _translate("MainWindow", "Main Commands"))
+            self.lsmemgru_4.setText(_translate("MainWindow", "List Members of Group*"))
+            self.chngusrpas_4.setText(_translate("MainWindow", "Change all User Passwords at Once*"))
+            self.rmvusrfrosys_4.setText(_translate("MainWindow", "Remove User From System*"))
+            self.adusrtosys_4.setText(_translate("MainWindow", "Add User to System*"))
+            self.rmvusrfrogru_4.setText(_translate("MainWindow", "Remove User from Group*"))
+            self.adgrutosys_4.setText(_translate("MainWindow", "Add Group to System*"))
+            self.lslocausr_4.setText(_translate("MainWindow", "List Local Users*"))
+            self.rmvgrufrosys_4.setText(_translate("MainWindow", "Remove Group from System*"))
+            self.lslocagru_4.setText(_translate("MainWindow", "List Local Groups*"))
+            self.lsgruusrin_4.setText(_translate("MainWindow", "List Groups an User is in*"))
+            self.adusrtogru_4.setText(_translate("MainWindow", "Add User to Group*"))
+            self.label_16.setText(_translate("MainWindow",
+                                             "All Commands here will work on Debian/Ubuntu/Manjaro Linux distrobutions\n"
+                                             "                                    "))
+            self.linTAB.setTabText(self.linTAB.indexOf(self.linux_usrgruCOM),
+                                   _translate("MainWindow", "User / Group Settings"))
+            self.basicConfbutton_4.setText(_translate("MainWindow", "Basic Configurations*"))
+            self.rmvprosoftbutton_4.setText(_translate("MainWindow", "Remove Prohibited Software*"))
+            self.malrembutton_4.setText(_translate("MainWindow", "Malware Removal*"))
+            self.label_17.setText(_translate("MainWindow", "All Commands here will work on MacOS X"))
+            self.servicesConfButton_3.setText(_translate("MainWindow", "Services Configurations*"))
+            self.macTAB.setTabText(self.macTAB.indexOf(self.mac_mainCOM), _translate("MainWindow", "Main Commands"))
+            self.lsmemgru_5.setText(_translate("MainWindow", "List Members of Group*"))
+            self.chngusrpas_5.setText(_translate("MainWindow", "Change all User Passwords at Once*"))
+            self.rmvusrfrosys_5.setText(_translate("MainWindow", "Remove User From System*"))
+            self.adusrtosys_5.setText(_translate("MainWindow", "Add User to System*"))
         self.rmvusrfrogru_5.setText(_translate("MainWindow", "Remove User from Group*"))
         self.adgrutosys_5.setText(_translate("MainWindow", "Add Group to System*"))
         self.lslocausr_5.setText(_translate("MainWindow", "List Local Users*"))
@@ -709,10 +713,10 @@ class Ui_MainWindow(object):
         self.lslocagru_5.setText(_translate("MainWindow", "List Local Groups*"))
         self.lsgruusrin_5.setText(_translate("MainWindow", "List Groups an User is in*"))
         self.adusrtogru_5.setText(_translate("MainWindow", "Add User to Group*"))
-        self.label_18.setText(_translate("MainWindow", "All Commands here will work on MacOS X"))
-        self.macTAB.setTabText(self.macTAB.indexOf(self.mac_usrgruCOM),
-                               _translate("MainWindow", "User / Group Settings"))
-        self.label.setText(_translate("MainWindow", "Note: any command with a * is not completed yet"))
+            self.label_18.setText(_translate("MainWindow", "All Commands here will work on MacOS X"))
+            self.macTAB.setTabText(self.macTAB.indexOf(self.mac_usrgruCOM),
+                                   _translate("MainWindow", "User / Group Settings"))
+            self.label.setText(_translate("MainWindow", "Note: any command with a * is not completed yet"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
         self.menuLighting_Mode.setTitle(_translate("MainWindow", "Light/Dark Mode Settings"))
         self.actionAbout_Creator.setText(_translate("MainWindow", "About Creators"))
@@ -723,9 +727,11 @@ class Ui_MainWindow(object):
         self.actionChange_Configurations.setText(_translate("MainWindow", "Change Configurations"))
 
 
+import resources_rc
+
+
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
