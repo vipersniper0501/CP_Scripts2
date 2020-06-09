@@ -574,7 +574,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         self.quit_button_3.clicked.connect(quitButton)
 
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     main = Mainstart()
