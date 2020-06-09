@@ -1,7 +1,9 @@
 import configparser
 import itertools
 import os
+import shutil
 import subprocess as sub
+import sys
 from threading import *
 
 import distro  # for figuring out what linux distro
@@ -304,3 +306,24 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
             widget.exec_()
 
         callBITRUN()
+
+    def browserCONF(self):
+        print('Configuring browser...')
+        # def cptree(src, dst, symlinks=False, ignore=None):
+        #    for item in os.listdir(src):
+        #        s = os.path.join(src, item)
+        #        d = os.path.join(dst, item)
+        #    if os.path.isdir(s):
+        #        shutil.copytree(s, d, symlinks, ignore)
+        #    else:
+        #        shutil.copy2(s, d)
+
+        shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\Extensions')
+        shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\Firefox')
+        shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\SystemExtensionsDev')
+        shutil.copytree('./configurations/Win_Mozilla/Extensions',
+                        r'C:\Users\Michael\AppData\Roaming\Mozilla\Extensions')
+        shutil.copytree('./configurations/Win_Mozilla/Firefox', r'C:\Users\Michael\AppData\Roaming\Mozilla\Firefox')
+        shutil.copytree('./configurations/Win_Mozilla/SystemExtensionsDev',
+                        r'C:\Users\Michael\AppData\Roaming\Mozilla\SystemExtensionsDev')
+        print('Firefox has been configured')

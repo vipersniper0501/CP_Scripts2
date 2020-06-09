@@ -589,14 +589,14 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>8</pointsize>
+          <pointsize>10</pointsize>
          </font>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Configure Browser Settings [Firefox and IE]*</string>
+         <string>Configure Browser Settings [Firefox]</string>
         </property>
        </widget>
       </widget>

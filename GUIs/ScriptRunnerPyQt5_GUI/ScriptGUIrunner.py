@@ -30,6 +30,7 @@ class fconfStart(QDialog, Ui_firstConf):
 
     def __init__(self, parent=None):
         super(fconfStart, self).__init__(parent)
+
         print('Script Runner First Time Configurations')
         self.setFixedSize(721, 441)
         self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
@@ -40,19 +41,18 @@ class fconfStart(QDialog, Ui_firstConf):
         print('Assigning First Time Configurations Functions')
 
         # sets default values
-        self.ssh = 'no'
-        self.ftp = 'no'
-        self.proftpd = 'no'
-        self.vsftpd = 'no'
-        self.web = 'no'
-        self.apaweb = 'no'
-        self.nginweb = 'no'
-        self.https = 'no'
-        self.smb = 'no'
-        self.sql = 'no'
-        self.rsnc = 'no'
         self.rdp = 'no'
-
+        self.rsnc = 'no'
+        self.sql = 'no'
+        self.smb = 'no'
+        self.https = 'no'
+        self.nginweb = 'no'
+        self.apaweb = 'no'
+        self.web = 'no'
+        self.vsftpd = 'no'
+        self.proftpd = 'no'
+        self.ftp = 'no'
+        self.ssh = 'no'
         config_name = 'config.ini'
         if getattr(sys, 'frozen', False):
             application_Path = os.path.dirname(sys.executable)
@@ -251,7 +251,10 @@ class fconfStart(QDialog, Ui_firstConf):
             if self.ssh != '' and self.ftp != '' and self.proftpd != '' and self.vsftpd != '' and self.web != '' and self.apaweb != '' and self.nginweb != '' and self.https != '' and self.smb != '' and self.sql != '' and self.rsnc != '' and self.rdp != '':
                 print('saving configurations\n')
                 print(
-                    "ssh=" + self.ssh + ", ftp=" + self.ftp + ", proftpd=" + self.proftpd + ", vsftpd=" + self.vsftpd + ", web=" + self.web + ", apaweb=" + self.apaweb + ", nginweb=" + self.nginweb + ", https=" + self.https + ", smb=" + self.smb + ", sql=" + self.sql + ", rsnc=" + self.rsnc + ", RDP=" + self.rdp)
+                    "ssh=" + str(self.ssh) + ", ftp=" + str(self.ftp) + ", proftpd=" + str(
+                        self.proftpd) + ", vsftpd=" + str(self.vsftpd) + ", web=" + str(self.web) + ", apaweb=" + str(
+                        self.apaweb) + ", nginweb=" + str(self.nginweb) + ", https=" + str(self.https) + ", smb=" + str(
+                        self.smb) + ", sql=" + str(self.sql) + ", rsnc=" + str(self.rsnc) + ", RDP=" + str(self.rdp))
 
                 filename = "config.ini"
 
@@ -539,6 +542,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                                                                                                     'proftpd'),
                                                                                          config.get('Services',
                                                                                                     'vsftpd')))))
+        self.browserConf.clicked.connect(lambda: self.threader(funcWIN.browserCONF()))
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3, self.chngusrpas_3,
                                 self.lsgruusrin_3, self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,

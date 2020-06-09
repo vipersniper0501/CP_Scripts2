@@ -72,9 +72,54 @@ class ScriptRunnerFunc:
             Write-Host("")
             Write-Host("All updates are installed!")"""
             sub.Popen(["powershell", "& {" + commands + "}"])
-            # Definitely is executing but it needs to be run as admin. Must figure out a way to do that.
+            print('Windows Update completed')
+            print('Updating device drivers...')
+            # FIXME: Need to find a way to confirm if the drivers are being updated
+            command = """
+$UpdateSvc = New-Object -ComObject Microsoft.Update.ServiceManager
+$UpdateSvc.AddService2("7971f918-a847-4430-9279-4a52d1efe18d", 7,"")
+            
+#search and list all missing Drivers
+$Session = New-Object -ComObject Microsoft.Update.Session           
+$Searcher = $Session.CreateUpdateSearcher() 
 
-            # print('This function (updates) does not currently support this OS.')
+$Searcher.ServiceID = '7971f918-a847-4430-9279-4a52d1efe18d'
+$Searcher.SearchScope =  1 # MachineOnly
+$Searcher.ServerSelection = 3 # Third Party
+
+$Criteria = "IsInstalled=0 and Type='Driver' and ISHidden=0"
+Write-Host('Searching Driver-Updates...') -Fore Green  
+$SearchResult = $Searcher.Search($Criteria)          
+$Updates = $SearchResult.Updates
+
+#Show available Drivers
+
+$Updates | select Title, DriverModel, DriverVerDate, Driverclass, DriverManufacturer | fl
+
+#Download the Drivers from Microsoft
+
+$UpdatesToDownload = New-Object -Com Microsoft.Update.UpdateColl
+$updates | % { $UpdatesToDownload.Add($_) | out-null }
+Write-Host('Downloading Drivers...')  -Fore Green  
+$UpdateSession = New-Object -Com Microsoft.Update.Session
+$Downloader = $UpdateSession.CreateUpdateDownloader()
+$Downloader.Updates = $UpdatesToDownload
+$Downloader.Download()
+
+#Check if the Drivers are all downloaded and trigger the Installation
+
+$UpdatesToInstall = New-Object -Com Microsoft.Update.UpdateColl
+$updates | % { if($_.IsDownloaded) { $UpdatesToInstall.Add($_) | out-null } }
+
+Write-Host('Installing Drivers...')  -Fore Green  
+$Installer = $UpdateSession.CreateUpdateInstaller()
+$Installer.Updates = $UpdatesToInstall
+$InstallationResult = $Installer.Install()
+if($InstallationResult.RebootRequired) {  
+Write-Host('Reboot required! please reboot now..') -Fore Red  
+} else { Write-Host('Done..') -Fore Green }
+            """
+            sub.Popen(["powershell", "& {" + command + "}"])
         else:
             print('This command does not currently support this OS')
 
@@ -417,6 +462,7 @@ class ScriptRunnerFunc:
                     shutil.copy('../configurations/linux_config_files/proftpd.conf', '/etc/proftpd/proftpd.conf')
                     shutil.copy('../configurations/linux_config_files/proftpTls_patch.conf', '/etc/proftpd/tls.conf')
                 if vsftpd == 'yes':
+                    # FIXME: Create and add vsftpd configuration
                     pass
 
             if samba == 'yes':
@@ -465,9 +511,8 @@ class ScriptRunnerFunc:
                 sub.call(["powershell", "& {" + command + "}"])
                 print('removed openssh capability')
 
-    # Still needs Linux configurations
-    # Need to add way to easily create samba shares
-    # Need easy way to edit ssh settings (going into services and doing it there takes to long. and it is complicated to explain how to get there)
+    # TODO: Need to add way to easily create samba shares
+    #  Need easy way to edit ssh settings (going into services and doing it there takes to long. and it is complicated to explain how to get there)
 
     def basConf(self, rdp):
         if platform == 'win32':
@@ -601,6 +646,8 @@ class ScriptRunnerFunc:
 
         # Get-WmiObject -Class Win32_Product | Select-Object -Property Name
         # ^ will print out list of all installed programs.
+        # TODO: Possibly have Charlotte work on this while I work on other parts
+        #  Should be modular so more programs can be easily added.
 
         index = ['uTorrent',
                  'BitTorrent',
