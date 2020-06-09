@@ -18,7 +18,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #212434
-</string>
+   </string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="cmdCHNG">
@@ -293,7 +293,9 @@
        <string notr="true">color: #8B93B2;</string>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;All Commands here will work across all Operating Systems&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;All Commands here will work across all
+        Operating Systems&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+       </string>
       </property>
       <property name="wordWrap">
        <bool>true</bool>
@@ -470,7 +472,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Security Policies Configurations*</string>
+         <string>Security Policies Configurations</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvprosoftbutton_2">
@@ -574,6 +576,27 @@
         </property>
         <property name="text">
          <string>Services Configurations*</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="browserConf">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>90</y>
+          <width>221</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+        </property>
+        <property name="text">
+         <string>Configure Browser Settings [Firefox]</string>
         </property>
        </widget>
       </widget>
@@ -980,7 +1003,8 @@
          <string notr="true">color: #8B93B2;</string>
         </property>
         <property name="text">
-         <string>All Commands here will work on Debian/Ubuntu/Manjaro Linux distributions</string>
+         <string>All Commands here will work on Debian/Ubuntu/Manjaro Linux distributions
+         </string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -1259,7 +1283,8 @@
          <string notr="true">color: #8B93B2;</string>
         </property>
         <property name="text">
-         <string>All Commands here will work on Debian/Ubuntu/Manjaro Linux distrobutions</string>
+         <string>All Commands here will work on Debian/Ubuntu/Manjaro Linux distrobutions
+         </string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>

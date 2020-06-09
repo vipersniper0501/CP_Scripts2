@@ -3,11 +3,11 @@ Michael Brenner
 v1.0, 5/14/2020
 
 DISCLAIMERS: This project is student made with inspiration from other projects such as the scripts made by Ethan Fowler from TEAM BYTE.
-This script also uses Microsoft Sysinternals suite which is owned and created by Microsoft. I do not take any credit in the creation of that program. (_I don't want to get sued_)
+This script also uses Microsoft Sysinternals suite which is owned and created by Microsoft.I do not take any credit in the creation of that program.(_I don't want to get sued_)
 
 FYI: This will be mostly used for a backup location for my scripts and will not always have the most up to date versions.
 
-IMPORTANT: Before using any of these scripts for the CyberPatriot Challenges, please make sure that you complete as many of the Forensic Questions as possible! If not, then you risk the chance that the script will remove or change something that the Forensics Question requires later.
+IMPORTANT: Before using any of these scripts for the CyberPatriot Challenges, please make sure that you complete as many of the Forensic Questions as possible!If not, then you risk the chance that the script will remove or change something that the Forensics Question requires later.
 
 '''
 
@@ -95,19 +95,17 @@ I am currently working on fixing this problem.
 
 3.) The script is now running and you are now free to choose the commands to execute
 
-
 == Version Numbers
 
 1.2.3.4
 
-**First Number:** used for releases
+**First Number:** used for noting number of os's completely supported
 
-**Second Number:** used for Feature Updates Ex: New command has been completed and works as supposed to.
+**Second Number:** Number of completed commands regardless of OS type or section of program.
 
-**Third Number:** used for patches and updates that are working towards a new feature.Also updated when code has been
-edited to become more efficient.
-
-**Fourth Number:** used for minor updates.Usually finding a typo or quick edits.Or, if a file was forgotten when pushing
-to GitHub.
+**Third Number:** used for patches, minor updates, and updates that are working towards a new feature.
+Also updated when code has been edited to become more efficient.
+Finding a typo or quick edits.
+Also, occurs if a file was forgotten when pushing to the repository.
 
 NOTE: When ever a version number has been updated, all of the numbers to the right of the changed number is set to zero.

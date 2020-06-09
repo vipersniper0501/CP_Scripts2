@@ -15,7 +15,7 @@ class Ui_hashGEN(object):
         hashGEN.setObjectName("hashGEN")
         hashGEN.resize(431, 179)
         hashGEN.setStyleSheet("background-color: #212434\n"
-"")
+                              "")
         self.fpath = QtWidgets.QLineEdit(hashGEN)
         self.fpath.setGeometry(QtCore.QRect(70, 10, 281, 20))
         self.fpath.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
@@ -34,10 +34,10 @@ class Ui_hashGEN(object):
         self.frame = QtWidgets.QFrame(hashGEN)
         self.frame.setGeometry(QtCore.QRect(10, 40, 81, 131))
         self.frame.setStyleSheet("border: 2px solid;\n"
-"border-width: 3px;\n"
-"background: transparent;\n"
-"border-radius: 10px; \n"
-"color: black;")
+                                 "border-width: 3px;\n"
+                                 "background: transparent;\n"
+                                 "border-radius: 10px; \n"
+                                 "color: black;")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -90,6 +90,7 @@ class Ui_hashGEN(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     hashGEN = QtWidgets.QDialog()
     ui = Ui_hashGEN()

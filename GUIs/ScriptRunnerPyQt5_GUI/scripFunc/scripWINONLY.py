@@ -1,18 +1,16 @@
-import os
-import subprocess as sub
-from sys import platform
-import getpass
-import itertools
-from threading import *
-import distro  # for figuring out what linux distro
 import configparser
+import itertools
+import os
 import shutil
+import subprocess as sub
+import sys
+from threading import *
+
+import distro  # for figuring out what linux distro
 from PyQt5 import QtGui
-from PyUIs.hashgen import Ui_hashGEN
-from PyUIs.enblebit import Ui_bitlockerGUI
-from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
+
+from PyUIs.enblebit import Ui_bitlockerGUI
 
 OS = distro.linux_distribution()
 ops = OS[0]
@@ -39,7 +37,7 @@ This file is used to store commands that are to only be used on Windows machines
 
 class funcWINONLY:
     def BITLOCKER(self):
-
+        # TODO: must Notify the user if the command has run successfully and tell them that for encryption to start the user must reboot the computer
         class bitRUN(QDialog, Ui_bitlockerGUI):
             def __init__(self, parent=None):
                 super(bitRUN, self).__init__(parent)
@@ -174,16 +172,27 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                         '''
                         print(command)
 
-                        # sub.Popen(["powershell", "& {" + command + "}"])
+                        sub.Popen(["powershell", "& {" + command + "}"])
 
-                        def restartyn(i):
-                            print(i)
+                        def restart():
+                            print('Restart is now happening')
+                            command = 'Restart-Computer'
+                            sub.Popen(["powershell", "& {" + command + "}"])
 
                         COMPLETE = QMessageBox()
                         COMPLETE.setIcon(QMessageBox.Question)
                         COMPLETE.setWindowTitle('Hey! Listen!')
-                        COMPLETE.setText('Restart for encryption to begin on the drive.')
+                        COMPLETE.setText('You must restart the computer for encryption to begin on the drive. '
+                                         '\nWould you like to restart now?')
+                        COMPLETE.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
                         x = COMPLETE.exec_()
+
+                        if x == QMessageBox.Yes:
+                            print('Restarting...')
+                            restart()
+                        elif x == QMessageBox.No:
+                            print('Closing...')
+                            self.close()
 
                 # Gets list of drives and encryption status'
                 decryptSTATUS = []
@@ -297,3 +306,24 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
             widget.exec_()
 
         callBITRUN()
+
+    def browserCONF(self):
+        print('Configuring browser...')
+        # def cptree(src, dst, symlinks=False, ignore=None):
+        #    for item in os.listdir(src):
+        #        s = os.path.join(src, item)
+        #        d = os.path.join(dst, item)
+        #    if os.path.isdir(s):
+        #        shutil.copytree(s, d, symlinks, ignore)
+        #    else:
+        #        shutil.copy2(s, d)
+
+        shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\Extensions')
+        shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\Firefox')
+        shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\SystemExtensionsDev')
+        shutil.copytree('./configurations/Win_Mozilla/Extensions',
+                        r'C:\Users\Michael\AppData\Roaming\Mozilla\Extensions')
+        shutil.copytree('./configurations/Win_Mozilla/Firefox', r'C:\Users\Michael\AppData\Roaming\Mozilla\Firefox')
+        shutil.copytree('./configurations/Win_Mozilla/SystemExtensionsDev',
+                        r'C:\Users\Michael\AppData\Roaming\Mozilla\SystemExtensionsDev')
+        print('Firefox has been configured')

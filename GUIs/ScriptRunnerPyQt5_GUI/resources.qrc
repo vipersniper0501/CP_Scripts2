@@ -1,11 +1,11 @@
 <RCC>
-  <qresource prefix="Pictures">
-    <file>images/linuxICON(1).png</file>
-    <file>images/MacOSx.png</file>
-    <file>images/Universal-partner-icon(1).png</file>
-    <file>images/windows-8-png-icon-7(1).png</file>
-    <file>images/HEY.png</file>
-    <file>images/cup2.png</file>
-    <file>images/cup2.ico</file>
-  </qresource>
+    <qresource prefix="Pictures">
+        <file>images/linuxICON(1).png</file>
+        <file>images/MacOSx.png</file>
+        <file>images/Universal-partner-icon(1).png</file>
+        <file>images/windows-8-png-icon-7(1).png</file>
+        <file>images/HEY.png</file>
+        <file>images/cup2.png</file>
+        <file>images/cup2.ico</file>
+    </qresource>
 </RCC>

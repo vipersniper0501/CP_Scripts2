@@ -35,7 +35,7 @@ This command will update your Operating System (Only the Operating System if you
 - This command will install prebuilt Local Policies (E.g. Lockout policies, audit policies, and password policies) and Group Policies and making sure that IE is also installed, because that will always be required.
 I have missed too many points due to forgetting about Internet Explorer
 
-==== BitLocker
+==== BitLocker Drive Encryption
 
 - This command will have you choose a drive to encrypt and have you enter a password that comply's with the password policy.
 

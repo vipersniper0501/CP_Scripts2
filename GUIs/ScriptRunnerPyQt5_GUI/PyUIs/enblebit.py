@@ -149,6 +149,7 @@ class Ui_bitlockerGUI(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     bitlockerGUI = QtWidgets.QDialog()
     ui = Ui_bitlockerGUI()

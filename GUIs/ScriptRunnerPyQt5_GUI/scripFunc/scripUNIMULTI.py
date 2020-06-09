@@ -1,22 +1,18 @@
+import getpass
 import os
 import subprocess as sub
 import sys
-from sys import platform
-import getpass
-from threading import *
-import distro  # for figuring out what linux distro
+from distutils.dir_util import copy_tree
 from shlex import quote as shlex_quote
-
+from sys import platform
+import distro  # for figuring out what linux distro
 if platform == 'linux':
     import pwd
 import configparser
 import shutil
 from PyQt5 import QtGui
 from PyUIs.hashgen import Ui_hashGEN
-from PyUIs.enblebit import Ui_bitlockerGUI
-from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
 
 OS = distro.linux_distribution()
 ops = OS[0]
@@ -39,6 +35,7 @@ def resource_path(relative_path):
 class ScriptRunnerFunc:
     # Universal Updates
     def updateos(self):
+        # TODO: Have function also update all drivers
         if ops == 'Ubuntu' or ops == 'debian':
             command = 'sudo apt update && upgrade -y'
             sub.Popen(command.split())
@@ -73,9 +70,54 @@ class ScriptRunnerFunc:
             Write-Host("")
             Write-Host("All updates are installed!")"""
             sub.Popen(["powershell", "& {" + commands + "}"])
-            # Definitely is executing but it needs to be run as admin. Must figure out a way to do that.
+            print('Windows Update completed')
+            print('Updating device drivers...')
+            # FIXME: Need to find a way to confirm if the drivers are being updated
+            command = """
+$UpdateSvc = New-Object -ComObject Microsoft.Update.ServiceManager
+$UpdateSvc.AddService2("7971f918-a847-4430-9279-4a52d1efe18d", 7,"")
+            
+#search and list all missing Drivers
+$Session = New-Object -ComObject Microsoft.Update.Session           
+$Searcher = $Session.CreateUpdateSearcher() 
 
-            # print('This function (updates) does not currently support this OS.')
+$Searcher.ServiceID = '7971f918-a847-4430-9279-4a52d1efe18d'
+$Searcher.SearchScope =  1 # MachineOnly
+$Searcher.ServerSelection = 3 # Third Party
+
+$Criteria = "IsInstalled=0 and Type='Driver' and ISHidden=0"
+Write-Host('Searching Driver-Updates...') -Fore Green  
+$SearchResult = $Searcher.Search($Criteria)          
+$Updates = $SearchResult.Updates
+
+#Show available Drivers
+
+$Updates | select Title, DriverModel, DriverVerDate, Driverclass, DriverManufacturer | fl
+
+#Download the Drivers from Microsoft
+
+$UpdatesToDownload = New-Object -Com Microsoft.Update.UpdateColl
+$updates | % { $UpdatesToDownload.Add($_) | out-null }
+Write-Host('Downloading Drivers...')  -Fore Green  
+$UpdateSession = New-Object -Com Microsoft.Update.Session
+$Downloader = $UpdateSession.CreateUpdateDownloader()
+$Downloader.Updates = $UpdatesToDownload
+$Downloader.Download()
+
+#Check if the Drivers are all downloaded and trigger the Installation
+
+$UpdatesToInstall = New-Object -Com Microsoft.Update.UpdateColl
+$updates | % { if($_.IsDownloaded) { $UpdatesToInstall.Add($_) | out-null } }
+
+Write-Host('Installing Drivers...')  -Fore Green  
+$Installer = $UpdateSession.CreateUpdateInstaller()
+$Installer.Updates = $UpdatesToInstall
+$InstallationResult = $Installer.Install()
+if($InstallationResult.RebootRequired) {  
+Write-Host('Reboot required! please reboot now..') -Fore Red  
+} else { Write-Host('Done..') -Fore Green }
+            """
+            sub.Popen(["powershell", "& {" + command + "}"])
         else:
             print('This command does not currently support this OS')
 
@@ -389,7 +431,9 @@ class ScriptRunnerFunc:
         else:
             print('This command is currently in developement')
 
-    def servSet(self, ssh, samba, web, apaweb, nginweb, ftp):
+
+    def servSet(self, ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
+        # TODO: Testing and making sure everything works correctly
         if platform == 'linux':
             if ops == 'Ubuntu' or ops == 'Debian':
                 command = 'sudo apt install libpam-cracklib'
@@ -402,24 +446,32 @@ class ScriptRunnerFunc:
                 command = 'sudo pacman -S wenglish'
                 sub.Popen(command.split())
             if ssh == 'yes':
-                command = """sudo cp /etc/proftpd/proftpd.conf ~/Desktop/orig_proftpd.conf
-            sudo mkdir /etc/proftpd/ssl
-            sudo openssl req -new -x509 -days 365 -nodes -out /etc/proftpd/ssl/proftpd.cert.pem -keyout /etc/proftpd/ssl/proftpd.key.pem
-            echo "TLS/SSL keys have been created for ProFTP server  | ${thedate}"
-            """
-                sub.Popen(command.split())
+                shutil.copy('../configurations/linux_config_files/ssh_config', '/etc/ssh/ssh_config')
+                shutil.copy('../configurations/linux_config_files/sshd_config', '/etc/ssh/sshd_config')
             if ftp == 'yes':
-                shutil.copy('../linux_config_files/proftpd.conf', '/etc/proftpd/proftpd.conf')
-                shutil.copy('../linux_config_files/proftpTls_patch.conf', '/etc/proftpd/tls.conf')
+                if proftpd == 'yes':
+                    # first line of command creates a backup of the original configurations
+                    command = """sudo cp /etc/proftpd/proftpd.conf ~/Desktop/orig_proftpd.conf 
+                                 sudo mkdir /etc/proftpd/ssl
+                                 sudo openssl req -new -x509 -days 365 -nodes -out /etc/proftpd/ssl/proftpd.cert.pem -keyout /etc/proftpd/ssl/proftpd.key.pem
+                                 sudo systemctl restart proftpd.service
+                                 echo "TLS/SSL keys have been created for ProFTP server  | ${thedate}"
+                              """
+                    sub.Popen(command.split())
+                    shutil.copy('../configurations/linux_config_files/proftpd.conf', '/etc/proftpd/proftpd.conf')
+                    shutil.copy('../configurations/linux_config_files/proftpTls_patch.conf', '/etc/proftpd/tls.conf')
+                if vsftpd == 'yes':
+                    # FIXME: Create and add vsftpd configuration
+                    pass
 
             if samba == 'yes':
-                shutil.copy('../linux_config_files/smb.conf', '/etc/samba/smb.conf')
+                shutil.copy('../configurations/linux_config_files/smb.conf', '/etc/samba/smb.conf')
 
             if web == 'yes':
                 if apaweb == 'yes':
-                    shutil.copy('../linux_config_files/apache2.conf', '/etc/apache2/apache2.conf')
+                    shutil.copy('../configurations/linux_config_files/apache2.conf', '/etc/apache2/apache2.conf')
                 elif nginweb == 'yes':
-                    shutil.copy('../linux_config_files/nginx.conf', '/etc/nginx/nginx.conf')
+                    shutil.copy('../configurations/linux_config_files/nginx.conf', '/etc/nginx/nginx.conf')
                 else:
                     try:
                         raise ImportError(
@@ -435,38 +487,67 @@ class ScriptRunnerFunc:
                                "SMB1Protocol-Deprecation"]
                 for i in range(0, len(featuresSMB)):
                     command = 'Enable-WindowsOptionalFeature -Online -FeatureName ' + featuresSMB[i] + ' -NoRestart'
-                    sub.Popen(["powershell", "& {" + command + "}"])
-                if ssh == 'yes':
-                    command = "Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
-                    sub.Popen(["powershell", "& {" + command + "}"])
-                    command = "Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
-                    sub.Popen(["powershell", "& {" + command + "}"])
-                elif ssh == 'no':
-                    command = "Remove-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
-                    sub.Popen(["powershell", "& {" + command + "}"])
-                    command = "Remove-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
-                    sub.Popen(["powershell", "& {" + command + "}"])
+                    sub.call(["powershell", "& {" + command + "}"])
+            elif samba == 'no':
+                featuresSMB = ["SmbDirect",
+                               "SMB1Protocol",
+                               "SMB1Protocol-Client",
+                               "SMB1Protocol-Server",
+                               "SMB1Protocol-Deprecation"]
+                for i in range(0, len(featuresSMB)):
+                    command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + featuresSMB[i] + ' -NoRestart'
+                    sub.call(["powershell", "& {" + command + "}"])
+            if ssh == 'yes':
+                command = "Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
+                sub.call(["powershell", "& {" + command + "}"])
+                command = "Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
+                sub.call(["powershell", "& {" + command + "}"])
+                print('Added / confirmed installation of openssh capability')
+            elif ssh == 'no':
+                command = "Remove-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
+                sub.call(["powershell", "& {" + command + "}"])
+                command = "Remove-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
+                sub.call(["powershell", "& {" + command + "}"])
+                print('removed openssh capability')
 
-    # Still needs Linux configurations
+    # TODO: Need to add way to easily create samba shares
+    #  Need easy way to edit ssh settings (going into services and doing it there takes to long. and it is complicated to explain how to get there)
 
     def basConf(self, rdp):
         if platform == 'win32':
+            def cptree(src, dst, symlinks=False, ignore=None):
+                for item in os.listdir(src):
+                    s = os.path.join(src, item)
+                    d = os.path.join(dst, item)
+                if os.path.isdir(s):
+                    shutil.copytree(s, d, symlinks, ignore)
+                else:
+                    shutil.copy2(s, d)
+
             if rdp == 'yes':
                 try:
-                    shutil.copy('../winCONF/win10StigsRDPy/win10secRDPallowed.inf', 'C:/win10secRDPallowed.inf')
-                    shutil.copy('../winCONF/win10StigsRDPy/Machine', r'c:\Windows\System32\GroupPolicy\Machine')
-                    shutil.copy('../winCONF/win10StigsRDPy/User', r'c:\Windows\System32\GroupPolicy\User')
-                    shutil.copy('../winCONF/win10StigsRDPy/gpt.ini', r'c:\Windows\System32\GroupPolicy\GPT.INI')
+                    shutil.copy('./configurations/winCONF/win10StigsRDPy/win10secRDPallowed.inf',
+                                'C:/win10secRDPallowed.inf')
+                    copy_tree('./configurations/winCONF/win10StigsRDPy/Group_Policy_Files/Machine',
+                              r'c:\Windows\System32\GroupPolicy\Machine')
+                    copy_tree('./configurations/winCONF/win10StigsRDPy/Group_Policy_Files/User',
+                              r'c:\Windows\System32\GroupPolicy\User')
+                    shutil.copy('./configurations/winCONF/win10StigsRDPy/Group_Policy_Files/gpt.ini',
+                                r'c:\Windows\System32\GroupPolicy\gpt.ini')
                     print('Successfully copied Group Policy Settings')
                 except IOError as e:
                     print("Unable to copy file. %s" % e)
                 path = 'C:/win10secRDPallowed.inf'
             elif rdp == 'no':
                 try:
-                    shutil.copy('../winCONF/win10StigsRDPn/Windows10Template11_17.inf', 'C:/Windows10Template11_17.inf')
-                    shutil.copy('../winCONF/win10StigsRDPn/Machine', r'c:\Windows\System32\GroupPolicy\Machine')
-                    shutil.copy('../winCONF/win10StigsRDPn/User', r'c:\Windows\System32\GroupPolicy\User')
-                    shutil.copy('../winCONF/win10StigsRDPn/gpt.ini', r'c:\Windows\System32\GroupPolicy\GPT.INI')
+                    shutil.copy('./configurations/winCONF/win10StigsRDPn/Windows10Template11_17.inf',
+                                'C:/Windows10Template11_17.inf')
+                    copy_tree('./configurations/winCONF/win10StigsRDPn/gpoRDPn/Machine',
+                              r'c:\Windows\System32\GroupPolicy\Machine')
+                    copy_tree('./configurations/winCONF/win10StigsRDPn/gpoRDPn/User',
+                              r'c:\Windows\System32\GroupPolicy\User')
+                    shutil.copy('./configurations/winCONF/win10StigsRDPn/gpoRDPn/gpt.ini',
+                                r'c:\Windows\System32\GroupPolicy\gpt.ini')
                     print('Successfully copied Group Policy Settings')
                 except IOError as e:
                     print('Unable to copy file. %s' % e)
@@ -474,12 +555,12 @@ class ScriptRunnerFunc:
             else:
                 raise ValueError('rdp should be either yes or no!')
             command = r"secedit /configure /db C:\\windows\\security\\local.sdb /cfg {0}".format(path)
-            sub.Popen(command.split())
+            sub.call(command.split())
             command = 'gpupdate'
-            sub.Popen(command)
+            sub.call(command)
             command = 'Enable-WindowsOptionalFeature –FeatureName "Internet-Explorer-Optional-amd64" -All –Online ' \
                       '-NoRestart '
-            sub.Popen(["powershell", "& {" + command + "}"])
+            sub.call(["powershell", "& {" + command + "}"])
             disableCOM = ["SimpleTCP",
                           "TFTP",
                           "TelnetClient",
@@ -495,21 +576,23 @@ class ScriptRunnerFunc:
                           "MicrosoftWindowsPowershellV2Root"]
             for i in range(0, len(disableCOM)):
                 command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[i] + ' -NoRestart'
-                sub.Popen(["powershell", "& {" + command + "}"])
+                sub.call(["powershell", "& {" + command + "}"])
+            windowsCapabilitesDisable = ["RIP.Listener~~~~0.0.1.0",
+                                         "SNMP.Client~~~~0.0.1.0"]
+            for i in range(0, len(windowsCapabilitesDisable)):
+                command = "Remove-WindowsCapability -Online -Name " + windowsCapabilitesDisable[i]
+                sub.call(["powershell", "& {" + command + "}"])
 
-                windowsCapabilitesDisable = ["RIP.Listener~~~~0.0.1.0",
-                                             "SNMP.Client~~~~0.0.1.0"]
-
-                for i in range(0, len(windowsCapabilitesDisable)):
-                    command = "Remove-WindowsCapability -Online -Name " + windowsCapabilitesDisable[i]
-                    sub.Popen(["powershell", "& {" + command + "}"])
-
-            HEY = QMessageBox()
-            HEY.setWindowTitle('Hey! Listen!')
-            HEY.setText("Hey! For the changes to take full effect please restart the computer!")
-            HEY.setIcon(QMessageBox.Critical)
-            HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            x = HEY.exec_()
+            '''
+            def completed():
+                HEY = QMessageBox()
+                HEY.setWindowTitle('Hey! Listen!')
+                HEY.setText("Hey! For the changes to take full effect please restart the computer!")
+                HEY.setIcon(QMessageBox.Critical)
+                HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                x = HEY.exec_()
+            completed()
+            '''
 
         elif platform == 'linux':
             if ops == 'Ubuntu' or ops == 'Debian':
@@ -519,10 +602,10 @@ class ScriptRunnerFunc:
                 command = 'sudo pacman -S fail2ban'
                 sub.Popen(command.split())
 
-            shutil.copy('../linux_config_files/common-password', '/etc/pam.d/common-password')
-            shutil.copy('../linux_config_files/common-session', '/etc/pam.d/common-session')
-            shutil.copy('../linux_config_files/login', '/etc/pam.d/login')
-            shutil.copy('../linux_config_files/other', '/etc/pam.d/other')
+            shutil.copy('../configurations/linux_config_files/common-password', '/etc/pam.d/common-password')
+            shutil.copy('../configurations/linux_config_files/common-session', '/etc/pam.d/common-session')
+            shutil.copy('../configurations/linux_config_files/login', '/etc/pam.d/login')
+            shutil.copy('../configurations/linux_config_files/other', '/etc/pam.d/other')
             # Removal of old ssh keys
             command = """thedate=$(date)
   userlist2=( $(eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1) )
@@ -550,7 +633,7 @@ class ScriptRunnerFunc:
             else:
                 command = "sudo -S usermod -a -G " + group + " " + username
             os.system(shlex_quote(command))
-            shutil.copy('../linux_config_files/su', '/etc/pam.d/su')
+            shutil.copy('../configurations/linux_config_files/su', '/etc/pam.d/su')
 
     '''
     Removal of Prohibited Software.
@@ -562,6 +645,8 @@ class ScriptRunnerFunc:
 
         # Get-WmiObject -Class Win32_Product | Select-Object -Property Name
         # ^ will print out list of all installed programs.
+        # TODO: Possibly have Charlotte work on this while I work on other parts
+        #  Should be modular so more programs can be easily added.
 
         index = ['uTorrent',
                  'BitTorrent',

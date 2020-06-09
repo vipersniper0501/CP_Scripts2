@@ -1,23 +1,16 @@
+import configparser
 import os
 import subprocess as sub
 from sys import platform
-import getpass
-from threading import *
+
 import distro  # for figuring out what linux distro
-import configparser
-import shutil
-from PyQt5 import QtGui
-from PyUIs.hashgen import Ui_hashGEN
-from PyUIs.enblebit import Ui_bitlockerGUI
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
 
 OS = distro.linux_distribution()
 ops = OS[0]
 
 config = configparser.ConfigParser()
 config.read('config.ini')
+
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -29,9 +22,11 @@ def resource_path(relative_path):
 
     return os.path.join(base_path, relative_path)
 
+
 '''
 This file is used to store commands that are to only be used on Linux machines
 '''
+
 
 class funcLINUX:
     def malRem(self):
