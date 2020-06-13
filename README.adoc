@@ -89,11 +89,15 @@ I am currently working on fixing this problem.
 
 1.2.3.4
 
-**First Number:** used for noting number of os's completely supported
+**First Number:** Generation (General Information -> 0, Cli -> 1, Tkinter -> 2, PyQt5 ->3, Electron -> 4) +
+This number is to be used to identify which generation of script has been changed.
+For example, if I were to change something in the CLI version it would uploaded as version 1.x.x.x, but if I were to change something in the Electron version, I would upload as version 4.x.x.x
 
-**Second Number:** Number of completed commands regardless of OS type or section of program.
+**Second Number:** used for noting number of os's completely supported in the generation
 
-**Third Number:** used for patches, minor updates, and updates that are working towards a new feature. +
+**Third Number:** Number of completed commands regardless of OS type or section of program (mainly used in the GUI versions).
+
+*Fourth Number:* used for patches, minor updates, and updates that are working towards a new feature. +
 This is also updated when code has been edited to become more efficient or after finding a typo and making a quick edit.
 Also changes if a file was forgotten when pushing to the repository.
 
