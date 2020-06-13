@@ -9,9 +9,9 @@ def helloworld():
 
 if sys.argv[1] == 'hello':
     helloworld()
-
 # End of example function
 
 arguments = []
 arguments.append(sys.argv)
 print(arguments)
+
