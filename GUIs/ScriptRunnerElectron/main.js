@@ -26,7 +26,7 @@ function createWindow () {
                 //Use this label as an example as to how to make the GUI execute a python command. Use arguments to
                 //  decide what function is to be executed.
                 {label:'Python Test', click(){
-                    var python = require('child_process').spawn('python', ['./PythonAPI/scriptEXECUTOR.py', 'hello']);
+                    var python = require('child_process').spawn('python', ['./PythonAPI/scriptEXECUTOR.exe', 'hello']);
                     python.stdout.on('data', function(data){
                         console.log("data: ",data.toString('utf8'));
                     });
