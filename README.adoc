@@ -2,6 +2,7 @@
 Michael Brenner
 v1.0, 5/14/2020
 
+image:https://github.com/vipersniper0501/CP_Scripts2/workflows/Python%20application%20(Ubuntu)/badge.svg?branch=GUI-Updates&event=push[Python application (Ubuntu)] +
 
 *DISCLAIMERS:* This project is student made with inspiration from other projects such as the scripts made by Ethan Fowler from TEAM BYTE.
 
