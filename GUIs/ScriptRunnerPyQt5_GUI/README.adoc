@@ -8,6 +8,7 @@ This GUI is based on the https://www.riverbankcomputing.com/software/pyqt/intro[
 This script runs on Mac OS X, Windows 10, Windows 8.x, Windows 7, Debian, Ubuntu, and Manjaro Linux.
 
 
+
 == List of supported commands:
 === Universal Commands
 ==== Updates:
@@ -44,10 +45,22 @@ I have missed too many points due to forgetting about Internet Explorer
 - This command will open or close certain ports based upon the configurations you made when you first opened the app.Along with those changes it will also close a couple of other ports that are known vulnerabilities.
 
 ==== Audit System:
+
 - This command will install an auditing program called Lynis that checks for vulnerabilities that you will want to change.It will ouput the results into a text file on the Desktop
 
 ==== Malware Removal:
+
 - This command will use the program called ClamAV/ClamTK to search for Malware on this machine.
 
 ==== Linux Basic Configurations:
+
 - This command will install premade Local Policies (E.g. Lockout Policies and Password Policies)
+
+== Extra Info
+
+Colors used in GUI: +
+#212434 (darkest blue, background) +
+#2E344A (slightly brighter blue, for the tab) +
+#414E6E (light blue, used for the buttons, second tab and buttons on left) +
+#8B93B2 (light but not too light purple, used for less important text) +
+#CCD2E6 (brightest color, used in top text, button labels) +
