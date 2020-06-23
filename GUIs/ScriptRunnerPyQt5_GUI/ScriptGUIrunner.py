@@ -377,6 +377,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         self.descriptions.setWordWrap(True)
         scripfunc = ScriptRunnerFunc()
         funcWIN = funcWINONLY()
+        funcWINUSRGRU = funcWINusrgru()
         funcLIN = funcLINUX()
 
         def quitButton():
@@ -544,11 +545,13 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                                                                                                     'vsftpd')))))
         self.browserConf.clicked.connect(lambda: self.threader(funcWIN.browserCONF()))
         # Windows User Group Commands
-        self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3, self.chngusrpas_3,
+        self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3,  # self.chngusrpas_3,
                                 self.lsgruusrin_3, self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
                                 self.rmvgrufrosys_3, self.rmvusrfrogru_3, self.rmvusrfrosys_3]
-        for i in range(0, 11):
+        for i in range(0, 10):
             self.WINUSRGRUBUTTON[i].clicked.connect(lambda: self.threader(indev()))  #
+
+        self.chngusrpas_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.chngpasswdofall()))
 
         # Linux Main Menu Commands
         self.fwlbutton_3.clicked.connect(lambda: self.threader(scripfunc.fwl))

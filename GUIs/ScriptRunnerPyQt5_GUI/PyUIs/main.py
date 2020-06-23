@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
         MainWindow.setEnabled(True)
         MainWindow.resize(848, 598)
         MainWindow.setStyleSheet("background-color: #212434\n"
-                                 "            ")
+                                 "   ")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.cmdCHNG = QtWidgets.QFrame(self.centralwidget)
@@ -641,8 +641,8 @@ class Ui_MainWindow(object):
         self.quit_button_3.setText(_translate("MainWindow", "Quit"))
         self.quit_button_3.setShortcut(_translate("MainWindow", "Ctrl+Q"))
         self.label_8.setText(_translate("MainWindow", "<html><head/><body><p>All Commands here will work across all\n"
-                                                      "                                Operating Systems</p></body></html>\n"
-                                                      "                            "))
+                                                      "        Operating Systems</p></body></html>\n"
+                                                      "       "))
         self.srchmedbuttonUNI.setText(_translate("MainWindow", "Search For Prohibited Media"))
         self.rmvprosoftbuttonUNI.setText(_translate("MainWindow", "Remove Prohibited Software*"))
         self.Updates_buttonUNI.setText(_translate("MainWindow", "Update System"))
@@ -656,7 +656,7 @@ class Ui_MainWindow(object):
         self.browserConf.setText(_translate("MainWindow", "Configure Browser Settings [Firefox]"))
         self.winTAB.setTabText(self.winTAB.indexOf(self.windows_mainCOM), _translate("MainWindow", "Main Commands"))
         self.lsmemgru_3.setText(_translate("MainWindow", "List Members of Group*"))
-        self.chngusrpas_3.setText(_translate("MainWindow", "Change all User Passwords at Once*"))
+        self.chngusrpas_3.setText(_translate("MainWindow", "Change all User Passwords at Once"))
         self.rmvusrfrosys_3.setText(_translate("MainWindow", "Remove User From System*"))
         self.adusrtosys_3.setText(_translate("MainWindow", "Add User to System*"))
         self.rmvusrfrogru_3.setText(_translate("MainWindow", "Remove User from Group*"))
@@ -676,7 +676,7 @@ class Ui_MainWindow(object):
         self.fwlbutton_3.setText(_translate("MainWindow", "Linux Firewall Settings"))
         self.label_15.setText(
             _translate("MainWindow", "All Commands here will work on Debian/Ubuntu/Manjaro Linux distributions\n"
-                                     "                                    "))
+                                     "         "))
         self.servicesConfButton_2.setText(_translate("MainWindow", "Services Configurations"))
         self.linTAB.setTabText(self.linTAB.indexOf(self.linux_mainCOM), _translate("MainWindow", "Main Commands"))
         self.lsmemgru_4.setText(_translate("MainWindow", "List Members of Group*"))
@@ -692,7 +692,7 @@ class Ui_MainWindow(object):
         self.adusrtogru_4.setText(_translate("MainWindow", "Add User to Group*"))
         self.label_16.setText(
             _translate("MainWindow", "All Commands here will work on Debian/Ubuntu/Manjaro Linux distrobutions\n"
-                                     "                                    "))
+                                     "         "))
         self.linTAB.setTabText(self.linTAB.indexOf(self.linux_usrgruCOM),
                                _translate("MainWindow", "User / Group Settings"))
         self.basicConfbutton_4.setText(_translate("MainWindow", "Basic Configurations*"))

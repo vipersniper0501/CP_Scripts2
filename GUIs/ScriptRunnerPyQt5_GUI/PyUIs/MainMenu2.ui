@@ -643,7 +643,7 @@
          <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
         </property>
         <property name="text">
-         <string>Change all User Passwords at Once*</string>
+         <string>Change all User Passwords at Once</string>
         </property>
        </widget>
        <widget class="QPushButton" name="rmvusrfrosys_3">

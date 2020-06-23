@@ -45,7 +45,7 @@ class funcLINUX:
             print('This command is currently in development')
 
     def alyn(self):
-        if ops == 'Ubuntu' or ops == 'debian':
+        if ops in ('Ubuntu', 'debian'):
             command = 'sudo apt install lynis -y'
             sub.Popen(command.split())
             command = 'sudo touch auditRESULTS.txt'

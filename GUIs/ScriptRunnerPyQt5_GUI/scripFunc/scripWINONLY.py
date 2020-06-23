@@ -11,6 +11,7 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 
 from PyUIs.enblebit import Ui_bitlockerGUI
+from PyUIs.changepass import Ui_chngpass
 
 OS = distro.linux_distribution()
 ops = OS[0]
@@ -37,7 +38,6 @@ This file is used to store commands that are to only be used on Windows machines
 
 class funcWINONLY:
     def BITLOCKER(self):
-        # TODO: must Notify the user if the command has run successfully and tell them that for encryption to start the user must reboot the computer
         class bitRUN(QDialog, Ui_bitlockerGUI):
             def __init__(self, parent=None):
                 super(bitRUN, self).__init__(parent)
@@ -285,13 +285,6 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                         buttons[i].setChecked(True)
                     i = i + 1
 
-                ''' 
-                command = """
-                $drv = Read-Host -Prompt 'What drive would you like to enable bit locker on? [Ex: c:   e:  ]   '
-                manage-bde -protectors -add -pw $drv
-                manage-bde -on $drv"""
-                '''
-
         # Allows for program to continue running while the function executes.
         def threader(com):
             try:
@@ -327,3 +320,238 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
         shutil.copytree('./configurations/Win_Mozilla/SystemExtensionsDev',
                         r'C:\Users\Michael\AppData\Roaming\Mozilla\SystemExtensionsDev')
         print('Firefox has been configured')
+
+
+class funcWINusrgru:
+    def addusr(self):
+        pass
+
+    def remusr(self):
+        pass
+
+    def addgrutosys(self):
+        pass
+
+    def remgrufrosys(self):
+        pass
+
+    def addusrtogru(self):
+        pass
+
+    def remusrfrogru(self):
+        pass
+
+    def lslocausrs(self):
+        pass
+
+    def lslocagrus(self):
+        pass
+
+    def lsmemofgru(self):
+        pass
+
+    def lsgrusanusrin(self):
+        pass
+
+    # @staticmethod
+    def chngpasswdofall(self):
+        class changepasswordofall(QDialog, Ui_chngpass):
+            def __init__(self, parent=None):
+                super(changepasswordofall, self).__init__(parent)
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setupUi(self)
+                self.EXECUTE()
+
+            def EXECUTE(self):
+                # TODO: Create interface asking for new password and have user confirm new password
+                #  When completed, remove all of old print statements to improve speed.
+                def findnames():
+                    exec = sub.Popen(["powershell", "& {Get-LocalUser}"], stdout=sub.PIPE)
+                    stdout, _ = exec.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+                    # print(output)
+                    n = []
+                    for i in range(0, len(output)):
+                        if 'True' in output[i]:
+                            # print('found in ' + str(i))
+                            # print(output[i])
+                            n.append(output[i])
+                    a = []
+                    for i in range(0, len(n)):
+                        x = n[i]
+                        y = x.split()
+                        # print(y)
+                        a.append(y)
+                    # print(a)
+                    names = []
+                    for i in range(0, len(a)):
+                        # print(a[i])
+                        x = a[i]
+                        y = x[0]
+                        # print(y)
+                        names.append(y)
+                    # print(names)
+
+                    exec = sub.Popen(["powershell", "& {$env:UserName}"], stdout=sub.PIPE)
+                    stdout, _ = exec.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split('\r\n')
+                    # print(output)
+                    for i in range(0, len(names)):
+                        # print(names[i])
+                        if output[0] == names[i]:
+                            # print('user found')
+                            # print(i)
+                            names.pop(i)
+                            break
+                    print('--------------------------------------------------')
+                    print(names)
+                    return names
+
+                x = findnames()
+
+                def RUN(names):
+                    l1 = self.passwd.text()
+                    # print(l1)
+                    # print(len(l1))
+                    l2 = self.pass_verify.text()
+                    # print(l2)
+                    # print(len(l2))
+                    # Try loop enforces password policy.
+                    try:
+                        symbols = '`~!@#$%^&*()_+-=[]{};:,./<>?'
+                        characterBOOL = ''
+                        for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
+                            character = l1[i]
+                            character2 = l2[x]
+                            if character.islower() and character2.islower():
+                                characterBOOL = True
+                            elif not character.islower() and not character2.islower():
+                                characterBOOL = False
+                            if characterBOOL:
+                                break
+
+                        characterUPBOOL = ''
+                        for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
+                            character = l1[i]
+                            character2 = l2[x]
+                            if character.isupper() and character2.isupper():
+                                characterUPBOOL = True
+                            elif not character.isupper() and not character2.isupper():
+                                characterUPBOOL = False
+                            if characterUPBOOL:
+                                break
+
+                        symbolsBOOL = ''
+                        for y in range(0, len(symbols)):
+                            if (symbols[y] not in l1) and (symbols[y] not in l2):
+                                symbolsBOOL = False
+                            elif (symbols[y] in l1) and (symbols[y] in l2):
+                                symbolsBOOL = True
+                            if symbolsBOOL:
+                                break
+
+                        numberBOOL = ''
+                        for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
+                            character = l1[i]
+                            character2 = l2[x]
+                            if character.isdigit() and character2.isdigit():
+                                numberBOOL = True
+                            elif not character.isdigit() and not character2.isdigit():
+                                numberBOOL = False
+                            if numberBOOL:
+                                break
+
+                        print(str(characterBOOL) + ' Lower Case')
+                        print(str(characterUPBOOL) + ' Upper case')
+                        print(str(symbolsBOOL) + ' symbols')
+                        print(str(numberBOOL) + ' number')
+                    except IndexError:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your passwords do not match!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+
+                    if len(l1) == 0 or len(l2) == 0:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! You don't have a password!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif len(l1) <= 8 or len(l2) <= 8:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your password must have at least 8 characters!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif l1 != l2:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your passwords do not match!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif not characterBOOL:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your password must have at least 1 lower case letter!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif not characterUPBOOL:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your password must have at least 1 Upper Case letter!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif not symbolsBOOL:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif not numberBOOL:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    else:
+                        for i in range(0, len(names)):
+                            command = """$Password = ConvertTo-SecureString """ + "'{}'".format(self.passwd.text()) + """ -AsPlainText -Force
+                $Username = Get-LocalUser -Name """ + "'{}'".format(names[i]) + """
+                $Username | Set-LocalUser -Password $Password"""
+                            print(command + "\n")
+                        sub.Popen(["powershell", "& {$env:UserName}"], stdout=sub.PIPE)
+
+                    COMPLETE = QMessageBox()
+                    COMPLETE.setIcon(QMessageBox.Question)
+                    COMPLETE.setWindowTitle('Hey! Listen!')
+                    COMPLETE.setText('Passwords for all users have been successfully changed.')
+                    COMPLETE.setStandardButtons(QMessageBox.Close)
+                    x = COMPLETE.exec_()
+                    self.close()
+
+                self.chngpass_button.clicked.connect(lambda: threader(RUN(x)))
+
+                def threader(com):
+                    try:
+                        threader = Thread(target=com)
+                        threader.start()
+                    except Exception as e:
+                        print(e)
+                        print('Could not start thread')
+
+        def callChangepaswordofall():
+            widget = changepasswordofall()
+            widget.exec_()
+
+        callChangepaswordofall()
