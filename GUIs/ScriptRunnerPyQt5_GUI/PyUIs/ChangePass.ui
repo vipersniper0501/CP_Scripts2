@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>chngpass</class>
+    <widget class="QDialog" name="chngpass">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>428</width>
+                <height>146</height>
+            </rect>
+        </property>
+        <property name="windowTitle">
+            <string>Change Password for All Users</string>
+        </property>
+        <property name="styleSheet">
+            <string notr="true">background-color: #212434
+            </string>
+        </property>
+        <widget class="QLineEdit" name="passwd">
+            <property name="geometry">
+                <rect>
+                    <x>110</x>
+                    <y>10</y>
+                    <width>291</width>
+                    <height>20</height>
+                </rect>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
+            </property>
+        </widget>
+        <widget class="QLabel" name="label">
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>10</y>
+                    <width>91</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">color: #8B93B2;</string>
+            </property>
+            <property name="text">
+                <string>Password:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" name="label_3">
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>40</y>
+                    <width>91</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">color: #8B93B2;</string>
+            </property>
+            <property name="text">
+                <string>Confirm Password:</string>
+            </property>
+        </widget>
+        <widget class="QLineEdit" name="pass_verify">
+            <property name="geometry">
+                <rect>
+                    <x>110</x>
+                    <y>40</y>
+                    <width>291</width>
+                    <height>20</height>
+                </rect>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" name="chngpass_button">
+            <property name="geometry">
+                <rect>
+                    <x>80</x>
+                    <y>80</y>
+                    <width>321</width>
+                    <height>51</height>
+                </rect>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>16</pointsize>
+                </font>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+            </property>
+            <property name="text">
+                <string>Change Password for All Users</string>
+            </property>
+        </widget>
+    </widget>
+    <resources/>
+    <connections/>
+</ui>
