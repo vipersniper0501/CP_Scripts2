@@ -1,0 +1,11 @@
+= Script Runner (PyQt5) NOTES
+Author: Michael Brenner
+
+== Compatibility Notes
+
+=== 64-bit vs. 32-bit
+
+    * 64-bit
+    ** To compile the program into a 64-bit format, the program must compiled using a 64-bit version of python and `auto-py-to-exe`. Only use this version when sure that you are going to be using a 64-bit operating system. Otherwise the program will not run correctly or just wont run at all.
+    * 32-bit
+    ** To compile the program into a 32-bit format, it must be compiled using a 32-bit version of python and `auto-py-to-exe`. This version should work on all platforms, regardless if it is 32-bit or 64-bit.

@@ -2,11 +2,11 @@
 Michael Brenner
 v1.0, 5/14/2020
 
-image:https://github.com/vipersniper0501/CP_Scripts2/workflows/Python%20application%20(Ubuntu)/badge.svg?branch=GUI-Updates[Python application (Ubuntu)] +
+
 
 *DISCLAIMERS:* This project is student made with inspiration from other projects such as the scripts made by Ethan Fowler from TEAM BYTE.
 
-This script also uses Microsoft Sysinternals suite which is owned and created by Microsoft.I do not take any credit in the creation of that program.(_I don't want to get sued_)
+This script also uses Microsoft Sysinternals suite which is owned and created by Microsoft. I do not take any credit in the creation of that program. (_I don't want to get sued_)
 
 FYI: This will be mostly used for a backup location for my scripts and will not always have the most up to date versions.
 
@@ -16,13 +16,8 @@ IMPORTANT: Before using any of these scripts for the CyberPatriot Challenges, pl
 
 == Dependancies
 
-- GUI
 - Admin access
-- Powershell Script
-- Admin access
-- Set-ExecutionPolicy Unrestricted
-- Linux Scripts
-- Admin access
+- Set-ExecutionPolicy Unrestricted _(For Powershell Scripts only)_
 
 == Current Scripts and GUI's Available
 
@@ -31,20 +26,20 @@ I currently have two Command Line scripts:
 - link:./CLI_Scripts/WindowsScript/[Powershell Script] for Windows machines
 - link:./CLI_Scripts/LinuxScript/[Bash Script] for Linux machines
 
-These two scripts currently have around 10-20 commands each.They do most of the basic commands that you would use in competition, but, they are not good enough that they could get you a ton of points by just using them alone.
+These two scripts currently have around 10-20 commands each. They do most of the basic commands that you would use in competition, but, they are not good enough that they could get you a ton of points by just using them alone.
 
-NOTE: The Command Line Script are on hold for now as currently I am spending all of my efforts on the GUI's.This is mostly due to it being A.) more fun for me and B.) because due to the fact that the GUI's are cross platform, I no longer need to manage 2-3 different scripts for different OS's [.underline]#and# use more than one coding/scripting language.(It becomes very hard to remember how to do things in both Bash and Powershell the bigger your script gets :S )
+NOTE: The Command Line Script are on hold for now as currently I am spending all of my efforts on the GUI's. This is mostly due to it being A.) more fun for me and B.) because due to the fact that the GUI's are cross platform, I no longer need to manage 2-3 different scripts for different OS's [.underline]#and# use more than one coding/scripting language. (It becomes very hard to remember how to do things in both Bash and Powershell the bigger your script gets :S )
 
-I currently have available three GUI's.Of the three, only two are very developed.The following list are the available GUI's to choose from:
+I currently have available three GUI's. Of the three, only two are very developed. The following list are the available GUI's to choose from:
 
 * link:./GUIs/ScriptRunnerTkinter_GUI/[Script Runner Tkinter]
 ** Built on the TKinter framework so it looks like it was made in the 90's
 
 * link:./GUIs/ScriptRunnerElectron/[Script Runner Electron]
-** This GUI is built on the same framework that applications like Discord, Slack, and Atom.Although due to it using website code (HTML, CSS, JavaScript) I am still having trouble attempting to connect it to python code that will actually execute the commands
+** This GUI is built on the same framework that applications like Discord, Slack, and Atom. Although due to it using website code (HTML, CSS, JavaScript) I am still having trouble attempting to connect it to python code that will actually execute the commands
 
 * link:./GUIs/ScriptRunnerPyQt5_GUI/[Script Runner PyQt5]
-** This GUI is built on the PyQt frame work.This is the newest best version of all of the GUI's and Scripts Combined.It is the most modern looking and has the most commands, platform support, and Ease of Use.
+** This GUI is built on the PyQt frame work. This is the newest best version of all of the GUI's and Scripts Combined. It is the most modern looking and has the most commands, platform support, and Ease of Use.
 
 == How to compile GUI
 
@@ -77,7 +72,7 @@ Do this to allow the execution of `Powershell` scripts +
 
 Hit Enter
 
-That is it!Good Luck!
+That is it! Good Luck!
 
 Some of the commands might require for you to execute them twice if they did not show a list when they should have.
 I am currently working on fixing this problem.

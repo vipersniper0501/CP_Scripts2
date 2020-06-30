@@ -37,7 +37,9 @@ class ScriptRunnerFunc:
     def updateos(self):
         # TODO: Have function also update all drivers
         if ops == 'Ubuntu' or ops == 'debian':
-            command = 'sudo apt update && upgrade -y'
+            command = 'sudo apt-get update && apt-get upgrade -y'
+            sub.Popen(command.split())
+            command = 'sudo apt-get dist-upgrade'
             sub.Popen(command.split())
             print('Updates Completed!')
         elif platform == 'darwin':
