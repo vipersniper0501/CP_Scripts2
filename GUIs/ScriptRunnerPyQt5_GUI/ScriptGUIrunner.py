@@ -3,6 +3,8 @@ from pathlib import Path
 from sys import platform
 from threading import *
 
+import PyQt5
+
 from PyUIs.comdescript import Ui_comDescript
 from PyUIs.firstconf import *
 from PyUIs.main import Ui_MainWindow
@@ -10,6 +12,13 @@ from PyUIs.progabout import Ui_About
 from scripFunc.scripLINUXONLY import *
 from scripFunc.scripUNIMULTI import *
 from scripFunc.scripWINONLY import *
+
+# The following two `if` statements fix the problem where the application would not scale correctly to the resolution of the monitor
+if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
+    PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+
+if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
+    PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
 def resource_path(relative_path):
@@ -32,7 +41,7 @@ class fconfStart(QDialog, Ui_firstConf):
         super(fconfStart, self).__init__(parent)
 
         print('Script Runner First Time Configurations')
-        self.setFixedSize(721, 441)
+        # self.setFixedSize(721, 441)
         self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
         self.setupUi(self)
         self.fcFuncts()
@@ -335,6 +344,22 @@ class Mainstart(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(Mainstart, self).__init__(parent)
         print('Script Runner has started')
+        # self.size().setHeight(675)
+        # self.size().setWidth(860)
+        a = self.size()
+        print(a)
+        # print(a.height())
+        # print(a.width())
+        # screen = app.primaryScreen()
+        # print('Screen: %s' % screen.name())
+        # size = screen.size()
+        # print('Screen Size: %d x %d' % (size.width(), size.height()))
+        # rect = screen.availableGeometry()
+        # print('Available: %d x %d' % (rect.width(), rect.height()))
+        # hScaled = size.height()/1080
+        # print(hScaled)
+        # hScaled = hScaled*610
+        # print(hScaled)
 
         config_name = 'config.ini'
         if getattr(sys, 'frozen', False):
@@ -354,7 +379,9 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
             QMainWindow.__init__(self)
             self.setupUi(self)
-            self.setFixedSize(848, 603)
+            # self.setFixedWidth(848)
+            # self.setFixedHeight(603)
+            # self.setFixedSize(850, 640)
             self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
             self.mmfuncassign(variableCheck)
         else:
@@ -576,6 +603,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             self.MACBUTTONS[i].clicked.connect(lambda: self.threader(indev()))
 
         self.quit_button_3.clicked.connect(quitButton)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
