@@ -9,14 +9,14 @@
          <rect>
              <x>0</x>
              <y>0</y>
-             <width>860</width>
+             <width>862</width>
              <height>675</height>
          </rect>
      </property>
      <property name="minimumSize">
          <size>
-             <width>0</width>
-             <height>0</height>
+             <width>860</width>
+             <height>675</height>
          </size>
      </property>
      <property name="windowTitle">
@@ -38,10 +38,10 @@
              </property>
              <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
+             </property>
+             <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+             </property>
              <widget class="QLabel" name="header_title">
                  <property name="geometry">
                      <rect>
@@ -54,15 +54,15 @@
                  <property name="font">
                      <font>
                          <pointsize>30</pointsize>
-      </font>
-     </property>
-     <property name="styleSheet">
-         <string notr="true">color: #8B93B2;</string>
-     </property>
-     <property name="text">
-         <string/>
-     </property>
-    </widget>
+                     </font>
+                 </property>
+                 <property name="styleSheet">
+                     <string notr="true">color: #8B93B2;</string>
+                 </property>
+                 <property name="text">
+                     <string/>
+                 </property>
+             </widget>
              <widget class="QLabel" name="descriptions">
                  <property name="geometry">
                      <rect>
@@ -88,7 +88,7 @@
          <widget class="QPushButton" name="quit_button_3">
              <property name="geometry">
                  <rect>
-                     <x>730</x>
+                     <x>740</x>
                      <y>590</y>
                      <width>110</width>
                      <height>50</height>
@@ -444,7 +444,7 @@
                              </size>
                          </property>
                          <property name="currentIndex">
-                             <number>2</number>
+                             <number>0</number>
                          </property>
                          <widget class="QWidget" name="Universal_Page">
                              <widget class="QFrame" name="frame">
@@ -645,9 +645,9 @@
                                          <property name="geometry">
                                              <rect>
                                                  <x>20</x>
-                                                 <y>320</y>
+                                                 <y>340</y>
                                                  <width>451</width>
-                                                 <height>51</height>
+                                                 <height>31</height>
                                              </rect>
                                          </property>
                                          <property name="styleSheet">
@@ -665,7 +665,7 @@
                                              <rect>
                                                  <x>22</x>
                                                  <y>0</y>
-                                                 <width>521</width>
+                                                 <width>528</width>
                                                  <height>171</height>
                                              </rect>
                                          </property>
@@ -674,8 +674,8 @@
                                                  <widget class="QPushButton" name="basicConfbutton_2">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -696,8 +696,8 @@
                                                  <widget class="QPushButton" name="rmvprosoftbutton_2">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -718,8 +718,8 @@
                                                  <widget class="QPushButton" name="enblBitLockerbutton">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -740,8 +740,8 @@
                                                  <widget class="QPushButton" name="fwlbutton_2">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -762,8 +762,8 @@
                                                  <widget class="QPushButton" name="servicesConfButton_4">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -784,8 +784,8 @@
                                                  <widget class="QPushButton" name="browserConf">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -812,10 +812,10 @@
                                      <widget class="QLabel" name="label_14">
                                          <property name="geometry">
                                              <rect>
-                                                 <x>10</x>
-                                                 <y>320</y>
+                                                 <x>20</x>
+                                                 <y>340</y>
                                                  <width>471</width>
-                                                 <height>51</height>
+                                                 <height>31</height>
                                              </rect>
                                          </property>
                                          <property name="styleSheet">
@@ -831,10 +831,10 @@
                                      <widget class="QWidget" name="gridLayoutWidget_4">
                                          <property name="geometry">
                                              <rect>
-                                                 <x>24</x>
-                                                 <y>-5</y>
-                                                 <width>511</width>
-                                                 <height>331</height>
+                                                 <x>20</x>
+                                                 <y>0</y>
+                                                 <width>521</width>
+                                                 <height>341</height>
                                              </rect>
                                          </property>
                                          <layout class="QGridLayout" name="gridLayout_4">
@@ -842,8 +842,8 @@
                                                  <widget class="QPushButton" name="rmvusrfrosys_3">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -864,8 +864,8 @@
                                                  <widget class="QPushButton" name="rmvgrufrosys_3">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -886,8 +886,8 @@
                                                  <widget class="QPushButton" name="lsmemgru_3">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -908,8 +908,8 @@
                                                  <widget class="QPushButton" name="adusrtosys_3">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -925,7 +925,7 @@
                                                          </string>
                                                      </property>
                                                      <property name="text">
-                                                         <string>Add User to System*</string>
+                                                         <string>Add User to System</string>
                                                      </property>
                                                  </widget>
                                              </item>
@@ -933,8 +933,8 @@
                                                  <widget class="QPushButton" name="rmvusrfrogru_3">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -955,8 +955,8 @@
                                                  <widget class="QPushButton" name="lslocausr_3">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -977,8 +977,8 @@
                                                  <widget class="QPushButton" name="adusrtogru_3">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -999,8 +999,8 @@
                                                  <widget class="QPushButton" name="adgrutosys_3">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -1021,8 +1021,8 @@
                                                  <widget class="QPushButton" name="lslocagru_3">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -1043,8 +1043,8 @@
                                                  <widget class="QPushButton" name="lsgruusrin_3">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -1065,8 +1065,8 @@
                                                  <widget class="QPushButton" name="chngusrpas_3">
                                                      <property name="minimumSize">
                                                          <size>
-                                                             <width>220</width>
-                                                             <height>30</height>
+                                                             <width>260</width>
+                                                             <height>40</height>
                                                          </size>
                                                      </property>
                                                      <property name="font">
@@ -1116,118 +1116,13 @@
                                      <attribute name="title">
                                          <string>Main Commands</string>
                                      </attribute>
-                                     <widget class="QPushButton" name="auditbutton_3">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>90</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Audit System</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="basicConfbutton_3">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>50</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Basic Configurations</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="rmvprosoftbutton_3">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>50</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>10</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Remove Prohibited Software*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="malrembutton_3">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>10</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Malware Removal</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="fwlbutton_3">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>10</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Linux Firewall Settings</string>
-                                         </property>
-                                     </widget>
                                      <widget class="QLabel" name="label_15">
                                          <property name="geometry">
                                              <rect>
                                                  <x>20</x>
-                                                 <y>320</y>
+                                                 <y>340</y>
                                                  <width>511</width>
-                                                 <height>51</height>
+                                                 <height>31</height>
                                              </rect>
                                          </property>
                                          <property name="styleSheet">
@@ -1242,273 +1137,162 @@
                                              <bool>true</bool>
                                          </property>
                                      </widget>
-                                     <widget class="QPushButton" name="servicesConfButton_2">
+                                     <widget class="QWidget" name="gridLayoutWidget">
                                          <property name="geometry">
                                              <rect>
-                                                 <x>300</x>
-                                                 <y>90</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
+                                                 <x>20</x>
+                                                 <y>0</y>
+                                                 <width>528</width>
+                                                 <height>171</height>
                                              </rect>
                                          </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Services Configurations</string>
-                                         </property>
+                                         <layout class="QGridLayout" name="gridLayout_5">
+                                             <item row="1" column="0">
+                                                 <widget class="QPushButton" name="rmvprosoftbutton_3">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>10</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Remove Prohibited Software*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="0" column="0">
+                                                 <widget class="QPushButton" name="fwlbutton_3">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Linux Firewall Settings</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="0" column="1">
+                                                 <widget class="QPushButton" name="malrembutton_3">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Malware Removal</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="1" column="1">
+                                                 <widget class="QPushButton" name="basicConfbutton_3">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Basic Configurations</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="2" column="0">
+                                                 <widget class="QPushButton" name="auditbutton_3">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Audit System</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="2" column="1">
+                                                 <widget class="QPushButton" name="servicesConfButton_2">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Services Configurations</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                         </layout>
                                      </widget>
                                  </widget>
                                  <widget class="QWidget" name="linux_usrgruCOM">
                                      <attribute name="title">
                                          <string>User / Group Settings</string>
                                      </attribute>
-                                     <widget class="QPushButton" name="lsmemgru_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>170</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>List Members of Group*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="chngusrpas_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>210</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>10</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Change all User Passwords at Once*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="rmvusrfrosys_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>10</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Remove User From System*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="adusrtosys_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>10</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="acceptDrops">
-                                             <bool>false</bool>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Add User to System*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="rmvusrfrogru_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>90</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Remove User from Group*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="adgrutosys_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>50</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Add Group to System*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="lslocausr_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>130</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>List Local Users*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="rmvgrufrosys_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>50</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Remove Group from System*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="lslocagru_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>130</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>List Local Groups*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="lsgruusrin_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>170</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>List Groups an User is in*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="adusrtogru_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>90</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Add User to Group*</string>
-                                         </property>
-                                     </widget>
                                      <widget class="QLabel" name="label_16">
                                          <property name="geometry">
                                              <rect>
-                                                 <x>10</x>
-                                                 <y>320</y>
+                                                 <x>20</x>
+                                                 <y>340</y>
                                                  <width>511</width>
-                                                 <height>51</height>
+                                                 <height>31</height>
                                              </rect>
                                          </property>
                                          <property name="styleSheet">
@@ -1516,12 +1300,269 @@
                                          </property>
                                          <property name="text">
                                              <string>All Commands here will work on Debian/Ubuntu/Manjaro Linux
-                                                 distrobutions
+                                                 distributions
                                              </string>
                                          </property>
                                          <property name="wordWrap">
                                              <bool>true</bool>
                                          </property>
+                                     </widget>
+                                     <widget class="QWidget" name="gridLayoutWidget_5">
+                                         <property name="geometry">
+                                             <rect>
+                                                 <x>20</x>
+                                                 <y>0</y>
+                                                 <width>528</width>
+                                                 <height>321</height>
+                                             </rect>
+                                         </property>
+                                         <layout class="QGridLayout" name="gridLayout_6">
+                                             <item row="1" column="0">
+                                                 <widget class="QPushButton" name="adgrutosys_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Add Group to System*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="2" column="0">
+                                                 <widget class="QPushButton" name="adusrtogru_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Add User to Group*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="1" column="1">
+                                                 <widget class="QPushButton" name="rmvgrufrosys_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Remove Group from System*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="3" column="1">
+                                                 <widget class="QPushButton" name="lslocagru_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>List Local Groups*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="0" column="1">
+                                                 <widget class="QPushButton" name="rmvusrfrosys_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Remove User From System*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="0" column="0">
+                                                 <widget class="QPushButton" name="adusrtosys_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="acceptDrops">
+                                                         <bool>false</bool>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Add User to System*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="2" column="1">
+                                                 <widget class="QPushButton" name="rmvusrfrogru_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Remove User from Group*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="3" column="0">
+                                                 <widget class="QPushButton" name="lslocausr_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>List Local Users*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="4" column="1">
+                                                 <widget class="QPushButton" name="lsgruusrin_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>List Groups an User is in*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="4" column="0">
+                                                 <widget class="QPushButton" name="lsmemgru_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>List Members of Group*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="5" column="0">
+                                                 <widget class="QPushButton" name="chngusrpas_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>10</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Change all User Passwords at Once*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                         </layout>
                                      </widget>
                                  </widget>
                              </widget>
@@ -1557,76 +1598,13 @@
                                      <attribute name="title">
                                          <string>Main Commands</string>
                                      </attribute>
-                                     <widget class="QPushButton" name="basicConfbutton_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>50</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Basic Configurations*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="rmvprosoftbutton_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>10</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>10</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Remove Prohibited Software*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="malrembutton_4">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>10</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Malware Removal*</string>
-                                         </property>
-                                     </widget>
                                      <widget class="QLabel" name="label_17">
                                          <property name="geometry">
                                              <rect>
                                                  <x>20</x>
-                                                 <y>320</y>
+                                                 <y>340</y>
                                                  <width>421</width>
-                                                 <height>51</height>
+                                                 <height>31</height>
                                              </rect>
                                          </property>
                                          <property name="styleSheet">
@@ -1639,273 +1617,118 @@
                                              <bool>true</bool>
                                          </property>
                                      </widget>
-                                     <widget class="QPushButton" name="servicesConfButton_3">
+                                     <widget class="QWidget" name="gridLayoutWidget_6">
                                          <property name="geometry">
                                              <rect>
-                                                 <x>20</x>
-                                                 <y>50</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
+                                                 <x>19</x>
+                                                 <y>0</y>
+                                                 <width>528</width>
+                                                 <height>141</height>
                                              </rect>
                                          </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Services Configurations*</string>
-                                         </property>
+                                         <layout class="QGridLayout" name="gridLayout_7">
+                                             <item row="0" column="0">
+                                                 <widget class="QPushButton" name="rmvprosoftbutton_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>10</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Remove Prohibited Software*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="0" column="1">
+                                                 <widget class="QPushButton" name="malrembutton_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Malware Removal*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="1" column="0">
+                                                 <widget class="QPushButton" name="servicesConfButton_3">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Services Configurations*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="1" column="1">
+                                                 <widget class="QPushButton" name="basicConfbutton_4">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Basic Configurations*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                         </layout>
                                      </widget>
                                  </widget>
                                  <widget class="QWidget" name="mac_usrgruCOM">
                                      <attribute name="title">
                                          <string>User / Group Settings</string>
                                      </attribute>
-                                     <widget class="QPushButton" name="lsmemgru_5">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>170</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>List Members of Group*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="chngusrpas_5">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>210</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>10</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Change all User Passwords at Once*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="rmvusrfrosys_5">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>10</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Remove User From System*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="adusrtosys_5">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>10</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="acceptDrops">
-                                             <bool>false</bool>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Add User to System*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="rmvusrfrogru_5">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>90</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Remove User from Group*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="adgrutosys_5">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>50</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Add Group to System*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="lslocausr_5">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>130</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>List Local Users*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="rmvgrufrosys_5">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>50</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Remove Group from System*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="lslocagru_5">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>130</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>List Local Groups*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="lsgruusrin_5">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>300</x>
-                                                 <y>170</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>List Groups an User is in*</string>
-                                         </property>
-                                     </widget>
-                                     <widget class="QPushButton" name="adusrtogru_5">
-                                         <property name="geometry">
-                                             <rect>
-                                                 <x>20</x>
-                                                 <y>90</y>
-                                                 <width>221</width>
-                                                 <height>31</height>
-                                             </rect>
-                                         </property>
-                                         <property name="font">
-                                             <font>
-                                                 <pointsize>12</pointsize>
-                                             </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                             <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-                                         </property>
-                                         <property name="text">
-                                             <string>Add User to Group*</string>
-                                         </property>
-                                     </widget>
                                      <widget class="QLabel" name="label_18">
                                          <property name="geometry">
                                              <rect>
-                                                 <x>10</x>
-                                                 <y>320</y>
+                                                 <x>20</x>
+                                                 <y>340</y>
                                                  <width>421</width>
-                                                 <height>51</height>
+                                                 <height>31</height>
                                              </rect>
                                          </property>
                                          <property name="styleSheet">
@@ -1917,6 +1740,263 @@
                                          <property name="wordWrap">
                                              <bool>true</bool>
                                          </property>
+                                     </widget>
+                                     <widget class="QWidget" name="gridLayoutWidget_7">
+                                         <property name="geometry">
+                                             <rect>
+                                                 <x>20</x>
+                                                 <y>0</y>
+                                                 <width>528</width>
+                                                 <height>321</height>
+                                             </rect>
+                                         </property>
+                                         <layout class="QGridLayout" name="gridLayout_8">
+                                             <item row="0" column="1">
+                                                 <widget class="QPushButton" name="rmvusrfrosys_5">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Remove User From System*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="1" column="0">
+                                                 <widget class="QPushButton" name="adgrutosys_5">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Add Group to System*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="4" column="0">
+                                                 <widget class="QPushButton" name="lsmemgru_5">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>List Members of Group*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="2" column="0">
+                                                 <widget class="QPushButton" name="adusrtogru_5">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Add User to Group*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="3" column="0">
+                                                 <widget class="QPushButton" name="lslocausr_5">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>List Local Users*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="3" column="1">
+                                                 <widget class="QPushButton" name="lslocagru_5">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>List Local Groups*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="4" column="1">
+                                                 <widget class="QPushButton" name="lsgruusrin_5">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>List Groups an User is in*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="1" column="1">
+                                                 <widget class="QPushButton" name="rmvgrufrosys_5">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Remove Group from System*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="2" column="1">
+                                                 <widget class="QPushButton" name="rmvusrfrogru_5">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Remove User from Group*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="0" column="0">
+                                                 <widget class="QPushButton" name="adusrtosys_5">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>12</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="acceptDrops">
+                                                         <bool>false</bool>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Add User to System*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                             <item row="5" column="0">
+                                                 <widget class="QPushButton" name="chngusrpas_5">
+                                                     <property name="minimumSize">
+                                                         <size>
+                                                             <width>260</width>
+                                                             <height>40</height>
+                                                         </size>
+                                                     </property>
+                                                     <property name="font">
+                                                         <font>
+                                                             <pointsize>10</pointsize>
+                                                         </font>
+                                                     </property>
+                                                     <property name="styleSheet">
+                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         </string>
+                                                     </property>
+                                                     <property name="text">
+                                                         <string>Change all User Passwords at Once*</string>
+                                                     </property>
+                                                 </widget>
+                                             </item>
+                                         </layout>
                                      </widget>
                                  </widget>
                              </widget>
@@ -1927,14 +2007,14 @@
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-       <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>860</width>
-           <height>26</height>
-       </rect>
-   </property>
+      <property name="geometry">
+          <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>862</width>
+              <height>26</height>
+          </rect>
+      </property>
    <property name="font">
     <font>
      <pointsize>11</pointsize>

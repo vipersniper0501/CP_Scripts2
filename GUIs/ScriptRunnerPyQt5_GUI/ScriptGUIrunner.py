@@ -41,7 +41,7 @@ class fconfStart(QDialog, Ui_firstConf):
         super(fconfStart, self).__init__(parent)
 
         print('Script Runner First Time Configurations')
-        # self.setFixedSize(721, 441)
+        self.setFixedSize(720, 440)
         self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
         self.setupUi(self)
         self.fcFuncts()
@@ -74,11 +74,12 @@ class fconfStart(QDialog, Ui_firstConf):
         else:
             self.quit_buttonConf.setText('Quit')
 
+        # TODO: Convert to a switch statement. Should improve efficiency.
+
         def sshYES(selected):
             if selected:
                 print('ssh yes')
                 self.ssh = 'yes'
-                print(self.ssh)
 
         def sshNO(selected):
             if selected:
@@ -346,8 +347,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         print('Script Runner has started')
         # self.size().setHeight(675)
         # self.size().setWidth(860)
-        a = self.size()
-        print(a)
+        # a = self.size()
+        # print(a)
         # print(a.height())
         # print(a.width())
         # screen = app.primaryScreen()
@@ -572,12 +573,13 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                                                                                                     'vsftpd')))))
         self.browserConf.clicked.connect(lambda: self.threader(funcWIN.browserCONF()))
         # Windows User Group Commands
-        self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.adusrtosys_3,  # self.chngusrpas_3,
-                                self.lsgruusrin_3, self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
+        self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.lsgruusrin_3,
+                                self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
                                 self.rmvgrufrosys_3, self.rmvusrfrogru_3, self.rmvusrfrosys_3]
-        for i in range(0, 10):
+        for i in range(0, len(self.WINUSRGRUBUTTON)):
             self.WINUSRGRUBUTTON[i].clicked.connect(lambda: self.threader(indev()))  #
 
+        self.adusrtosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.addusr()))
         self.chngusrpas_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.chngpasswdofall()))
 
         # Linux Main Menu Commands

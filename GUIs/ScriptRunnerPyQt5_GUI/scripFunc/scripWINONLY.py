@@ -1,5 +1,6 @@
 import configparser
 import itertools
+import os
 import shutil
 import subprocess as sub
 from threading import *
@@ -10,6 +11,7 @@ from PyQt5.QtWidgets import *
 
 from PyUIs.changepass import Ui_chngpass
 from PyUIs.enblebit import Ui_bitlockerGUI
+from PyUIs.addusrUI import Ui_addUSR
 
 OS = distro.linux_distribution()
 ops = OS[0]
@@ -17,6 +19,8 @@ ops = OS[0]
 config = configparser.ConfigParser()
 config.read('config.ini')
 
+
+# This function is not really needed, but nice to have if needed.
 # def resource_path(relative_path):
 #     """ Get absolute path to resource, works for dev and for PyInstaller """
 #     try:
@@ -28,9 +32,11 @@ config.read('config.ini')
 #     return os.path.join(base_path, relative_path)
 
 
-'''
-This file is used to store commands that are to only be used on Windows machines
-'''
+# This file is used to store commands that are to only be used on Windows machines
+
+
+# TODO: When done, possible convert the try and if statements used for enforcing the complexity requirement into it's
+#  own function to reduce the number of lines in the file.
 
 
 class funcWINONLY:
@@ -321,7 +327,201 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
 
 class funcWINusrgru:
     def addusr(self):
-        pass
+        class addusrtosys(QDialog, Ui_addUSR):
+            def __init__(self, parent=None):
+                super(addusrtosys, self).__init__(parent)
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setupUi(self)
+                self.EXECUTE()
+
+            def EXECUTE(self):
+                self.adminyn = 'n'
+
+                def adminy(selected):
+                    if selected:
+                        print('This user will be an admin')
+                        self.adminyn = 'y'
+
+                def adminn(selected):
+                    if selected:
+                        print('This user will NOT be an admin')
+                        self.adminyn = 'n'
+
+                self.admin_y.toggled.connect(adminy)
+                self.admin_n.toggled.connect(adminn)
+
+                def CONFIRM():
+                    username = self.username_input.text()
+                    passwd = self.Password1_input.text()
+                    passwd_confirm = self.Password2_input.text()
+
+                    l1 = passwd
+                    l2 = passwd_confirm
+                    # Try loop enforces password policy.
+                    try:
+                        symbols = "`~!@#$%^&*()_+-=[]{};:,./<>?"
+                        characterBOOL = ''
+                        for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
+                            character = l1[i]
+                            character2 = l2[x]
+                            if character.islower() and character2.islower():
+                                characterBOOL = True
+                            elif not character.islower() and not character2.islower():
+                                characterBOOL = False
+                            if characterBOOL:
+                                break
+
+                        characterUPBOOL = ''
+                        for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
+                            character = l1[i]
+                            character2 = l2[x]
+                            if character.isupper() and character2.isupper():
+                                characterUPBOOL = True
+                            elif not character.isupper() and not character2.isupper():
+                                characterUPBOOL = False
+                            if characterUPBOOL:
+                                break
+
+                        symbolsBOOL = ''
+                        for y in range(0, len(symbols)):
+                            if (symbols[y] not in l1) and (symbols[y] not in l2):
+                                symbolsBOOL = False
+                            elif (symbols[y] in l1) and (symbols[y] in l2):
+                                symbolsBOOL = True
+                            if symbolsBOOL:
+                                break
+
+                        numberBOOL = ''
+                        for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
+                            character = l1[i]
+                            character2 = l2[x]
+                            if character.isdigit() and character2.isdigit():
+                                numberBOOL = True
+                            elif not character.isdigit() and not character2.isdigit():
+                                numberBOOL = False
+                            if numberBOOL:
+                                break
+
+                        print(str(characterBOOL) + ' Lower Case')
+                        print(str(characterUPBOOL) + ' Upper case')
+                        print(str(symbolsBOOL) + ' symbols')
+                        print(str(numberBOOL) + ' number')
+                    except IndexError:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your passwords do not match!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+
+                    def completedPOP():
+                        COMPLETE = QMessageBox()
+                        COMPLETE.setIcon(QMessageBox.Question)
+                        COMPLETE.setWindowTitle('Hey! Listen!')
+                        COMPLETE.setText('User ' + username + ' has been successfully added to system.')
+                        COMPLETE.setStandardButtons(QMessageBox.Close)
+                        x = COMPLETE.exec_()
+                        self.close()
+
+                    if len(username) == 0:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! You don't have a username!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif len(l1) == 0 or len(l2) == 0:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! You don't have a password!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif len(l1) <= 8 or len(l2) <= 8:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your password must have at least 8 characters!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif l1 != l2:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your passwords do not match!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif not characterBOOL:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your password must have at least 1 lower case letter!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif not characterUPBOOL:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your password must have at least 1 Upper Case letter!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif not symbolsBOOL:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    elif not numberBOOL:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        x = HEY.exec_()
+                    else:
+                        if self.adminyn == 'y':
+                            print('This user will be an admin')
+                            print(os.getcwd())
+                            command = """
+$nusnm = """ + '"{}"'.format(username) + """
+$nuspss = ConvertTo-SecureString """ + '"{}"'.format(passwd) + """ -AsPlainText -Force
+New-LocalUser -Name $nusnm -Password $nuspss
+Add-LocalGroupMember -Group "Administrators" -Member $nusnm"""
+                            print(command)
+                            sub.Popen(["powershell", "& {" + command + "}"])
+                            print('User ' + username + " has been successfully added!")
+                            completedPOP()
+                        elif self.adminyn == 'n':
+                            print('This user will not be an admin')
+                            command = """
+$nusnm = """ + '"{}"'.format(username) + """
+$nuspss = ConvertTo-SecureString """ + '"{}"'.format(passwd) + """ -AsPlainText -Force
+New-LocalUser -Name $nusnm -Password $nuspss"""
+                            print(command)
+                            sub.Popen(["powershell", "& {" + command + "}"])
+                            print('User ' + username + " has been successfully added!")
+                            completedPOP()
+
+                def cancelbutton():
+                    self.close()
+
+                self.Confirm_button.clicked.connect(lambda: threader(CONFIRM()))
+                self.Cancel_button.clicked.connect(cancelbutton)
+
+                def threader(com):
+                    try:
+                        threader = Thread(target=com)
+                        threader.start()
+                    except Exception as e:
+                        print(e)
+                        print('Could not start thread')
+
+        def calladdusrtosys():
+            widget = addusrtosys()
+            widget.exec_()
+
+        calladdusrtosys()
 
     def remusr(self):
         pass
@@ -352,6 +552,9 @@ class funcWINusrgru:
 
     # @staticmethod
     def chngpasswdofall(self):
+
+        # TODO: This command as of July 7th, 2020 is broken. More on the issue can be found here: https://github.com/vipersniper0501/CP_Scripts2/issues/48
+
         class changepasswordofall(QDialog, Ui_chngpass):
             def __init__(self, parent=None):
                 super(changepasswordofall, self).__init__(parent)
@@ -360,14 +563,13 @@ class funcWINusrgru:
                 self.EXECUTE()
 
             def EXECUTE(self):
-                # TODO: Create interface asking for new password and have user confirm new password
-                #  When completed, remove all of old print statements to improve speed.
                 def findnames():
-                    exec = sub.Popen(["powershell", "& {Get-LocalUser}"], stdout=sub.PIPE)
-                    stdout, _ = exec.communicate()
+                    command = 'Get-LocalUser'
+                    EXEC = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
+                    stdout, _ = EXEC.communicate()
                     output = stdout.decode("utf-8")
-                    output = output.split("\n")
-                    # print(output)
+                    output = output.split('\n')
+                    print(output)
                     n = []
                     for i in range(0, len(output)):
                         if 'True' in output[i]:
@@ -407,6 +609,15 @@ class funcWINusrgru:
                     return names
 
                 x = findnames()
+
+                def completedPOP():
+                    COMPLETE = QMessageBox()
+                    COMPLETE.setIcon(QMessageBox.Question)
+                    COMPLETE.setWindowTitle('Hey! Listen!')
+                    COMPLETE.setText('Passwords for all users have been successfully changed.')
+                    COMPLETE.setStandardButtons(QMessageBox.Close)
+                    x = COMPLETE.exec_()
+                    self.close()
 
                 def RUN(names):
                     l1 = self.passwd.text()
@@ -528,14 +739,7 @@ class funcWINusrgru:
                 $Username | Set-LocalUser -Password $Password"""
                             print(command + "\n")
                         sub.Popen(["powershell", "& {$env:UserName}"], stdout=sub.PIPE)
-
-                    COMPLETE = QMessageBox()
-                    COMPLETE.setIcon(QMessageBox.Question)
-                    COMPLETE.setWindowTitle('Hey! Listen!')
-                    COMPLETE.setText('Passwords for all users have been successfully changed.')
-                    COMPLETE.setStandardButtons(QMessageBox.Close)
-                    x = COMPLETE.exec_()
-                    self.close()
+                        completedPOP()
 
                 self.chngpass_button.clicked.connect(lambda: threader(RUN(x)))
 

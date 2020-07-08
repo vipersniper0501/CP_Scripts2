@@ -2,11 +2,11 @@
 Michael Brenner
 v1.0, 5/14/2020
 
-
+image:https://app.codacy.com/project/badge/Grade/d277e9b251a74fc0a61da1fc321a9bfa["Codacy code quality",link="https://www.codacy.com/manual/vipersniper0501/CP_Scripts2?utm_source=github.com&utm_medium=referral&utm_content=vipersniper0501/CP_Scripts2&utm_campaign=Badge_Grade"]
 
 *DISCLAIMERS:* This project is student made with inspiration from other projects such as the scripts made by Ethan Fowler from TEAM BYTE.
 
-This script also uses Microsoft Sysinternals suite which is owned and created by Microsoft. I do not take any credit in the creation of that program. (_I don't want to get sued_)
+This script also uses Microsoft Sysinternals suite which is owned and created by Microsoft.I do not take any credit in the creation of that program.(_I don't want to get sued_)
 
 FYI: This will be mostly used for a backup location for my scripts and will not always have the most up to date versions.
 
