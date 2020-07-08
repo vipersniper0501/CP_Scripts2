@@ -6,6 +6,7 @@ image:https://app.codacy.com/project/badge/Grade/d277e9b251a74fc0a61da1fc321a9bf
 image:https://img.shields.io/github/issues-raw/vipersniper0501/CP_Scripts2[GitHub issues]
 image:https://img.shields.io/github/repo-size/vipersniper0501/CP_Scripts2[GitHub repo size]
 
+
 *DISCLAIMERS:* This project is student made with inspiration from other projects such as the scripts made by Ethan Fowler from TEAM BYTE.
 
 This script also uses Microsoft Sysinternals suite which is owned and created by Microsoft.I do not take any credit in the creation of that program.(_I don't want to get sued_)
