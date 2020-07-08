@@ -8,6 +8,7 @@ jobs:
     name: codacy-coverage-reporter
     steps:
       - uses: actions/checkout@master
+      - run: export CODACY_PROJECT_TOKEN=%Project_Token%
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@master
         with:
