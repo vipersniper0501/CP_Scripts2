@@ -2,6 +2,7 @@
 Michael Brenner
 v1.0, 5/14/2020
 
+image:https://app.codacy.com/project/badge/Grade/d277e9b251a74fc0a61da1fc321a9bfa["Codacy code quality",link="https://www.codacy.com/manual/vipersniper0501/CP_Scripts2?utm_source=github.com&utm_medium=referral&utm_content=vipersniper0501/CP_Scripts2&utm_campaign=Badge_Grade"]
 
 *DISCLAIMERS:* This project is student made with inspiration from other projects such as the scripts made by Ethan Fowler from TEAM BYTE.
 
@@ -15,13 +16,8 @@ IMPORTANT: Before using any of these scripts for the CyberPatriot Challenges, pl
 
 == Dependancies
 
-- GUI
 - Admin access
-- Powershell Script
-- Admin access
-- Set-ExecutionPolicy Unrestricted
-- Linux Scripts
-- Admin access
+- Set-ExecutionPolicy Unrestricted _(For Powershell Scripts only)_
 
 == Current Scripts and GUI's Available
 
@@ -76,7 +72,7 @@ Do this to allow the execution of `Powershell` scripts +
 
 Hit Enter
 
-That is it!Good Luck!
+That is it! Good Luck!
 
 Some of the commands might require for you to execute them twice if they did not show a list when they should have.
 I am currently working on fixing this problem.

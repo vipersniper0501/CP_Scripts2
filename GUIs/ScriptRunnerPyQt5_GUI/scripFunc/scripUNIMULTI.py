@@ -21,15 +21,15 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 
-def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and for PyInstaller """
-    try:
-        # PyInstaller creates a temp folder and stores path in _MEIPASS
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
+# def resource_path(relative_path):
+#     """ Get absolute path to resource, works for dev and for PyInstaller """
+#     try:
+#         # PyInstaller creates a temp folder and stores path in _MEIPASS
+#         base_path = sys._MEIPASS
+#     except Exception:
+#         base_path = os.path.abspath(".")
+#
+#     return os.path.join(base_path, relative_path)
 
 
 class ScriptRunnerFunc:
@@ -37,7 +37,9 @@ class ScriptRunnerFunc:
     def updateos(self):
         # TODO: Have function also update all drivers
         if ops == 'Ubuntu' or ops == 'debian':
-            command = 'sudo apt update && upgrade -y'
+            command = 'sudo apt-get update && apt-get upgrade -y'
+            sub.Popen(command.split())
+            command = 'sudo apt-get dist-upgrade'
             sub.Popen(command.split())
             print('Updates Completed!')
         elif platform == 'darwin':

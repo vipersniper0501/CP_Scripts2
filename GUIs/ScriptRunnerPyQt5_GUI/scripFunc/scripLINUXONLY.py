@@ -11,9 +11,9 @@ ops = OS[0]
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-
+"""
 def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and for PyInstaller """
+    
     try:
         # PyInstaller creates a temp folder and stores path in _MEIPASS
         base_path = sys._MEIPASS
@@ -21,7 +21,7 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, relative_path)
-
+"""
 
 '''
 This file is used to store commands that are to only be used on Linux machines
@@ -45,7 +45,7 @@ class funcLINUX:
             print('This command is currently in development')
 
     def alyn(self):
-        if ops == 'Ubuntu' or ops == 'debian':
+        if ops in ('Ubuntu', 'debian'):
             command = 'sudo apt install lynis -y'
             sub.Popen(command.split())
             command = 'sudo touch auditRESULTS.txt'
