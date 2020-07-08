@@ -213,7 +213,7 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                         decryptSTATUS.append(output3[1])
                         decryptSTATUS.append(output3[3])
                         i = i + 1
-                    except Exception as e:
+                    except Exception:
                         # print('Controlled exit of loop: ' + str(e))
                         break
                 # print(decryptSTATUS)
@@ -412,7 +412,7 @@ class funcWINusrgru:
                         HEY.setText("Hey! Your passwords do not match!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
 
                     def completedPOP():
                         COMPLETE = QMessageBox()
@@ -420,7 +420,7 @@ class funcWINusrgru:
                         COMPLETE.setWindowTitle('Hey! Listen!')
                         COMPLETE.setText('User ' + username + ' has been successfully added to system.')
                         COMPLETE.setStandardButtons(QMessageBox.Close)
-                        x = COMPLETE.exec_()
+                        COMPLETE.exec_()
                         self.close()
 
                     if len(username) == 0:
@@ -429,56 +429,56 @@ class funcWINusrgru:
                         HEY.setText("Hey! You don't have a username!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif len(l1) == 0 or len(l2) == 0:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! You don't have a password!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif len(l1) <= 8 or len(l2) <= 8:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 8 characters!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif l1 != l2:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your passwords do not match!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not characterBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 lower case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not characterUPBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 Upper Case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not symbolsBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not numberBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     else:
                         if self.adminyn == 'y':
                             print('This user will be an admin')
@@ -616,7 +616,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     COMPLETE.setWindowTitle('Hey! Listen!')
                     COMPLETE.setText('Passwords for all users have been successfully changed.')
                     COMPLETE.setStandardButtons(QMessageBox.Close)
-                    x = COMPLETE.exec_()
+                    COMPLETE.exec_()
                     self.close()
 
                 def RUN(names):
@@ -681,7 +681,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                         HEY.setText("Hey! Your passwords do not match!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
 
                     if len(l1) == 0 or len(l2) == 0:
                         HEY = QMessageBox()
@@ -689,49 +689,49 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                         HEY.setText("Hey! You don't have a password!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif len(l1) <= 8 or len(l2) <= 8:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 8 characters!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif l1 != l2:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your passwords do not match!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not characterBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 lower case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not characterUPBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 Upper Case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not symbolsBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not numberBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     else:
                         for i in range(0, len(names)):
                             command = """$Password = ConvertTo-SecureString """ + "'{}'".format(self.passwd.text()) + """ -AsPlainText -Force

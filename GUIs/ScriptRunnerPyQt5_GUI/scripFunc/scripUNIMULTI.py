@@ -1,7 +1,6 @@
 import getpass
 import os
 import subprocess as sub
-import sys
 from distutils.dir_util import copy_tree
 from shlex import quote as shlex_quote
 from sys import platform
@@ -517,15 +516,6 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
 
     def basConf(self, rdp):
         if platform == 'win32':
-            def cptree(src, dst, symlinks=False, ignore=None):
-                for item in os.listdir(src):
-                    s = os.path.join(src, item)
-                    d = os.path.join(dst, item)
-                if os.path.isdir(s):
-                    shutil.copytree(s, d, symlinks, ignore)
-                else:
-                    shutil.copy2(s, d)
-
             if rdp == 'yes':
                 try:
                     shutil.copy('./configurations/winCONF/win10StigsRDPy/win10secRDPallowed.inf',
@@ -592,7 +582,7 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                 HEY.setText("Hey! For the changes to take full effect please restart the computer!")
                 HEY.setIcon(QMessageBox.Critical)
                 HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                x = HEY.exec_()
+                HEY.exec_()
             completed()
             '''
 
@@ -692,6 +682,8 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                   'nmap',
                   'kodi',
                   'wireshark']
+        print(index)
+        print(lindex)
         print('This command is currently in developement')
 
     def hashCheck(self):
@@ -745,7 +737,7 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                     OUTPUT.setDetailedText(text)
                     OUTPUT.setIcon(QMessageBox.Information)
                     OUTPUT.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                    x = OUTPUT.exec_()
+                    OUTPUT.exec_()
 
                 def hashchk(hashnumber):
                     linhashtypes = ['MD5', 'sha1sum', 'sha256sum', 'sha384sum', 'sha512sum']
