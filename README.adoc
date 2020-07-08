@@ -1,4 +1,6 @@
 = CP_Scripts2
+
+image:https://api.codacy.com/project/badge/Grade/607ddcec5d63481ab66105ce48802d26[link="https://app.codacy.com/manual/vipersniper0501/CP_Scripts2?utm_source=github.com&utm_medium=referral&utm_content=vipersniper0501/CP_Scripts2&utm_campaign=Badge_Grade_Dashboard"]
 Michael Brenner
 v1.0, 5/14/2020
 
