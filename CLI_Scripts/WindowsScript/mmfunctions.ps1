@@ -14,17 +14,20 @@ function enblbit {
 
 function winupd {
     Clear-Host
-    Write-Host("Installing module PSWindowsUpdate if not already installed... ")
+    Write-Output("Installing module PSWindowsUpdate if not already installed... ")
     Install-Module PSWindowsUpdate
-    Write-Host("PSWindowsUpdate is now installed.")
-    Write-Host("")
-    Write-Host("Getting Windows Updates...")
+    Write-Output("PSWindowsUpdate is now installed.")
+    Write-Output("")
+    Write-Output("Getting Windows Updates...")
     Import-Module PSWindowsUpdate
-    $updates = Invoke-Command -ScriptBlock {Get-Wulist -verbose}
+    $updates = Invoke-Command -ScriptBlock { Get-Wulist -verbose }
     $updatenumber = ($updates.kb).count
-    if ($null -ne $updates){
+    if ($null -ne $updates)
+    {
         Get-WindowsUpdate -AcceptAll -Install | Out-File C:\PSWindowsUpdate.log
-        do {$updatestatus = Get-Content c:\PSWindowsUpdate.log
+        do
+        {
+            $updatestatus = Get-Content c:\PSWindowsUpdate.log
             "Currently processing the following update:"
             Get-Content c:\PSWindowsUpdate.log | select-object -last 1
             Start-Sleep -Seconds 10
@@ -38,7 +41,7 @@ function winupd {
 
 function serv { #UNCOMPLETED
     Clear-Host
-    Write-Host("")
+    Write-Output("")
     servyn = Read-Host -Prompt 'Would you like to disable services? [y/n] '
     if ($servyn -eq 'y'){
         rdpyn = Read-Host -Prompt 'IMPORTANT: Is Remote Desktop Services required from the readme? [y/n] '
@@ -55,6 +58,6 @@ function serv { #UNCOMPLETED
 
 function rall {
     srchmdia
-    Write-Host("Please go through output and delete all prohibited media...")
+    Write-Output("Please go through output and delete all prohibited media...")
 
 }
