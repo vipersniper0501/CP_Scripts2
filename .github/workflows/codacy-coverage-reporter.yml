@@ -12,4 +12,4 @@ jobs:
         uses: codacy/codacy-coverage-reporter-action@0.2.0
         with:
           project-token: 64a4cd7bbf9744f0a2aaa57306be5b61
-          args: 'report -l Java -r report1.xml --partial'
+          args: 'report -r report1.xml --final'
