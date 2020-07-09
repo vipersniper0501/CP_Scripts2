@@ -41,7 +41,7 @@ I currently have available three GUI's.Of the three, only two are very developed
 * link:./GUIs/ScriptRunnerElectron/[Script Runner Electron]
 ** This GUI is built on the same framework that applications like Discord, Slack, and Atom.Although due to it using website code (HTML, CSS, JavaScript) I am still having trouble attempting to connect it to python code that will actually execute the commands
 
-* link:./GUIs/ScriptRunnerPyQt5_GUI/[Script Runner PyQt5]
+* link:./GUIs/ScriptRunnerPyQt5_GUI/[Script Runner PyQt5]  image:https://travis-ci.com/vipersniper0501/CP_Scripts2.svg?branch=GUI-Updates["Build Status",link="https://travis-ci.com/vipersniper0501/CP_Scripts2"]
 ** This GUI is built on the PyQt frame work.This is the newest best version of all of the GUI's and Scripts Combined.It is the most modern looking and has the most commands, platform support, and Ease of Use.
 
 == How to compile GUI

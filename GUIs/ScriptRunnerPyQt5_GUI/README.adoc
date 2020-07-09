@@ -2,23 +2,25 @@
 Author: Michael Brenner
 v1.0    5/15/2020
 
+image:https://travis-ci.com/vipersniper0501/CP_Scripts2.svg?branch=GUI-Updates["Build Status",link="https://travis-ci.com/vipersniper0501/CP_Scripts2"]
+
 == Description
+
 This GUI is based on the https://www.riverbankcomputing.com/software/pyqt/intro[PyQt] frame work.
 
 This script runs on Mac OS X, Windows 10, Windows 8.x, Windows 7, Debian, Ubuntu, and Manjaro Linux.
 
-
-
 == List of supported commands:
+
 === Universal Commands
 ==== Updates:
-This command will update your Operating System (Only the Operating System if you are using Windows 10 or Mac OS) When using on windows 10, it will continue to keep cheking for updates until there are none left compared to Settings > Updates which will only check once and update. NOTE: For other updates to third party apps, I recommend using software such as PatchMyPc which will update up 250+ apps at once.
+This command will update your Operating System (Only the Operating System if you are using Windows 10 or Mac OS) When using on windows 10, it will continue to keep cheking for updates until there are none left compared to Settings > Updates which will only check once and update.NOTE: For other updates to third party apps, I recommend using software such as PatchMyPc which will update up 250+ apps at once.
 
 ==== Search For Prohibited Media:
-- This command will search through the entire system looking for the following file types: .jpg, .mp4, .flv, .avi, .wmv, .mov, .png, .tif, .gif, .mp3, .wma, .aif, .jar  This command will output it's results into a text file on the Desktop.
+- This command will search through the entire system looking for the following file types: .jpg, .mp4, .flv, .avi, .wmv, .mov, .png, .tif, .gif, .mp3, .wma, .aif, .jar This command will output it's results into a text file on the Desktop.
 
 ==== Remove Prohibited Software:
-- This command will search through your system looking for known games and software that is known to be against the rules of Cyber Patriots. E.g. Wireshark and BitTorrent
+- This command will search through your system looking for known games and software that is known to be against the rules of Cyber Patriots. E.g.Wireshark and BitTorrent
 
 ==== Check the Hash of a File:
 - This command will check the hash of a file of your choosing. (helpful for Forensics Questions)
