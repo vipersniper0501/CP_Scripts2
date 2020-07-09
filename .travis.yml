@@ -1,7 +1,6 @@
 language: python
 sudo: required
 python:
-  - "3.6"      # current default Python on Travis CI
   - "3.7"
   - "3.8"
   - "3.8-dev"  # 3.8 development branch
@@ -9,6 +8,8 @@ python:
 # command to install dependencies
 install:
   - pip install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
+before-script:
+  - chmod +x ./builds/tests/compile_test.sh
 # command to run tests
 script:
-  - "./builds/tests/compile_test.sh"
+  - bash ./builds/tests/compile_test.sh
