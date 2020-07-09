@@ -7,8 +7,8 @@ python:
 # command to install dependencies
 install:
   - pip install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
-before-script:
-  - chmod +x ./builds/tests/compile_test.sh
+# before-script:
+#  - chmod +x ./builds/tests/compile_test.sh
 # command to run tests
 script:
   - pytest ./builds/tests/compile_test.py
