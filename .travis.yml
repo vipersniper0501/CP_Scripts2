@@ -10,4 +10,4 @@ install:
   - pip install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
 # command to run tests
 script:
-  - pytest ./builds/tests/compile_test.sh
+  - "./builds/tests/compile_test.sh"
