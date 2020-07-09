@@ -12,4 +12,4 @@ before-script:
   - chmod +x ./builds/tests/compile_test.sh
 # command to run tests
 script:
-  - pytest bash ./builds/tests/compile_test.sh
+  - pytest ./builds/tests/compile_test.sh
