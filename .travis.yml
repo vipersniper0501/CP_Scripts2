@@ -12,9 +12,8 @@ python:
   - "3.8"
 # command to install dependencies
 install:
-  - pip install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
-  # - if [ "$TRAVIS_OS_NAME" = "osx" ]; pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt; fi
-  # - if [ "$TRAVIS_OS_NAME" = "linux" ]; pip install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt; fi
 before-script:
   - chmod +x ./builds/tests/compile_test.sh
 # command to run tests
