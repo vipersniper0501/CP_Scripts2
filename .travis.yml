@@ -1,14 +1,35 @@
 language: python
 sudo: required
+jobs:
+  include:
+    - name: "Linux Ubuntu Python 3.8"
+      os: linux
+      python: 3.8
+      before_install:
+        - chmod +x ./builds/tests/compile_test.sh
+    - name: "MacOS X Build Python 3.8"
+      os: osx
+      language: generic
+      before_install:
+        - chmod +x ./builds/tests/compile_test.sh
+      env: TOXENV=py38
+    - name: "Windows 10 Build Python 3.8"
+      os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.8.3
+        - python -m pip install --upgrade pip
+      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
 python:
   - "3.8"
-  - "3.8-dev"  # 3.8 development branch
-  - "nightly"  # nightly build
 # command to install dependencies
 install:
-  - pip install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
-before-script:
-  - chmod +x ./builds/tests/compile_test.sh
+  - pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
+  # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt; fi
+  # - if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt; fi
+  
+# before-script:
+  # - chmod +x ./builds/tests/compile_test.sh
 # command to run tests
 script:
   - ./builds/tests/compile_test.sh
