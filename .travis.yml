@@ -32,4 +32,4 @@ install:
   # - chmod +x ./builds/tests/compile_test.sh
 # command to run tests
 script:
-  - ./builds/tests/compile_test.sh
+  - ./builds/tests/compile_test.sh || python ./builds/tests/compile_exeWIN.py
