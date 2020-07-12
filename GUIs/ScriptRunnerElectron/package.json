@@ -1,6 +1,6 @@
 {
   "name": "Apple_CIDR_Script_Runner",
-  "version": "5.0.0.3",
+  "version": "4.0.4",
   "description": "This is the Apple Cidr CyberPatriot Team's script runner.",
   "main": "main.js",
   "scripts": {

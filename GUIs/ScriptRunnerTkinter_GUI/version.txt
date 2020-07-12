@@ -35,7 +35,7 @@ VSVersionInfo(
         #StringStruct(u'InternalName', u'SILLINESS'),
         StringStruct(u'OriginalFilename', u'AppleCIDRScriptRunnerTKINTER.exe'),
         #StringStruct(u'FileVersion', u'96, 12, 19, 1'),
-        StringStruct(u'FileDescription', u'Script made for the Apple CIDR Cyber Patriot team.'),
+        StringStruct(u'FileDescription', u'Apple CIDR Script Runner'),
         StringStruct(u'LegalCopyright', u'Copyright? Dont have one :P'),
         StringStruct(u'LegalTrademarks', u'You dont own me'),])
       ]),

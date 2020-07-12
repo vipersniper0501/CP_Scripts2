@@ -21,25 +21,30 @@
 function main_menu{
     Clear-Host
     win10
-    Write-Host("Windows 10 CyberPatriots Script created by Michael Brenner for Team Apple Cidr")
-    Write-Host("Commands:")
-    Write-Host("")
-    Write-Host("(1)Search Media Files                 (2)Windows Update")
-    Write-Host("(3)Enable BitLocker                   (4)SysInternals Commands*")
-    Write-Host("(5)Services*                           (6)User and Group Settings")
-    Write-Host("")
-    Write-Host("(85)Run all commands now")
-    Write-Host("(99)Exit                              (100)Reboot")
-    Write-Host("")
+    Write-Output("Windows 10 CyberPatriots Script created by Michael Brenner for Team Apple Cidr")
+    Write-Output("Commands:")
+    Write-Output("")
+    Write-Output("(1)Search Media Files                 (2)Windows Update")
+    Write-Output("(3)Enable BitLocker                   (4)SysInternals Commands*")
+    Write-Output("(5)Services*                           (6)User and Group Settings")
+    Write-Output("")
+    Write-Output("(85)Run all commands now")
+    Write-Output("(99)Exit                              (100)Reboot")
+    Write-Output("")
 
     $com = Read-Host -Prompt 'Which command would you like to use? '
-    if ($com -eq '1'){
+    if ($com -eq '1')
+    {
         srchmdia
         Read-Host -Prompt 'Press Enter to exit... '
-    } elseif ($com -eq '2'){
+    }
+    elseif ($com -eq '2')
+    {
         winupd
         Read-Host -Prompt 'Press Enter to exit... '
-    } elseif ($com -eq '3'){
+    }
+    elseif ($com -eq '3')
+    {
         enblbit
         Read-Host -Prompt 'Press Enter to continue... '
     } elseif ($com -eq '4'){
@@ -55,15 +60,18 @@ function main_menu{
         Clear-Host
         break
     } elseif ($com -eq '100'){
-        Write-Host("")
-        Write-Host("")
-        Write-Host("!WARNING!")
-        Write-Host("Make sure to save all your work saved and not have any important processes running on the computer such as windows updates. ")
-        Write-Host("")
+        Write-Output("")
+        Write-Output("")
+        Write-Output("!WARNING!")
+        Write-Output("Make sure to save all your work saved and not have any important processes running on the computer such as windows updates. ")
+        Write-Output("")
         $rstrtcpu = Read-Host -Prompt 'Would you like to restart your computer? [y/n] '
-        if ($rstrtcpu -eq 'y'){
+        if ($rstrtcpu -eq 'y')
+        {
             Restart-Computer -Confirm
-        } else {
+        }
+        else
+        {
             return
         }
     } else {
@@ -75,23 +83,30 @@ function main_menu{
 #sysinternals command Menu
 function sysintmenu {
     Clear-Host
-    Write-Host("")
-    Write-Host("This is the menu for use of the Microsoft SysInternals Suite of commands and applications...")
-    Write-Host("These commands are currently under contstruction, they will be ready in a future update.")
-    Write-Host("")
-    Write-Host("1.)Handle               2.)Registry Size Usage Reporter")
-    Write-Host("3.)TCP Viewer")
-    Write-Host("")
-    Write-Host("99.) Back")
+    Write-Output("")
+    Write-Output("This is the menu for use of the Microsoft SysInternals Suite of commands and applications...")
+    Write-Output("These commands are currently under contstruction, they will be ready in a future update.")
+    Write-Output("")
+    Write-Output("1.)Handle               2.)Registry Size Usage Reporter")
+    Write-Output("3.)TCP Viewer")
+    Write-Output("")
+    Write-Output("99.) Back")
 
     $com = Read-Host -Prompt 'Which command would you like to use? '
-    if ($com -eq 1){
+    if ($com -eq 1)
+    {
         handle
-    } elseif ($com -eq 2) {
+    }
+    elseif ($com -eq 2)
+    {
         rotkit
-    } elseif ($com -eq 3) {
+    }
+    elseif ($com -eq 3)
+    {
         tcpview
-    } elseif ($com -eq 99) {
+    }
+    elseif ($com -eq 99)
+    {
         main_menu
     } else {
       sysintmenu
@@ -104,25 +119,27 @@ function sysintmenu {
 function usr_grumnu{
     Clear-Host
     win10
-    Write-Host("Windows 10 CyberPatriots Script created by Michael Brenner for Team Apple Cidr")
-    Write-Host("Commands:")
-    Write-Host("")
-    Write-Host("(1)Add user to system           (2)Remove User from system")
-    Write-Host("(3)Create New User Group        (4)Remove User Group")
-    Write-Host("(5)Add User to User Group       (6)Remove User from User Group")
-    Write-Host("(7)List Local Users		(8)List Local Groups")
-    Write-Host("")
-    Write-Host("(99)Back            ")
-    Write-Host("")
+    Write-Output("Windows 10 CyberPatriots Script created by Michael Brenner for Team Apple Cidr")
+    Write-Output("Commands:")
+    Write-Output("")
+    Write-Output("(1)Add user to system           (2)Remove User from system")
+    Write-Output("(3)Create New User Group        (4)Remove User Group")
+    Write-Output("(5)Add User to User Group       (6)Remove User from User Group")
+    Write-Output("(7)List Local Users		(8)List Local Groups")
+    Write-Output("")
+    Write-Output("(99)Back            ")
+    Write-Output("")
 
     $usrcommand = Read-Host -Prompt 'Which command would you like to use? '
 
-    if ($usrcommand -eq '1'){
+    if ($usrcommand -eq '1')
+    {
         #add user to system
         auts
     }
 
-    if ($usrcommand -eq '2'){
+    if ($usrcommand -eq '2')
+    {
         #remove user from system
         rusr
     }
@@ -149,24 +166,24 @@ function usr_grumnu{
 
     if ($usrcommand -eq '7'){
         Clear-Host
-        Write-Host("You may have to repeat the command if nothing shows up...")
-        Write-Host("")
-        Write-Host("")
+        Write-Output("You may have to repeat the command if nothing shows up...")
+        Write-Output("")
+        Write-Output("")
         Get-LocalUser
-        Write-Host("")
-	    Read-Host -Prompt 'Press any key to continue... '
+        Write-Output("")
+        Read-Host -Prompt 'Press any key to continue... '
         usr_grumnu
     }
 
     if ($usrcommand -eq '8'){
         Clear-Host
-        Write-Host("You may have to repeat the command if nothing shows up...")
-        Write-Host("")
-        Write-Host("")
+        Write-Output("You may have to repeat the command if nothing shows up...")
+        Write-Output("")
+        Write-Output("")
         Get-LocalGroup
-        Write-Host("")
-	    Read-Host -Prompt 'Press any key to continue... '
-	    usr_grumnu
+        Write-Output("")
+        Read-Host -Prompt 'Press any key to continue... '
+        usr_grumnu
     }
 
     if ($usrcommand -eq '99'){
@@ -178,17 +195,17 @@ function usr_grumnu{
 ######################## Functions ######################################################################
 
 function win10 {
-    Write-Host("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    Write-Host("        ||       ||  ||||||  ||      ||         /||      /||||\         ")
-    Write-Host("        ||       ||    ||    ||\     ||        //||     ||    ||        ")
-    Write-Host("        ||       ||    ||    ||\\    ||       // ||     ||    ||        ")
-    Write-Host("        ||       ||    ||    || \\   ||          ||     ||    ||        ")
-    Write-Host("        ||       ||    ||    ||  \\  ||          ||     ||    ||        ")
-    Write-Host("        ||  /|\  ||    ||    ||   \\ ||          ||     ||    ||        ")
-    Write-Host("        || // \\ ||    ||    ||    \\||          ||     ||    ||        ")
-    Write-Host("         ||     ||   ||||||  ||     \||       ||||||||   \||||/         ")
-    Write-Host("~~~~~~~~~~~~~~~~~~~~~~~~~Created by Apple Cidr~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    Write-Host("")
+    Write-Output("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    Write-Output("        ||       ||  ||||||  ||      ||         /||      /||||\         ")
+    Write-Output("        ||       ||    ||    ||\     ||        //||     ||    ||        ")
+    Write-Output("        ||       ||    ||    ||\\    ||       // ||     ||    ||        ")
+    Write-Output("        ||       ||    ||    || \\   ||          ||     ||    ||        ")
+    Write-Output("        ||       ||    ||    ||  \\  ||          ||     ||    ||        ")
+    Write-Output("        ||  /|\  ||    ||    ||   \\ ||          ||     ||    ||        ")
+    Write-Output("        || // \\ ||    ||    ||    \\||          ||     ||    ||        ")
+    Write-Output("         ||     ||   ||||||  ||     \||       ||||||||   \||||/         ")
+    Write-Output("~~~~~~~~~~~~~~~~~~~~~~~~~Created by Apple Cidr~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    Write-Output("")
 }
 
 #function Sysint {
@@ -208,21 +225,25 @@ function win10 {
 function start_script {
     Clear-Host
     #Requires -RunAsAdministrator
-    Write-Host("")
-    Write-Host("")
-    Write-Host("This is the CyberPatriots powershell script created by team Apple Cidr    ")
+    Write-Output("")
+    Write-Output("")
+    Write-Output("This is the CyberPatriots powershell script created by team Apple Cidr    ")
     win10
     $ynfo = Read-Host -Prompt 'Have you completed all of the Forensics Questions? [y/n] '
-    if ($ynfo -eq 'y'){
+    if ($ynfo -eq 'y')
+    {
         $start_sc = $True
-        while ($start_sc -eq $True){
+        while ($start_sc -eq $True)
+        {
             Clear-Host
             main_menu
         }
 
-    } else {
-        Write-Host("You must complete the Forensics first before you use this script.")
-        Write-Host("")
+    }
+    else
+    {
+        Write-Output("You must complete the Forensics first before you use this script.")
+        Write-Output("")
         Read-Host -Prompt 'Press any key to continue...'
         break
     }

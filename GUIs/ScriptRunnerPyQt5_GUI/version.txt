@@ -33,7 +33,7 @@ VSVersionInfo(
         StringStruct(u'ProductName', u'Apple CIDR Script Runner'),
         StringStruct(u'ProductVersion', u'3.0.12.0'),
         StringStruct(u'OriginalFilename', u'AppleCIDRScriptRunner.exe'),
-        StringStruct(u'FileDescription', u'Script made for the Apple CIDR Cyber Patriot team.'),
+        StringStruct(u'FileDescription', u'Apple CIDR Script Runner'),
         StringStruct(u'LegalCopyright', u'Copyright? Dont have one :P'),
         StringStruct(u'LegalTrademarks', u'You dont own me'),])
       ]),

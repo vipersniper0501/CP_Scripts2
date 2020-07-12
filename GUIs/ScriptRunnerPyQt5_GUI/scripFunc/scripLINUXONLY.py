@@ -1,5 +1,4 @@
 import configparser
-import os
 import subprocess as sub
 from sys import platform
 

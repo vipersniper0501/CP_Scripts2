@@ -1,4 +1,5 @@
 import configparser
+import sys
 from pathlib import Path
 from sys import platform
 from threading import *
@@ -266,8 +267,6 @@ class fconfStart(QDialog, Ui_firstConf):
                         self.apaweb) + ", nginweb=" + str(self.nginweb) + ", https=" + str(self.https) + ", smb=" + str(
                         self.smb) + ", sql=" + str(self.sql) + ", rsnc=" + str(self.rsnc) + ", RDP=" + str(self.rdp))
 
-                filename = "config.ini"
-
                 config = configparser.ConfigParser()
                 config['Services'] = {'ssh': self.ssh,
                                       'ftp': self.ftp,
@@ -284,17 +283,13 @@ class fconfStart(QDialog, Ui_firstConf):
                 with open('config.ini', 'w') as configfile:
                     config.write(configfile)
 
-                def closing():
-                    print('closing')
-                    self.close()
-
                 RESTART = QMessageBox()
                 RESTART.setWindowTitle("Hey! Listen!")
                 RESTART.setText("Configurations have been sucessfully saved.")
                 RESTART.setIcon(QMessageBox.Information)
                 RESTART.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                 RESTART.setStandardButtons(QMessageBox.Close)
-                x = RESTART.exec_()
+                RESTART.exec_()
                 self.close()
             else:
                 HEY = QMessageBox()
@@ -302,7 +297,7 @@ class fconfStart(QDialog, Ui_firstConf):
                 HEY.setText("Hey! You have not finished filling in all of the choices!")
                 HEY.setIcon(QMessageBox.Critical)
                 HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                x = HEY.exec_()
+                HEY.exec_()
 
         self.sshy.toggled.connect(sshYES)
         self.sshn.toggled.connect(sshNO)
@@ -466,7 +461,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 """)
             HOWTO.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             HOWTO.setStyleSheet('background-color: #414E6E; color: #CCD2E6')
-            x = HOWTO.exec_()  # change to QDialog
+            HOWTO.exec_()  # change to QDialog
 
         def runCOMDESCRIPT():
             class showComDescript(QDialog, Ui_comDescript):
@@ -502,7 +497,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             INDEV.setText('Hey! This command is not yet complete and in development!')
             INDEV.setIcon(QMessageBox.Critical)
             INDEV.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            x = INDEV.exec_()
+            INDEV.exec_()
 
         def wrongos():
             WRONGOS = QMessageBox()
@@ -510,7 +505,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             WRONGOS.setText('Hey! These commands do not support this Operating System!')
             WRONGOS.setIcon(QMessageBox.Critical)
             WRONGOS.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            x = WRONGOS.exec_()
+            WRONGOS.exec_()
 
         def chngconf():
             widget = fconfStart()
