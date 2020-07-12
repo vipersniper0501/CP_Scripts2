@@ -7,6 +7,8 @@ jobs:
       python: 3.8
       before_install:
         - chmod +x ./builds/tests/compile_test.sh
+        # - apt-get install git -y
+        # - apt-get install asciidoctor -y
     - name: "MacOS X Build Python 3.8"
       os: osx
       language: generic
