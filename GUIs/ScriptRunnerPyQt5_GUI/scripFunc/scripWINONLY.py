@@ -12,6 +12,7 @@ from PyQt5.QtWidgets import *
 from PyUIs.changepass import Ui_chngpass
 from PyUIs.enblebit import Ui_bitlockerGUI
 from PyUIs.addusrUI import Ui_addUSR
+from PyUIs.rmvUSRoGRU import Ui_rmvusrogru
 
 OS = distro.linux_distribution()
 ops = OS[0]
@@ -319,16 +320,26 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
         shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\SystemExtensionsDev')
         shutil.copytree('./configurations/Win_Mozilla/Extensions',
                         r'C:\Users\Michael\AppData\Roaming\Mozilla\Extensions')
-        shutil.copytree('./configurations/Win_Mozilla/Firefox', r'C:\Users\Michael\AppData\Roaming\Mozilla\Firefox')
+        shutil.copytree('./configurations/Win_Mozilla/Firefox',
+                        r'C:\Users\Michael\AppData\Roaming\Mozilla\Firefox')
         shutil.copytree('./configurations/Win_Mozilla/SystemExtensionsDev',
                         r'C:\Users\Michael\AppData\Roaming\Mozilla\SystemExtensionsDev')
         print('Firefox has been configured')
 
 
+def threader(com):
+    try:
+        threader = Thread(target = com)
+        threader.start()
+    except Exception as e:
+        print(e)
+        print('Could not start thread')
+
+
 class funcWINusrgru:
     def addusr(self):
         class addusrtosys(QDialog, Ui_addUSR):
-            def __init__(self, parent=None):
+            def __init__(self, parent = None):
                 super(addusrtosys, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setupUi(self)
@@ -524,7 +535,126 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
         calladdusrtosys()
 
     def remusr(self):
-        pass
+        class rmvusrfrosys(QDialog, Ui_rmvusrogru):
+            def __init__(self, parent = None):
+                super(rmvusrfrosys, self).__init__(parent)
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setupUi(self)
+                self.EXECUTE()
+
+            def EXECUTE(self):
+                self.setWindowTitle('Remove User From System')
+                self.label.setText('Current Users:')
+                self.label2.setText('Username: ')
+
+                def findnames():
+                    # Local users are added to a list of names
+                    EXEC = sub.Popen(["powershell", "& {net localgroup users}"], stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+                    # print(output)
+                    n = []
+                    for i in range(6, len(output) - 3):
+                        # print(output[i])
+                        # if '\r' in output[i]:
+                        #     print('found in ' + str(i))
+                        #     print(output[i])
+                        n.append(output[i])
+                    a = []
+                    for i in range(0, len(n)):
+                        x = n[i]
+                        y = x.split('\r')
+                        # print(y)
+                        a.append(y)
+                    # print(a)
+                    names = []
+                    for i in range(0, len(a)):
+                        # print(a[i])
+                        x = a[i]
+                        y = x[0]
+                        # print(y)
+                        names.append(y)
+                    # print(names)
+
+                    # Local Administrators are added to list of names
+                    EXEC = sub.Popen(["powershell", "& {net localgroup administrators}"],
+                                     stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+                    # print(output)
+                    n2 = []
+                    for i in range(6, len(output) - 3):
+                        # print(output[i])
+                        # if '\r' in output[i]:
+                        #     print('found in ' + str(i))
+                        #     print(output[i])
+                        n2.append(output[i])
+                    a2 = []
+                    for i in range(0, len(n2)):
+                        x = n2[i]
+                        y = x.split('\r')
+                        # print(y)
+                        a2.append(y)
+                    # print(a)
+                    for i in range(0, len(a2)):
+                        # print(a[i])
+                        x = a2[i]
+                        y = x[0]
+                        EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
+                        stdout, _ = EXEC.communicate()
+                        output = stdout.decode("utf-8")
+                        output = output.split('\r\n')
+                        if output[0] == y:
+                            y = output[0] + '   (Current User)'
+                        # print(y)
+                        names.append(y)
+                    # print(names)
+                    return names
+
+                listoNames = findnames()
+
+                for i in range(0, len(listoNames)):
+                    QListWidgetItem(listoNames[i], self.listOFnames)
+
+                username = self.Username_Input.text()
+
+                def completedPOP(username):
+                    COMPLETE = QMessageBox()
+                    COMPLETE.setIcon(QMessageBox.Question)
+                    COMPLETE.setWindowTitle('Hey! Listen!')
+                    COMPLETE.setText(
+                        'User ' + username + ' has been successfully removed from the system.')
+                    COMPLETE.setStandardButtons(QMessageBox.Close)
+                    COMPLETE.exec_()
+                    self.close()
+
+                def removal(username):
+                    sub.Popen(["powershell", "& {net user " + username + " /DELETE}"])
+                    completedPOP(username)
+
+                def confirmation(com):
+                    CONFIRM = QMessageBox()
+                    CONFIRM.setWindowTitle('Hey! Listen!')
+                    CONFIRM.setText("Hey! Are you sure you want to do this?")
+                    CONFIRM.setIcon(QMessageBox.Critical)
+                    CONFIRM.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
+                    CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                    x = CONFIRM.exec_()
+                    if x == QMessageBox.Yes:
+                        print('Removing user ' + com)
+                        removal(com)
+                    elif x == QMessageBox.No:
+                        print('Cancelling...')
+
+                self.Confirm_button.clicked(lambda: confirmation(username))
+
+        def callrmvusrfrosys():
+            widget = rmvusrfrosys()
+            widget.exec_()
+
+        callrmvusrfrosys()
 
     def addgrutosys(self):
         pass
@@ -550,7 +680,6 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
     def lsgrusanusrin(self):
         pass
 
-    # @staticmethod
     def chngpasswdofall(self):
 
         # TODO: This command as of July 7th, 2020 is broken. More on the issue can be found here: https://github.com/vipersniper0501/CP_Scripts2/issues/48
@@ -564,22 +693,23 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
 
             def EXECUTE(self):
                 def findnames():
-                    command = 'Get-LocalUser'
-                    EXEC = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
+                    # Local users are added to a list of names
+                    EXEC = sub.Popen(["powershell", "& {net localgroup users}"], stdout = sub.PIPE)
                     stdout, _ = EXEC.communicate()
                     output = stdout.decode("utf-8")
-                    output = output.split('\n')
+                    output = output.split("\n")
                     print(output)
                     n = []
-                    for i in range(0, len(output)):
-                        if 'True' in output[i]:
-                            # print('found in ' + str(i))
-                            # print(output[i])
-                            n.append(output[i])
+                    for i in range(6, len(output) - 3):
+                        print(output[i])
+                        # if '\r' in output[i]:
+                        #     print('found in ' + str(i))
+                        #     print(output[i])
+                        n.append(output[i])
                     a = []
                     for i in range(0, len(n)):
                         x = n[i]
-                        y = x.split()
+                        y = x.split('\r')
                         # print(y)
                         a.append(y)
                     # print(a)
@@ -590,10 +720,41 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                         y = x[0]
                         # print(y)
                         names.append(y)
-                    # print(names)
+                    print(names)
 
-                    exec = sub.Popen(["powershell", "& {$env:UserName}"], stdout=sub.PIPE)
-                    stdout, _ = exec.communicate()
+                    # Local Administrators are added to list of names
+                    EXEC = sub.Popen(["powershell", "& {net localgroup administrators}"],
+                                     stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+                    print(output)
+                    n2 = []
+                    for i in range(6, len(output) - 3):
+                        print(output[i])
+                        # if '\r' in output[i]:
+                        #     print('found in ' + str(i))
+                        #     print(output[i])
+                        n2.append(output[i])
+                    a2 = []
+                    for i in range(0, len(n2)):
+                        x = n2[i]
+                        y = x.split('\r')
+                        # print(y)
+                        a2.append(y)
+                    # print(a)
+                    for i in range(0, len(a2)):
+                        # print(a[i])
+                        x = a2[i]
+                        y = x[0]
+                        # print(y)
+                        names.append(y)
+                    print(names)
+
+                    # Removal of current user from list of names (This is so the current user does not get it's password
+                    # changed.
+                    EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
                     output = stdout.decode("utf-8")
                     output = output.split('\r\n')
                     # print(output)
@@ -734,22 +895,23 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                         HEY.exec_()
                     else:
                         for i in range(0, len(names)):
-                            command = """$Password = ConvertTo-SecureString """ + "'{}'".format(self.passwd.text()) + """ -AsPlainText -Force
+                            command = """$Password = ConvertTo-SecureString """ + "'{}'".format(
+                                self.passwd.text()) + """ -AsPlainText -Force
                 $Username = Get-LocalUser -Name """ + "'{}'".format(names[i]) + """
                 $Username | Set-LocalUser -Password $Password"""
                             print(command + "\n")
-                        sub.Popen(["powershell", "& {$env:UserName}"], stdout=sub.PIPE)
+                        sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
                         completedPOP()
 
                 self.chngpass_button.clicked.connect(lambda: threader(RUN(x)))
 
-                def threader(com):
-                    try:
-                        threader = Thread(target=com)
-                        threader.start()
-                    except Exception as e:
-                        print(e)
-                        print('Could not start thread')
+                # def threader(com):
+                #     try:
+                #         threader = Thread(target=com)
+                #         threader.start()
+                #     except Exception as e:
+                #         print(e)
+                #         print('Could not start thread')
 
         def callChangepaswordofall():
             widget = changepasswordofall()

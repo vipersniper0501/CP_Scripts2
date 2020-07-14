@@ -14,7 +14,8 @@ from scripFunc.scripLINUXONLY import *
 from scripFunc.scripUNIMULTI import *
 from scripFunc.scripWINONLY import *
 
-# The following two `if` statements fix the problem where the application would not scale correctly to the resolution of the monitor
+# The following two `if` statements fix the problem where the application would not scale correctly
+# to the resolution of the monitor
 if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
 
@@ -33,12 +34,13 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
-# Button logic (calls functions in module and connects to other parts of GUI. Does not actually do anything to system)
+# Button logic (calls functions in module and connects to other parts of GUI. Does not actually do
+# anything to system)
 
 
 class fconfStart(QDialog, Ui_firstConf):
 
-    def __init__(self, parent=None):
+    def __init__(self, parent = None):
         super(fconfStart, self).__init__(parent)
 
         print('Script Runner First Time Configurations')
@@ -259,13 +261,18 @@ class fconfStart(QDialog, Ui_firstConf):
                 sys.exit(0)
 
         def confirmBTTN():
-            if self.ssh != '' and self.ftp != '' and self.proftpd != '' and self.vsftpd != '' and self.web != '' and self.apaweb != '' and self.nginweb != '' and self.https != '' and self.smb != '' and self.sql != '' and self.rsnc != '' and self.rdp != '':
+            if (self.ssh != '' and self.ftp != '' and self.proftpd != '' and self.vsftpd != ''
+                    and self.web != '' and self.apaweb != '' and self.nginweb != '' and
+                    self.https != '' and self.smb != '' and self.sql != '' and self.rsnc != '' and
+                    self.rdp != ''):
                 print('saving configurations\n')
                 print(
                     "ssh=" + str(self.ssh) + ", ftp=" + str(self.ftp) + ", proftpd=" + str(
-                        self.proftpd) + ", vsftpd=" + str(self.vsftpd) + ", web=" + str(self.web) + ", apaweb=" + str(
-                        self.apaweb) + ", nginweb=" + str(self.nginweb) + ", https=" + str(self.https) + ", smb=" + str(
-                        self.smb) + ", sql=" + str(self.sql) + ", rsnc=" + str(self.rsnc) + ", RDP=" + str(self.rdp))
+                        self.proftpd) + ", vsftpd=" + str(self.vsftpd) + ", web=" + str(
+                        self.web) + ", apaweb=" + str(self.apaweb) + ", nginweb=" + str(
+                        self.nginweb) + ", https=" + str(self.https) + ", smb=" + str(
+                        self.smb) + ", sql=" + str(self.sql) + ", rsnc=" + str(
+                        self.rsnc) + ", RDP=" + str(self.rdp))
 
                 config = configparser.ConfigParser()
                 config['Services'] = {'ssh': self.ssh,
@@ -570,11 +577,12 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.lsgruusrin_3,
                                 self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
-                                self.rmvgrufrosys_3, self.rmvusrfrogru_3, self.rmvusrfrosys_3]
+                                self.rmvgrufrosys_3, self.rmvusrfrogru_3]
         for i in range(0, len(self.WINUSRGRUBUTTON)):
             self.WINUSRGRUBUTTON[i].clicked.connect(lambda: self.threader(indev()))  #
 
         self.adusrtosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.addusr()))
+        self.rmvusrfrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remusr()))
         self.chngusrpas_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.chngpasswdofall()))
 
         # Linux Main Menu Commands
