@@ -476,7 +476,8 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                 else:
                     try:
                         raise ImportError(
-                            'Web setting is set to yes but neither Apache or Nginx were selected. No web settings were configured.')
+                            'Web setting is set to yes but neither Apache nor Nginx were '
+                            'selected. No web settings were configured.')
                     except ImportError:
                         pass
         elif platform == 'win32':
@@ -518,13 +519,14 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
         if platform == 'win32':
             if rdp == 'yes':
                 try:
-                    shutil.copy('./configurations/winCONF/win10StigsRDPy/win10secRDPallowed.inf',
+                    shutil.copy('../configurations/winCONF/win10StigsRDPy/win10secRDPallowed.inf',
                                 'C:/win10secRDPallowed.inf')
-                    copy_tree('./configurations/winCONF/win10StigsRDPy/Group_Policy_Files/Machine',
+                    copy_tree('../configurations/winCONF/win10StigsRDPy/Group_Policy_Files/Machine',
                               r'c:\Windows\System32\GroupPolicy\Machine')
-                    copy_tree('./configurations/winCONF/win10StigsRDPy/Group_Policy_Files/User',
+                    copy_tree('../configurations/winCONF/win10StigsRDPy/Group_Policy_Files/User',
                               r'c:\Windows\System32\GroupPolicy\User')
-                    shutil.copy('./configurations/winCONF/win10StigsRDPy/Group_Policy_Files/gpt.ini',
+                    shutil.copy('../configurations/winCONF/win10StigsRDPy/Group_Policy_Files/gpt'
+                                '.ini',
                                 r'c:\Windows\System32\GroupPolicy\gpt.ini')
                     print('Successfully copied Group Policy Settings')
                 except IOError as e:
@@ -532,13 +534,14 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                 path = 'C:/win10secRDPallowed.inf'
             elif rdp == 'no':
                 try:
-                    shutil.copy('./configurations/winCONF/win10StigsRDPn/Windows10Template11_17.inf',
-                                'C:/Windows10Template11_17.inf')
-                    copy_tree('./configurations/winCONF/win10StigsRDPn/gpoRDPn/Machine',
+                    shutil.copy('../configurations/winCONF/win10StigsRDPn/Windows10Template11_17'
+                                '.inf',
+                                r'c:\Windows10Template11_17.inf')
+                    copy_tree('../configurations/winCONF/win10StigsRDPn/gpoRDPn/Machine',
                               r'c:\Windows\System32\GroupPolicy\Machine')
-                    copy_tree('./configurations/winCONF/win10StigsRDPn/gpoRDPn/User',
+                    copy_tree('../configurations/winCONF/win10StigsRDPn/gpoRDPn/User',
                               r'c:\Windows\System32\GroupPolicy\User')
-                    shutil.copy('./configurations/winCONF/win10StigsRDPn/gpoRDPn/gpt.ini',
+                    shutil.copy('../configurations/winCONF/win10StigsRDPn/gpoRDPn/gpt.ini',
                                 r'c:\Windows\System32\GroupPolicy\gpt.ini')
                     print('Successfully copied Group Policy Settings')
                 except IOError as e:
@@ -546,18 +549,24 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                 path = 'C:/Windows10Template11_17.inf'
             else:
                 raise ValueError('rdp should be either yes or no!')
-            command = r"secedit /configure /db C:\\windows\\security\\local.sdb /cfg {0}".format(path)
-            sub.call(command.split())
+            command = r"secedit /configure /db C:\\windows\\security\\local.sdb /cfg {0}".format(
+                path)
+            sub.Popen(command.split())
             command = 'gpupdate'
-            sub.call(command)
+            sub.Popen(command)
             command = 'Enable-WindowsOptionalFeature –FeatureName "Internet-Explorer-Optional-amd64" -All –Online ' \
                       '-NoRestart '
-            sub.call(["powershell", "& {" + command + "}"])
+            sub.Popen(["powershell", "& {" + command + "}"])
+            command = 'Enable-WindowsOptionalFeature –FeatureName ' \
+                      '"Internet-Explorer-Optional-x86" -All –Online ' \
+                      '-NoRestart '
+            sub.Popen(["powershell", "& {" + command + "}"])
             disableCOM = ["SimpleTCP",
                           "TFTP",
                           "TelnetClient",
                           "IIS-FTPServer",
                           "IIS-WebDAV",
+                          "IIS-ManagementConsole",
                           "IIS-WebServer",
                           "WCF-Services45",
                           "WCF-TCP-PortSharing45",
@@ -568,12 +577,12 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                           "MicrosoftWindowsPowershellV2Root"]
             for i in range(0, len(disableCOM)):
                 command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[i] + ' -NoRestart'
-                sub.call(["powershell", "& {" + command + "}"])
+                sub.Popen(["powershell", "& {" + command + "}"])
             windowsCapabilitesDisable = ["RIP.Listener~~~~0.0.1.0",
                                          "SNMP.Client~~~~0.0.1.0"]
             for i in range(0, len(windowsCapabilitesDisable)):
                 command = "Remove-WindowsCapability -Online -Name " + windowsCapabilitesDisable[i]
-                sub.call(["powershell", "& {" + command + "}"])
+                sub.Popen(["powershell", "& {" + command + "}"])
 
             '''
             def completed():
@@ -585,7 +594,6 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                 HEY.exec_()
             completed()
             '''
-
         elif platform == 'linux':
             if ops == 'Ubuntu' or ops == 'Debian':
                 command = 'sudo apt install fail2ban'

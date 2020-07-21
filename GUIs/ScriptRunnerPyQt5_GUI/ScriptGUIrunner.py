@@ -23,15 +23,15 @@ if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
-def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and for PyInstaller """
-    try:
-        # PyInstaller creates a temp folder and stores path in _MEIPASS
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
+# def resource_path(relative_path):
+#     """ Get absolute path to resource, works for dev and for PyInstaller """
+#     try:
+#         # PyInstaller creates a temp folder and stores path in _MEIPASS
+#         base_path = sys._MEIPASS
+#     except Exception:
+#         base_path = os.path.abspath(".")
+#
+#     return os.path.join(base_path, relative_path)
 
 
 # Button logic (calls functions in module and connects to other parts of GUI. Does not actually do
@@ -338,13 +338,13 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
     def threader(self, com):
         try:
-            threader = Thread(target=com)
+            threader = Thread(target = com)
             threader.start()
         except Exception as e:
             print(e)
             print('Could not start thread')
 
-    def __init__(self, parent=None):
+    def __init__(self, parent = None):
         super(Mainstart, self).__init__(parent)
         print('Script Runner has started')
         # self.size().setHeight(675)
@@ -439,7 +439,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             elif i == 3:
                 if platform == 'darwin':
                     self.header_title.setText('MacOS X Commands')
-                    self.descriptions.setText('Description: These commands will ONLY work on MacOS X')
+                    self.descriptions.setText(
+                        'Description: These commands will ONLY work on MacOS X')
                     self.stackedWidget.setCurrentIndex(i)
                 else:
                     wrongos()
@@ -472,7 +473,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         def runCOMDESCRIPT():
             class showComDescript(QDialog, Ui_comDescript):
-                def __init__(self, parent=None):
+                def __init__(self, parent = None):
                     super(showComDescript, self).__init__(parent)
                     self.setupUi(self)
                     self.setFixedSize(531, 360)
@@ -486,7 +487,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         def runABOUTPROG():
             class showAboutProg(QDialog, Ui_About):
-                def __init__(self, parent=None):
+                def __init__(self, parent = None):
                     super(showAboutProg, self).__init__(parent)
                     self.setupUi(self)
                     self.setFixedSize(330, 182)
@@ -555,24 +556,36 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         self.fwlbutton_2.clicked.connect(lambda: self.threader(scripfunc.fwl))
         self.basicConfbutton_2.clicked.connect(
-            lambda: self.threader(confirmation(lambda: scripfunc.basConf(config.get('Services', 'rdp')))))  #
+            lambda: self.threader(
+                confirmation(lambda: scripfunc.basConf(config.get('Services', 'rdp')))))  #
         self.rmvprosoftbutton_2.clicked.connect(lambda: self.threader(scripfunc.rmProSoft()))
         self.enblBitLockerbutton.clicked.connect(lambda: self.threader(funcWIN.BITLOCKER()))
         self.servicesConfButton_4.clicked.connect(lambda: self.threader(confirmation(lambda:
                                                                                      scripfunc.servSet(
-                                                                                         config.get('Services', 'ssh'),
-                                                                                         config.get('Services', 'smb'),
-                                                                                         config.get('Services', 'web'),
-                                                                                         config.get('Services',
-                                                                                                    'apaweb'),
-                                                                                         config.get('Services',
-                                                                                                    'nginweb'),
-                                                                                         config.get('Services',
-                                                                                                    'ftp'),
-                                                                                         config.get('Services',
-                                                                                                    'proftpd'),
-                                                                                         config.get('Services',
-                                                                                                    'vsftpd')))))
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'ssh'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'smb'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'web'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'apaweb'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'nginweb'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'ftp'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'proftpd'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'vsftpd')))))
         self.browserConf.clicked.connect(lambda: self.threader(funcWIN.browserCONF()))
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.lsgruusrin_3,
@@ -593,16 +606,20 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         self.basicConfbutton_3.clicked.connect(lambda: self.threader(indev()))  #
         self.servicesConfButton_2.clicked.connect(lambda: self.threader(indev()))  #
         # Linux User Group Commands
-        self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4, self.adusrtosys_4, self.chngusrpas_4,
-                                   self.lsgruusrin_4, self.lslocagru_4, self.lslocausr_4, self.lsmemgru_4,
+        self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4, self.adusrtosys_4,
+                                   self.chngusrpas_4,
+                                   self.lsgruusrin_4, self.lslocagru_4, self.lslocausr_4,
+                                   self.lsmemgru_4,
                                    self.rmvgrufrosys_4, self.rmvusrfrogru_4, self.rmvusrfrosys_4]
         for i in range(0, 11):
             self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: self.threader(indev()))  #
 
         # MacOS Buttons
         self.MACBUTTONS = [self.rmvprosoftbutton_4, self.malrembutton_4, self.basicConfbutton_4,
-                           self.servicesConfButton_3, self.adgrutosys_5, self.adusrtogru_5, self.adusrtosys_5,
-                           self.chngusrpas_5, self.lsgruusrin_5, self.lslocagru_5, self.lslocausr_5, self.lsmemgru_5,
+                           self.servicesConfButton_3, self.adgrutosys_5, self.adusrtogru_5,
+                           self.adusrtosys_5,
+                           self.chngusrpas_5, self.lsgruusrin_5, self.lslocagru_5, self.lslocausr_5,
+                           self.lsmemgru_5,
                            self.rmvgrufrosys_5, self.rmvusrfrogru_5, self.rmvusrfrosys_5]
         for i in range(0, 15):
             self.MACBUTTONS[i].clicked.connect(lambda: self.threader(indev()))

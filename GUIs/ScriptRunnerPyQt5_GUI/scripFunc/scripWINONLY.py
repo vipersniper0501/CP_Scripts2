@@ -4,6 +4,7 @@ import os
 import shutil
 import subprocess as sub
 from threading import *
+from distutils.dir_util import copy_tree
 
 import distro  # for figuring out what linux distro
 from PyQt5 import QtGui
@@ -26,7 +27,7 @@ config.read('config.ini')
 #     """ Get absolute path to resource, works for dev and for PyInstaller """
 #     try:
 #         # PyInstaller creates a temp folder and stores path in _MEIPASS
-#         base_path = sys._MEIPASS
+#         base_path = sys._MEIPASS # pylint: disable=no-member
 #     except Exception:
 #         base_path = os.path.abspath(".")
 #
@@ -314,16 +315,26 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
         #        shutil.copytree(s, d, symlinks, ignore)
         #    else:
         #        shutil.copy2(s, d)
-
-        shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\Extensions')
-        shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\Firefox')
-        shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\SystemExtensionsDev')
-        shutil.copytree('./configurations/Win_Mozilla/Extensions',
-                        r'C:\Users\Michael\AppData\Roaming\Mozilla\Extensions')
-        shutil.copytree('./configurations/Win_Mozilla/Firefox',
-                        r'C:\Users\Michael\AppData\Roaming\Mozilla\Firefox')
-        shutil.copytree('./configurations/Win_Mozilla/SystemExtensionsDev',
-                        r'C:\Users\Michael\AppData\Roaming\Mozilla\SystemExtensionsDev')
+        try:
+            EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
+            stdout, _ = EXEC.communicate()
+            output = stdout.decode("utf-8")
+            output = output.split('\r\n')
+            # shutil.rmtree(r'%appdata%\Mozilla\Extensions')
+            rmv_folder = 'C:\\Users\\' + str(output[0]) + '\\AppData\\Roaming\\Mozilla\\Firefox'
+            shutil.rmtree(rmv_folder)
+            # shutil.rmtree(r'%appdata%\Mozilla\SystemExtensionsDev')
+        except Exception as e:
+            print('Error caught: ' + str(e))
+        # copy_tree('../configurations/Win_Mozilla/Extensions', 'C:/')
+        copy_tree('../configurations/Win_Mozilla/Firefox', 'C:/')
+        # copy_tree('../configurations/Win_Mozilla/SystemExtensionsDev', 'C:/')
+        # shutil.copytree('../configurations/Win_Mozilla/Extensions',
+        #                 r'%appdata%\Mozilla\Extensions')
+        # shutil.copytree('../configurations/Win_Mozilla/Firefox',
+        #                 r'%appdata%\Mozilla\Firefox')
+        # shutil.copytree('../configurations/Win_Mozilla/SystemExtensionsDev',
+        #                 r'%appdata%\Mozilla\SystemExtensionsDev')
         print('Firefox has been configured')
 
 
@@ -693,81 +704,92 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
 
             def EXECUTE(self):
                 def findnames():
-                    # Local users are added to a list of names
-                    EXEC = sub.Popen(["powershell", "& {net localgroup users}"], stdout = sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output = stdout.decode("utf-8")
-                    output = output.split("\n")
-                    print(output)
-                    n = []
-                    for i in range(6, len(output) - 3):
-                        print(output[i])
-                        # if '\r' in output[i]:
-                        #     print('found in ' + str(i))
-                        #     print(output[i])
-                        n.append(output[i])
-                    a = []
-                    for i in range(0, len(n)):
-                        x = n[i]
-                        y = x.split('\r')
-                        # print(y)
-                        a.append(y)
-                    # print(a)
                     names = []
-                    for i in range(0, len(a)):
-                        # print(a[i])
-                        x = a[i]
-                        y = x[0]
-                        # print(y)
-                        names.append(y)
-                    print(names)
+                    try:
+                        print('Detecting Users On System...')
+                        # Local users are added to a list of names
+                        EXEC = sub.Popen(["powershell", "& {net localgroup users}"],
+                                         stdout = sub.PIPE)
+                        stdout, _ = EXEC.communicate()
+                        output = stdout.decode("utf-8")
+                        output = output.split("\n")
+                        # print(output)
+                        n = []
+                        for i in range(6, len(output) - 3):
+                            # print(output[i])
+                            # if '\r' in output[i]:
+                            #     print('found in ' + str(i))
+                            #     print(output[i])
+                            n.append(output[i])
+                        a = []
+                        for i in range(0, len(n)):
+                            x = n[i]
+                            y = x.split('\r')
+                            # print(y)
+                            a.append(y)
+                        # print(a)
+                        # names = []
+                        for i in range(0, len(a)):
+                            # print(a[i])
+                            x = a[i]
+                            y = x[0]
+                            # print(y)
+                            names.append(y)
+                        # print(names)
+                        # Local Administrators are added to list of names
+                        EXEC = sub.Popen(["powershell", "& {net localgroup administrators}"],
+                                         stdout = sub.PIPE)
+                        stdout, _ = EXEC.communicate()
+                        output = stdout.decode("utf-8")
+                        output = output.split("\n")
+                        # print(output)
+                        n2 = []
+                        for i in range(6, len(output) - 3):
+                            # print(output[i])
+                            # if '\r' in output[i]:
+                            #     print('found in ' + str(i))
+                            #     print(output[i])
+                            n2.append(output[i])
+                        a2 = []
+                        for i in range(0, len(n2)):
+                            x = n2[i]
+                            y = x.split('\r')
+                            # print(y)
+                            a2.append(y)
+                        # print(a)
+                        for i in range(0, len(a2)):
+                            # print(a[i])
+                            x = a2[i]
+                            y = x[0]
+                            # print(y)
+                            names.append(y)
+                        # print(names)
 
-                    # Local Administrators are added to list of names
-                    EXEC = sub.Popen(["powershell", "& {net localgroup administrators}"],
-                                     stdout = sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output = stdout.decode("utf-8")
-                    output = output.split("\n")
-                    print(output)
-                    n2 = []
-                    for i in range(6, len(output) - 3):
-                        print(output[i])
-                        # if '\r' in output[i]:
-                        #     print('found in ' + str(i))
-                        #     print(output[i])
-                        n2.append(output[i])
-                    a2 = []
-                    for i in range(0, len(n2)):
-                        x = n2[i]
-                        y = x.split('\r')
-                        # print(y)
-                        a2.append(y)
-                    # print(a)
-                    for i in range(0, len(a2)):
-                        # print(a[i])
-                        x = a2[i]
-                        y = x[0]
-                        # print(y)
-                        names.append(y)
-                    print(names)
-
-                    # Removal of current user from list of names (This is so the current user does not get it's password
-                    # changed.
-                    EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output = stdout.decode("utf-8")
-                    output = output.split('\r\n')
-                    # print(output)
-                    for i in range(0, len(names)):
-                        # print(names[i])
-                        if output[0] == names[i]:
-                            # print('user found')
+                        # Removal of current user from list of names (This is so the current user does not get it's password
+                        # changed.
+                        EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
+                        stdout, _ = EXEC.communicate()
+                        output = stdout.decode("utf-8")
+                        output = output.split('\r\n')
+                        # print(output)
+                        for i in range(0, len(names)):
                             # print(i)
-                            names.pop(i)
-                            break
-                    print('--------------------------------------------------')
-                    print(names)
-                    return names
+                            print(names[i])
+                            if output[0] == names[i]:
+                                # print('user found')
+                                # print(i)
+                                names.pop(i)
+                                # print(names)
+                            if i == len(names):
+                                break
+                        print('--------------------------------------------------')
+                        print('The following list are all current users and admins on this system')
+                        print(names)
+                        return names
+                    except Exception as e:
+                        print('Index error has occured. exception was caught: ' + str(e))
+                        print(names)
+                        return names
 
                 x = findnames()
 
@@ -897,10 +919,11 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                         for i in range(0, len(names)):
                             command = """$Password = ConvertTo-SecureString """ + "'{}'".format(
                                 self.passwd.text()) + """ -AsPlainText -Force
-                $Username = Get-LocalUser -Name """ + "'{}'".format(names[i]) + """
-                $Username | Set-LocalUser -Password $Password"""
-                            print(command + "\n")
-                        sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
+$Username = Get-LocalUser -Name """ + "'{}'".format(names[i]) + """
+$Username | Set-LocalUser -Password $Password"""
+                            # print(command + "\n")
+                            sub.Popen(["powershell", "& {" + command + "}"], stdout = sub.PIPE)
+                            print('User ' + names[i] + "'s password has been successfully changed.")
                         completedPOP()
 
                 self.chngpass_button.clicked.connect(lambda: threader(RUN(x)))

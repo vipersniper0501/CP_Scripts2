@@ -18,3 +18,7 @@ This version should work on all platforms, regardless if it is 32-bit or 64-bit.
 * To create an .app executable for MacOS you must include the --windowed (-w) option when using pyinstaller.
 
 NOTE: By enabling the --windowed option you will be disabling the terminal from popping up while the program is running.
+
+=== How to make an installable executable
+
+https://www.makeuseof.com/tag/how-to-make-an-exe-installation-file/
