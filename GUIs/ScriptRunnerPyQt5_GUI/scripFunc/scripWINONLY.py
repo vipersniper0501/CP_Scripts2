@@ -254,7 +254,10 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                 self.cancelbutton.clicked.connect(cancelbutton)
 
                 # Sets default status check to the C: Drive
-                STATUSCHECK("C:")
+                try:
+                    STATUSCHECK("C:")
+                except Exception:
+                    STATUSCHECK("c:")
 
                 # adds the drive letters to the available radio buttons
                 i = 0
@@ -327,14 +330,14 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
         except Exception as e:
             print('Error caught: ' + str(e))
         # copy_tree('../configurations/Win_Mozilla/Extensions', 'C:/')
-        copy_tree('../configurations/Win_Mozilla/Firefox', 'C:/')
+        # copy_tree('../configurations/Win_Mozilla/Firefox', 'C:/')
         # copy_tree('../configurations/Win_Mozilla/SystemExtensionsDev', 'C:/')
-        # shutil.copytree('../configurations/Win_Mozilla/Extensions',
-        #                 r'%appdata%\Mozilla\Extensions')
-        # shutil.copytree('../configurations/Win_Mozilla/Firefox',
-        #                 r'%appdata%\Mozilla\Firefox')
-        # shutil.copytree('../configurations/Win_Mozilla/SystemExtensionsDev',
-        #                 r'%appdata%\Mozilla\SystemExtensionsDev')
+        shutil.copytree('../configurations/Win_Mozilla/Extensions',
+                        r'%appdata%\Mozilla\Extensions')
+        shutil.copytree('../configurations/Win_Mozilla/Firefox',
+                        r'%appdata%\Mozilla\Firefox')
+        shutil.copytree('../configurations/Win_Mozilla/SystemExtensionsDev',
+                        r'%appdata%\Mozilla\SystemExtensionsDev')
         print('Firefox has been configured')
 
 

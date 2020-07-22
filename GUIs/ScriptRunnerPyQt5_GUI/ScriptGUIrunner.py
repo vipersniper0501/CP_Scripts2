@@ -3,8 +3,11 @@ import sys
 from pathlib import Path
 from sys import platform
 from threading import *
+# import os
+# os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
 import PyQt5
+from PyQt5 import QtWidgets
 
 from PyUIs.comdescript import Ui_comDescript
 from PyUIs.firstconf import *
@@ -14,14 +17,13 @@ from scripFunc.scripLINUXONLY import *
 from scripFunc.scripUNIMULTI import *
 from scripFunc.scripWINONLY import *
 
+
 # The following two `if` statements fix the problem where the application would not scale correctly
 # to the resolution of the monitor
-if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
-    PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
 
-if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
-    PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
+# QT_AUTO_SCREEN_SCALE_FACTOR = True
+# QT_SCALE_FACTOR = 2
 
 # def resource_path(relative_path):
 #     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -298,6 +300,8 @@ class fconfStart(QDialog, Ui_firstConf):
                 RESTART.setStandardButtons(QMessageBox.Close)
                 RESTART.exec_()
                 self.close()
+                beginMain = Mainstart()
+                beginMain.show()
             else:
                 HEY = QMessageBox()
                 HEY.setWindowTitle('Hey! Listen!')
@@ -347,55 +351,19 @@ class Mainstart(QMainWindow, Ui_MainWindow):
     def __init__(self, parent = None):
         super(Mainstart, self).__init__(parent)
         print('Script Runner has started')
-        # self.size().setHeight(675)
-        # self.size().setWidth(860)
-        # a = self.size()
-        # print(a)
-        # print(a.height())
-        # print(a.width())
-        # screen = app.primaryScreen()
-        # print('Screen: %s' % screen.name())
-        # size = screen.size()
-        # print('Screen Size: %d x %d' % (size.width(), size.height()))
-        # rect = screen.availableGeometry()
-        # print('Available: %d x %d' % (rect.width(), rect.height()))
-        # hScaled = size.height()/1080
-        # print(hScaled)
-        # hScaled = hScaled*610
-        # print(hScaled)
+        self.setFixedSize(860, 675)
+        self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
 
-        config_name = 'config.ini'
+        config_name2 = 'config.ini'
         if getattr(sys, 'frozen', False):
-            application_Path = os.path.dirname(sys.executable)
+            application_Path2 = os.path.dirname(sys.executable)
         elif __file__:
-            application_Path = os.path.dirname(__file__)
-        config_path = os.path.join(application_Path, config_name)
-        print(config_path)
-        variableCheck = Path(config_path)
+            application_Path2 = os.path.dirname(__file__)
+        config_path2 = os.path.join(application_Path2, config_name2)
+        variableCheck2 = Path(config_path2)
 
-        if variableCheck.is_file():
-            config = configparser.ConfigParser()
-            config.read(variableCheck)
-            # x = config.get('Services', 'ssh')
-            # print(x)
-            print('Configuration file has been loaded...')
-
-            QMainWindow.__init__(self)
-            self.setupUi(self)
-            # self.setFixedWidth(848)
-            # self.setFixedHeight(603)
-            # self.setFixedSize(850, 640)
-            self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
-            self.mmfuncassign(variableCheck)
-        else:
-            print('Ello, you have some configurations to do!')
-
-            def firstCONF():
-                widget = fconfStart()
-                widget.exec_()
-
-            self.threader(firstCONF())
-
+        self.mmfuncassign(variableCheck2)
         ###################
 
     def mmfuncassign(self, configurations):
@@ -409,6 +377,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         funcWIN = funcWINONLY()
         funcWINUSRGRU = funcWINusrgru()
         funcLIN = funcLINUX()
+
+        # print(os.getcwd())
 
         def quitButton():
             print('Closing program')
@@ -628,7 +598,35 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
 
 if __name__ == "__main__":
+    # if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
+    #     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+
+    # if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
+    #     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+    # os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
+    QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+    QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
     app = QApplication(sys.argv)
-    main = Mainstart()
-    main.show()
-    sys.exit(app.exec_())
+    config_name = 'config.ini'
+    if getattr(sys, 'frozen', False):
+        application_Path = os.path.dirname(sys.executable)
+    elif __file__:
+        application_Path = os.path.dirname(__file__)
+    config_path = os.path.join(application_Path, config_name)
+    print(config_path)
+    variableCheck = Path(config_path)
+
+    # Checks to make sure there is a config file. If not, then First time setup runs
+    if variableCheck.is_file():
+        config = configparser.ConfigParser()
+        config.read(variableCheck)
+        print('Configuration file has been loaded...')
+
+        main = Mainstart()
+        main.show()
+        sys.exit(app.exec_())
+    else:
+        print('Ello, you have some configurations to do!')
+        start = fconfStart()
+        start.show()
+        sys.exit(app.exec_())

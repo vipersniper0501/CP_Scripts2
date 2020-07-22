@@ -9,6 +9,10 @@ image:https://img.shields.io/github/repo-size/vipersniper0501/CP_Scripts2[GitHub
 
 *DISCLAIMERS:* This project is student made with inspiration from other projects such as the scripts made by Ethan Fowler from TEAM BYTE.
 
+*PlEASE NOTE:* This is program is Pre-Alpha so it still has many bugs and is missing many of the core features.
+I am only one person so this will take a while to even get to Alpha.
+Thank you for your understanding.
+
 This script also uses Microsoft Sysinternals suite which is owned and created by Microsoft.I do not take any credit in the creation of that program.(_I don't want to get sued_)
 
 FYI: This will be mostly used for a backup location for my scripts and will not always have the most up to date versions.

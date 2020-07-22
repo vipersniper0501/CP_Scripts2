@@ -13,12 +13,6 @@
              <height>675</height>
          </rect>
      </property>
-     <property name="minimumSize">
-         <size>
-             <width>860</width>
-             <height>675</height>
-         </size>
-     </property>
      <property name="windowTitle">
          <string>Apple CIDR Script Runner</string>
      </property>
@@ -157,7 +151,8 @@
                                      </font>
                                  </property>
                                  <property name="styleSheet">
-                                     <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+                                     <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                     </string>
                                  </property>
                                  <property name="text">
                                      <string>MacOS Only Commands</string>
@@ -173,10 +168,13 @@
                                      </size>
                                  </property>
                                  <property name="text">
-                                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/Pictures/images/Universal-partner-icon(1).png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img
+                                         src=&quot;:/Pictures/images/Universal-partner-icon(1).png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                                     </string>
                                  </property>
                                  <property name="pixmap">
-                                     <pixmap>:/Pictures/pictures/Universal-partner-icon(1).png</pixmap>
+                                     <pixmap>:/Pictures/pictures/Universal-partner-icon(1).png
+                                     </pixmap>
                                  </property>
                              </widget>
                          </item>
@@ -194,7 +192,8 @@
                                      </font>
                                  </property>
                                  <property name="styleSheet">
-                                     <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+                                     <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                     </string>
                                  </property>
                                  <property name="text">
                                      <string>Linux Only Commands</string>
@@ -267,7 +266,8 @@
                                      </font>
                                  </property>
                                  <property name="styleSheet">
-                                     <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+                                     <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                     </string>
                                  </property>
                                  <property name="text">
                                      <string>Universal Commands</string>
@@ -304,7 +304,8 @@
                                      </font>
                                  </property>
                                  <property name="styleSheet">
-                                     <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+                                     <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                     </string>
                                  </property>
                                  <property name="text">
                                      <string>Windows Only Commands</string>
@@ -336,10 +337,13 @@
                                      </size>
                                  </property>
                                  <property name="text">
-                                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/Pictures/images/windows-8-png-icon-7(1).png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img
+                                         src=&quot;:/Pictures/images/windows-8-png-icon-7(1).png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                                     </string>
                                  </property>
                                  <property name="pixmap">
-                                     <pixmap>:/Pictures/pictures/windows-8-png-icon-7(1).png</pixmap>
+                                     <pixmap>:/Pictures/pictures/windows-8-png-icon-7(1).png
+                                     </pixmap>
                                  </property>
                              </widget>
                          </item>
@@ -365,7 +369,9 @@
                                      </size>
                                  </property>
                                  <property name="text">
-                                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/Pictures/images/MacOSx.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img
+                                         src=&quot;:/Pictures/images/MacOSx.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                                     </string>
                                  </property>
                                  <property name="pixmap">
                                      <pixmap>:/Pictures/pictures/MacOSx.png</pixmap>
@@ -426,7 +432,9 @@
                                      </size>
                                  </property>
                                  <property name="text">
-                                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/Pictures/images/linuxICON(1).png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img
+                                         src=&quot;:/Pictures/images/linuxICON(1).png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                                     </string>
                                  </property>
                                  <property name="pixmap">
                                      <pixmap>:/Pictures/pictures/linuxICON(1).png</pixmap>
@@ -498,7 +506,8 @@
                                                      <string/>
                                                  </property>
                                                  <property name="styleSheet">
-                                                     <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                     <string notr="true">background-color:
+                                                         #414E6E;color: #CCD2E6;
                                                      </string>
                                                  </property>
                                                  <property name="text">
@@ -529,7 +538,8 @@
                                                      <string/>
                                                  </property>
                                                  <property name="styleSheet">
-                                                     <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                     <string notr="true">background-color:
+                                                         #414E6E;color: #CCD2E6;
                                                      </string>
                                                  </property>
                                                  <property name="text">
@@ -551,7 +561,8 @@
                                                      </font>
                                                  </property>
                                                  <property name="styleSheet">
-                                                     <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                     <string notr="true">background-color:
+                                                         #414E6E;color: #CCD2E6;
                                                      </string>
                                                  </property>
                                                  <property name="text">
@@ -560,7 +571,8 @@
                                              </widget>
                                          </item>
                                          <item row="1" column="1">
-                                             <widget class="QPushButton" name="chkhashfile_buttonUNI">
+                                             <widget class="QPushButton"
+                                                     name="chkhashfile_buttonUNI">
                                                  <property name="minimumSize">
                                                      <size>
                                                          <width>260</width>
@@ -573,7 +585,8 @@
                                                      </font>
                                                  </property>
                                                  <property name="styleSheet">
-                                                     <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                     <string notr="true">background-color:
+                                                         #414E6E;color: #CCD2E6;
                                                      </string>
                                                  </property>
                                                  <property name="text">
@@ -596,7 +609,8 @@
                                          <string notr="true">color: #8B93B2;</string>
                                      </property>
                                      <property name="text">
-                                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;All Commands here will
+                                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;All
+                                             Commands here will
                                              work across all
                                              Operating Systems&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                                          </string>
@@ -654,7 +668,8 @@
                                              <string notr="true">color: #8B93B2;</string>
                                          </property>
                                          <property name="text">
-                                             <string>All Commands here will work on Windows 10</string>
+                                             <string>All Commands here will work on Windows 10
+                                             </string>
                                          </property>
                                          <property name="wordWrap">
                                              <bool>true</bool>
@@ -671,7 +686,8 @@
                                          </property>
                                          <layout class="QGridLayout" name="gridLayout_3">
                                              <item row="0" column="1">
-                                                 <widget class="QPushButton" name="basicConfbutton_2">
+                                                 <widget class="QPushButton"
+                                                         name="basicConfbutton_2">
                                                      <property name="minimumSize">
                                                          <size>
                                                              <width>260</width>
@@ -684,16 +700,19 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
-                                                         <string>Security Policies Configurations</string>
+                                                         <string>Security Policies Configurations
+                                                         </string>
                                                      </property>
                                                  </widget>
                                              </item>
                                              <item row="1" column="0">
-                                                 <widget class="QPushButton" name="rmvprosoftbutton_2">
+                                                 <widget class="QPushButton"
+                                                         name="rmvprosoftbutton_2">
                                                      <property name="minimumSize">
                                                          <size>
                                                              <width>260</width>
@@ -706,16 +725,19 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
-                                                         <string>Remove Prohibited Software*</string>
+                                                         <string>Remove Prohibited Software*
+                                                         </string>
                                                      </property>
                                                  </widget>
                                              </item>
                                              <item row="1" column="1">
-                                                 <widget class="QPushButton" name="enblBitLockerbutton">
+                                                 <widget class="QPushButton"
+                                                         name="enblBitLockerbutton">
                                                      <property name="minimumSize">
                                                          <size>
                                                              <width>260</width>
@@ -728,7 +750,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -750,7 +773,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -759,7 +783,8 @@
                                                  </widget>
                                              </item>
                                              <item row="2" column="0">
-                                                 <widget class="QPushButton" name="servicesConfButton_4">
+                                                 <widget class="QPushButton"
+                                                         name="servicesConfButton_4">
                                                      <property name="minimumSize">
                                                          <size>
                                                              <width>260</width>
@@ -772,7 +797,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -794,11 +820,14 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
-                                                         <string>Configure Browser Settings [Firefox]</string>
+                                                         <string>Configure Browser Settings
+                                                             [Firefox]
+                                                         </string>
                                                      </property>
                                                  </widget>
                                              </item>
@@ -822,7 +851,8 @@
                                              <string notr="true">color: #8B93B2;</string>
                                          </property>
                                          <property name="text">
-                                             <string>All Commands here will work on Windows 10</string>
+                                             <string>All Commands here will work on Windows 10
+                                             </string>
                                          </property>
                                          <property name="wordWrap">
                                              <bool>true</bool>
@@ -833,7 +863,7 @@
                                              <rect>
                                                  <x>20</x>
                                                  <y>0</y>
-                                                 <width>521</width>
+                                                 <width>528</width>
                                                  <height>341</height>
                                              </rect>
                                          </property>
@@ -852,7 +882,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -874,7 +905,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -896,7 +928,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -921,7 +954,8 @@
                                                          <bool>false</bool>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -943,7 +977,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -965,7 +1000,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -987,7 +1023,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1009,7 +1046,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1031,7 +1069,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1053,7 +1092,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1075,11 +1115,13 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
-                                                         <string>Change all User Passwords at Once</string>
+                                                         <string>Change all User Passwords at Once
+                                                         </string>
                                                      </property>
                                                  </widget>
                                              </item>
@@ -1129,7 +1171,8 @@
                                              <string notr="true">color: #8B93B2;</string>
                                          </property>
                                          <property name="text">
-                                             <string>All Commands here will work on Debian/Ubuntu/Manjaro Linux
+                                             <string>All Commands here will work on
+                                                 Debian/Ubuntu/Manjaro Linux
                                                  distributions
                                              </string>
                                          </property>
@@ -1148,7 +1191,8 @@
                                          </property>
                                          <layout class="QGridLayout" name="gridLayout_5">
                                              <item row="1" column="0">
-                                                 <widget class="QPushButton" name="rmvprosoftbutton_3">
+                                                 <widget class="QPushButton"
+                                                         name="rmvprosoftbutton_3">
                                                      <property name="minimumSize">
                                                          <size>
                                                              <width>260</width>
@@ -1161,11 +1205,13 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
-                                                         <string>Remove Prohibited Software*</string>
+                                                         <string>Remove Prohibited Software*
+                                                         </string>
                                                      </property>
                                                  </widget>
                                              </item>
@@ -1183,7 +1229,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1205,7 +1252,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1214,7 +1262,8 @@
                                                  </widget>
                                              </item>
                                              <item row="1" column="1">
-                                                 <widget class="QPushButton" name="basicConfbutton_3">
+                                                 <widget class="QPushButton"
+                                                         name="basicConfbutton_3">
                                                      <property name="minimumSize">
                                                          <size>
                                                              <width>260</width>
@@ -1227,7 +1276,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1249,7 +1299,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1258,7 +1309,8 @@
                                                  </widget>
                                              </item>
                                              <item row="2" column="1">
-                                                 <widget class="QPushButton" name="servicesConfButton_2">
+                                                 <widget class="QPushButton"
+                                                         name="servicesConfButton_2">
                                                      <property name="minimumSize">
                                                          <size>
                                                              <width>260</width>
@@ -1271,7 +1323,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1299,7 +1352,8 @@
                                              <string notr="true">color: #8B93B2;</string>
                                          </property>
                                          <property name="text">
-                                             <string>All Commands here will work on Debian/Ubuntu/Manjaro Linux
+                                             <string>All Commands here will work on
+                                                 Debian/Ubuntu/Manjaro Linux
                                                  distributions
                                              </string>
                                          </property>
@@ -1331,7 +1385,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1353,7 +1408,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1375,7 +1431,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1397,7 +1454,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1419,7 +1477,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1444,7 +1503,8 @@
                                                          <bool>false</bool>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1466,7 +1526,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1488,7 +1549,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1510,7 +1572,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1532,7 +1595,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1554,11 +1618,14 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
-                                                         <string>Change all User Passwords at Once*</string>
+                                                         <string>Change all User Passwords at
+                                                             Once*
+                                                         </string>
                                                      </property>
                                                  </widget>
                                              </item>
@@ -1628,7 +1695,8 @@
                                          </property>
                                          <layout class="QGridLayout" name="gridLayout_7">
                                              <item row="0" column="0">
-                                                 <widget class="QPushButton" name="rmvprosoftbutton_4">
+                                                 <widget class="QPushButton"
+                                                         name="rmvprosoftbutton_4">
                                                      <property name="minimumSize">
                                                          <size>
                                                              <width>260</width>
@@ -1641,11 +1709,13 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
-                                                         <string>Remove Prohibited Software*</string>
+                                                         <string>Remove Prohibited Software*
+                                                         </string>
                                                      </property>
                                                  </widget>
                                              </item>
@@ -1663,7 +1733,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1672,7 +1743,8 @@
                                                  </widget>
                                              </item>
                                              <item row="1" column="0">
-                                                 <widget class="QPushButton" name="servicesConfButton_3">
+                                                 <widget class="QPushButton"
+                                                         name="servicesConfButton_3">
                                                      <property name="minimumSize">
                                                          <size>
                                                              <width>260</width>
@@ -1685,7 +1757,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1694,7 +1767,8 @@
                                                  </widget>
                                              </item>
                                              <item row="1" column="1">
-                                                 <widget class="QPushButton" name="basicConfbutton_4">
+                                                 <widget class="QPushButton"
+                                                         name="basicConfbutton_4">
                                                      <property name="minimumSize">
                                                          <size>
                                                              <width>260</width>
@@ -1707,7 +1781,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1765,7 +1840,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1787,7 +1863,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1809,7 +1886,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1831,7 +1909,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1853,7 +1932,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1875,7 +1955,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1897,7 +1978,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1919,7 +2001,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1941,7 +2024,8 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1966,7 +2050,8 @@
                                                          <bool>false</bool>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
@@ -1988,11 +2073,14 @@
                                                          </font>
                                                      </property>
                                                      <property name="styleSheet">
-                                                         <string notr="true">background-color: #414E6E;color: #CCD2E6;
+                                                         <string notr="true">background-color:
+                                                             #414E6E;color: #CCD2E6;
                                                          </string>
                                                      </property>
                                                      <property name="text">
-                                                         <string>Change all User Passwords at Once*</string>
+                                                         <string>Change all User Passwords at
+                                                             Once*
+                                                         </string>
                                                      </property>
                                                  </widget>
                                              </item>
@@ -2006,25 +2094,25 @@
              </layout>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-      <property name="geometry">
-          <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>862</width>
-              <height>26</height>
-          </rect>
-      </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: #8B93B2; background-color: #2E344A;</string>
-   </property>
-   <widget class="QMenu" name="menuHelp">
-    <property name="styleSheet">
+     <widget class="QMenuBar" name="menubar">
+         <property name="geometry">
+             <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>862</width>
+                 <height>26</height>
+             </rect>
+         </property>
+         <property name="font">
+             <font>
+                 <pointsize>11</pointsize>
+             </font>
+         </property>
+         <property name="styleSheet">
+             <string notr="true">color: #8B93B2; background-color: #2E344A;</string>
+         </property>
+         <widget class="QMenu" name="menuHelp">
+             <property name="styleSheet">
      <string notr="true"/>
     </property>
     <property name="title">
