@@ -3,8 +3,6 @@ import sys
 from pathlib import Path
 from sys import platform
 from threading import *
-# import os
-# os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
 import PyQt5
 from PyQt5 import QtWidgets
@@ -18,13 +16,6 @@ from scripFunc.scripUNIMULTI import *
 from scripFunc.scripWINONLY import *
 
 
-# The following two `if` statements fix the problem where the application would not scale correctly
-# to the resolution of the monitor
-
-
-# QT_AUTO_SCREEN_SCALE_FACTOR = True
-# QT_SCALE_FACTOR = 2
-
 # def resource_path(relative_path):
 #     """ Get absolute path to resource, works for dev and for PyInstaller """
 #     try:
@@ -34,11 +25,6 @@ from scripFunc.scripWINONLY import *
 #         base_path = os.path.abspath(".")
 #
 #     return os.path.join(base_path, relative_path)
-
-
-# Button logic (calls functions in module and connects to other parts of GUI. Does not actually do
-# anything to system)
-
 
 class fconfStart(QDialog, Ui_firstConf):
 
@@ -351,7 +337,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
     def __init__(self, parent = None):
         super(Mainstart, self).__init__(parent)
         print('Script Runner has started')
-        self.setFixedSize(860, 675)
+        self.setFixedSize(860, 650)
         self.setupUi(self)
         self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
 
@@ -439,7 +425,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 """)
             HOWTO.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             HOWTO.setStyleSheet('background-color: #414E6E; color: #CCD2E6')
-            HOWTO.exec_()  # change to QDialog
+            HOWTO.exec_()
 
         def runCOMDESCRIPT():
             class showComDescript(QDialog, Ui_comDescript):
@@ -523,7 +509,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         self.chkhashfile_buttonUNI.clicked.connect(lambda: self.threader(scripfunc.hashCheck()))
 
         # Windows Main Menu Commands
-
         self.fwlbutton_2.clicked.connect(lambda: self.threader(scripfunc.fwl))
         self.basicConfbutton_2.clicked.connect(
             lambda: self.threader(
@@ -598,12 +583,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
 
 if __name__ == "__main__":
-    # if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
-    #     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
-
-    # if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
-    #     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
-    # os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
     QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
     QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
     app = QApplication(sys.argv)
