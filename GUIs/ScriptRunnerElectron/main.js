@@ -26,17 +26,39 @@ function createWindow () {
                     label: "Change Configurations", click() {
 
                     }
-                },
+                }// ,
                 //Use this label as an example as to how to make the GUI execute a python command. Use arguments to
                 //  decide what function is to be executed.
-                {
-                    label: "Python Test", click() {
-                        var python = require("child_process").spawn("python", ["./PythonAPI/scriptEXECUTOR.exe", "hello"]);
-                        python.stdout.on("data", function (data) {
-                            console.log("data: ", data.toString("utf8"));
-                        });
-                    }
-                }
+                // {
+                //     label: "Python Test", click() {
+                //
+                //         // expressapp.get('/name', callFUNC);
+                //         //
+                //         // function callFUNC(req, res) {
+                //         //     let spawn = require('child_process').spawn;
+                //         //     let process = spawn('python', ['./PythonAPI/pythonTESTING.py',
+                //         //     req.query.pyarg]);
+                //         //
+                //         //     process.stdout.on('data', function(data){
+                //         //         res.send(data.toString());
+                //         //     });
+                //         // }
+                //         // client.invoke("TESTING", (error, result) => {
+                //         //     if (error) {
+                //         //         console.log(error)
+                //         //     } else {
+                //         //         console.log(result)
+                //         //     }
+                //         // })
+                //
+                //         var python = require("child_process").spawn("python", ["./PythonAPI/scriptEXECUTOR.py", "hello"]);
+                //         python.stdout.on("data", function (data) {
+                //             console.log("data: ", data.toString());
+                //             let abc = document.getElementById("pythonTESTINGground");
+                //             abc.innerHTML = data.toString();
+                //         });
+                //     }
+                // }
             ]
         }
     ]);
@@ -49,6 +71,12 @@ function createWindow () {
 function changeconfTEST(){
     console.log("test");
 }
+
+// const ipc = require('electron').ipcMain;
+// ipc.on('testButton', (event, args) => {
+//     console.log(args);
+//     event.returnValue = 'Hello';
+// });
 
 app.whenReady().then(createWindow);
 
