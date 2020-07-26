@@ -337,7 +337,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
     def __init__(self, parent = None):
         super(Mainstart, self).__init__(parent)
         print('Script Runner has started')
-        self.setFixedSize(860, 650)
+        self.setFixedSize(860, 675)
         self.setupUi(self)
         self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
 
@@ -545,12 +545,13 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.lsgruusrin_3,
                                 self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
-                                self.rmvgrufrosys_3, self.rmvusrfrogru_3]
+                                self.rmvusrfrogru_3]
         for i in range(0, len(self.WINUSRGRUBUTTON)):
             self.WINUSRGRUBUTTON[i].clicked.connect(lambda: self.threader(indev()))  #
 
         self.adusrtosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.addusr()))
         self.rmvusrfrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remusr()))
+        self.rmvgrufrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remgrufrosys()))
         self.chngusrpas_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.chngpasswdofall()))
 
         # Linux Main Menu Commands

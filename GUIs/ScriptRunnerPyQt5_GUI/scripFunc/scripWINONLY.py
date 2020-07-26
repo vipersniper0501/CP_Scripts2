@@ -44,7 +44,7 @@ config.read('config.ini')
 class funcWINONLY:
     def BITLOCKER(self):
         class bitRUN(QDialog, Ui_bitlockerGUI):
-            def __init__(self, parent=None):
+            def __init__(self, parent = None):
                 super(bitRUN, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setupUi(self)
@@ -155,14 +155,16 @@ class funcWINONLY:
                     elif not symbolsBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText("Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         x = HEY.exec_()
                     elif not numberBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText("Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         x = HEY.exec_()
@@ -187,8 +189,9 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                         COMPLETE = QMessageBox()
                         COMPLETE.setIcon(QMessageBox.Question)
                         COMPLETE.setWindowTitle('Hey! Listen!')
-                        COMPLETE.setText('You must restart the computer for encryption to begin on the drive. '
-                                         '\nWould you like to restart now?')
+                        COMPLETE.setText(
+                            'You must restart the computer for encryption to begin on the drive. '
+                            '\nWould you like to restart now?')
                         COMPLETE.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
                         x = COMPLETE.exec_()
 
@@ -202,7 +205,7 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                 # Gets list of drives and encryption status'
                 decryptSTATUS = []
                 command = 'Get-BitLockerVolume'
-                EXEC = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
+                EXEC = sub.Popen(["powershell", "& {" + command + "}"], stdout = sub.PIPE)
                 stdout, _ = EXEC.communicate()
                 output = stdout.decode("utf-8")
                 output2 = output.split('\n')
@@ -219,7 +222,8 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                         # print('Controlled exit of loop: ' + str(e))
                         break
                 # print(decryptSTATUS)
-                buttons = [self.radioButton, self.radioButton_2, self.radioButton_3, self.radioButton_4,
+                buttons = [self.radioButton, self.radioButton_2, self.radioButton_3,
+                           self.radioButton_4,
                            self.radioButton_5, self.radioButton_6, self.radioButton_7]
 
                 self.selectedDRIVE = ''
@@ -296,7 +300,7 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
         # Allows for program to continue running while the function executes.
         def threader(com):
             try:
-                threader = Thread(target=com)
+                threader = Thread(target = com)
                 threader.start()
             except Exception as e:
                 print(e)
@@ -443,7 +447,8 @@ class funcWINusrgru:
                         COMPLETE = QMessageBox()
                         COMPLETE.setIcon(QMessageBox.Question)
                         COMPLETE.setWindowTitle('Hey! Listen!')
-                        COMPLETE.setText('User ' + username + ' has been successfully added to system.')
+                        COMPLETE.setText(
+                            'User ' + username + ' has been successfully added to system.')
                         COMPLETE.setStandardButtons(QMessageBox.Close)
                         COMPLETE.exec_()
                         self.close()
@@ -493,14 +498,16 @@ class funcWINusrgru:
                     elif not symbolsBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText("Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
                     elif not numberBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText("Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
@@ -536,7 +543,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
 
                 def threader(com):
                     try:
-                        threader = Thread(target=com)
+                        threader = Thread(target = com)
                         threader.start()
                     except Exception as e:
                         print(e)
@@ -632,37 +639,63 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                 for i in range(0, len(listoNames)):
                     QListWidgetItem(listoNames[i], self.listOFnames)
 
-                username = self.Username_Input.text()
+                def removal():
+                    username = self.Username_Input.text()
 
-                def completedPOP(username):
-                    COMPLETE = QMessageBox()
-                    COMPLETE.setIcon(QMessageBox.Question)
-                    COMPLETE.setWindowTitle('Hey! Listen!')
-                    COMPLETE.setText(
-                        'User ' + username + ' has been successfully removed from the system.')
-                    COMPLETE.setStandardButtons(QMessageBox.Close)
-                    COMPLETE.exec_()
-                    self.close()
+                    def completedPOP(username):
+                        COMPLETE = QMessageBox()
+                        COMPLETE.setIcon(QMessageBox.Question)
+                        COMPLETE.setWindowTitle('Hey! Listen!')
+                        COMPLETE.setText(
+                            'User ' + username + ' has been successfully removed from the system.')
+                        COMPLETE.setStandardButtons(QMessageBox.Close)
+                        COMPLETE.exec_()
+                        self.close()
 
-                def removal(username):
-                    sub.Popen(["powershell", "& {net user " + username + " /DELETE}"])
-                    completedPOP(username)
+                    if len(username) == 0 or username not in listoNames:
+                        if len(username) == 0:
+                            print('no username entered')
+                            ERROR_NO_USER = QMessageBox()
+                            ERROR_NO_USER.setIcon(QMessageBox.Warning)
+                            ERROR_NO_USER.setWindowTitle('Hey! Listen!')
+                            ERROR_NO_USER.setText(
+                                'No username was entered. No user was removed.')
+                            ERROR_NO_USER.setStandardButtons(QMessageBox.Close)
+                            ERROR_NO_USER.exec_()
+                        else:
+                            print('User not found')
+                            ERROR_NO_USER_FOUND = QMessageBox()
+                            ERROR_NO_USER_FOUND.setIcon(QMessageBox.Warning)
+                            ERROR_NO_USER_FOUND.setWindowTitle('Hey! Listen!')
+                            ERROR_NO_USER_FOUND.setText(
+                                'User was not found on system. No user was removed.')
+                            ERROR_NO_USER_FOUND.setStandardButtons(QMessageBox.Close)
+                            ERROR_NO_USER_FOUND.exec_()
+                    else:
+                        print('User was removed............ This is a test')
+                        # Executes command.
+                        sub.Popen(["powershell", "& {net user " + username + " /DELETE}"])
+                        completedPOP(username)
 
-                def confirmation(com):
+                def confirmation():
                     CONFIRM = QMessageBox()
                     CONFIRM.setWindowTitle('Hey! Listen!')
                     CONFIRM.setText("Hey! Are you sure you want to do this?")
-                    CONFIRM.setIcon(QMessageBox.Critical)
+                    CONFIRM.setIcon(QMessageBox.Question)
                     CONFIRM.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
                     CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                     x = CONFIRM.exec_()
                     if x == QMessageBox.Yes:
-                        print('Removing user ' + com)
-                        removal(com)
+                        print('Removing user...')
+                        removal()
                     elif x == QMessageBox.No:
                         print('Cancelling...')
 
-                self.Confirm_button.clicked(lambda: confirmation(username))
+                def cancel_button():
+                    self.close()
+
+                self.Cancel_button.clicked.connect(cancel_button)
+                self.Confirm_button.clicked.connect(lambda: confirmation())
 
         def callrmvusrfrosys():
             widget = rmvusrfrosys()
@@ -674,7 +707,44 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
         pass
 
     def remgrufrosys(self):
-        pass
+        class rmvgrufrosys(QDialog, Ui_rmvusrogru):
+            def __init__(self, parent = None):
+                super(rmvgrufrosys, self).__init__(parent)
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setupUi(self)
+                self.EXECUTE()
+
+            def EXECUTE(self):
+                self.setWindowTitle('Remove Group From System')
+                self.label.setText('Current Groups:')
+                self.label2.setText('Group Name: ')
+
+
+                def confirmation():
+                    CONFIRM = QMessageBox()
+                    CONFIRM.setWindowTitle('Hey! Listen!')
+                    CONFIRM.setText("Hey! Are you sure you want to do this?")
+                    CONFIRM.setIcon(QMessageBox.Question)
+                    CONFIRM.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
+                    CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                    x = CONFIRM.exec_()
+                    if x == QMessageBox.Yes:
+                        print('Removing group...')
+                        # Removal function here
+                    elif x == QMessageBox.No:
+                        print('Cancelling...')
+
+                def cancel_button():
+                    self.close()
+
+                self.Cancel_button.clicked.connect(cancel_button)
+                self.Confirm_button.clicked.connect(lambda: confirmation())
+
+        def callrmvgrufrosys():
+            widget = rmvgrufrosys()
+            widget.exec_()
+
+        callrmvgrufrosys()
 
     def addusrtogru(self):
         pass
@@ -699,7 +769,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
         # TODO: This command as of July 7th, 2020 is broken. More on the issue can be found here: https://github.com/vipersniper0501/CP_Scripts2/issues/48
 
         class changepasswordofall(QDialog, Ui_chngpass):
-            def __init__(self, parent=None):
+            def __init__(self, parent = None):
                 super(changepasswordofall, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setupUi(self)
@@ -907,14 +977,16 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     elif not symbolsBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText("Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
                     elif not numberBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText("Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
