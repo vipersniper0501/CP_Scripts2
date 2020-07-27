@@ -23,14 +23,23 @@ commit_compiled_executables() {
         git add ./builds/AppleCIDR.exe
         echo "Added AppleCIDR.exe to commit"
     elif [ $TRAVIS_OS_NAME = 'linux' ]; then
-        mv ./dist/AppleCIDR ./builds/AppleCIDR
-        echo "Moved AppleCIDR.exe from ./dist to ./builds"
+        mv "./dist/AppleCIDR(Linux_x64)" "./builds/AppleCIDR(Linux_x64)"
+        echo "Moved AppleCIDR(Linux_x64) from ./dist to ./builds"
         echo "./dist directory AFTER"
         ls ./dist
         echo "./builds directory AFTER"
         ls ./builds
-        git add ./builds/AppleCIDR
-        echo "Added AppleCIDR to commit"
+        git add "./builds/AppleCIDR(Linux_x64)"
+        echo "Added AppleCIDR(Linux_x64) to commit"
+    elif [ $TRAVIS_OS_NAME = 'osx' ]; then
+        mv "./dist/AppleCIDR(MacOS_x64)" "./builds/AppleCIDR(MacOS_x64)"
+        echo "Moved AppleCIDR(MacOS_x64) from ./dist to ./builds"
+        echo "./dist directory AFTER"
+        ls ./dist
+        echo "./builds directory AFTER"
+        ls ./builds
+        git add "./builds/AppleCIDR(MacOS_x64)"
+        echo "Added AppleCIDR(MacOS_x64) to commit"
     fi
     git commit --message "[skip travis-ci] Travis build: $TRAVIS_BUILD_NUMBER"
     echo "git committed created. Ready to push"
