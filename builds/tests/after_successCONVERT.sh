@@ -21,7 +21,7 @@ commit_compiled_executables() {
         echo "./builds directory AFTER"
         ls ./builds
         git add "./builds/AppleCIDR(Windows_x64)"
-        echo "Added AppleCIDR(Windows_x64) to commit"
+        git status
     elif [ $TRAVIS_OS_NAME = 'linux' ]; then
         mv "./dist/AppleCIDR(Linux_x64)" "./builds/AppleCIDR(Linux_x64)"
         echo "Moved AppleCIDR(Linux_x64) from ./dist to ./builds"
@@ -31,7 +31,7 @@ commit_compiled_executables() {
         ls ./builds
         chmod +x "./builds/AppleCIDR(Linux_x64)"
         git add "./builds/AppleCIDR(Linux_x64)"
-        echo "Added AppleCIDR(Linux_x64) to commit"
+        git status
     elif [ $TRAVIS_OS_NAME = 'osx' ]; then
         mv "./dist/AppleCIDR(MacOS_x64)" "./builds/AppleCIDR(MacOS_x64)"
         echo "Moved AppleCIDR(MacOS_x64) from ./dist to ./builds"
@@ -41,15 +41,13 @@ commit_compiled_executables() {
         ls ./builds
         chmod +x "./builds/AppleCIDR(MacOS_x64)"
         git add "./builds/AppleCIDR(MacOS_x64)"
-        echo "Added AppleCIDR(MacOS_x64) to commit"
+        git status
     fi
     git commit --message "[skip travis-ci] Travis build: $TRAVIS_BUILD_NUMBER"
     echo "git committed created. Ready to push"
 }
 
 upload_files() {
-    git branch --show-current
-    echo "^ Is the current branch"
     git push -f -q https://vipersniper0501:${GH_TOKEN}@github.com/vipersniper0501/CP_Scripts2.git GUI-Updates
     echo "Pushed to GUI-Updates"
 }
