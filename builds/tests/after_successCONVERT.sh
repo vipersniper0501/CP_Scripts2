@@ -23,7 +23,8 @@ commit_compiled_executables() {
         git pull
         git add "./builds"
         git status
-    elif [ $TRAVIS_OS_NAME = 'linux' ]; then
+    fi
+    if [ $TRAVIS_OS_NAME = 'linux' ]; then
         mv "./dist/AppleCIDR_Linux_x64" "./builds/AppleCIDR_Linux_x64"
         echo "Moved AppleCIDR_Linux_x64 from ./dist to ./builds"
         echo "./dist directory AFTER"
@@ -34,7 +35,8 @@ commit_compiled_executables() {
         git pull
         git add "./builds"
         git status
-    elif [ $TRAVIS_OS_NAME = 'osx' ]; then
+    fi
+    if [ $TRAVIS_OS_NAME = 'osx' ]; then
         mv "./dist/AppleCIDR_MacOS_x64" "./builds/AppleCIDR_MacOS_x64"
         echo "Moved AppleCIDR_MacOS_x64 from ./dist to ./builds"
         echo "./dist directory AFTER"
