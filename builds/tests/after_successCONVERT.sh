@@ -29,7 +29,8 @@ commit_compiled_executables() {
 upload_files() {
   git branch --show-current
   echo "^ Is the current branch"
-  git push -f https://${GITHUB_TOKEN}@github.com/vipersniper0501/CP_Scripts2.git GUI-Updates
+  git push -f -q https://vipersniper0501:${GH_TOKEN}@github.com/vipersniper0501/CP_Scripts2.git
+  GUI-Updates
   # echo "Remote add GUI-Updates"
   # git push
   echo "Pushed to GUI-Updates"
