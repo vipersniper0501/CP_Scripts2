@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git checkout GUI-Updates
+
 if [ $TRAVIS_OS_NAME = 'osx' ]; then
     # Install some custom requirements on macOS
     # e.g. brew install pyenv-virtualenv

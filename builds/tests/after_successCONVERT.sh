@@ -14,14 +14,14 @@ commit_compiled_executables() {
     echo "./builds directory BEFORE"
     ls ./builds
     if [ $TRAVIS_OS_NAME = 'windows' ]; then
-        mv ./dist/AppleCIDR.exe ./builds/AppleCIDR.exe
-        echo "Moved AppleCIDR.exe from ./dist to ./builds"
+        mv "./dist/AppleCIDR(Windows_x64)" "./builds/AppleCIDR(Windows_x64)"
+        echo "Moved AppleCIDR(Windows_x64) from ./dist to ./builds"
         echo "./dist directory AFTER"
         ls ./dist
         echo "./builds directory AFTER"
         ls ./builds
-        git add ./builds/AppleCIDR.exe
-        echo "Added AppleCIDR.exe to commit"
+        git add "./builds/AppleCIDR(Windows_x64)"
+        echo "Added AppleCIDR(Windows_x64) to commit"
     elif [ $TRAVIS_OS_NAME = 'linux' ]; then
         mv "./dist/AppleCIDR(Linux_x64)" "./builds/AppleCIDR(Linux_x64)"
         echo "Moved AppleCIDR(Linux_x64) from ./dist to ./builds"
