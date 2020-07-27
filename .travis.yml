@@ -2,45 +2,34 @@ language: python
 sudo: required
 jobs:
   include:
-    - name: "Linux Ubuntu Python 3.8"
-      os: linux
-      python: 3.8
-      before_install:
-        - chmod +x ./builds/tests/compile_test.sh
-        - chmod +x ./builds/tests/after_successCONVERT.sh
-        # - apt-get install git -y
-        # - apt-get install asciidoctor -y
-    - name: "MacOS X Build Python 3.8"
-      os: osx
-      language: generic
-      before_install:
-        - chmod +x ./builds/tests/compile_test.sh
-        - chmod +x ./builds/tests/after_successCONVERT.sh
-      env: TOXENV=py38
-    - name: "Windows 10 Build Python 3.8"
-      os: windows
-      language: shell
-      before_install:
-        - choco install python --version 3.8.3
-        - python -m pip install --upgrade pip
-      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+  - name: Linux Ubuntu Python 3.8
+    os: linux
+    python: 3.8
+    before_install:
+    - chmod +x ./builds/tests/compile_test.sh
+    - chmod +x ./builds/tests/after_successCONVERT.sh
+  - name: MacOS X Build Python 3.8
+    os: osx
+    language: generic
+    before_install:
+    - chmod +x ./builds/tests/compile_test.sh
+    - chmod +x ./builds/tests/after_successCONVERT.sh
+    env: TOXENV=py38
+  - name: Windows 10 Build Python 3.8
+    os: windows
+    language: shell
+    before_install:
+    - choco install python --version 3.8.3
+    - python -m pip install --upgrade pip
+    env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
 python:
-  - "3.8"
-# command to install dependencies
+- '3.8'
 install:
-  - pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
-  # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt; fi
-  # - if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt; fi
-  
-# before-script:
-  # - chmod +x ./builds/tests/compile_test.sh
-# command to run tests
+- pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
 script:
-  - ./builds/tests/compile_test.sh
-
+- "./builds/tests/compile_test.sh"
 after_success:
-  - ./builds/tests/after_successCONVERT.sh
-
+- "./builds/tests/after_successCONVERT.sh"
 env:
   global:
-    secure: Q/HoEzl+LhwVVz0n63lRb0YC4Bfw0aSZJDGRtJOjcPsnOQgb5YPtgO0tz5f5IMXfybZY2A4QcTz/LjYLg1IGzF3sHxCz6UeYWnBHOAhHY2RZ7us8CuLiphccSOTsU/Qri+C38uVHLX/emNplHjgqC9imO4ydIjlGKxHB1+z4C8/baQ0o9NWJ4LI2bFVq18S/TFaunjmfQLtc2hKIdzeiumefE/aRnSo9kQxNw/2ElbDI4xcEOzF/va40jZjmEPpd29CNtQzMfZDhFKCBCPFbt/B5v5J4tmlEtjWcMiIq2RloR/q5NULQyasHo6LASL2ijeGluNlMAUbp+u5NfO/qsvDZNYd7tlrPepPXQdAmnKLu7nVFYKxukL/GWLx52ANSXPNnps40PPa+EDsbEgFvo07lNELV7t6gZOo2ZaoFGYCGiZHml0wSUfjCkQksRP3vYsUIE0lcbu9ucD1EEkA9Mwcp/xlI6JSFnTGrSEHP5Po+diue6IBYqx2PDNKGiUHe6X9UrNAGojbShi3VoGox2P2oy+dPEaMfWbo3YntPRpjwUzAK+tl7egZ3fAvt9V7+mGi+QqDqsLGTNQNcpp734z1BzopuEDnf4g++m3QCxnXrikIj/lqjLVhGwf2GkT0zYPTp3suwLMvx6r3Vo+hJY0NxAY72bRJC+bIPaiKyRQk=
+    secure: miAVNLrqpuDTnozkUpkA1jmIWWAgRIVQiABKBBxq4EJ68swCLW6+2oqxK/tDyUkUOmCOPdcU9qOuvmsEc4eiIOtsv3X8FxGHCyO8yp8x96DYCuo3pBIEY586TeY20si7hlEAUNyJ3exNGKbnxsIR1UkrrRdRjwIkdzjL1q5xBKG75vrNlQue6CCghw1liIvI0ZCAZ1lEmRqQJt2dfeAe5pn0ZVRhajp7BF/2I1H2H9l0SiPBp+8iQFj/+VeRCMO6iWc/nb9sSzYripLMEApQtzeQ1S/aLOZfWTv4ZGlGt9Vz6Z3Zs9zjNI8ATaAQ5ZV1Uv0gyGp0KC9x5q7yIORF+tBJK/RYbPOIHso9JJTxjVY4ghTt+S8DERsxJtJQktSI3JpjUHN+yDIrDFBXk6P0+AlkSxJ8+u15eRBSmxEa+mOgnawH8WiIic4yDRSYAgz9M0wpxkZR1tcUNm+1Ep9tSrzCODAAGlb7myfPIgvhdtxj7BN7S0wsqascg/7G3iqoMMjewzeSJIIrH/s3pLPeeUgWvMr6BpFswMNZYfGYYt4+LHlNVt9wLOuS48GD3uDn1o3uXuVxLlP/cKNVY7i8hnc6eAhaRafcwzrn7qQUeeE0gU9cKIt8rEb17WfJEicoFvGJWUBHQybpoltZYZi0ArEez5gmaVcdRssyxuJyF+A=
