@@ -7,6 +7,7 @@ jobs:
       python: 3.8
       before_install:
         - chmod +x ./builds/tests/compile_test.sh
+        - chmod +x ./builds/tests/after_successCONVERT.sh
         # - apt-get install git -y
         # - apt-get install asciidoctor -y
     - name: "MacOS X Build Python 3.8"
@@ -14,6 +15,7 @@ jobs:
       language: generic
       before_install:
         - chmod +x ./builds/tests/compile_test.sh
+        - chmod +x ./builds/tests/after_successCONVERT.sh
       env: TOXENV=py38
     - name: "Windows 10 Build Python 3.8"
       os: windows
