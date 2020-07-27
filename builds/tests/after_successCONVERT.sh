@@ -7,15 +7,23 @@ setup_git() {
 
 commit_compiled_executables() {
   if [ $TRAVIS_OS_NAME = 'windows' ]; then
-    git checkout -b GUI-Updates
-    git add ./dist/AppleCIDR.exe
+    git checkout GUI-Updates
+    echo "checked out GUI-Updates"
+    mv ./dist/AppleCIDR.exe ./builds/AppleCIDR.exe
+    echo "Moved AppleCIDR.exe from ./dist to ./builds"
+    git add ./builds/AppleCIDR.exe
+    echo "Added AppleCIDR.exe to commit"
     git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
+    echo "git committed created. Ready to push"
   fi
 }
 
 upload_files() {
-  git remote add GUI-Updates https://${GH_TOKEN}@github.com/vipersniper0501/CP_Scripts2.git
-  git push GUI-Updates
+  git branch --show-current
+  git push -f -q https://${GH_TOKEN}@github.com/vipersniper0501/CP_Scripts2.git GUI-Updates
+  # echo "Remote add GUI-Updates"
+  # git push
+  echo "Pushed to GUI-Updates"
 }
 
 if [ $TRAVIS_OS_NAME = 'windows' ]; then
