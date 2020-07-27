@@ -14,23 +14,23 @@ commit_compiled_executables() {
     echo "./builds directory BEFORE"
     ls ./builds
     if [ $TRAVIS_OS_NAME = 'windows' ]; then
-        mv "./dist/AppleCIDR(Windows_x64)" "./builds/AppleCIDR(Windows_x64)"
-        echo "Moved AppleCIDR(Windows_x64) from ./dist to ./builds"
+        mv "./dist/AppleCIDR_Windows_x64" "./builds/AppleCIDR_Windows_x64"
+        echo "Moved AppleCIDR_Windows_x64 from ./dist to ./builds"
         echo "./dist directory AFTER"
         ls ./dist
         echo "./builds directory AFTER"
         ls ./builds
-        git add "./builds/AppleCIDR(Windows_x64)"
+        git add "./builds/AppleCIDR_Windows_x64"
         git status
     elif [ $TRAVIS_OS_NAME = 'linux' ]; then
-        mv "./dist/AppleCIDR(Linux_x64)" "./builds/AppleCIDR(Linux_x64)"
-        echo "Moved AppleCIDR(Linux_x64) from ./dist to ./builds"
+        mv "./dist/AppleCIDR_Linux_x64" "./builds/AppleCIDR_Linux_x64"
+        echo "Moved AppleCIDR_Linux_x64 from ./dist to ./builds"
         echo "./dist directory AFTER"
         ls ./dist
         echo "./builds directory AFTER"
         ls ./builds
-        chmod +x "./builds/AppleCIDR(Linux_x64)"
-        git add "./builds/AppleCIDR(Linux_x64)"
+        chmod +x "./builds/AppleCIDR_Linux_x64"
+        git add "./builds/AppleCIDR_Linux_x64"
         git status
     elif [ $TRAVIS_OS_NAME = 'osx' ]; then
         mv "./dist/AppleCIDR(MacOS_x64)" "./builds/AppleCIDR(MacOS_x64)"
