@@ -21,7 +21,6 @@ ops = OS[0]
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-
 # This function is not really needed, but nice to have if needed.
 # def resource_path(relative_path):
 #     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -33,9 +32,7 @@ config.read('config.ini')
 #
 #     return os.path.join(base_path, relative_path)
 
-
 # This file is used to store commands that are to only be used on Windows machines
-
 
 # TODO: When done, possible convert the try and if statements used for enforcing the complexity requirement into it's
 #  own function to reduce the number of lines in the file.
@@ -115,7 +112,7 @@ class funcWINONLY:
                         HEY.setText("Hey! Your passwords do not match!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
 
                     if len(l1) == 0 or len(l2) == 0:
                         HEY = QMessageBox()
@@ -123,35 +120,35 @@ class funcWINONLY:
                         HEY.setText("Hey! You don't have a password!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif len(l1) <= 8 or len(l2) <= 8:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 8 characters!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif l1 != l2:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your passwords do not match!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not characterBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 lower case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not characterUPBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 Upper Case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not symbolsBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
@@ -159,7 +156,7 @@ class funcWINONLY:
                             "Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not numberBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
@@ -167,7 +164,7 @@ class funcWINONLY:
                             "Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     else:
                         command = """
 $pass = ConvertTo-SecureString '""" + self.encrypPASS.text() + """' -AsPlainText -Force
@@ -212,16 +209,12 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                 i = 7
                 while True:
                     try:
-                        # print(output2[i])
                         output3 = output2[i].split()
-                        # print(output3)
                         decryptSTATUS.append(output3[1])
                         decryptSTATUS.append(output3[3])
                         i = i + 1
                     except Exception:
-                        # print('Controlled exit of loop: ' + str(e))
                         break
-                # print(decryptSTATUS)
                 buttons = [self.radioButton, self.radioButton_2, self.radioButton_3,
                            self.radioButton_4,
                            self.radioButton_5, self.radioButton_6, self.radioButton_7]
