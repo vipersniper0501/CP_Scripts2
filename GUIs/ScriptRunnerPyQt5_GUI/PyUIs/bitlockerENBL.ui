@@ -1,363 +1,383 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <class>bitlockerGUI</class>
-    <widget class="QDialog" name="bitlockerGUI">
-        <property name="geometry">
-            <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>483</width>
-                <height>323</height>
-            </rect>
-        </property>
-        <property name="windowTitle">
-            <string>Enable Bitlocker</string>
-        </property>
-        <property name="styleSheet">
-            <string notr="true">background-color: #212434
+ <class>bitlockerGUI</class>
+ <widget class="QDialog" name="bitlockerGUI">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>483</width>
+    <height>323</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Enable Bitlocker</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #212434
             </string>
-        </property>
-        <widget class="QFrame" name="frame">
-            <property name="geometry">
-                <rect>
-                    <x>15</x>
-                    <y>70</y>
-                    <width>160</width>
-                    <height>241</height>
-                </rect>
-            </property>
-            <property name="styleSheet">
-                <string notr="true">border: 2px solid;
+  </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>70</y>
+     <width>160</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border: 2px solid;
                     border-width: 3px;
                     background: transparent;
                     border-radius: 10px;
                     color: black;
                     padding: 3px;
                 </string>
-            </property>
-            <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-            </property>
-            <widget class="QLabel" name="label">
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>10</y>
-                        <width>140</width>
-                        <height>15</height>
-                    </rect>
-                </property>
-                <property name="styleSheet">
-                    <string notr="true">color: #8B93B2;border: none;</string>
-                </property>
-                <property name="text">
-                    <string>Current available drive(s):</string>
-                </property>
-            </widget>
-            <widget class="QRadioButton" name="radioButton">
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>30</y>
-                        <width>121</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="styleSheet">
-                    <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>140</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #8B93B2;border: none;</string>
+    </property>
+    <property name="text">
+     <string>Current available drive(s):</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
                     </string>
-                </property>
-                <property name="text">
-                    <string/>
-                </property>
-            </widget>
-            <widget class="QRadioButton" name="radioButton_2">
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>60</y>
-                        <width>121</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="styleSheet">
-                    <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
                     </string>
-                </property>
-                <property name="text">
-                    <string/>
-                </property>
-            </widget>
-            <widget class="QRadioButton" name="radioButton_3">
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>90</y>
-                        <width>121</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="styleSheet">
-                    <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
                     </string>
-                </property>
-                <property name="text">
-                    <string/>
-                </property>
-            </widget>
-            <widget class="QRadioButton" name="radioButton_4">
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>120</y>
-                        <width>121</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="styleSheet">
-                    <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
                     </string>
-                </property>
-                <property name="text">
-                    <string/>
-                </property>
-            </widget>
-            <widget class="QRadioButton" name="radioButton_5">
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>150</y>
-                        <width>121</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="styleSheet">
-                    <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
                     </string>
-                </property>
-                <property name="text">
-                    <string/>
-                </property>
-            </widget>
-            <widget class="QRadioButton" name="radioButton_6">
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>180</y>
-                        <width>121</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="styleSheet">
-                    <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
                     </string>
-                </property>
-                <property name="text">
-                    <string/>
-                </property>
-            </widget>
-            <widget class="QRadioButton" name="radioButton_7">
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>210</y>
-                        <width>121</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="styleSheet">
-                    <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_7">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>210</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;
                     </string>
-                </property>
-                <property name="text">
-                    <string/>
-                </property>
-            </widget>
-        </widget>
-        <widget class="QPushButton" name="enblBIT">
-            <property name="geometry">
-                <rect>
-                    <x>194</x>
-                    <y>70</y>
-                    <width>281</width>
-                    <height>131</height>
-                </rect>
-            </property>
-            <property name="font">
-                <font>
-                    <pointsize>28</pointsize>
-                </font>
-            </property>
-            <property name="styleSheet">
-                <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-            </property>
-            <property name="text">
-                <string>Enable BitLocker</string>
-            </property>
-        </widget>
-        <widget class="QLabel" name="label_2">
-            <property name="geometry">
-                <rect>
-                    <x>10</x>
-                    <y>10</y>
-                    <width>121</width>
-                    <height>21</height>
-                </rect>
-            </property>
-            <property name="styleSheet">
-                <string notr="true">color: #8B93B2;</string>
-            </property>
-            <property name="text">
-                <string>Encryption Password:</string>
-            </property>
-        </widget>
-        <widget class="QLineEdit" name="encrypPASS">
-            <property name="geometry">
-                <rect>
-                    <x>150</x>
-                    <y>10</y>
-                    <width>311</width>
-                    <height>20</height>
-                </rect>
-            </property>
-            <property name="styleSheet">
-                <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
-            </property>
-        </widget>
-        <widget class="QFrame" name="frame_2">
-            <property name="geometry">
-                <rect>
-                    <x>185</x>
-                    <y>210</y>
-                    <width>291</width>
-                    <height>61</height>
-                </rect>
-            </property>
-            <property name="styleSheet">
-                <string notr="true">border: 2px solid;
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="enblBIT">
+   <property name="geometry">
+    <rect>
+     <x>194</x>
+     <y>70</y>
+     <width>281</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>23</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color:#414E6E;
+color: #CCD2E6;
+font-weight: bold;
+}
+
+QPushButton:hover {
+background: rgba(139, 147, 178, .75);
+}</string>
+   </property>
+   <property name="text">
+    <string>Enable BitLocker</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: #8B93B2;</string>
+   </property>
+   <property name="text">
+    <string>Encryption Password:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="encrypPASS">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>10</y>
+     <width>311</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
+   </property>
+  </widget>
+  <widget class="QFrame" name="frame_2">
+   <property name="geometry">
+    <rect>
+     <x>185</x>
+     <y>210</y>
+     <width>291</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border: 2px solid;
                     border-width: 3px;
                     background: transparent;
                     border-radius: 10px;
                     color: black;
                     padding: 3px;
                 </string>
-            </property>
-            <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-            </property>
-            <widget class="QLabel" name="label_3">
-                <property name="geometry">
-                    <rect>
-                        <x>0</x>
-                        <y>10</y>
-                        <width>111</width>
-                        <height>41</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <pointsize>10</pointsize>
-                    </font>
-                </property>
-                <property name="styleSheet">
-                    <string notr="true">color: #8B93B2;border: none;</string>
-                </property>
-                <property name="text">
-                    <string>Encryption Status:</string>
-                </property>
-            </widget>
-            <widget class="QLabel" name="label_4">
-                <property name="geometry">
-                    <rect>
-                        <x>120</x>
-                        <y>10</y>
-                        <width>161</width>
-                        <height>41</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <pointsize>15</pointsize>
-                    </font>
-                </property>
-                <property name="styleSheet">
-                    <string notr="true">color: #8B93B2;</string>
-                </property>
-                <property name="text">
-                    <string/>
-                </property>
-            </widget>
-        </widget>
-        <widget class="QPushButton" name="cancelbutton">
-            <property name="geometry">
-                <rect>
-                    <x>320</x>
-                    <y>280</y>
-                    <width>151</width>
-                    <height>31</height>
-                </rect>
-            </property>
-            <property name="font">
-                <font>
-                    <pointsize>15</pointsize>
-                </font>
-            </property>
-            <property name="styleSheet">
-                <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
-            </property>
-            <property name="text">
-                <string>Cancel</string>
-            </property>
-        </widget>
-        <widget class="QLineEdit" name="encrypPASS_2">
-            <property name="geometry">
-                <rect>
-                    <x>150</x>
-                    <y>40</y>
-                    <width>311</width>
-                    <height>20</height>
-                </rect>
-            </property>
-            <property name="styleSheet">
-                <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
-            </property>
-        </widget>
-        <widget class="QLabel" name="label_5">
-            <property name="geometry">
-                <rect>
-                    <x>10</x>
-                    <y>40</y>
-                    <width>141</width>
-                    <height>21</height>
-                </rect>
-            </property>
-            <property name="styleSheet">
-                <string notr="true">color: #8B93B2;</string>
-            </property>
-            <property name="text">
-                <string>Verify Encryption Password:</string>
-            </property>
-        </widget>
-    </widget>
-    <tabstops>
-        <tabstop>encrypPASS</tabstop>
-        <tabstop>encrypPASS_2</tabstop>
-        <tabstop>radioButton</tabstop>
-        <tabstop>radioButton_2</tabstop>
-        <tabstop>radioButton_3</tabstop>
-        <tabstop>radioButton_4</tabstop>
-        <tabstop>radioButton_5</tabstop>
-        <tabstop>radioButton_6</tabstop>
-        <tabstop>radioButton_7</tabstop>
-        <tabstop>enblBIT</tabstop>
-        <tabstop>cancelbutton</tabstop>
-    </tabstops>
-    <resources/>
-    <connections/>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #8B93B2;border: none;</string>
+    </property>
+    <property name="text">
+     <string>Encryption Status:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>10</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #8B93B2;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="cancelbutton">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>280</y>
+     <width>151</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color:#414E6E;
+color: #CCD2E6;
+font-weight: bold;
+}
+
+QPushButton:hover {
+background: rgba(139, 147, 178, .75);
+}</string>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="encrypPASS_2">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>40</y>
+     <width>311</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: #8B93B2;</string>
+   </property>
+   <property name="text">
+    <string>Verify Encryption Password:</string>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>encrypPASS</tabstop>
+  <tabstop>encrypPASS_2</tabstop>
+  <tabstop>radioButton</tabstop>
+  <tabstop>radioButton_2</tabstop>
+  <tabstop>radioButton_3</tabstop>
+  <tabstop>radioButton_4</tabstop>
+  <tabstop>radioButton_5</tabstop>
+  <tabstop>radioButton_6</tabstop>
+  <tabstop>radioButton_7</tabstop>
+  <tabstop>enblBIT</tabstop>
+  <tabstop>cancelbutton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
 </ui>

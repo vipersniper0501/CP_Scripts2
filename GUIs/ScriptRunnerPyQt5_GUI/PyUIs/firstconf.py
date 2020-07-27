@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'firstConf.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.2
+# Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -15,21 +15,41 @@ class Ui_firstConf(object):
         firstConf.setObjectName("firstConf")
         firstConf.resize(723, 448)
         firstConf.setStyleSheet("background-color: #212434\n"
-                                "")
+"            ")
         self.quit_buttonConf = QtWidgets.QPushButton(firstConf)
         self.quit_buttonConf.setGeometry(QtCore.QRect(610, 390, 91, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
         self.quit_buttonConf.setFont(font)
-        self.quit_buttonConf.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.quit_buttonConf.setStyleSheet("QPushButton {\n"
+"background-color:#414E6E;\n"
+"color: #CCD2E6;\n"
+"font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"background: rgba(139, 147, 178, .75);\n"
+"}")
         self.quit_buttonConf.setText("")
         self.quit_buttonConf.setObjectName("quit_buttonConf")
         self.confirmbtn = QtWidgets.QPushButton(firstConf)
         self.confirmbtn.setGeometry(QtCore.QRect(510, 390, 91, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
         self.confirmbtn.setFont(font)
-        self.confirmbtn.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.confirmbtn.setStyleSheet("QPushButton {\n"
+"background-color:#414E6E;\n"
+"color: #CCD2E6;\n"
+"font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"background: rgba(139, 147, 178, .75);\n"
+"}")
         self.confirmbtn.setDefault(True)
         self.confirmbtn.setObjectName("confirmbtn")
         self.fconflbl = QtWidgets.QLabel(firstConf)
@@ -52,10 +72,11 @@ class Ui_firstConf(object):
         self.frame.setGeometry(QtCore.QRect(50, 120, 191, 41))
         self.frame.setAutoFillBackground(False)
         self.frame.setStyleSheet("border: 2px solid;\n"
-                                 "border-width: 3px;\n"
-                                 "background: transparent;\n"
-                                 "border-radius: 10px; \n"
-                                 "color: black;")
+"                    border-width: 3px;\n"
+"                    background: transparent;\n"
+"                    border-radius: 10px;\n"
+"                    color: black;\n"
+"                ")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -86,10 +107,11 @@ class Ui_firstConf(object):
         self.ftpfrm = QtWidgets.QFrame(firstConf)
         self.ftpfrm.setGeometry(QtCore.QRect(50, 180, 211, 101))
         self.ftpfrm.setStyleSheet("border: 2px solid;\n"
-                                  "border-width: 3px;\n"
-                                  "background: transparent;\n"
-                                  "border-radius: 10px; \n"
-                                  "color: black;")
+"                    border-width: 3px;\n"
+"                    background: transparent;\n"
+"                    border-radius: 10px;\n"
+"                    color: black;\n"
+"                ")
         self.ftpfrm.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.ftpfrm.setFrameShadow(QtWidgets.QFrame.Raised)
         self.ftpfrm.setObjectName("ftpfrm")
@@ -188,10 +210,11 @@ class Ui_firstConf(object):
         self.frame_2 = QtWidgets.QFrame(firstConf)
         self.frame_2.setGeometry(QtCore.QRect(50, 290, 291, 131))
         self.frame_2.setStyleSheet("border: 2px solid;\n"
-                                   "border-width: 3px;\n"
-                                   "background: transparent;\n"
-                                   "border-radius: 10px; \n"
-                                   "color: black;")
+"                    border-width: 3px;\n"
+"                    background: transparent;\n"
+"                    border-radius: 10px;\n"
+"                    color: black;\n"
+"                ")
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_2.setObjectName("frame_2")
@@ -318,10 +341,11 @@ class Ui_firstConf(object):
         self.frame_3 = QtWidgets.QFrame(firstConf)
         self.frame_3.setGeometry(QtCore.QRect(410, 120, 191, 41))
         self.frame_3.setStyleSheet("border: 2px solid;\n"
-                                   "border-width: 3px;\n"
-                                   "background: transparent;\n"
-                                   "border-radius: 10px; \n"
-                                   "color: black;")
+"                    border-width: 3px;\n"
+"                    background: transparent;\n"
+"                    border-radius: 10px;\n"
+"                    color: black;\n"
+"                ")
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
@@ -352,10 +376,11 @@ class Ui_firstConf(object):
         self.frame_4 = QtWidgets.QFrame(firstConf)
         self.frame_4.setGeometry(QtCore.QRect(410, 170, 191, 41))
         self.frame_4.setStyleSheet("border: 2px solid;\n"
-                                   "border-width: 3px;\n"
-                                   "background: transparent;\n"
-                                   "border-radius: 10px; \n"
-                                   "color: black;")
+"                    border-width: 3px;\n"
+"                    background: transparent;\n"
+"                    border-radius: 10px;\n"
+"                    color: black;\n"
+"                ")
         self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_4.setObjectName("frame_4")
@@ -386,10 +411,11 @@ class Ui_firstConf(object):
         self.frame_5 = QtWidgets.QFrame(firstConf)
         self.frame_5.setGeometry(QtCore.QRect(410, 230, 191, 41))
         self.frame_5.setStyleSheet("border: 2px solid;\n"
-                                   "border-width: 3px;\n"
-                                   "background: transparent;\n"
-                                   "border-radius: 10px; \n"
-                                   "color: black;")
+"                    border-width: 3px;\n"
+"                    background: transparent;\n"
+"                    border-radius: 10px;\n"
+"                    color: black;\n"
+"                ")
         self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_5.setObjectName("frame_5")
@@ -420,10 +446,11 @@ class Ui_firstConf(object):
         self.frame_10 = QtWidgets.QFrame(firstConf)
         self.frame_10.setGeometry(QtCore.QRect(410, 290, 251, 41))
         self.frame_10.setStyleSheet("border: 2px solid;\n"
-                                    "border-width: 3px;\n"
-                                    "background: transparent;\n"
-                                    "border-radius: 10px; \n"
-                                    "color: black;")
+"                    border-width: 3px;\n"
+"                    background: transparent;\n"
+"                    border-radius: 10px;\n"
+"                    color: black;\n"
+"                ")
         self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_10.setObjectName("frame_10")
@@ -501,7 +528,6 @@ class Ui_firstConf(object):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     firstConf = QtWidgets.QDialog()
     ui = Ui_firstConf()

@@ -242,10 +242,12 @@ class fconfStart(QDialog, Ui_firstConf):
                 self.rdp = 'no'
 
         def quitButton():
-            print('Closing program')
+
             if variableCheck.is_file():
+                print('Cancelling configurations. Nothing has changed.')
                 self.close()
             else:
+                print('Closing program')
                 sys.exit(0)
 
         def confirmBTTN():
@@ -340,7 +342,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         self.setFixedSize(860, 675)
         self.setupUi(self)
         self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
-
         config_name2 = 'config.ini'
         if getattr(sys, 'frozen', False):
             application_Path2 = os.path.dirname(sys.executable)
@@ -504,6 +505,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         # Universal Buttons
         self.Updates_buttonUNI.clicked.connect(lambda: self.threader(scripfunc.updateos()))
+        # self.Updates_buttonUNI.setStyleSheet('Updates_buttonUNI:hover{\nbackground-color: '
+        #                                      '#8B93B2;\n}')
         self.rmvprosoftbuttonUNI.clicked.connect(lambda: self.threader(indev()))  #
         self.srchmedbuttonUNI.clicked.connect(lambda: self.threader(scripfunc.srchmedia))
         self.chkhashfile_buttonUNI.clicked.connect(lambda: self.threader(scripfunc.hashCheck()))

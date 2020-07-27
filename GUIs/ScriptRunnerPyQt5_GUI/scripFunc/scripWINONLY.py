@@ -765,9 +765,6 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
         pass
 
     def chngpasswdofall(self):
-
-        # TODO: This command as of July 7th, 2020 is broken. More on the issue can be found here: https://github.com/vipersniper0501/CP_Scripts2/issues/48
-
         class changepasswordofall(QDialog, Ui_chngpass):
             def __init__(self, parent = None):
                 super(changepasswordofall, self).__init__(parent)

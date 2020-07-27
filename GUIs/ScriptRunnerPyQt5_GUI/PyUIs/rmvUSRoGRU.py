@@ -16,7 +16,7 @@ class Ui_rmvusrogru(object):
         rmvusrogru.resize(302, 334)
         rmvusrogru.setWindowTitle("")
         rmvusrogru.setStyleSheet("background-color: #212434\n"
-                                 "            ")
+"            ")
         self.Username_Input = QtWidgets.QLineEdit(rmvusrogru)
         self.Username_Input.setGeometry(QtCore.QRect(100, 250, 191, 21))
         self.Username_Input.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
@@ -33,11 +33,37 @@ class Ui_rmvusrogru(object):
         self.label.setObjectName("label")
         self.Cancel_button = QtWidgets.QPushButton(rmvusrogru)
         self.Cancel_button.setGeometry(QtCore.QRect(200, 290, 91, 31))
-        self.Cancel_button.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.Cancel_button.setFont(font)
+        self.Cancel_button.setStyleSheet("QPushButton {\n"
+"background-color:#414E6E;\n"
+"color: #CCD2E6;\n"
+"font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"background: rgba(139, 147, 178, .75);\n"
+"}")
         self.Cancel_button.setObjectName("Cancel_button")
         self.Confirm_button = QtWidgets.QPushButton(rmvusrogru)
         self.Confirm_button.setGeometry(QtCore.QRect(10, 290, 91, 31))
-        self.Confirm_button.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.Confirm_button.setFont(font)
+        self.Confirm_button.setStyleSheet("QPushButton {\n"
+"background-color:#414E6E;\n"
+"color: #CCD2E6;\n"
+"font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"background: rgba(139, 147, 178, .75);\n"
+"}")
         self.Confirm_button.setObjectName("Confirm_button")
         self.listOFnames = QtWidgets.QListWidget(rmvusrogru)
         self.listOFnames.setGeometry(QtCore.QRect(10, 40, 281, 191))
@@ -57,7 +83,6 @@ class Ui_rmvusrogru(object):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     rmvusrogru = QtWidgets.QDialog()
     ui = Ui_rmvusrogru()

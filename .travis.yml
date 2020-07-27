@@ -35,3 +35,10 @@ install:
 # command to run tests
 script:
   - ./builds/tests/compile_test.sh
+
+after_success:
+  - ./builds/tests/after_successCONVERT.sh
+
+env:
+  global:
+    secure: Q/HoEzl+LhwVVz0n63lRb0YC4Bfw0aSZJDGRtJOjcPsnOQgb5YPtgO0tz5f5IMXfybZY2A4QcTz/LjYLg1IGzF3sHxCz6UeYWnBHOAhHY2RZ7us8CuLiphccSOTsU/Qri+C38uVHLX/emNplHjgqC9imO4ydIjlGKxHB1+z4C8/baQ0o9NWJ4LI2bFVq18S/TFaunjmfQLtc2hKIdzeiumefE/aRnSo9kQxNw/2ElbDI4xcEOzF/va40jZjmEPpd29CNtQzMfZDhFKCBCPFbt/B5v5J4tmlEtjWcMiIq2RloR/q5NULQyasHo6LASL2ijeGluNlMAUbp+u5NfO/qsvDZNYd7tlrPepPXQdAmnKLu7nVFYKxukL/GWLx52ANSXPNnps40PPa+EDsbEgFvo07lNELV7t6gZOo2ZaoFGYCGiZHml0wSUfjCkQksRP3vYsUIE0lcbu9ucD1EEkA9Mwcp/xlI6JSFnTGrSEHP5Po+diue6IBYqx2PDNKGiUHe6X9UrNAGojbShi3VoGox2P2oy+dPEaMfWbo3YntPRpjwUzAK+tl7egZ3fAvt9V7+mGi+QqDqsLGTNQNcpp734z1BzopuEDnf4g++m3QCxnXrikIj/lqjLVhGwf2GkT0zYPTp3suwLMvx6r3Vo+hJY0NxAY72bRJC+bIPaiKyRQk=

@@ -15,7 +15,7 @@ class Ui_addUSR(object):
         addUSR.setObjectName("addUSR")
         addUSR.resize(345, 187)
         addUSR.setStyleSheet("background-color: #212434\n"
-                             "   ")
+"   ")
         self.label = QtWidgets.QLabel(addUSR)
         self.label.setGeometry(QtCore.QRect(10, 10, 131, 21))
         self.label.setStyleSheet("color: #8B93B2;")
@@ -49,24 +49,48 @@ class Ui_addUSR(object):
         self.Password2_input.setObjectName("Password2_input")
         self.admin_y = QtWidgets.QRadioButton(addUSR)
         self.admin_y.setGeometry(QtCore.QRect(150, 100, 41, 21))
-        self.admin_y.setStyleSheet(
-            "background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;\n"
-            "    ")
+        self.admin_y.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;\n"
+"    ")
         self.admin_y.setObjectName("admin_y")
         self.admin_n = QtWidgets.QRadioButton(addUSR)
         self.admin_n.setGeometry(QtCore.QRect(240, 100, 41, 21))
-        self.admin_n.setStyleSheet(
-            "background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;\n"
-            "    ")
+        self.admin_n.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;\n"
+"    ")
         self.admin_n.setChecked(True)
         self.admin_n.setObjectName("admin_n")
         self.Confirm_button = QtWidgets.QPushButton(addUSR)
         self.Confirm_button.setGeometry(QtCore.QRect(10, 142, 91, 31))
-        self.Confirm_button.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.Confirm_button.setFont(font)
+        self.Confirm_button.setStyleSheet("QPushButton {\n"
+"background-color:#414E6E;\n"
+"color: #CCD2E6;\n"
+"font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"background: rgba(139, 147, 178, .75);\n"
+"}")
         self.Confirm_button.setObjectName("Confirm_button")
         self.Cancel_button = QtWidgets.QPushButton(addUSR)
         self.Cancel_button.setGeometry(QtCore.QRect(240, 140, 91, 31))
-        self.Cancel_button.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.Cancel_button.setFont(font)
+        self.Cancel_button.setStyleSheet("QPushButton {\n"
+"background-color:#414E6E;\n"
+"color: #CCD2E6;\n"
+"font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"background: rgba(139, 147, 178, .75);\n"
+"}")
         self.Cancel_button.setObjectName("Cancel_button")
 
         self.retranslateUi(addUSR)

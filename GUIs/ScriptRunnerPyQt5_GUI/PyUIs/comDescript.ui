@@ -1,213 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <class>comDescript</class>
-    <widget class="QDialog" name="comDescript">
-        <property name="geometry">
-            <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>531</width>
-                <height>365</height>
-            </rect>
-        </property>
-        <property name="windowTitle">
-            <string>Hey! These are descriptions for each command!</string>
-        </property>
-        <property name="styleSheet">
-            <string notr="true">background-color: #414E6E; color: #CCD2E6</string>
-        </property>
-        <widget class="QDialogButtonBox" name="buttonBox">
-            <property name="geometry">
-                <rect>
-                    <x>470</x>
-                    <y>340</y>
-                    <width>51</width>
-                    <height>21</height>
-                </rect>
-            </property>
-            <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="standardButtons">
-                <set>QDialogButtonBox::Ok</set>
-            </property>
-        </widget>
-        <widget class="QTextBrowser" name="textBrowser">
-            <property name="geometry">
-                <rect>
-                    <x>0</x>
-                    <y>0</y>
-                    <width>531</width>
-                    <height>331</height>
-                </rect>
-            </property>
-            <property name="font">
-                <font>
-                    <pointsize>15</pointsize>
-                </font>
-            </property>
-            <property name="styleSheet">
-                <string notr="true">border: none;</string>
-            </property>
-            <property name="html">
-                <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-                    &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style
-                    type=&quot;text/css&quot;&gt;
-                    p, li { white-space: pre-wrap; }
-                    &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:15pt;
-                    font-weight:400; font-style:normal;&quot;&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:20pt;&quot;&gt;This is a list of descriptions for each command:&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px;
-                    margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2';&quot;&gt;&lt;br
-                    /&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:18pt;&quot;&gt;Universal Commands&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt; font-weight:600;&quot;&gt;Updates:&lt;/span&gt;&lt;span style=&quot; font-family:'MS
-                    Shell Dlg 2'; font-size:12pt;&quot;&gt; This command will update your Operating System (Only the
-                    Operating System if you are using Windows 10 or Mac OS) When using on windows 10, it will continue
-                    to keep cheking for updates until there are none left compared to Settings &amp;gt; Updates which
-                    will only check once and update. &lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt; text-decoration: underline;&quot;&gt;NOTE:&lt;/span&gt;&lt;span style=&quot;
-                    font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt; For other updates to third party apps, I
-                    recommend using software such as PatchMyPc which will update up 250+ apps at once. &lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;______________________________________________&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt; font-weight:600;&quot;&gt;Search For Prohibited Media:&lt;/span&gt;&lt;span style=&quot;
-                    font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt; This command will search through the entire
-                    system looking for the following file types: .jpg, .mp4, .flv, .avi, .wmv, .mov, .png, .tif, .gif,
-                    .mp3, .wma, .aif, .jar This command will output it's results into a text file on the Desktop.&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;______________________________________________&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt; font-weight:600;&quot;&gt;Remove Prohibited Software:&lt;/span&gt;&lt;span style=&quot;
-                    font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt; This command will search through your system
-                    looking for known games and software that is known to be against the rules of Cyber Patriots. E.g.
-                    Wireshark and BitTorrent&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt;&quot;&gt;_________________________________________________________&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt; font-weight:600;&quot;&gt;Check the Hash of a File:&lt;/span&gt;&lt;span style=&quot;
-                    font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt; This command will check the hash of a file
-                    of your choosing. (helpful for Forensics Questions)&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;______________________________________________&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt; font-weight:600;&quot;&gt;Services Configurations:&lt;/span&gt;&lt;span style=&quot;
-                    font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt; This command will apply premade
-                    configurations to services like ssh, ftp, and samba.&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;______________________________________________&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px;
-                    margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2';&quot;&gt;&lt;br
-                    /&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:18pt;&quot;&gt;Windows Specific Commands&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt; font-weight:600;&quot;&gt;Windows Firewall Settings:&lt;/span&gt;&lt;span style=&quot;
-                    font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt; This command will open or close certain
-                    ports based upon the configurations you made when you first opened the app. Along with those changes
-                    it will also close a couple of other ports that are known vulnerabilities.&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;______________________________________________&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt; font-weight:600;&quot;&gt;Windows Basic Configurations:&lt;/span&gt;&lt;span style=&quot;
-                    font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt; This command will install prebuilt Local
-                    Policies (E.g. Lockout policies, audit policies, and password policies) and Group Policies and
-                    making sure that IE is also installed, because that will always be required. I have missed too many
-                    points due to forgetting about Internet Explorer &lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;______________________________________________&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px;
-                    margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2';&quot;&gt;&lt;br
-                    /&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:16pt;&quot;&gt;Linux Specific Commands&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt; font-weight:600;&quot;&gt;Linux Firewall Settings:&lt;/span&gt;&lt;span style=&quot;
-                    font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt; This command will open or close certain
-                    ports based upon the configurations you made when you first opened the app. Along with those changes
-                    it will also close a couple of other ports that are known vulnerabilities.&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;______________________________________________&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt; font-weight:600;&quot;&gt;Audit System:&lt;/span&gt;&lt;span style=&quot;
-                    font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt; This command will install an auditing
-                    program called Lynis that checks for vulnerabilities that you will want to change. It will ouput the
-                    results into a text file on the Desktop&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;______________________________________________&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt; font-weight:600;&quot;&gt;Malware Removal:&lt;/span&gt;&lt;span style=&quot;
-                    font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt; This command will use the program called
-                    ClamAV/ClamTK to search for Malware on this machine.&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;______________________________________________&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;
-                    -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';
-                    font-size:12pt; font-weight:600;&quot;&gt;Linux Basic Configurations: &lt;/span&gt;&lt;span style=&quot;
-                    font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt;This command will install premade Local
-                    Policies (E.g. Lockout Policies and Password Policies)&lt;/span&gt;&lt;/p&gt;
-                    &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px;
-                    margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt;&lt;br
-                    /&gt;&lt;/p&gt;
-                    &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px;
-                    margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:16pt;&quot;&gt;&lt;br
-                    /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
-                </string>
-            </property>
-        </widget>
-    </widget>
-    <resources/>
-    <connections>
-        <connection>
-            <sender>buttonBox</sender>
-            <signal>accepted()</signal>
-            <receiver>comDescript</receiver>
-            <slot>accept()</slot>
-            <hints>
-                <hint type="sourcelabel">
-                    <x>248</x>
-                    <y>254</y>
-                </hint>
-                <hint type="destinationlabel">
-                    <x>157</x>
-                    <y>274</y>
-                </hint>
-            </hints>
-        </connection>
-        <connection>
-            <sender>buttonBox</sender>
-            <signal>rejected()</signal>
-            <receiver>comDescript</receiver>
-            <slot>reject()</slot>
-            <hints>
-                <hint type="sourcelabel">
-                    <x>316</x>
-                    <y>260</y>
-                </hint>
-                <hint type="destinationlabel">
-                    <x>286</x>
-                    <y>274</y>
-                </hint>
-            </hints>
-        </connection>
-    </connections>
+ <class>comDescript</class>
+ <widget class="QDialog" name="comDescript">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>531</width>
+    <height>365</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>These Are Descriptions For Each Command</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #212434;color: #CCD2E6;   </string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>340</y>
+     <width>51</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color:#414E6E;
+color: #CCD2E6;
+font-weight: bold;
+}
+
+QPushButton:hover {
+background: rgba(139, 147, 178, .75);
+}</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>531</width>
+     <height>331</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border: none;</string>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:15pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;This is a list of descriptions for each command:&lt;/span&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Universal Commands&lt;/span&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Updates:&lt;/span&gt; &lt;span style=&quot; font-size:12pt;&quot;&gt;This command will update your Operating System (Will update only the Operating System if you are using Windows 10 or Mac OS. If on linux it will update the kernel and all installed apps). When using on windows 10, it will continue to keep cheking for updates until there are none left compared to Settings &amp;gt; Updates which will only check once and update.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; text-decoration: underline;&quot;&gt;NOTE:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; For other updates to third party apps, I recommend using software such as PatchMyPc which will update up 250+ apps at once.   &lt;/span&gt;                  &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;______________________________________________                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Search For Prohibited Media:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; This command will search through the entire system looking for the following file types: .jpg, .mp4, .flv, .avi, .wmv, .mov, .png, .tif, .gif, .mp3, .wma, .aif, .jar This command will output it's results into a text file on the Desktop.&lt;/span&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;______________________________________________                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Remove Prohibited Software:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; This command will search through your system looking for known games and software that is known to be against the rules of Cyber Patriots. E.g. Wireshark and BitTorrent&lt;/span&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;_________________________________________________________&lt;/span&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Check the Hash of a File:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; This command will check the hash of a file of your choosing. (helpful for Forensics Questions)&lt;/span&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;______________________________________________                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Services Configurations:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; This command will apply premade configurations to services like ssh, ftp, and samba.&lt;/span&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;______________________________________________                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Windows Specific Commands&lt;/span&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Windows Firewall Settings:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; This command will open or close certain ports based upon the configurations you made when you first opened the app. Along with those changes it will also close a couple of other ports that are known vulnerabilities.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;______________________________________________                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Windows Basic Configurations:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; This command will install prebuilt Local Policies (E.g. Lockout policies, audit policies, and password policies) and Group Policies and making sure that IE is also installed, because that will always be required. I have missed too many points due to forgetting about Internet Explorer. &lt;/span&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;______________________________________________                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Linux Specific Commands&lt;/span&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Linux Firewall Settings:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; This command will open or close certain ports based upon the configurations you made when you first opened the app. Along with those changes it will also close a couple of other ports that are known vulnerabilities.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;______________________________________________                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Audit System:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; This command will install an auditing program called Lynis that checks for vulnerabilities that you will want to change. It will ouput the results into a text file on the Desktop.&lt;/span&gt;                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;______________________________________________                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Malware Removal:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; This command will use the program called ClamAV/ClamTK to search for Malware on this machine.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;______________________________________________                    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Linux Basic Configurations: &lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;This command will install premade Local Policies (E.g. Lockout Policies and Password Policies)&lt;/span&gt;                    &lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>comDescript</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>comDescript</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
