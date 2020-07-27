@@ -14,8 +14,7 @@ commit_compiled_executables() {
 }
 
 upload_files() {
-  git remote add GUI-Updates https://${GH_TOKEN}@github.com/vipersniper0501/CP_Scripts2.git >
-  /dev/null 2>&1
+  git remote add GUI-Updates https://${GH_TOKEN}@github.com/vipersniper0501/CP_Scripts2.git
   git push GUI-Updates
 }
 
