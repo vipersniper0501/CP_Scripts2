@@ -33,14 +33,14 @@ commit_compiled_executables() {
         git add "./builds/AppleCIDR_Linux_x64"
         git status
     elif [ $TRAVIS_OS_NAME = 'osx' ]; then
-        mv "./dist/AppleCIDR(MacOS_x64)" "./builds/AppleCIDR(MacOS_x64)"
-        echo "Moved AppleCIDR(MacOS_x64) from ./dist to ./builds"
+        mv "./dist/AppleCIDR_MacOS_x64" "./builds/AppleCIDR_MacOS_x64"
+        echo "Moved AppleCIDR_MacOS_x64 from ./dist to ./builds"
         echo "./dist directory AFTER"
         ls ./dist
         echo "./builds directory AFTER"
         ls ./builds
-        chmod +x "./builds/AppleCIDR(MacOS_x64)"
-        git add "./builds/AppleCIDR(MacOS_x64)"
+        chmod +x "./builds/AppleCIDR_MacOS_x64"
+        git add "./builds/AppleCIDR_MacOS_x64"
         git status
     fi
     git commit --message "[skip travis-ci] Travis build: $TRAVIS_BUILD_NUMBER"
