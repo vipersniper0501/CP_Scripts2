@@ -29,6 +29,7 @@ commit_compiled_executables() {
         ls ./dist
         echo "./builds directory AFTER"
         ls ./builds
+        chmod +x "./builds/AppleCIDR(Linux_x64)"
         git add "./builds/AppleCIDR(Linux_x64)"
         echo "Added AppleCIDR(Linux_x64) to commit"
     elif [ $TRAVIS_OS_NAME = 'osx' ]; then
@@ -38,6 +39,7 @@ commit_compiled_executables() {
         ls ./dist
         echo "./builds directory AFTER"
         ls ./builds
+        chmod +x "./builds/AppleCIDR(MacOS_x64)"
         git add "./builds/AppleCIDR(MacOS_x64)"
         echo "Added AppleCIDR(MacOS_x64) to commit"
     fi
