@@ -21,7 +21,7 @@ commit_compiled_executables() {
     ls ./builds
     git add ./builds/AppleCIDR.exe
     echo "Added AppleCIDR.exe to commit"
-    git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
+    git commit --message "[skip travis-ci] Travis build: $TRAVIS_BUILD_NUMBER"
     echo "git committed created. Ready to push"
   fi
 }
