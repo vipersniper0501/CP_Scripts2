@@ -28,6 +28,10 @@ install:
 - pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
 script:
 - "./builds/tests/compile_test.sh"
+after_script:
+  - git config credential.helper "store --file=.git/credentials"
+  - echo "https://${GH_TOKEN}:@github.com" > .get/credentials
+  - node ./node_modules/grunt-cli/bin/grunt release
 after_success:
 - "./builds/tests/after_successCONVERT.sh"
 env:
