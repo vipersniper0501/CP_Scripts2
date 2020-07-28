@@ -14,36 +14,36 @@ commit_compiled_executables() {
     echo "./builds directory BEFORE"
     ls ./builds
     if [ $TRAVIS_OS_NAME = 'windows' ]; then
-        mv "./dist/AppleCIDR_Windows_x64.exe" "./builds/AppleCIDR_Windows_x64.exe"
+        mv "./dist/AppleCIDR_Windows_x64.exe" "./builds/PyQt5_Executables/AppleCIDR_Windows_x64.exe"
         echo "Moved AppleCIDR_Windows_x64.exe from ./dist to ./builds"
         echo "./dist directory AFTER"
         ls ./dist
         echo "./builds directory AFTER"
-        ls ./builds
+        ls ./builds/PyQt5_Executables
         git pull
         git add "./builds"
         git status
     fi
     if [ $TRAVIS_OS_NAME = 'linux' ]; then
-        mv "./dist/AppleCIDR_Linux_x64" "./builds/AppleCIDR_Linux_x64"
+        mv "./dist/AppleCIDR_Linux_x64" "./builds/PyQt5_Executables/AppleCIDR_Linux_x64"
         echo "Moved AppleCIDR_Linux_x64 from ./dist to ./builds"
         echo "./dist directory AFTER"
         ls ./dist
         echo "./builds directory AFTER"
-        ls ./builds
-        chmod +x "./builds/AppleCIDR_Linux_x64"
+        ls ./builds/PyQt5_Executables
+        chmod +x "./builds/PyQt5_Executables/AppleCIDR_Linux_x64"
         git pull
         git add "./builds"
         git status
     fi
     if [ $TRAVIS_OS_NAME = 'osx' ]; then
-        mv "./dist/AppleCIDR_MacOS_x64" "./builds/AppleCIDR_MacOS_x64"
-        echo "Moved AppleCIDR_MacOS_x64 from ./dist to ./builds"
+        mv "./dist/AppleCIDR_MacOS_x64" "./builds/PyQt5_Executables/AppleCIDR_MacOS_x64"
+        echo "Moved AppleCIDR_MacOS_x64 from ./dist to ./builds/PyQt5_Executables/"
         echo "./dist directory AFTER"
         ls ./dist
         echo "./builds directory AFTER"
-        ls ./builds
-        chmod +x "./builds/AppleCIDR_MacOS_x64"
+        ls ./builds/PyQt5_Executables
+        chmod +x "./builds/PyQt5_Executables/AppleCIDR_MacOS_x64"
         git pull
         git add "./builds"
         git status
