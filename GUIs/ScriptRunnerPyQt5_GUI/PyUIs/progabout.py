@@ -13,10 +13,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_About(object):
     def setupUi(self, About):
         About.setObjectName("About")
-        About.resize(330, 182)
+        About.resize(395, 282)
         About.setStyleSheet("background-color: #212434;color: #CCD2E6;   ")
         self.buttonBox = QtWidgets.QDialogButtonBox(About)
-        self.buttonBox.setGeometry(QtCore.QRect(270, 150, 51, 21))
+        self.buttonBox.setGeometry(QtCore.QRect(330, 250, 51, 21))
         self.buttonBox.setStyleSheet("QPushButton {\n"
 "background-color:#414E6E;\n"
 "color: #CCD2E6;\n"
@@ -30,7 +30,7 @@ class Ui_About(object):
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.textBrowser = QtWidgets.QTextBrowser(About)
-        self.textBrowser.setGeometry(QtCore.QRect(0, 0, 331, 141))
+        self.textBrowser.setGeometry(QtCore.QRect(0, 0, 381, 231))
         font = QtGui.QFont()
         font.setPointSize(15)
         self.textBrowser.setFont(font)

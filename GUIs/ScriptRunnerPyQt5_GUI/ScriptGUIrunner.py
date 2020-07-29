@@ -447,7 +447,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                 def __init__(self, parent = None):
                     super(showAboutProg, self).__init__(parent)
                     self.setupUi(self)
-                    self.setFixedSize(330, 182)
+                    self.setFixedSize(330, 250)
                     self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
 
             def callaboutprog():

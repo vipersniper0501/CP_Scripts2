@@ -313,28 +313,28 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
             if https == 'yes':
                 command = "netsh advfirewall firewall add rule name='https' dir=in action=allow protocol=TCP localport=443"
                 sub.Popen(["powershell", "& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='https' dire=out action=allow protocol=TCP localport=443"
+                command = "netsh advfirewall firewall add rule name='https' dir=out action=allow protocol=TCP localport=443"
                 sub.Popen(["powershell", "& {" + command + "}"])
             elif https == 'no':
                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=443"
                 sub.Popen(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='https' dir=in action=block protocol=TCP localport=443"
                 sub.Popen(["powershell", "& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='https' dire=out action=block protocol=TCP localport=443"
+                command = "netsh advfirewall firewall add rule name='https' dir=out action=block protocol=TCP localport=443"
                 sub.Popen(["powershell", "& {" + command + "}"])
             # Samba
             smb = config.get('Services', 'smb')
             if smb == 'yes':
                 command = "netsh advfirewall firewall add rule name='SAMBA' dir=in action=allow protocol=TCP localport=139"
                 sub.Popen(["powershell", "& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='SAMBA' dire=out action=allow protocol=TCP localport=139"
+                command = "netsh advfirewall firewall add rule name='SAMBA' dir=out action=allow protocol=TCP localport=139"
                 sub.Popen(["powershell", "& {" + command + "}"])
             elif smb == 'no':
                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=139"
                 sub.Popen(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='SAMBA' dir=in action=block protocol=TCP localport=139"
                 sub.Popen(["powershell", "& {" + command + "}"])
-                command = "netsh advfirewall firewall add rule name='SAMBA' dire=out action=block protocol=TCP localport=139"
+                command = "netsh advfirewall firewall add rule name='SAMBA' dir=out action=block protocol=TCP localport=139"
                 sub.Popen(["powershell", "& {" + command + "}"])
             # SQL
             sql = config.get('Services', 'sql')
@@ -777,6 +777,7 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                         ERROR_NO_FILEPATH.setText(
                             'ERROR: No File Path Found')
                         ERROR_NO_FILEPATH.setStandardButtons(QMessageBox.Close)
+                        ERROR_NO_FILEPATH.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         ERROR_NO_FILEPATH.exec_()
                     elif not Path(self.fpath.text()).is_file():
                         print('No file path entered')
@@ -786,6 +787,7 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                         ERROR_FILE_NOT_FOUND.setText(
                             'ERROR: File Not Found Or Does Not Exist')
                         ERROR_FILE_NOT_FOUND.setStandardButtons(QMessageBox.Close)
+                        ERROR_FILE_NOT_FOUND.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         ERROR_FILE_NOT_FOUND.exec_()
 
                 self.genhash.clicked.connect(lambda: hashchk(self.hash_number))
