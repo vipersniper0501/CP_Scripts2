@@ -1,6 +1,7 @@
 import getpass
 import os
 import subprocess as sub
+from pathlib import Path
 from distutils.dir_util import copy_tree
 from shlex import quote as shlex_quote
 from sys import platform
@@ -476,7 +477,8 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                 else:
                     try:
                         raise ImportError(
-                            'Web setting is set to yes but neither Apache or Nginx were selected. No web settings were configured.')
+                            'Web setting is set to yes but neither Apache nor Nginx were '
+                            'selected. No web settings were configured.')
                     except ImportError:
                         pass
         elif platform == 'win32':
@@ -518,13 +520,14 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
         if platform == 'win32':
             if rdp == 'yes':
                 try:
-                    shutil.copy('./configurations/winCONF/win10StigsRDPy/win10secRDPallowed.inf',
+                    shutil.copy('../configurations/winCONF/win10StigsRDPy/win10secRDPallowed.inf',
                                 'C:/win10secRDPallowed.inf')
-                    copy_tree('./configurations/winCONF/win10StigsRDPy/Group_Policy_Files/Machine',
+                    copy_tree('../configurations/winCONF/win10StigsRDPy/Group_Policy_Files/Machine',
                               r'c:\Windows\System32\GroupPolicy\Machine')
-                    copy_tree('./configurations/winCONF/win10StigsRDPy/Group_Policy_Files/User',
+                    copy_tree('../configurations/winCONF/win10StigsRDPy/Group_Policy_Files/User',
                               r'c:\Windows\System32\GroupPolicy\User')
-                    shutil.copy('./configurations/winCONF/win10StigsRDPy/Group_Policy_Files/gpt.ini',
+                    shutil.copy('../configurations/winCONF/win10StigsRDPy/Group_Policy_Files/gpt'
+                                '.ini',
                                 r'c:\Windows\System32\GroupPolicy\gpt.ini')
                     print('Successfully copied Group Policy Settings')
                 except IOError as e:
@@ -532,13 +535,14 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                 path = 'C:/win10secRDPallowed.inf'
             elif rdp == 'no':
                 try:
-                    shutil.copy('./configurations/winCONF/win10StigsRDPn/Windows10Template11_17.inf',
-                                'C:/Windows10Template11_17.inf')
-                    copy_tree('./configurations/winCONF/win10StigsRDPn/gpoRDPn/Machine',
+                    shutil.copy('../configurations/winCONF/win10StigsRDPn/Windows10Template11_17'
+                                '.inf',
+                                r'c:\Windows10Template11_17.inf')
+                    copy_tree('../configurations/winCONF/win10StigsRDPn/gpoRDPn/Machine',
                               r'c:\Windows\System32\GroupPolicy\Machine')
-                    copy_tree('./configurations/winCONF/win10StigsRDPn/gpoRDPn/User',
+                    copy_tree('../configurations/winCONF/win10StigsRDPn/gpoRDPn/User',
                               r'c:\Windows\System32\GroupPolicy\User')
-                    shutil.copy('./configurations/winCONF/win10StigsRDPn/gpoRDPn/gpt.ini',
+                    shutil.copy('../configurations/winCONF/win10StigsRDPn/gpoRDPn/gpt.ini',
                                 r'c:\Windows\System32\GroupPolicy\gpt.ini')
                     print('Successfully copied Group Policy Settings')
                 except IOError as e:
@@ -546,18 +550,24 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                 path = 'C:/Windows10Template11_17.inf'
             else:
                 raise ValueError('rdp should be either yes or no!')
-            command = r"secedit /configure /db C:\\windows\\security\\local.sdb /cfg {0}".format(path)
-            sub.call(command.split())
+            command = r"secedit /configure /db C:\\windows\\security\\local.sdb /cfg {0}".format(
+                path)
+            sub.Popen(command.split())
             command = 'gpupdate'
-            sub.call(command)
+            sub.Popen(command)
             command = 'Enable-WindowsOptionalFeature –FeatureName "Internet-Explorer-Optional-amd64" -All –Online ' \
                       '-NoRestart '
-            sub.call(["powershell", "& {" + command + "}"])
+            sub.Popen(["powershell", "& {" + command + "}"])
+            command = 'Enable-WindowsOptionalFeature –FeatureName ' \
+                      '"Internet-Explorer-Optional-x86" -All –Online ' \
+                      '-NoRestart '
+            sub.Popen(["powershell", "& {" + command + "}"])
             disableCOM = ["SimpleTCP",
                           "TFTP",
                           "TelnetClient",
                           "IIS-FTPServer",
                           "IIS-WebDAV",
+                          "IIS-ManagementConsole",
                           "IIS-WebServer",
                           "WCF-Services45",
                           "WCF-TCP-PortSharing45",
@@ -568,12 +578,12 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                           "MicrosoftWindowsPowershellV2Root"]
             for i in range(0, len(disableCOM)):
                 command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[i] + ' -NoRestart'
-                sub.call(["powershell", "& {" + command + "}"])
+                sub.Popen(["powershell", "& {" + command + "}"])
             windowsCapabilitesDisable = ["RIP.Listener~~~~0.0.1.0",
                                          "SNMP.Client~~~~0.0.1.0"]
             for i in range(0, len(windowsCapabilitesDisable)):
                 command = "Remove-WindowsCapability -Online -Name " + windowsCapabilitesDisable[i]
-                sub.call(["powershell", "& {" + command + "}"])
+                sub.Popen(["powershell", "& {" + command + "}"])
 
             '''
             def completed():
@@ -585,7 +595,6 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                 HEY.exec_()
             completed()
             '''
-
         elif platform == 'linux':
             if ops == 'Ubuntu' or ops == 'Debian':
                 command = 'sudo apt install fail2ban'
@@ -689,7 +698,7 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
     def hashCheck(self):
         class hashRUN(QDialog, Ui_hashGEN):
 
-            hashnumber = 0
+            hash_number = 0
 
             def __init__(self, parent=None):
                 super(hashRUN, self).__init__(parent)
@@ -705,24 +714,23 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
 
                 def hashMD5(selected):
                     if selected:
-                        print('test')
-                        self.hashnumber = 0
+                        self.hash_number = 0
 
                 def hashsha1(selected):
                     if selected:
-                        self.hashnumber = 1
+                        self.hash_number = 1
 
                 def hashsha256(selected):
                     if selected:
-                        self.hashnumber = 2
+                        self.hash_number = 2
 
                 def hashsha384(selected):
                     if selected:
-                        self.hashnumber = 3
+                        self.hash_number = 3
 
                 def hashsha512(selected):
                     if selected:
-                        self.hashnumber = 4
+                        self.hash_number = 4
 
                 self.MD5radio.toggled.connect(hashMD5)
                 self.SHA1radio.toggled.connect(hashsha1)
@@ -740,28 +748,47 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
                     OUTPUT.exec_()
 
                 def hashchk(hashnumber):
-                    linhashtypes = ['MD5', 'sha1sum', 'sha256sum', 'sha384sum', 'sha512sum']
-                    winhashtypes = ['MD5', 'SHA1', 'SHA256', 'SHA384', 'SHA512']
+                    if len(self.fpath.text()) != 0 and Path(self.fpath.text()).is_file():
+                        linhashtypes = ['MD5', 'sha1sum', 'sha256sum', 'sha384sum', 'sha512sum']
+                        winhashtypes = ['MD5', 'SHA1', 'SHA256', 'SHA384', 'SHA512']
 
-                    if platform == 'linux' or platform == 'darwin':
-                        filepath = self.fpath.text()
-                        command = r'sudo ' + linhashtypes[hashnumber] + ' ' + filepath
-                        EXEC = sub.Popen(command.split(), stdout=sub.PIPE)
-                        stdout, _ = EXEC.communicate()
-                        output = stdout.decode("utf-8")
-                        OUTPUTBOX(output)
-                    elif platform == 'win32':
-                        print(winhashtypes[hashnumber])
-                        filepath = self.fpath.text()
-                        command = r'Get-Filehash ' + filepath + ' -Algorithm ' + winhashtypes[
-                            hashnumber] + ' | Format-List'
-                        print(command)
-                        EXEC = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
-                        stdout, _ = EXEC.communicate()
-                        output = stdout.decode("utf-8")
-                        OUTPUTBOX(output)
+                        if platform == 'linux' or platform == 'darwin':
+                            filepath = self.fpath.text()
+                            command = r'sudo ' + linhashtypes[hashnumber] + ' ' + filepath
+                            EXEC = sub.Popen(command.split(), stdout=sub.PIPE)
+                            stdout, _ = EXEC.communicate()
+                            output = stdout.decode("utf-8")
+                            OUTPUTBOX(output)
+                        elif platform == 'win32':
+                            print(winhashtypes[hashnumber])
+                            filepath = self.fpath.text()
+                            command = r"Get-Filehash '" + filepath + "' -Algorithm " + winhashtypes[
+                                hashnumber] + " | Format-List"
+                            print(command)
+                            EXEC = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
+                            stdout, _ = EXEC.communicate()
+                            output = stdout.decode("utf-8")
+                            OUTPUTBOX(output)
+                    elif len(self.fpath.text()) == 0:
+                        print('No file path entered')
+                        ERROR_NO_FILEPATH = QMessageBox()
+                        ERROR_NO_FILEPATH.setIcon(QMessageBox.Warning)
+                        ERROR_NO_FILEPATH.setWindowTitle('Hey! Listen!')
+                        ERROR_NO_FILEPATH.setText(
+                            'ERROR: No File Path Found')
+                        ERROR_NO_FILEPATH.setStandardButtons(QMessageBox.Close)
+                        ERROR_NO_FILEPATH.exec_()
+                    elif not Path(self.fpath.text()).is_file():
+                        print('No file path entered')
+                        ERROR_FILE_NOT_FOUND = QMessageBox()
+                        ERROR_FILE_NOT_FOUND.setIcon(QMessageBox.Warning)
+                        ERROR_FILE_NOT_FOUND.setWindowTitle('Hey! Listen!')
+                        ERROR_FILE_NOT_FOUND.setText(
+                            'ERROR: File Not Found Or Does Not Exist')
+                        ERROR_FILE_NOT_FOUND.setStandardButtons(QMessageBox.Close)
+                        ERROR_FILE_NOT_FOUND.exec_()
 
-                self.genhash.clicked.connect(lambda: hashchk(self.hashnumber))
+                self.genhash.clicked.connect(lambda: hashchk(self.hash_number))
 
         def callhash():
             widget = hashRUN()

@@ -1,19 +1,28 @@
 = CP_Scripts2
 Michael Brenner
-v1.0, 5/14/2020
+:toc:
+
+
 
 image:https://app.codacy.com/project/badge/Grade/d277e9b251a74fc0a61da1fc321a9bfa["Codacy code quality",link="https://www.codacy.com/manual/vipersniper0501/CP_Scripts2?utm_source=github.com&utm_medium=referral&utm_content=vipersniper0501/CP_Scripts2&utm_campaign=Badge_Grade"]
 image:https://img.shields.io/github/issues-raw/vipersniper0501/CP_Scripts2[GitHub issues]
 image:https://img.shields.io/github/repo-size/vipersniper0501/CP_Scripts2[GitHub repo size]
 
+*DISCLAIMERS:* This project is student made with inspiration from other projects such as the scripts
+made by Ethan Fowler from TEAM BYTE.
 
-*DISCLAIMERS:* This project is student made with inspiration from other projects such as the scripts made by Ethan Fowler from TEAM BYTE.
+NOTE: This is program is Pre-Alpha so it still has many bugs and is missing many of the core features.
+I am only one person so this will take a while to even get to Alpha.
+Thank you for your understanding.
 
-This script also uses Microsoft Sysinternals suite which is owned and created by Microsoft.I do not take any credit in the creation of that program.(_I don't want to get sued_)
 
-FYI: This will be mostly used for a backup location for my scripts and will not always have the most up to date versions.
 
-IMPORTANT: Before using any of these scripts for the CyberPatriot Challenges, please make sure that you complete as many of the Forensic Questions as possible!If not, then you risk the chance that the script will remove or change something that the Forensics Question requires later.
+This script also uses Microsoft Sysinternals suite which is owned and created by Microsoft. I do
+not take any credit in the creation of that program.(_I don't want to get sued_)
+
+Before using any of these scripts for the CyberPatriot challenges, please make sure
+that you complete as many of the Forensic Questions as possible! If not, then you risk the chance
+that the script will remove or change something that the Forensics Question requires later.
 
 '''
 
@@ -29,22 +38,27 @@ I currently have two Command Line scripts:
 - link:./CLI_Scripts/WindowsScript/[Powershell Script] for Windows machines
 - link:./CLI_Scripts/LinuxScript/[Bash Script] for Linux machines
 
-These two scripts currently have around 10-20 commands each.They do most of the basic commands that you would use in competition, but, they are not good enough that they could get you a ton of points by just using them alone.
+These two scripts currently have around 10-20 commands each.They do most of the basic commands that
+you would use in competition, but, they are not good enough that they could get you a ton of points
+by just using them alone.
 
-NOTE: The Command Line Script are on hold for now as currently I am spending all of my efforts on the GUI's.This is mostly due to it being A.) more fun for me and B.) because due to the fact that the GUI's are cross platform, I no longer need to manage 2-3 different scripts for different OS's [.underline]#and# use more than one coding/scripting language.(It becomes very hard to remember how to do things in both Bash and Powershell the bigger your script gets :S )
-
-I currently have available three GUI's.Of the three, only two are very developed.The following list are the available GUI's to choose from:
+I currently have available three GUI's. Of the three, only two are very developed. The following
+list are the available GUI's to choose from:
 
 * link:./GUIs/ScriptRunnerTkinter_GUI/[Script Runner Tkinter]
 ** Built on the TKinter framework so it looks like it was made in the 90's
 
 * link:./GUIs/ScriptRunnerElectron/[Script Runner Electron]
-** This GUI is built on the same framework that applications like Discord, Slack, and Atom.Although due to it using website code (HTML, CSS, JavaScript) I am still having trouble attempting to connect it to python code that will actually execute the commands
+** This GUI is built on the same framework that applications like Discord, Slack, and Atom.
+Although due to it using website code (HTML, CSS, JavaScript) I am still having trouble attempting
+to connect it to python code that will actually execute the commands
 
 * link:./GUIs/ScriptRunnerPyQt5_GUI/[Script Runner PyQt5]  image:https://travis-ci.com/vipersniper0501/CP_Scripts2.svg?branch=GUI-Updates["Build Status",link="https://travis-ci.com/vipersniper0501/CP_Scripts2"]
-** This GUI is built on the PyQt frame work.This is the newest best version of all of the GUI's and Scripts Combined.It is the most modern looking and has the most commands, platform support, and Ease of Use.
+** This GUI is built on the PyQt frame work.This is the newest best version of all of the GUI's and
+Scripts Combined.It is the most modern looking and has the most commands, platform support, and
+Ease of Use.
 
-== How to compile GUI
+== How to compile a GUI from source code
 
 Make sure you have the correct version of Pyinstaller:
 
@@ -77,8 +91,8 @@ Hit Enter
 
 That is it! Good Luck!
 
-Some of the commands might require for you to execute them twice if they did not show a list when they should have.
-I am currently working on fixing this problem.
+Some of the commands might require for you to execute them twice if they did not show a list when
+they should have. I am currently working on fixing this problem.
 
 == Usage Instructions For Linux CLI Scripts
 
@@ -92,14 +106,31 @@ I am currently working on fixing this problem.
 
 **First Number:** Generation (General Information -> 0, Cli -> 1, Tkinter -> 2, PyQt5 ->3, Electron -> 4) +
 This number is to be used to identify which generation of script has been changed.
-For example, if I were to change something in the CLI version it would uploaded as version 1.x.x.x, but if I were to change something in the Electron version, I would upload as version 4.x.x.x
+For example, if I were to change something in the CLI version it would uploaded as version 1.x.x.x,
+but if I were to change something in the Electron version, I would upload as version 4.x.x.x
 
 **Second Number:** used for noting number of os's completely supported in the generation
 
-**Third Number:** Number of completed commands regardless of OS type or section of program (mainly used in the GUI versions).
+**Third Number:** Number of completed commands regardless of OS type or section of program (mainly
+used in the GUI versions).
 
 *Fourth Number:* used for patches, minor updates, and updates that are working towards a new feature. +
-This is also updated when code has been edited to become more efficient or after finding a typo and making a quick edit.
-Also changes if a file was forgotten when pushing to the repository.
+This is also updated when code has been edited to become more efficient or after finding a typo and
+making a quick edit. Also changes if a file was forgotten when pushing to the repository.
 
-NOTE: When ever a version number has been updated, all of the numbers to the right of the changed number is set to zero.
+NOTE: When ever a version number has been updated, all of the numbers to the right of the changed
+number is set to zero.
+
+== FaQ
+[qanda]
+Why is it that when I download the exe, it says it is malware?::
+    This is because I have not yet been able to sign my executables. So as of right now, windows
+does not know that this program is safe so it try's to warn you that this is not an official
+program.
+Why are there so many different versions within the same repository?::
+    This is because when I first made the repository, I did not plan on making any of the other
+versions. I thought it was going to be just the CLI Script and that was it. After some time
+working on that I started to look into other ways of creating scripts and realized that I could
+also try and make things such as GUIs for it. Before I knew it, I had several versions and types
+of projects in one repository and have been too lazy to create a new repo for each version of the
+project.

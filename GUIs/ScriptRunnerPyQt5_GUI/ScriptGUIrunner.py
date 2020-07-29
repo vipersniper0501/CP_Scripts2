@@ -5,6 +5,7 @@ from sys import platform
 from threading import *
 
 import PyQt5
+from PyQt5 import QtWidgets
 
 from PyUIs.comdescript import Ui_comDescript
 from PyUIs.firstconf import *
@@ -14,31 +15,20 @@ from scripFunc.scripLINUXONLY import *
 from scripFunc.scripUNIMULTI import *
 from scripFunc.scripWINONLY import *
 
-# The following two `if` statements fix the problem where the application would not scale correctly to the resolution of the monitor
-if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
-    PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
 
-if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
-    PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
-
-
-def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and for PyInstaller """
-    try:
-        # PyInstaller creates a temp folder and stores path in _MEIPASS
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
-
-
-# Button logic (calls functions in module and connects to other parts of GUI. Does not actually do anything to system)
-
+# def resource_path(relative_path):
+#     """ Get absolute path to resource, works for dev and for PyInstaller """
+#     try:
+#         # PyInstaller creates a temp folder and stores path in _MEIPASS
+#         base_path = sys._MEIPASS
+#     except Exception:
+#         base_path = os.path.abspath(".")
+#
+#     return os.path.join(base_path, relative_path)
 
 class fconfStart(QDialog, Ui_firstConf):
 
-    def __init__(self, parent=None):
+    def __init__(self, parent = None):
         super(fconfStart, self).__init__(parent)
 
         print('Script Runner First Time Configurations')
@@ -252,20 +242,27 @@ class fconfStart(QDialog, Ui_firstConf):
                 self.rdp = 'no'
 
         def quitButton():
-            print('Closing program')
+
             if variableCheck.is_file():
+                print('Cancelling configurations. Nothing has changed.')
                 self.close()
             else:
+                print('Closing program')
                 sys.exit(0)
 
         def confirmBTTN():
-            if self.ssh != '' and self.ftp != '' and self.proftpd != '' and self.vsftpd != '' and self.web != '' and self.apaweb != '' and self.nginweb != '' and self.https != '' and self.smb != '' and self.sql != '' and self.rsnc != '' and self.rdp != '':
+            if (self.ssh != '' and self.ftp != '' and self.proftpd != '' and self.vsftpd != ''
+                    and self.web != '' and self.apaweb != '' and self.nginweb != '' and
+                    self.https != '' and self.smb != '' and self.sql != '' and self.rsnc != '' and
+                    self.rdp != ''):
                 print('saving configurations\n')
                 print(
                     "ssh=" + str(self.ssh) + ", ftp=" + str(self.ftp) + ", proftpd=" + str(
-                        self.proftpd) + ", vsftpd=" + str(self.vsftpd) + ", web=" + str(self.web) + ", apaweb=" + str(
-                        self.apaweb) + ", nginweb=" + str(self.nginweb) + ", https=" + str(self.https) + ", smb=" + str(
-                        self.smb) + ", sql=" + str(self.sql) + ", rsnc=" + str(self.rsnc) + ", RDP=" + str(self.rdp))
+                        self.proftpd) + ", vsftpd=" + str(self.vsftpd) + ", web=" + str(
+                        self.web) + ", apaweb=" + str(self.apaweb) + ", nginweb=" + str(
+                        self.nginweb) + ", https=" + str(self.https) + ", smb=" + str(
+                        self.smb) + ", sql=" + str(self.sql) + ", rsnc=" + str(
+                        self.rsnc) + ", RDP=" + str(self.rdp))
 
                 config = configparser.ConfigParser()
                 config['Services'] = {'ssh': self.ssh,
@@ -291,6 +288,8 @@ class fconfStart(QDialog, Ui_firstConf):
                 RESTART.setStandardButtons(QMessageBox.Close)
                 RESTART.exec_()
                 self.close()
+                beginMain = Mainstart()
+                beginMain.show()
             else:
                 HEY = QMessageBox()
                 HEY.setWindowTitle('Hey! Listen!')
@@ -331,64 +330,27 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
     def threader(self, com):
         try:
-            threader = Thread(target=com)
+            threader = Thread(target = com)
             threader.start()
         except Exception as e:
             print(e)
             print('Could not start thread')
 
-    def __init__(self, parent=None):
+    def __init__(self, parent = None):
         super(Mainstart, self).__init__(parent)
         print('Script Runner has started')
-        # self.size().setHeight(675)
-        # self.size().setWidth(860)
-        # a = self.size()
-        # print(a)
-        # print(a.height())
-        # print(a.width())
-        # screen = app.primaryScreen()
-        # print('Screen: %s' % screen.name())
-        # size = screen.size()
-        # print('Screen Size: %d x %d' % (size.width(), size.height()))
-        # rect = screen.availableGeometry()
-        # print('Available: %d x %d' % (rect.width(), rect.height()))
-        # hScaled = size.height()/1080
-        # print(hScaled)
-        # hScaled = hScaled*610
-        # print(hScaled)
-
-        config_name = 'config.ini'
+        self.setFixedSize(860, 675)
+        self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+        config_name2 = 'config.ini'
         if getattr(sys, 'frozen', False):
-            application_Path = os.path.dirname(sys.executable)
+            application_Path2 = os.path.dirname(sys.executable)
         elif __file__:
-            application_Path = os.path.dirname(__file__)
-        config_path = os.path.join(application_Path, config_name)
-        print(config_path)
-        variableCheck = Path(config_path)
+            application_Path2 = os.path.dirname(__file__)
+        config_path2 = os.path.join(application_Path2, config_name2)
+        variableCheck2 = Path(config_path2)
 
-        if variableCheck.is_file():
-            config = configparser.ConfigParser()
-            config.read(variableCheck)
-            # x = config.get('Services', 'ssh')
-            # print(x)
-            print('Configuration file has been loaded...')
-
-            QMainWindow.__init__(self)
-            self.setupUi(self)
-            # self.setFixedWidth(848)
-            # self.setFixedHeight(603)
-            # self.setFixedSize(850, 640)
-            self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
-            self.mmfuncassign(variableCheck)
-        else:
-            print('Ello, you have some configurations to do!')
-
-            def firstCONF():
-                widget = fconfStart()
-                widget.exec_()
-
-            self.threader(firstCONF())
-
+        self.mmfuncassign(variableCheck2)
         ###################
 
     def mmfuncassign(self, configurations):
@@ -402,6 +364,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         funcWIN = funcWINONLY()
         funcWINUSRGRU = funcWINusrgru()
         funcLIN = funcLINUX()
+
+        # print(os.getcwd())
 
         def quitButton():
             print('Closing program')
@@ -432,7 +396,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             elif i == 3:
                 if platform == 'darwin':
                     self.header_title.setText('MacOS X Commands')
-                    self.descriptions.setText('Description: These commands will ONLY work on MacOS X')
+                    self.descriptions.setText(
+                        'Description: These commands will ONLY work on MacOS X')
                     self.stackedWidget.setCurrentIndex(i)
                 else:
                     wrongos()
@@ -461,11 +426,11 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 """)
             HOWTO.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             HOWTO.setStyleSheet('background-color: #414E6E; color: #CCD2E6')
-            HOWTO.exec_()  # change to QDialog
+            HOWTO.exec_()
 
         def runCOMDESCRIPT():
             class showComDescript(QDialog, Ui_comDescript):
-                def __init__(self, parent=None):
+                def __init__(self, parent = None):
                     super(showComDescript, self).__init__(parent)
                     self.setupUi(self)
                     self.setFixedSize(531, 360)
@@ -479,7 +444,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         def runABOUTPROG():
             class showAboutProg(QDialog, Ui_About):
-                def __init__(self, parent=None):
+                def __init__(self, parent = None):
                     super(showAboutProg, self).__init__(parent)
                     self.setupUi(self)
                     self.setFixedSize(330, 182)
@@ -540,41 +505,56 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         # Universal Buttons
         self.Updates_buttonUNI.clicked.connect(lambda: self.threader(scripfunc.updateos()))
+        # self.Updates_buttonUNI.setStyleSheet('Updates_buttonUNI:hover{\nbackground-color: '
+        #                                      '#8B93B2;\n}')
         self.rmvprosoftbuttonUNI.clicked.connect(lambda: self.threader(indev()))  #
         self.srchmedbuttonUNI.clicked.connect(lambda: self.threader(scripfunc.srchmedia))
         self.chkhashfile_buttonUNI.clicked.connect(lambda: self.threader(scripfunc.hashCheck()))
 
         # Windows Main Menu Commands
-
         self.fwlbutton_2.clicked.connect(lambda: self.threader(scripfunc.fwl))
         self.basicConfbutton_2.clicked.connect(
-            lambda: self.threader(confirmation(lambda: scripfunc.basConf(config.get('Services', 'rdp')))))  #
+            lambda: self.threader(
+                confirmation(lambda: scripfunc.basConf(config.get('Services', 'rdp')))))  #
         self.rmvprosoftbutton_2.clicked.connect(lambda: self.threader(scripfunc.rmProSoft()))
         self.enblBitLockerbutton.clicked.connect(lambda: self.threader(funcWIN.BITLOCKER()))
         self.servicesConfButton_4.clicked.connect(lambda: self.threader(confirmation(lambda:
                                                                                      scripfunc.servSet(
-                                                                                         config.get('Services', 'ssh'),
-                                                                                         config.get('Services', 'smb'),
-                                                                                         config.get('Services', 'web'),
-                                                                                         config.get('Services',
-                                                                                                    'apaweb'),
-                                                                                         config.get('Services',
-                                                                                                    'nginweb'),
-                                                                                         config.get('Services',
-                                                                                                    'ftp'),
-                                                                                         config.get('Services',
-                                                                                                    'proftpd'),
-                                                                                         config.get('Services',
-                                                                                                    'vsftpd')))))
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'ssh'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'smb'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'web'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'apaweb'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'nginweb'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'ftp'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'proftpd'),
+                                                                                         config.get(
+                                                                                             'Services',
+                                                                                             'vsftpd')))))
         self.browserConf.clicked.connect(lambda: self.threader(funcWIN.browserCONF()))
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.lsgruusrin_3,
                                 self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
-                                self.rmvgrufrosys_3, self.rmvusrfrogru_3, self.rmvusrfrosys_3]
+                                self.rmvusrfrogru_3]
         for i in range(0, len(self.WINUSRGRUBUTTON)):
             self.WINUSRGRUBUTTON[i].clicked.connect(lambda: self.threader(indev()))  #
 
         self.adusrtosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.addusr()))
+        self.rmvusrfrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remusr()))
+        self.rmvgrufrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remgrufrosys()))
         self.chngusrpas_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.chngpasswdofall()))
 
         # Linux Main Menu Commands
@@ -585,16 +565,20 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         self.basicConfbutton_3.clicked.connect(lambda: self.threader(indev()))  #
         self.servicesConfButton_2.clicked.connect(lambda: self.threader(indev()))  #
         # Linux User Group Commands
-        self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4, self.adusrtosys_4, self.chngusrpas_4,
-                                   self.lsgruusrin_4, self.lslocagru_4, self.lslocausr_4, self.lsmemgru_4,
+        self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4, self.adusrtosys_4,
+                                   self.chngusrpas_4,
+                                   self.lsgruusrin_4, self.lslocagru_4, self.lslocausr_4,
+                                   self.lsmemgru_4,
                                    self.rmvgrufrosys_4, self.rmvusrfrogru_4, self.rmvusrfrosys_4]
         for i in range(0, 11):
             self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: self.threader(indev()))  #
 
         # MacOS Buttons
         self.MACBUTTONS = [self.rmvprosoftbutton_4, self.malrembutton_4, self.basicConfbutton_4,
-                           self.servicesConfButton_3, self.adgrutosys_5, self.adusrtogru_5, self.adusrtosys_5,
-                           self.chngusrpas_5, self.lsgruusrin_5, self.lslocagru_5, self.lslocausr_5, self.lsmemgru_5,
+                           self.servicesConfButton_3, self.adgrutosys_5, self.adusrtogru_5,
+                           self.adusrtosys_5,
+                           self.chngusrpas_5, self.lsgruusrin_5, self.lslocagru_5, self.lslocausr_5,
+                           self.lsmemgru_5,
                            self.rmvgrufrosys_5, self.rmvusrfrogru_5, self.rmvusrfrosys_5]
         for i in range(0, 15):
             self.MACBUTTONS[i].clicked.connect(lambda: self.threader(indev()))
@@ -603,7 +587,29 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
 
 if __name__ == "__main__":
+    QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+    QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
     app = QApplication(sys.argv)
-    main = Mainstart()
-    main.show()
-    sys.exit(app.exec_())
+    config_name = 'config.ini'
+    if getattr(sys, 'frozen', False):
+        application_Path = os.path.dirname(sys.executable)
+    elif __file__:
+        application_Path = os.path.dirname(__file__)
+    config_path = os.path.join(application_Path, config_name)
+    print(config_path)
+    variableCheck = Path(config_path)
+
+    # Checks to make sure there is a config file. If not, then First time setup runs
+    if variableCheck.is_file():
+        config = configparser.ConfigParser()
+        config.read(variableCheck)
+        print('Configuration file has been loaded...')
+
+        main = Mainstart()
+        main.show()
+        sys.exit(app.exec_())
+    else:
+        print('Ello, you have some configurations to do!')
+        start = fconfStart()
+        start.show()
+        sys.exit(app.exec_())

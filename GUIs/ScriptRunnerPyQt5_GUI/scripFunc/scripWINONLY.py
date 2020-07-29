@@ -4,6 +4,7 @@ import os
 import shutil
 import subprocess as sub
 from threading import *
+from distutils.dir_util import copy_tree
 
 import distro  # for figuring out what linux distro
 from PyQt5 import QtGui
@@ -12,6 +13,7 @@ from PyQt5.QtWidgets import *
 from PyUIs.changepass import Ui_chngpass
 from PyUIs.enblebit import Ui_bitlockerGUI
 from PyUIs.addusrUI import Ui_addUSR
+from PyUIs.rmvUSRoGRU import Ui_rmvusrogru
 
 OS = distro.linux_distribution()
 ops = OS[0]
@@ -19,21 +21,18 @@ ops = OS[0]
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-
 # This function is not really needed, but nice to have if needed.
 # def resource_path(relative_path):
 #     """ Get absolute path to resource, works for dev and for PyInstaller """
 #     try:
 #         # PyInstaller creates a temp folder and stores path in _MEIPASS
-#         base_path = sys._MEIPASS
+#         base_path = sys._MEIPASS # pylint: disable=no-member
 #     except Exception:
 #         base_path = os.path.abspath(".")
 #
 #     return os.path.join(base_path, relative_path)
 
-
 # This file is used to store commands that are to only be used on Windows machines
-
 
 # TODO: When done, possible convert the try and if statements used for enforcing the complexity requirement into it's
 #  own function to reduce the number of lines in the file.
@@ -42,7 +41,7 @@ config.read('config.ini')
 class funcWINONLY:
     def BITLOCKER(self):
         class bitRUN(QDialog, Ui_bitlockerGUI):
-            def __init__(self, parent=None):
+            def __init__(self, parent = None):
                 super(bitRUN, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setupUi(self)
@@ -113,7 +112,7 @@ class funcWINONLY:
                         HEY.setText("Hey! Your passwords do not match!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
 
                     if len(l1) == 0 or len(l2) == 0:
                         HEY = QMessageBox()
@@ -121,49 +120,51 @@ class funcWINONLY:
                         HEY.setText("Hey! You don't have a password!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif len(l1) <= 8 or len(l2) <= 8:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 8 characters!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif l1 != l2:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your passwords do not match!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not characterBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 lower case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not characterUPBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 Upper Case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not symbolsBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText("Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     elif not numberBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText("Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        x = HEY.exec_()
+                        HEY.exec_()
                     else:
                         command = """
 $pass = ConvertTo-SecureString '""" + self.encrypPASS.text() + """' -AsPlainText -Force
@@ -185,8 +186,9 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                         COMPLETE = QMessageBox()
                         COMPLETE.setIcon(QMessageBox.Question)
                         COMPLETE.setWindowTitle('Hey! Listen!')
-                        COMPLETE.setText('You must restart the computer for encryption to begin on the drive. '
-                                         '\nWould you like to restart now?')
+                        COMPLETE.setText(
+                            'You must restart the computer for encryption to begin on the drive. '
+                            '\nWould you like to restart now?')
                         COMPLETE.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
                         x = COMPLETE.exec_()
 
@@ -200,24 +202,21 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                 # Gets list of drives and encryption status'
                 decryptSTATUS = []
                 command = 'Get-BitLockerVolume'
-                EXEC = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
+                EXEC = sub.Popen(["powershell", "& {" + command + "}"], stdout = sub.PIPE)
                 stdout, _ = EXEC.communicate()
                 output = stdout.decode("utf-8")
                 output2 = output.split('\n')
                 i = 7
                 while True:
                     try:
-                        # print(output2[i])
                         output3 = output2[i].split()
-                        # print(output3)
                         decryptSTATUS.append(output3[1])
                         decryptSTATUS.append(output3[3])
                         i = i + 1
                     except Exception:
-                        # print('Controlled exit of loop: ' + str(e))
                         break
-                # print(decryptSTATUS)
-                buttons = [self.radioButton, self.radioButton_2, self.radioButton_3, self.radioButton_4,
+                buttons = [self.radioButton, self.radioButton_2, self.radioButton_3,
+                           self.radioButton_4,
                            self.radioButton_5, self.radioButton_6, self.radioButton_7]
 
                 self.selectedDRIVE = ''
@@ -252,7 +251,10 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                 self.cancelbutton.clicked.connect(cancelbutton)
 
                 # Sets default status check to the C: Drive
-                STATUSCHECK("C:")
+                try:
+                    STATUSCHECK("C:")
+                except Exception:
+                    STATUSCHECK("c:")
 
                 # adds the drive letters to the available radio buttons
                 i = 0
@@ -291,7 +293,7 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
         # Allows for program to continue running while the function executes.
         def threader(com):
             try:
-                threader = Thread(target=com)
+                threader = Thread(target = com)
                 threader.start()
             except Exception as e:
                 print(e)
@@ -313,22 +315,42 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
         #        shutil.copytree(s, d, symlinks, ignore)
         #    else:
         #        shutil.copy2(s, d)
-
-        shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\Extensions')
-        shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\Firefox')
-        shutil.rmtree(r'C:\Users\Michael\AppData\Roaming\Mozilla\SystemExtensionsDev')
-        shutil.copytree('./configurations/Win_Mozilla/Extensions',
-                        r'C:\Users\Michael\AppData\Roaming\Mozilla\Extensions')
-        shutil.copytree('./configurations/Win_Mozilla/Firefox', r'C:\Users\Michael\AppData\Roaming\Mozilla\Firefox')
-        shutil.copytree('./configurations/Win_Mozilla/SystemExtensionsDev',
-                        r'C:\Users\Michael\AppData\Roaming\Mozilla\SystemExtensionsDev')
+        try:
+            EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
+            stdout, _ = EXEC.communicate()
+            output = stdout.decode("utf-8")
+            output = output.split('\r\n')
+            # shutil.rmtree(r'%appdata%\Mozilla\Extensions')
+            rmv_folder = 'C:\\Users\\' + str(output[0]) + '\\AppData\\Roaming\\Mozilla\\Firefox'
+            shutil.rmtree(rmv_folder)
+            # shutil.rmtree(r'%appdata%\Mozilla\SystemExtensionsDev')
+        except Exception as e:
+            print('Error caught: ' + str(e))
+        # copy_tree('../configurations/Win_Mozilla/Extensions', 'C:/')
+        # copy_tree('../configurations/Win_Mozilla/Firefox', 'C:/')
+        # copy_tree('../configurations/Win_Mozilla/SystemExtensionsDev', 'C:/')
+        shutil.copytree('../configurations/Win_Mozilla/Extensions',
+                        r'%appdata%\Mozilla\Extensions')
+        shutil.copytree('../configurations/Win_Mozilla/Firefox',
+                        r'%appdata%\Mozilla\Firefox')
+        shutil.copytree('../configurations/Win_Mozilla/SystemExtensionsDev',
+                        r'%appdata%\Mozilla\SystemExtensionsDev')
         print('Firefox has been configured')
+
+
+def threader(com):
+    try:
+        threader = Thread(target = com)
+        threader.start()
+    except Exception as e:
+        print(e)
+        print('Could not start thread')
 
 
 class funcWINusrgru:
     def addusr(self):
         class addusrtosys(QDialog, Ui_addUSR):
-            def __init__(self, parent=None):
+            def __init__(self, parent = None):
                 super(addusrtosys, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setupUi(self)
@@ -418,7 +440,8 @@ class funcWINusrgru:
                         COMPLETE = QMessageBox()
                         COMPLETE.setIcon(QMessageBox.Question)
                         COMPLETE.setWindowTitle('Hey! Listen!')
-                        COMPLETE.setText('User ' + username + ' has been successfully added to system.')
+                        COMPLETE.setText(
+                            'User ' + username + ' has been successfully added to system.')
                         COMPLETE.setStandardButtons(QMessageBox.Close)
                         COMPLETE.exec_()
                         self.close()
@@ -468,14 +491,16 @@ class funcWINusrgru:
                     elif not symbolsBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText("Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
                     elif not numberBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText("Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
@@ -511,7 +536,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
 
                 def threader(com):
                     try:
-                        threader = Thread(target=com)
+                        threader = Thread(target = com)
                         threader.start()
                     except Exception as e:
                         print(e)
@@ -524,13 +549,195 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
         calladdusrtosys()
 
     def remusr(self):
-        pass
+        class rmvusrfrosys(QDialog, Ui_rmvusrogru):
+            def __init__(self, parent = None):
+                super(rmvusrfrosys, self).__init__(parent)
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setupUi(self)
+                self.EXECUTE()
+
+            def EXECUTE(self):
+                self.setWindowTitle('Remove User From System')
+                self.label.setText('Current Users:')
+                self.label2.setText('Username: ')
+
+                def findnames():
+                    # Local users are added to a list of names
+                    EXEC = sub.Popen(["powershell", "& {net localgroup users}"], stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+                    # print(output)
+                    n = []
+                    for i in range(6, len(output) - 3):
+                        # print(output[i])
+                        # if '\r' in output[i]:
+                        #     print('found in ' + str(i))
+                        #     print(output[i])
+                        n.append(output[i])
+                    a = []
+                    for i in range(0, len(n)):
+                        x = n[i]
+                        y = x.split('\r')
+                        # print(y)
+                        a.append(y)
+                    # print(a)
+                    names = []
+                    for i in range(0, len(a)):
+                        # print(a[i])
+                        x = a[i]
+                        y = x[0]
+                        # print(y)
+                        names.append(y)
+                    # print(names)
+
+                    # Local Administrators are added to list of names
+                    EXEC = sub.Popen(["powershell", "& {net localgroup administrators}"],
+                                     stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+                    # print(output)
+                    n2 = []
+                    for i in range(6, len(output) - 3):
+                        # print(output[i])
+                        # if '\r' in output[i]:
+                        #     print('found in ' + str(i))
+                        #     print(output[i])
+                        n2.append(output[i])
+                    a2 = []
+                    for i in range(0, len(n2)):
+                        x = n2[i]
+                        y = x.split('\r')
+                        # print(y)
+                        a2.append(y)
+                    # print(a)
+                    for i in range(0, len(a2)):
+                        # print(a[i])
+                        x = a2[i]
+                        y = x[0]
+                        EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
+                        stdout, _ = EXEC.communicate()
+                        output = stdout.decode("utf-8")
+                        output = output.split('\r\n')
+                        if output[0] == y:
+                            y = output[0] + '   (Current User)'
+                        # print(y)
+                        names.append(y)
+                    # print(names)
+                    return names
+
+                listoNames = findnames()
+
+                for i in range(0, len(listoNames)):
+                    QListWidgetItem(listoNames[i], self.listOFnames)
+
+                def removal():
+                    username = self.Username_Input.text()
+
+                    def completedPOP(username):
+                        COMPLETE = QMessageBox()
+                        COMPLETE.setIcon(QMessageBox.Question)
+                        COMPLETE.setWindowTitle('Hey! Listen!')
+                        COMPLETE.setText(
+                            'User ' + username + ' has been successfully removed from the system.')
+                        COMPLETE.setStandardButtons(QMessageBox.Close)
+                        COMPLETE.exec_()
+                        self.close()
+
+                    if len(username) == 0 or username not in listoNames:
+                        if len(username) == 0:
+                            print('no username entered')
+                            ERROR_NO_USER = QMessageBox()
+                            ERROR_NO_USER.setIcon(QMessageBox.Warning)
+                            ERROR_NO_USER.setWindowTitle('Hey! Listen!')
+                            ERROR_NO_USER.setText(
+                                'No username was entered. No user was removed.')
+                            ERROR_NO_USER.setStandardButtons(QMessageBox.Close)
+                            ERROR_NO_USER.exec_()
+                        else:
+                            print('User not found')
+                            ERROR_NO_USER_FOUND = QMessageBox()
+                            ERROR_NO_USER_FOUND.setIcon(QMessageBox.Warning)
+                            ERROR_NO_USER_FOUND.setWindowTitle('Hey! Listen!')
+                            ERROR_NO_USER_FOUND.setText(
+                                'User was not found on system. No user was removed.')
+                            ERROR_NO_USER_FOUND.setStandardButtons(QMessageBox.Close)
+                            ERROR_NO_USER_FOUND.exec_()
+                    else:
+                        print('User was removed............ This is a test')
+                        # Executes command.
+                        sub.Popen(["powershell", "& {net user " + username + " /DELETE}"])
+                        completedPOP(username)
+
+                def confirmation():
+                    CONFIRM = QMessageBox()
+                    CONFIRM.setWindowTitle('Hey! Listen!')
+                    CONFIRM.setText("Hey! Are you sure you want to do this?")
+                    CONFIRM.setIcon(QMessageBox.Question)
+                    CONFIRM.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
+                    CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                    x = CONFIRM.exec_()
+                    if x == QMessageBox.Yes:
+                        print('Removing user...')
+                        removal()
+                    elif x == QMessageBox.No:
+                        print('Cancelling...')
+
+                def cancel_button():
+                    self.close()
+
+                self.Cancel_button.clicked.connect(cancel_button)
+                self.Confirm_button.clicked.connect(lambda: confirmation())
+
+        def callrmvusrfrosys():
+            widget = rmvusrfrosys()
+            widget.exec_()
+
+        callrmvusrfrosys()
 
     def addgrutosys(self):
         pass
 
     def remgrufrosys(self):
-        pass
+        class rmvgrufrosys(QDialog, Ui_rmvusrogru):
+            def __init__(self, parent = None):
+                super(rmvgrufrosys, self).__init__(parent)
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setupUi(self)
+                self.EXECUTE()
+
+            def EXECUTE(self):
+                self.setWindowTitle('Remove Group From System')
+                self.label.setText('Current Groups:')
+                self.label2.setText('Group Name: ')
+
+
+                def confirmation():
+                    CONFIRM = QMessageBox()
+                    CONFIRM.setWindowTitle('Hey! Listen!')
+                    CONFIRM.setText("Hey! Are you sure you want to do this?")
+                    CONFIRM.setIcon(QMessageBox.Question)
+                    CONFIRM.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
+                    CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                    x = CONFIRM.exec_()
+                    if x == QMessageBox.Yes:
+                        print('Removing group...')
+                        # Removal function here
+                    elif x == QMessageBox.No:
+                        print('Cancelling...')
+
+                def cancel_button():
+                    self.close()
+
+                self.Cancel_button.clicked.connect(cancel_button)
+                self.Confirm_button.clicked.connect(lambda: confirmation())
+
+        def callrmvgrufrosys():
+            widget = rmvgrufrosys()
+            widget.exec_()
+
+        callrmvgrufrosys()
 
     def addusrtogru(self):
         pass
@@ -550,13 +757,9 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
     def lsgrusanusrin(self):
         pass
 
-    # @staticmethod
     def chngpasswdofall(self):
-
-        # TODO: This command as of July 7th, 2020 is broken. More on the issue can be found here: https://github.com/vipersniper0501/CP_Scripts2/issues/48
-
         class changepasswordofall(QDialog, Ui_chngpass):
-            def __init__(self, parent=None):
+            def __init__(self, parent = None):
                 super(changepasswordofall, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setupUi(self)
@@ -564,49 +767,92 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
 
             def EXECUTE(self):
                 def findnames():
-                    command = 'Get-LocalUser'
-                    EXEC = sub.Popen(["powershell", "& {" + command + "}"], stdout=sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output = stdout.decode("utf-8")
-                    output = output.split('\n')
-                    print(output)
-                    n = []
-                    for i in range(0, len(output)):
-                        if 'True' in output[i]:
-                            # print('found in ' + str(i))
-                            # print(output[i])
-                            n.append(output[i])
-                    a = []
-                    for i in range(0, len(n)):
-                        x = n[i]
-                        y = x.split()
-                        # print(y)
-                        a.append(y)
-                    # print(a)
                     names = []
-                    for i in range(0, len(a)):
-                        # print(a[i])
-                        x = a[i]
-                        y = x[0]
-                        # print(y)
-                        names.append(y)
-                    # print(names)
+                    try:
+                        print('Detecting Users On System...')
+                        # Local users are added to a list of names
+                        EXEC = sub.Popen(["powershell", "& {net localgroup users}"],
+                                         stdout = sub.PIPE)
+                        stdout, _ = EXEC.communicate()
+                        output = stdout.decode("utf-8")
+                        output = output.split("\n")
+                        # print(output)
+                        n = []
+                        for i in range(6, len(output) - 3):
+                            # print(output[i])
+                            # if '\r' in output[i]:
+                            #     print('found in ' + str(i))
+                            #     print(output[i])
+                            n.append(output[i])
+                        a = []
+                        for i in range(0, len(n)):
+                            x = n[i]
+                            y = x.split('\r')
+                            # print(y)
+                            a.append(y)
+                        # print(a)
+                        # names = []
+                        for i in range(0, len(a)):
+                            # print(a[i])
+                            x = a[i]
+                            y = x[0]
+                            # print(y)
+                            names.append(y)
+                        # print(names)
+                        # Local Administrators are added to list of names
+                        EXEC = sub.Popen(["powershell", "& {net localgroup administrators}"],
+                                         stdout = sub.PIPE)
+                        stdout, _ = EXEC.communicate()
+                        output = stdout.decode("utf-8")
+                        output = output.split("\n")
+                        # print(output)
+                        n2 = []
+                        for i in range(6, len(output) - 3):
+                            # print(output[i])
+                            # if '\r' in output[i]:
+                            #     print('found in ' + str(i))
+                            #     print(output[i])
+                            n2.append(output[i])
+                        a2 = []
+                        for i in range(0, len(n2)):
+                            x = n2[i]
+                            y = x.split('\r')
+                            # print(y)
+                            a2.append(y)
+                        # print(a)
+                        for i in range(0, len(a2)):
+                            # print(a[i])
+                            x = a2[i]
+                            y = x[0]
+                            # print(y)
+                            names.append(y)
+                        # print(names)
 
-                    exec = sub.Popen(["powershell", "& {$env:UserName}"], stdout=sub.PIPE)
-                    stdout, _ = exec.communicate()
-                    output = stdout.decode("utf-8")
-                    output = output.split('\r\n')
-                    # print(output)
-                    for i in range(0, len(names)):
-                        # print(names[i])
-                        if output[0] == names[i]:
-                            # print('user found')
+                        # Removal of current user from list of names (This is so the current user does not get it's password
+                        # changed.
+                        EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
+                        stdout, _ = EXEC.communicate()
+                        output = stdout.decode("utf-8")
+                        output = output.split('\r\n')
+                        # print(output)
+                        for i in range(0, len(names)):
                             # print(i)
-                            names.pop(i)
-                            break
-                    print('--------------------------------------------------')
-                    print(names)
-                    return names
+                            print(names[i])
+                            if output[0] == names[i]:
+                                # print('user found')
+                                # print(i)
+                                names.pop(i)
+                                # print(names)
+                            if i == len(names):
+                                break
+                        print('--------------------------------------------------')
+                        print('The following list are all current users and admins on this system')
+                        print(names)
+                        return names
+                    except Exception as e:
+                        print('Index error has occured. exception was caught: ' + str(e))
+                        print(names)
+                        return names
 
                 x = findnames()
 
@@ -721,35 +967,39 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     elif not symbolsBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText("Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
                     elif not numberBOOL:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText("Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
                     else:
                         for i in range(0, len(names)):
-                            command = """$Password = ConvertTo-SecureString """ + "'{}'".format(self.passwd.text()) + """ -AsPlainText -Force
-                $Username = Get-LocalUser -Name """ + "'{}'".format(names[i]) + """
-                $Username | Set-LocalUser -Password $Password"""
-                            print(command + "\n")
-                        sub.Popen(["powershell", "& {$env:UserName}"], stdout=sub.PIPE)
+                            command = """$Password = ConvertTo-SecureString """ + "'{}'".format(
+                                self.passwd.text()) + """ -AsPlainText -Force
+$Username = Get-LocalUser -Name """ + "'{}'".format(names[i]) + """
+$Username | Set-LocalUser -Password $Password"""
+                            # print(command + "\n")
+                            sub.Popen(["powershell", "& {" + command + "}"], stdout = sub.PIPE)
+                            print('User ' + names[i] + "'s password has been successfully changed.")
                         completedPOP()
 
                 self.chngpass_button.clicked.connect(lambda: threader(RUN(x)))
 
-                def threader(com):
-                    try:
-                        threader = Thread(target=com)
-                        threader.start()
-                    except Exception as e:
-                        print(e)
-                        print('Could not start thread')
+                # def threader(com):
+                #     try:
+                #         threader = Thread(target=com)
+                #         threader.start()
+                #     except Exception as e:
+                #         print(e)
+                #         print('Could not start thread')
 
         def callChangepaswordofall():
             widget = changepasswordofall()

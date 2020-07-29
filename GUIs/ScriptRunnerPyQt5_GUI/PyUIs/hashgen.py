@@ -15,7 +15,7 @@ class Ui_hashGEN(object):
         hashGEN.setObjectName("hashGEN")
         hashGEN.resize(431, 179)
         hashGEN.setStyleSheet("background-color: #212434\n"
-                              "")
+"            ")
         self.fpath = QtWidgets.QLineEdit(hashGEN)
         self.fpath.setGeometry(QtCore.QRect(70, 10, 281, 20))
         self.fpath.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;")
@@ -28,16 +28,27 @@ class Ui_hashGEN(object):
         self.genhash.setGeometry(QtCore.QRect(110, 50, 301, 101))
         font = QtGui.QFont()
         font.setPointSize(20)
+        font.setBold(True)
+        font.setWeight(75)
         self.genhash.setFont(font)
-        self.genhash.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.genhash.setStyleSheet("QPushButton {\n"
+"background-color:#414E6E;\n"
+"color: #CCD2E6;\n"
+"font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"background: rgba(139, 147, 178, .75);\n"
+"}")
         self.genhash.setObjectName("genhash")
         self.frame = QtWidgets.QFrame(hashGEN)
         self.frame.setGeometry(QtCore.QRect(10, 40, 81, 131))
         self.frame.setStyleSheet("border: 2px solid;\n"
-                                 "border-width: 3px;\n"
-                                 "background: transparent;\n"
-                                 "border-radius: 10px; \n"
-                                 "color: black;")
+"                    border-width: 3px;\n"
+"                    background: transparent;\n"
+"                    border-radius: 10px;\n"
+"                    color: black;\n"
+"                ")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -47,7 +58,8 @@ class Ui_hashGEN(object):
         self.HashLbl.setObjectName("HashLbl")
         self.MD5radio = QtWidgets.QRadioButton(self.frame)
         self.MD5radio.setGeometry(QtCore.QRect(10, 30, 62, 14))
-        self.MD5radio.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;")
+        self.MD5radio.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;\n"
+"                    ")
         self.MD5radio.setChecked(True)
         self.MD5radio.setObjectName("MD5radio")
         self.SHA512radio = QtWidgets.QRadioButton(self.frame)
@@ -68,7 +80,15 @@ class Ui_hashGEN(object):
         self.SHA384radio.setObjectName("SHA384radio")
         self.browsebutton = QtWidgets.QPushButton(hashGEN)
         self.browsebutton.setGeometry(QtCore.QRect(360, 10, 61, 21))
-        self.browsebutton.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.browsebutton.setStyleSheet("QPushButton {\n"
+"background-color:#414E6E;\n"
+"color: #CCD2E6;\n"
+"font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"background: rgba(139, 147, 178, .75);\n"
+"}")
         self.browsebutton.setObjectName("browsebutton")
 
         self.retranslateUi(hashGEN)
@@ -90,7 +110,6 @@ class Ui_hashGEN(object):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     hashGEN = QtWidgets.QDialog()
     ui = Ui_hashGEN()

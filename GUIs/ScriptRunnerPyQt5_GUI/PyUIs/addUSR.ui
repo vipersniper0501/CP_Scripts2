@@ -106,6 +106,12 @@
    <property name="styleSheet">
     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
    </property>
+   <property name="echoMode">
+    <enum>QLineEdit::PasswordEchoOnEdit</enum>
+   </property>
+   <property name="clearButtonEnabled">
+    <bool>false</bool>
+   </property>
   </widget>
   <widget class="QLineEdit" name="Password2_input">
    <property name="geometry">
@@ -118,6 +124,9 @@
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: #414E6E;color: #CCD2E6;border: none;</string>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::PasswordEchoOnEdit</enum>
    </property>
   </widget>
   <widget class="QRadioButton" name="admin_y">
@@ -166,8 +175,23 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+    <string notr="true">QPushButton {
+background-color:#414E6E;
+color: #CCD2E6;
+font-weight: bold;
+}
+
+QPushButton:hover {
+background: rgba(139, 147, 178, .75);
+}</string>
    </property>
    <property name="text">
     <string>Confirm</string>
@@ -182,8 +206,23 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">background-color: #414E6E;color: #CCD2E6;</string>
+    <string notr="true">QPushButton {
+background-color:#414E6E;
+color: #CCD2E6;
+font-weight: bold;
+}
+
+QPushButton:hover {
+background: rgba(139, 147, 178, .75);
+}</string>
    </property>
    <property name="text">
     <string>Cancel</string>

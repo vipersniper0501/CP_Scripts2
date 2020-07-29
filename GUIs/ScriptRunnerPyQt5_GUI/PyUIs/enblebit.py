@@ -15,15 +15,16 @@ class Ui_bitlockerGUI(object):
         bitlockerGUI.setObjectName("bitlockerGUI")
         bitlockerGUI.resize(483, 323)
         bitlockerGUI.setStyleSheet("background-color: #212434\n"
-                                   "")
+"            ")
         self.frame = QtWidgets.QFrame(bitlockerGUI)
         self.frame.setGeometry(QtCore.QRect(15, 70, 160, 241))
         self.frame.setStyleSheet("border: 2px solid;\n"
-                                 "border-width: 3px;\n"
-                                 "background: transparent;\n"
-                                 "border-radius: 10px; \n"
-                                 "color: black;\n"
-                                 "padding: 3px;")
+"                    border-width: 3px;\n"
+"                    background: transparent;\n"
+"                    border-radius: 10px;\n"
+"                    color: black;\n"
+"                    padding: 3px;\n"
+"                ")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -33,45 +34,62 @@ class Ui_bitlockerGUI(object):
         self.label.setObjectName("label")
         self.radioButton = QtWidgets.QRadioButton(self.frame)
         self.radioButton.setGeometry(QtCore.QRect(10, 30, 121, 21))
-        self.radioButton.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;")
+        self.radioButton.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;\n"
+"                    ")
         self.radioButton.setText("")
         self.radioButton.setObjectName("radioButton")
         self.radioButton_2 = QtWidgets.QRadioButton(self.frame)
         self.radioButton_2.setGeometry(QtCore.QRect(10, 60, 121, 21))
-        self.radioButton_2.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;")
+        self.radioButton_2.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;\n"
+"                    ")
         self.radioButton_2.setText("")
         self.radioButton_2.setObjectName("radioButton_2")
         self.radioButton_3 = QtWidgets.QRadioButton(self.frame)
         self.radioButton_3.setGeometry(QtCore.QRect(10, 90, 121, 21))
-        self.radioButton_3.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;")
+        self.radioButton_3.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;\n"
+"                    ")
         self.radioButton_3.setText("")
         self.radioButton_3.setObjectName("radioButton_3")
         self.radioButton_4 = QtWidgets.QRadioButton(self.frame)
         self.radioButton_4.setGeometry(QtCore.QRect(10, 120, 121, 21))
-        self.radioButton_4.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;")
+        self.radioButton_4.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;\n"
+"                    ")
         self.radioButton_4.setText("")
         self.radioButton_4.setObjectName("radioButton_4")
         self.radioButton_5 = QtWidgets.QRadioButton(self.frame)
         self.radioButton_5.setGeometry(QtCore.QRect(10, 150, 121, 21))
-        self.radioButton_5.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;")
+        self.radioButton_5.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;\n"
+"                    ")
         self.radioButton_5.setText("")
         self.radioButton_5.setObjectName("radioButton_5")
         self.radioButton_6 = QtWidgets.QRadioButton(self.frame)
         self.radioButton_6.setGeometry(QtCore.QRect(10, 180, 121, 21))
-        self.radioButton_6.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;")
+        self.radioButton_6.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;\n"
+"                    ")
         self.radioButton_6.setText("")
         self.radioButton_6.setObjectName("radioButton_6")
         self.radioButton_7 = QtWidgets.QRadioButton(self.frame)
         self.radioButton_7.setGeometry(QtCore.QRect(10, 210, 121, 21))
-        self.radioButton_7.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;")
+        self.radioButton_7.setStyleSheet("background-color: #414E6E;color: #CCD2E6;border: none;border-radius: 10px;\n"
+"                    ")
         self.radioButton_7.setText("")
         self.radioButton_7.setObjectName("radioButton_7")
         self.enblBIT = QtWidgets.QPushButton(bitlockerGUI)
         self.enblBIT.setGeometry(QtCore.QRect(194, 70, 281, 131))
         font = QtGui.QFont()
-        font.setPointSize(28)
+        font.setPointSize(23)
+        font.setBold(True)
+        font.setWeight(75)
         self.enblBIT.setFont(font)
-        self.enblBIT.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.enblBIT.setStyleSheet("QPushButton {\n"
+"background-color:#414E6E;\n"
+"color: #CCD2E6;\n"
+"font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"background: rgba(139, 147, 178, .75);\n"
+"}")
         self.enblBIT.setObjectName("enblBIT")
         self.label_2 = QtWidgets.QLabel(bitlockerGUI)
         self.label_2.setGeometry(QtCore.QRect(10, 10, 121, 21))
@@ -84,11 +102,12 @@ class Ui_bitlockerGUI(object):
         self.frame_2 = QtWidgets.QFrame(bitlockerGUI)
         self.frame_2.setGeometry(QtCore.QRect(185, 210, 291, 61))
         self.frame_2.setStyleSheet("border: 2px solid;\n"
-                                   "border-width: 3px;\n"
-                                   "background: transparent;\n"
-                                   "border-radius: 10px; \n"
-                                   "color: black;\n"
-                                   "padding: 3px;")
+"                    border-width: 3px;\n"
+"                    background: transparent;\n"
+"                    border-radius: 10px;\n"
+"                    color: black;\n"
+"                    padding: 3px;\n"
+"                ")
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_2.setObjectName("frame_2")
@@ -111,8 +130,18 @@ class Ui_bitlockerGUI(object):
         self.cancelbutton.setGeometry(QtCore.QRect(320, 280, 151, 31))
         font = QtGui.QFont()
         font.setPointSize(15)
+        font.setBold(True)
+        font.setWeight(75)
         self.cancelbutton.setFont(font)
-        self.cancelbutton.setStyleSheet("background-color: #414E6E;color: #CCD2E6;")
+        self.cancelbutton.setStyleSheet("QPushButton {\n"
+"background-color:#414E6E;\n"
+"color: #CCD2E6;\n"
+"font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"background: rgba(139, 147, 178, .75);\n"
+"}")
         self.cancelbutton.setObjectName("cancelbutton")
         self.encrypPASS_2 = QtWidgets.QLineEdit(bitlockerGUI)
         self.encrypPASS_2.setGeometry(QtCore.QRect(150, 40, 311, 20))
@@ -149,7 +178,6 @@ class Ui_bitlockerGUI(object):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     bitlockerGUI = QtWidgets.QDialog()
     ui = Ui_bitlockerGUI()
