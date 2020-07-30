@@ -41,7 +41,7 @@ function main_menu {
   echo ""
   echo ""
   read -p 'Which command would you like to use? : ' com
-  if [ $com = 1 ]; then
+  if [[ ${com} = 1 ]]; then
     clear
     updt
     echo ""
@@ -49,43 +49,43 @@ function main_menu {
     read -p 'Press Enter key to continue: '
     clear
     main_menu
-  elif [ $com = 2 ]; then
+  elif [[ ${com} = 2 ]]; then
     clear
 	  usr_gru
-  elif [ $com = 3 ]; then
+  elif [[ ${com} = 3 ]]; then
     clear
     fwset
     read -p 'Press Enter key to continue: '
     clear
     main_menu
-  elif [ $com = 6 ]; then
+  elif [[ ${com} = 6 ]]; then
     clear
     clamtime
     read -p 'Press Enter key to continue: '
     clear
     main_menu
-  elif [ $com = 7 ]; then
+  elif [[ ${com} = 7 ]]; then
     clear
     alyn
     read -p 'Press Enter key to continue: '
     clear
     main_menu
-  elif [ $com = 8 ]; then
+  elif [[ ${com} = 8 ]]; then
     clear
     basic_config
     read -p 'Press Enter key to continue: '
     clear
     main_menu
-  elif [ $com = 9 ]; then
+  elif [[ ${com} = 9 ]]; then
     clear
     srchmedia
     read -p 'Press Enter key to continue: '
     clear
     main_menu
-  elif [ $com = 99 ]; then
+  elif [[ ${com} = 99 ]]; then
     clear
     exit
-  elif [ $com = 100 ]; then
+  elif [[ ${com} = 100 ]]; then
     sudo reboot
   fi
 }
@@ -93,9 +93,9 @@ function main_menu {
 function usr_gru {
   clear
   #for determining which title to show
-  if [ $dist = "Ubuntu" ] || [ $dist = "ubuntu" ]; then
+  if [[ $dist = "Ubuntu" ]] || [[ $dist = "ubuntu" ]]; then
 	  linUbunut
-  elif [ $dist = "Debian" ] || [ $dist = "debian" ]; then
+  elif [[ $dist = "Debian" ]] || [[ $dist = "debian" ]]; then
 	  linDebian
   else
 	  return
