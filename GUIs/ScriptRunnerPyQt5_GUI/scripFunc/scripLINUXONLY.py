@@ -10,8 +10,7 @@ ops = OS[0]
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-"""
-def resource_path(relative_path):
+"""def resource_path(relative_path):
     
     try:
         # PyInstaller creates a temp folder and stores path in _MEIPASS
@@ -19,12 +18,9 @@ def resource_path(relative_path):
     except Exception:
         base_path = os.path.abspath(".")
 
-    return os.path.join(base_path, relative_path)
-"""
+    return os.path.join(base_path, relative_path)"""
 
-'''
-This file is used to store commands that are to only be used on Linux machines
-'''
+'''This file is used to store commands that are to only be used on Linux machines'''
 
 
 class funcLINUX:

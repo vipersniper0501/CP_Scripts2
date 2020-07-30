@@ -2,10 +2,6 @@ import configparser
 import sys
 from pathlib import Path
 from sys import platform
-from threading import *
-
-import PyQt5
-from PyQt5 import QtWidgets
 
 from PyUIs.comdescript import Ui_comDescript
 from PyUIs.firstconf import *

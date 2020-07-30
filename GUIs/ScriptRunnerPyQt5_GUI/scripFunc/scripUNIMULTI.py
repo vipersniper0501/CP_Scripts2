@@ -1,6 +1,7 @@
 import getpass
 import os
 import subprocess as sub
+from subprocess import Popen as procPop
 from pathlib import Path
 from distutils.dir_util import copy_tree
 from shlex import quote as shlex_quote
@@ -37,16 +38,16 @@ def updateos():
     # TODO: Have function also update all drivers
     if ops == 'Ubuntu' or ops == 'debian':
         command = 'sudo apt-get update && apt-get upgrade -y'
-        sub.Popen(command.split())
+        procPop(command.split())
         command = 'sudo apt-get dist-upgrade'
-        sub.Popen(command.split())
+        procPop(command.split())
         print('Updates Completed!')
     elif platform == 'darwin':
         command = 'sudo softwareupdate -i -a'
-        sub.Popen(command.split())
+        procPop(command.split())
     elif ops == 'Manjaro Linux':
         command = 'sudo pacman -Syu'
-        sub.Popen(command.split())
+        procPop(command.split())
     elif platform == 'win32':
         commands = """ Write-Host("Installing module PSWindowsUpdate if not already installed... ")
         Install-Module PSWindowsUpdate
@@ -70,7 +71,7 @@ def updateos():
         Remove-Item -path C:\PSWindowsUpdate.log -ErrorAction SilentlyContinue
         Write-Host("")
         Write-Host("All updates are installed!")"""
-        sub.Popen(["powershell", "& {" + commands + "}"])
+        procPop(["powershell", "& {" + commands + "}"])
         print('Windows Update completed')
         print('Updating device drivers...')
         # FIXME: Need to find a way to confirm if the drivers are being updated
@@ -118,7 +119,7 @@ if($InstallationResult.RebootRequired) {
 Write-Host('Reboot required! please reboot now..') -Fore Red  
 } else { Write-Host('Done..') -Fore Green }
         """
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
     else:
         print('This command does not currently support this OS')
 
@@ -160,7 +161,7 @@ def fwl():
     if platform == 'linux':
 
         commandtest = 'sudo ufw status'
-        EXEC = sub.Popen(commandtest.split(), stdout = sub.PIPE)
+        EXEC = procPop(commandtest.split(), stdout = sub.PIPE)
         stdout, _ = EXEC.communicate()
         output = stdout.decode('utf-8')
 
@@ -169,9 +170,9 @@ def fwl():
                 commandufw = 'sudo pacman -S ufw --noconfirm'
             else:
                 commandufw = 'sudo apt install ufw -y'
-            sub.call(commandufw.split())
+            procPop(commandufw.split())
             command = 'sudo ufw enable'
-            sub.Popen(command.split())
+            procPop(command.split())
 
         commandlog = 'sudo ufw status > firewallLOG.txt'
         os.system(shlex_quote(commandlog))
@@ -186,86 +187,86 @@ def fwl():
         ssh = config.get('Services', 'ssh')
         if ssh == 'yes':
             command = 'sudo ufw allow 22'
-            sub.Popen(command.split())
+            procPop(command.split())
         elif ssh == 'no':
             command = 'sudo ufw deny 22'
-            sub.Popen(command.split())
+            procPop(command.split())
         # FTP
         ftp = config.get('Services', 'ftp')
         if ftp == 'yes':
             command = 'sudo ufw allow 21'
-            sub.Popen(command.split())
+            procPop(command.split())
         elif ftp == 'no':
             command = 'sudo ufw deny 21'
-            sub.Popen(command.split())
+            procPop(command.split())
         # WEB
         web = config.get('Services', 'web')
         if web == 'yes':
             command = 'sudo ufw allow 80'
-            sub.Popen(command.split())
+            procPop(command.split())
             https = config.get('Services', 'https')
         elif web == 'no':
             command = 'sudo ufw deny 80'
-            sub.Popen(command.split())
+            procPop(command.split())
         # HTTPS
         https = config.get('Services', 'https')
         if https == 'yes':
             command = 'sudo ufw allow 443'
-            sub.Popen(command.split())
+            procPop(command.split())
         elif https == 'no':
             command = 'sudo ufw deny 443'
-            sub.Popen(command.split())
+            procPop(command.split())
         # Samba
         smb = config.get('Services', 'smb')
         if smb == 'yes':
             command = 'sudo ufw allow 139'
-            sub.Popen(command.split())
+            procPop(command.split())
         elif smb == 'no':
             command = 'sudo ufw deny 139'
-            sub.Popen(command.split())
+            procPop(command.split())
         # SQL
         sql = config.get('Services', 'sql')
         if sql == 'yes':
             command = 'sudo ufw allow 3306'
-            sub.Popen(command.split())
+            procPop(command.split())
         elif sql == 'no':
             command = 'sudo ufw deny 3306'
-            sub.Popen(command.split())
+            procPop(command.split())
         # Rsync
         rsnc = config.get('Services', 'rsnc')
         if rsnc == 'yes':
             command = 'sudo ufw allow 873'
-            sub.Popen(command.split())
+            procPop(command.split())
         elif rsnc == 'no':
             command = 'sudo ufw deny 873'
-            sub.Popen(command.split())
+            procPop(command.split())
 
         print(
             '------------------The Following Ports Have Been Closed Automatically-----------------')
         print('Port 19 has been closed to stop potential DoS attack')
         command = 'sudo ufw deny 19'
-        sub.Popen(command.split())
+        procPop(command.split())
         print('Port 123 has been closed to stop potential trojans (NetController)')
         command = 'sudo ufw deny 123'
-        sub.Popen(command.split())
+        procPop(command.split())
         print('Port 161 has been closed to stop SNMP functionality')
         command = 'sudo ufw deny 161'
-        sub.Popen(command.split())
+        procPop(command.split())
         print('Port 162 has been closed to stop SNMPtrap functionality')
         command = 'sudo ufw deny 162'
-        sub.Popen(command.split())
+        procPop(command.split())
         print('Port 1434 has been blocked to stop potential DoS attack')
         command = 'sudo ufw deny 1434'
-        sub.Popen(command.split())
+        procPop(command.split())
         print('Port 23 has been denied due to Telnet functionality is not necessary')
         command = 'sudo ufw deny 23'
-        sub.Popen(command.split())
+        procPop(command.split())
 
         # This next service should probably be asked during first time configurations
 
         # print('Port 53 has been closed to stop the use of DNS functionality since this is not a DNS Server')
         # command = 'sudo ufw deny 53'
-        # sub.Popen(command.split())
+        # procPop(command.split())
 
         print('--------------------Firewall Settings Have Finished-----------------------')
     elif platform == 'win32':
@@ -273,162 +274,162 @@ def fwl():
         ssh = config.get('Services', 'ssh')
         if ssh == 'yes':
             command = "netsh advfirewall firewall add rule name='ssh' dir=in action=allow protocol=TCP localport=22"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='ssh' dir=out action=allow protocol=TCP localport=22"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         elif ssh == 'no':
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=22"
-            sub.call(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='ssh' dir=in action=block protocol=TCP localport=22"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='ssh' dir=out action=block protocol=TCP localport=22"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         # FTP
         ftp = config.get('Services', 'ftp')
         if ftp == 'yes':
             command = "netsh advfirewall firewall add rule name='ftp' dir=in action=allow protocol=TCP localport=21"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='ftp' dir=out action=allow protocol=TCP localport=21"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         elif ftp == 'no':
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=21"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='ftp' dir=in action=block protocol=TCP localport=21"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='ftp' dir=in action=block protocol=TCP localport=21"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         # WEB
         web = config.get('Services', 'web')
         if web == 'yes':
             command = "netsh advfirewall firewall add rule name='webserver' dir=in action=allow protocol=TCP localport=80"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='webserver' dir=out action=allow protocol=TCP localport=80"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         elif web == 'no':
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=80"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='webserver' dir=in action=block protocol=TCP localport=80"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='webserver' dir=out action=block protocol=TCP localport=80"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         # HTTPS
         https = config.get('Services', 'https')
         if https == 'yes':
             command = "netsh advfirewall firewall add rule name='https' dir=in action=allow protocol=TCP localport=443"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='https' dir=out action=allow protocol=TCP localport=443"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         elif https == 'no':
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=443"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='https' dir=in action=block protocol=TCP localport=443"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='https' dir=out action=block protocol=TCP localport=443"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         # Samba
         smb = config.get('Services', 'smb')
         if smb == 'yes':
             command = "netsh advfirewall firewall add rule name='SAMBA' dir=in action=allow protocol=TCP localport=139"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='SAMBA' dir=out action=allow protocol=TCP localport=139"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         elif smb == 'no':
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=139"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='SAMBA' dir=in action=block protocol=TCP localport=139"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='SAMBA' dir=out action=block protocol=TCP localport=139"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         # SQL
         sql = config.get('Services', 'sql')
         if sql == 'yes':
             command = "netsh advfirewall firewall add rule name='SQLserver' dir=in action=allow protocol=TCP localport=3306"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='SQLserver' dir=out action=allow protocol=TCP localport=3306"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         elif sql == 'no':
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=3306"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='SQLserver' dir=in action=block protocol=TCP localport=3306"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='SQLserver' dir=out action=block protocol=TCP localport=3306"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         # Rsync
         rsnc = config.get('Services', 'rsnc')
         if rsnc == 'yes':
             command = "netsh advfirewall firewall add rule name='RSYNC' dir=in action=allow protocol=TCP localport=873"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RSYNC' dir=out action=allow protocol=TCP localport=873"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         elif rsnc == 'no':
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=873"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RSYNC' dir=in action=block protocol=TCP localport=873"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RSYNC' dir=out action=block protocol=TCP localport=873"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         # RDP
         rdp = config.get('Services', 'rdp')  # must block/allow port 5985 and 3389
         if rdp == 'yes':
             command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=allow protocol=TCP localport=5985"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=allow protocol=TCP localport=3389"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=allow protocol=TCP localport=5985"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=allow protocol=TCP localport=3389"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         elif rdp == 'no':
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=5985"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=3389"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=block protocol=TCP localport=5985"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=block protocol=TCP localport=3389"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=block protocol=TCP localport=5985"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=block protocol=TCP localport=3389"
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
 
         print(
             '------------------The Following Ports Have Been Closed Automatically-----------------')
         print('Port 19 has been closed to stop potential DoS attack')
         command = "netsh advfirewall firewall add rule name='port19BLOCK' dir=in action=block protocol=TCP localport=19"
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
         command = "netsh advfirewall firewall add rule name='port19BLOCK' dir=out action=block protocol=TCP localport=19"
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
 
         print('Port 123 has been closed to stop potential trojans (NetController)')
         command = "netsh advfirewall firewall add rule name='port123BLOCK' dir=in action=block protocol=TCP localport=123"
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
         command = "netsh advfirewall firewall add rule name='port123BLOCK' dir=out action=block protocol=TCP localport=123"
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
 
         print('Port 161 has been closed to stop SNMP functionality')
         command = "netsh advfirewall firewall add rule name='port161BLOCK' dir=in action=block protocol=TCP localport=161"
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
         command = "netsh advfirewall firewall add rule name='port161BLOCK' dir=out action=block protocol=TCP localport=161"
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
 
         print('Port 162 has been closed to stop SNMPtrap functionality')
         command = "netsh advfirewall firewall add rule name='port162BLOCK' dir=in action=block protocol=TCP localport=162"
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
         command = "netsh advfirewall firewall add rule name='port162BLOCK' dir=out action=block protocol=TCP localport=162"
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
 
         print('Port 1434 has been blocked to stop potential DoS attack')
         command = "netsh advfirewall firewall add rule name='port1434BLOCK' dir=in action=block protocol=TCP localport=1434"
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
         command = "netsh advfirewall firewall add rule name='port1434BLOCK' dir=out action=block protocol=TCP localport=1434"
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
 
         print('Port 23 has been denied due to Telnet functionality is not necessary')
         command = "netsh advfirewall firewall add rule name='port23BLOCK' dir=in action=block protocol=TCP localport=23"
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
         command = "netsh advfirewall firewall add rule name='port23BLOCK' dir=out action=block protocol=TCP localport=23"
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
 
         print('--------------------Firewall Settings Have Finished-----------------------')
 
@@ -445,14 +446,14 @@ def servSet(ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
     if platform == 'linux':
         if ops == 'Ubuntu' or ops == 'Debian':
             command = 'sudo apt install libpam-cracklib'
-            sub.Popen(command.split())
+            procPop(command.split())
             command = 'sudo apt install wenglish'
-            sub.Popen(command.split())
+            procPop(command.split())
         elif ops == 'Manjaro Linux':
             command = 'sudo pacman -S libpam-cracklib'
-            sub.Popen(command.split())
+            procPop(command.split())
             command = 'sudo pacman -S wenglish'
-            sub.Popen(command.split())
+            procPop(command.split())
         if ssh == 'yes':
             shutil.copy('../configurations/linux_config_files/ssh_config',
                         '/etc/ssh/ssh_config')
@@ -467,7 +468,7 @@ def servSet(ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
                              sudo systemctl restart proftpd.service
                              echo "TLS/SSL keys have been created for ProFTP server  | ${thedate}"
                           """
-                sub.Popen(command.split())
+                procPop(command.split())
                 shutil.copy('../configurations/linux_config_files/proftpd.conf',
                             '/etc/proftpd/proftpd.conf')
                 shutil.copy('../configurations/linux_config_files/proftpTls_patch.conf',
@@ -503,7 +504,7 @@ def servSet(ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
             for i in range(0, len(featuresSMB)):
                 command = 'Enable-WindowsOptionalFeature -Online -FeatureName ' + featuresSMB[
                     i] + ' -NoRestart'
-                sub.call(["powershell", "& {" + command + "}"])
+                procPop(["powershell", "& {" + command + "}"])
         elif samba == 'no':
             featuresSMB = ["SmbDirect",
                            "SMB1Protocol",
@@ -513,18 +514,18 @@ def servSet(ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
             for i in range(0, len(featuresSMB)):
                 command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + featuresSMB[
                     i] + ' -NoRestart'
-                sub.call(["powershell", "& {" + command + "}"])
+                procPop(["powershell", "& {" + command + "}"])
         if ssh == 'yes':
             command = "Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
-            sub.call(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
-            sub.call(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             print('Added / confirmed installation of openssh capability')
         elif ssh == 'no':
             command = "Remove-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
-            sub.call(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             command = "Remove-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
-            sub.call(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
             print('removed openssh capability')
 
 
@@ -564,16 +565,16 @@ def basConf(rdp):
             raise ValueError('rdp should be either yes or no!')
         command = r"secedit /configure /db C:\\windows\\security\\local.sdb /cfg {0}".format(
             path)
-        sub.Popen(command.split())
+        procPop(command.split())
         command = 'gpupdate'
-        sub.Popen(command)
+        procPop(command)
         command = 'Enable-WindowsOptionalFeature –FeatureName "Internet-Explorer-Optional-amd64" -All –Online ' \
                   '-NoRestart '
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
         command = 'Enable-WindowsOptionalFeature –FeatureName ' \
                   '"Internet-Explorer-Optional-x86" -All –Online ' \
                   '-NoRestart '
-        sub.Popen(["powershell", "& {" + command + "}"])
+        procPop(["powershell", "& {" + command + "}"])
         disableCOM = ["SimpleTCP",
                       "TFTP",
                       "TelnetClient",
@@ -591,14 +592,13 @@ def basConf(rdp):
         for i in range(0, len(disableCOM)):
             command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[
                 i] + ' -NoRestart'
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
         windowsCapabilitesDisable = ["RIP.Listener~~~~0.0.1.0",
                                      "SNMP.Client~~~~0.0.1.0"]
         for i in range(0, len(windowsCapabilitesDisable)):
             command = "Remove-WindowsCapability -Online -Name " + windowsCapabilitesDisable[i]
-            sub.Popen(["powershell", "& {" + command + "}"])
+            procPop(["powershell", "& {" + command + "}"])
 
-        '''
         def completed():
             HEY = QMessageBox()
             HEY.setWindowTitle('Hey! Listen!')
@@ -607,14 +607,13 @@ def basConf(rdp):
             HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             HEY.exec_()
         completed()
-        '''
     elif platform == 'linux':
         if ops == 'Ubuntu' or ops == 'Debian':
             command = 'sudo apt install fail2ban'
-            sub.Popen(command.split())
+            procPop(command.split())
         elif ops == 'Manjaro Linux':
             command = 'sudo pacman -S fail2ban'
-            sub.Popen(command.split())
+            procPop(command.split())
 
         shutil.copy('../configurations/linux_config_files/common-password',
                     '/etc/pam.d/common-password')
@@ -636,11 +635,11 @@ let usersleft2=usersleft2-1
 echo $usersleft2
 sleep 0.5s
 done"""
-        sub.Popen(command.split())
+        procPop(command.split())
         gruname = 'wheel'
         command = 'sudo groupadd ' + gruname
         print(command)
-        sub.Popen(command.split())
+        procPop(command.split())
 
         username = pwd.getpwuid(os.getuid()).pw_name
         group = 'wheel'
@@ -773,18 +772,13 @@ def hashCheck():
                     if platform == 'linux' or platform == 'darwin':
                         filepath = self.fpath.text()
                         command = r'sudo ' + linhashtypes[hashnumber] + ' ' + filepath
-                        EXEC = sub.Popen(command.split(), stdout = sub.PIPE)
+                        EXEC = procPop(command.split(), stdout = sub.PIPE)
                         stdout, _ = EXEC.communicate()
                         output = stdout.decode("utf-8")
                         OUTPUTBOX(output)
                     elif platform == 'win32':
-                        print(winhashtypes[hashnumber])
                         filepath = self.fpath.text()
-                        command = r"Get-Filehash '" + filepath + "' -Algorithm " + winhashtypes[
-                            hashnumber] + " | Format-List"
-                        print(command)
-                        EXEC = sub.Popen(["powershell", "& {" + command + "}"],
-                                         stdout = sub.PIPE)
+                        EXEC = procPop(["powershell", "& {Get-Filehash '" + filepath + "' -Algorithm " + winhashtypes[hashnumber] + " | Format-List}"], stdout = sub.PIPE)
                         stdout, _ = EXEC.communicate()
                         output = stdout.decode("utf-8")
                         OUTPUTBOX(output)

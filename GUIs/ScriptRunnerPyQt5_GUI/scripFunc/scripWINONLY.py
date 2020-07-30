@@ -169,11 +169,9 @@ class funcWINONLY:
                         command = """
 $pass = ConvertTo-SecureString '""" + self.encrypPASS.text() + """' -AsPlainText -Force
 Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
-                        '''
-                        Only works if 'Allow BitLocker without compatible TPM' is enabled in the Group Policy
+                        '''Only works if 'Allow BitLocker without compatible TPM' is enabled in the Group Policy
                         Also does not encrypt right away. If you type 'Get-BitlockerVolume' in powershell, it will tell
-                        you how much has been encrypted so far.
-                        '''
+                        you how much has been encrypted so far.'''
                         print(command)
 
                         sub.Popen(["powershell", "& {" + command + "}"])
@@ -688,7 +686,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     self.close()
 
                 self.Cancel_button.clicked.connect(cancel_button)
-                self.Confirm_button.clicked.connect(lambda: confirmation())
+                self.Confirm_button.clicked.connect(confirmation())
 
         def callrmvusrfrosys():
             widget = rmvusrfrosys()
@@ -731,7 +729,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     self.close()
 
                 self.Cancel_button.clicked.connect(cancel_button)
-                self.Confirm_button.clicked.connect(lambda: confirmation())
+                self.Confirm_button.clicked.connect(confirmation())
 
         def callrmvgrufrosys():
             widget = rmvgrufrosys()
