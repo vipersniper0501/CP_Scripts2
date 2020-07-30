@@ -764,7 +764,7 @@ def hashCheck():
 
             def hashchk(hashnumber):
                 if len(self.fpath.text()) != 0 and Path(self.fpath.text()).is_file():
-                    linhashtypes = ['MD5', 'sha1sum', 'sha256sum', 'sha384sum', 'sha512sum']
+                    linhashtypes = ['md5sum', 'sha1sum', 'sha256sum', 'sha384sum', 'sha512sum']
                     winhashtypes = ['MD5', 'SHA1', 'SHA256', 'SHA384', 'SHA512']
 
                     if platform == 'linux' or platform == 'darwin':
