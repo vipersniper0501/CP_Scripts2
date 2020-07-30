@@ -160,7 +160,6 @@ def srchmedia():
 # linux and windows firewall settings. Can only change Mac firewall through GUI
 def fwl():
     if platform == 'linux':
-
         commandtest = 'sudo ufw status'
         EXEC = procPop(commandtest.split(), stdout = sub.PIPE)
         stdout, _ = EXEC.communicate()
@@ -177,7 +176,7 @@ def fwl():
 
         commandlog = 'sudo ufw status > firewallLOG.txt'
         os.system(shlex_quote(commandlog))
-        with open('firewall.txt', 'r') as f:
+        with open('firewallLOG.txt', 'r') as f:
             for line in f:
                 output = f.read()
         print('The following is the output of your original firewall settings:\n')
@@ -652,11 +651,9 @@ done"""
         shutil.copy('../configurations/linux_config_files/su', '/etc/pam.d/su')
 
 
-'''
-    Removal of Prohibited Software.
+'''Removal of Prohibited Software.
     Before running through list of software to remove, you must ask user if there are any required applications.
-    Give a list that pops up and have them check of programs from the list that they want to keep. 
-'''
+    Give a list that pops up and have them check of programs from the list that they want to keep.'''
 
 
 def rmProSoft():

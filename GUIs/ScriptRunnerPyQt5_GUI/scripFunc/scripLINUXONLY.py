@@ -43,7 +43,7 @@ class funcLINUX:
         if ops in ('Ubuntu', 'debian'):
             command = 'sudo apt install lynis -y'
             sub.Popen(command.split())
-            command = 'sudo touch auditRESULTS.txt'
+            command = 'touch auditRESULTS.txt'
             sub.Popen(command.split())
             command2 = 'sudo lynis audit system | tee auditRESULTS.txt'
             sub.Popen(command2.split())
@@ -56,5 +56,3 @@ class funcLINUX:
             sub.Popen(command.split())
             command2 = 'sudo lynis audit system | tee auditRESULTS.txt'
             sub.Popen(command2.split())
-        elif platform == 'win32':
-            print('This function does not currently support this OS.')
