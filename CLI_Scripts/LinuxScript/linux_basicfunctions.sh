@@ -40,12 +40,12 @@ function distro_select {
   echo ""
   echo 'What linux distro are you using? [Ex: Ubuntu]  : '
   read dist
-  if [ $dist = 'Ubuntu' ] || [ $dist = 'ubuntu' ]; then
+  if [[ ${dist} = "Ubuntu" ]] || [[ ${dist} = "ubuntu" ]]; then
     start_menu
-  elif [ $dist = 'Debian' ] || [ $dist = 'debian' ]; then
+  elif [[ ${dist} = "Debian" ]] || [[ ${dist} = "debian" ]]; then
     start_menu
   else
-    echo 'That is not an available distro for this script...'
+    echo "That is not an available distro for this script..."
     sleep 2s
     distro_select
   fi
@@ -54,7 +54,7 @@ function distro_select {
 function start_menu {
   clear
   sleep 1s
-  if [ -s ScriptSettings.sh ]; then
+  if [[ -s ScriptSettings.sh ]]; then
     echo
   else
     echo ''
@@ -62,12 +62,12 @@ function start_menu {
     echo ''
     read -p 'Does this system require SSH functionality? [y/n] : ' ssh
     read -p 'Does this system require FTP functionality? [y/n] : ' ftp
-    if [ $ftp = 'y' ]; then
+    if [[ ${ftp} = 'y' ]]; then
       read -p 'Does this system use Proftpd? [y/n] : ' proftp
       read -p 'Does this system use Vsftpd? [y/n] : ' vsftpd
     fi
     read -p 'Does this system require Webserver functionality? Does it need to host a website? [y/n] : ' web
-    if [ $web = 'y' ]; then
+    if [[ ${web} = 'y' ]]; then
       read -p 'Does this system use Apache2 webserver for hosting? [y/n] : ' apaweb
       read -p 'Does this system use Nginx webserver for hosting? [y/n] : ' nginweb
       read -p 'Does the Webserver require SSL or HTTPS? [y/n] : ' https

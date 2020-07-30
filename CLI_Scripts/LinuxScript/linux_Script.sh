@@ -16,9 +16,9 @@ thedate=$(date)
 function main_menu {
   clear
   #if statement for determining which title to show
-  if [ $dist = "Ubuntu" ] || [ $dist = "ubuntu" ]; then
+  if [[ ${dist} = "Ubuntu" ]] || [[ ${dist} = "ubuntu" ]]; then
     linUbunut
-  elif [ $dist = "Debian" ] || [ $dist = "debian" ]; then
+  elif [[ ${dist} = "Debian" ]] || [[ ${dist} = "debian" ]]; then
     linDebian
   fi
   echo -e "SCRIPT SETTINGS:\n" | tee Script_log.txt
@@ -93,9 +93,9 @@ function main_menu {
 function usr_gru {
   clear
   #for determining which title to show
-  if [[ $dist = "Ubuntu" ]] || [[ $dist = "ubuntu" ]]; then
+  if [[ ${dist} = "Ubuntu" ]] || [[ ${dist} = "ubuntu" ]]; then
 	  linUbunut
-  elif [[ $dist = "Debian" ]] || [[ $dist = "debian" ]]; then
+  elif [[ ${dist} = "Debian" ]] || [[ ${dist} = "debian" ]]; then
 	  linDebian
   else
 	  return
@@ -115,51 +115,51 @@ function usr_gru {
   echo ""
   echo "99.) Back to Main Menu"
   read -p 'Which command would you like to use? : ' com
-  if [ $com = 1 ]; then
+  if [[ ${com} = 1 ]]; then
     clear
     aduser
     usr_gru
-  elif [ $com = 2 ]; then
+  elif [[ ${com} = 2 ]]; then
     clear
     rmuser
     usr_gru
-  elif [ $com = 3 ]; then
+  elif [[ ${com} = 3 ]]; then
     clear
     crtgru
     usr_gru
-  elif [ $com = 4 ]; then
+  elif [[ ${com} = 4 ]]; then
     clear
     rmgru
     usr_gru
-  elif [ $com = 5 ]; then
+  elif [[ ${com} = 5 ]]; then
     clear
     usrtogru
     usr_gru
-  elif [ $com = 6 ]; then
+  elif [[ ${com} = 6 ]]; then
     clear
     rmfrogru
     usr_gru
-  elif [ $com = 7 ]; then
+  elif [[ ${com} = 7 ]]; then
     clear
     lsusrs
     usr_gru
-  elif [ $com = 8 ]; then
+  elif [[ ${com} = 8 ]]; then
     clear
     lsgrus
     usr_gru
-  elif [ $com = 9 ]; then
+  elif [[ ${com} = 9 ]]; then
     clear
     grumem
     usr_gru
-  elif [ $com = 10 ]; then
+  elif [[ ${com} = 10 ]]; then
     clear
     usrgrumem
     usr_gru
-  elif [ $com = 11 ]; then
+  elif [[ ${com} = 11 ]]; then
     clear
     chpaswdall
     usr_gru
-  elif [ $com = 99 ]; then
+  elif [[ ${com} = 99 ]]; then
 	  main_menu
   fi
 }
@@ -168,6 +168,7 @@ function usr_gru {
 ############### Start Script ###########
 function start_scrpt {
   clear
+  sudo chsh /bin/bash
   echo ""
   if [[ $(/usr/bin/id -u) -ne 0 ]]; then	#this statement checks for if you are running as superuser (sudo)
 	  echo "You are not root. You must be running as root to use this script"
@@ -177,9 +178,9 @@ function start_scrpt {
   echo "Log Created ${thedate}" > Script_log.txt
   sudo chmod 777 Script_log.txt
   read -p 'Have you completed all of the Forensics Questions? [y/n] : ' fqs
-  if [ $fqs = "y" ]; then
+  if [[ ${fqs} = "y" ]]; then
 	  echo
-  elif [ $fqs = "debug" ]; then #for debugging
+  elif [[ ${fqs} = "debug" ]]; then #for debugging
     set -x #Displays script code while running
     echo
   else

@@ -2,6 +2,8 @@
 
 == Description
 
+Current Version - 1.2.10.2
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed elementum mauris. Aliquam egestas rhoncus augue ut pharetra. Sed ac efficitur ipsum, vel porta nisi. Aenean ultricies vitae justo vitae eleifend.
 
 == Supported Commands

@@ -30,32 +30,32 @@ function fwset {	#Function configures firewall settings
   sudo ufw enable
   echo "UFW has been enabled on the system | ${thedate}" >> Script_log.txt
   #SSH
-  if [[ $ssh = "y" ]]; then
+  if [[ ${ssh} = "y" ]]; then
     sudo ufw allow 22
     echo "Port 22 has been opened for SSH networking | ${thedate}" >> Script_log.txt
     echo "## y"
-  elif [[ $ssh = "n" ]]; then
+  elif [[ ${ssh} = "n" ]]; then
     sudo ufw deny 22
     echo "Port 22 has been closed to stop SSH networking | ${thedate}" >> Script_log.txt
     echo "## n"
   fi
   #Ftp
-  if [[ $ftp = "y" ]]; then
+  if [[ ${ftp} = "y" ]]; then
     sudo ufw allow 21
     echo "Port 21 has been opened for FTP networking | ${thedate}" >> Script_log.txt
     echo "#### y"
-  elif [[ $ftp = "n" ]]; then
+  elif [[ ${ftp} = "n" ]]; then
     sudo ufw deny 21
     echo "Port 21 has been closed to stop FTP networking | ${thedate}" >> Script_log.txt
     echo "#### n"
   fi
   #Web
-  if [[ $web = "y" ]]; then
+  if [[ ${web} = "y" ]]; then
     sudo ufw allow 80
     echo "###### y"
     echo "Port 80 has been opened for basic Webserver hosting | ${thedate}" >> Script_log.txt
     #read -p 'Does the Webserver require SSL or HTTPS? [y/n] : ' https
-    if [[ $https = "y" ]]; then
+    if [[ ${https} = "y" ]]; then
       sudo ufw allow 443
       echo "Port 443 has been opened for HTTPS or SSL | ${thedate}" >> Script_log.txt
       echo "######## y"
@@ -64,37 +64,37 @@ function fwset {	#Function configures firewall settings
       echo "Port 443 has been closed to stop HTTPS or SSL | ${thedate}" >> Script_log.txt
       echo "######## n"
     fi
-  elif [[ $web = "n" ]]; then
+  elif [[ ${web} = "n" ]]; then
 	  sudo ufw deny 80
 	  echo "Port 80 has been closed to stop the use of HTTP | ${thedate}" >> Script_log.txt
 	  echo "###### n"
   fi
   #Samba
-  if [[ $smb = "y" ]]; then
+  if [[ ${smb} = "y" ]]; then
     sudo ufw allow 139
     echo "Port 139 has been opened for SMB file sharing | ${thedate}" >> Script_log.txt
     echo "######## y"
-  elif [[ $smb = "n" ]]; then
+  elif [[ ${smb} = "n" ]]; then
     sudo ufw deny 139
     echo "Port 139 has been closed to stop SMB file sharing | ${thedate}" >> Script_log.txt
     echo "######## n"
   fi
   #SQL
-  if [[ $sql = "y" ]]; then
+  if [[ ${sql} = "y" ]]; then
     sudo ufw allow 3306
     echo "Port 3306 has been opened to provide SQL database functionality | ${thedate}" >> Script_log.txt
     echo "########## y"
-  elif [[ $sql = "n" ]]; then
+  elif [[ ${sql} = "n" ]]; then
     sudo ufw deny 3306
     echo "Port 3306 has been closed to deny SQL database functionality | ${thedate}" >> Script_log.txt
     echo "########## n"
   fi
   #Rsync
-  if [[ $rsnc = "y" ]]; then
+  if [[ ${rsnc} = "y" ]]; then
     sudo ufw allow 873
     echo "Port 873 has been opened to allow rsync service functionality  | ${thedate}" >> Script_log.txt
     echo "############ y"
-  elif [[ $rsnc = "n" ]]; then
+  elif [[ ${rsnc} = "n" ]]; then
     sudo ufw deny 873
     echo "Port 873 has been closed to deny rsync service functionality  | ${thedate}" >> Script_log.txt
     echo "############ n"
@@ -140,7 +140,7 @@ function alyn {
 function clamtime {
   echo "This command will take a long time! Once started you will no longer be able to use this terminal until the command has completed. I recommend that if you need to be able to continue using this script, that you then open a another tab and run the script again from that tab while the scan is running."
   read -p "Are you sure you want to start this now? [y/n]" clams
-  if [ $clams = 'y' ]; then
+  if [[ ${clams} = 'y' ]]; then
     echo "Starting install of clamav if not installed already on system...  | ${thedate}" >> Script_log.txt
     sudo apt install clamav -y
     sudo freshclam #make sure clamav's virus and malware database is updated
@@ -187,13 +187,13 @@ function basic_config {
   userlist2=( $(eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1) )
   usersleft2=${#userlist2[@]}  #this variable is equivelent to the number of users in list $userlist
   i=0
-  while [ $usersleft2 != 0 ]; do
+  while [[ ${usersleft2} != 0 ]]; do
     sudo rm -r /home/${userlist2[$i]}/.ssh
     echo "User ${userlist2[$i]} no longer has any SSH keys | ${thedate}" | tee Script_log.txt
     let i=i+1
-    echo $i
+    echo ${i}
     let usersleft2=usersleft2-1
-    echo $usersleft2
+    echo ${usersleft2}
     sleep 0.5s
   done
   
@@ -201,13 +201,13 @@ function basic_config {
   clear
 
   #SSH
-  if [ $sshconf = 'y' ]; then
+  if [[ ${sshconf} = 'y' ]]; then
     sudo cp sshConfPatch /etc/ssh/ssh_config  #replacing ssh client configuration files with pre-configured version
     sudo cp sshdConfPatch /etc/ssh/sshd_config  #replacing sshd server configuration files with pre-configured version
     echo "Both ssh client and server settings have been configured  | ${thedate}" | tee Script_log.txt
   fi
   #FTP
-  if [ $ftpconf = 'y' ]; then
+  if [[ ${ftpconf} = 'y' ]]; then
     sudo cp /etc/proftpd/proftpd.conf ~/Desktop/orig_proftpd.conf
     sudo mkdir /etc/proftpd/ssl
     sudo openssl req -new -x509 -days 365 -nodes -out /etc/proftpd/ssl/proftpd.cert.pem -keyout /etc/proftpd/ssl/proftpd.key.pem
@@ -217,12 +217,12 @@ function basic_config {
     echo "Proftpd server settings have been configured  | ${thedate}" | tee Script_log.txt
   fi
   #Samba
-  if [ $smbconf = 'y' ]; then
+  if [[ ${smbconf} = 'y' ]]; then
     sudo cp smbConf_patch.conf /etc/samba/smb.conf #replacing samba configuration files
     echo "Samba server settings have been configured  | ${thedate}" | tee Script_log.txt
   fi
   #Web
-  if [ $webocnf = 'y' ]; then
+  if [[ ${webocnf} = 'y' ]]; then
     sudo cp apaConf_patch.conf /etc/apache2/apache2.conf #replacing apache webserver configuration files
     echo "Apache2 web server settings have been configured  | ${thedate}" | tee Script_log.txt
   fi
