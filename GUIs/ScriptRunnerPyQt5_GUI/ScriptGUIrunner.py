@@ -360,7 +360,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         self.header_title.setWordWrap(True)
         self.descriptions.setWordWrap(True)
-        scripfunc = ScriptRunnerFunc()
+        # scripfunc = ScriptRunnerFunc()
         funcWIN = funcWINONLY()
         funcWINUSRGRU = funcWINusrgru()
         funcLIN = funcLINUX()
@@ -401,8 +401,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                     self.stackedWidget.setCurrentIndex(i)
                 else:
                     wrongos()
-
-        display(0)
 
         def light_darkMODE(i):
             print('Mode change')
@@ -490,6 +488,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             elif x == QMessageBox.No:
                 print('Cancelling...')
 
+        display(0)
+
         self.uniCom.clicked.connect(lambda: display(0))
         self.winCom.clicked.connect(lambda: display(1))
         self.linCom.clicked.connect(lambda: display(2))
@@ -504,22 +504,22 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         self.actionChange_Configurations.triggered.connect(lambda: self.threader(chngconf()))
 
         # Universal Buttons
-        self.Updates_buttonUNI.clicked.connect(lambda: self.threader(scripfunc.updateos()))
+        self.Updates_buttonUNI.clicked.connect(lambda: self.threader(updateos()))
         # self.Updates_buttonUNI.setStyleSheet('Updates_buttonUNI:hover{\nbackground-color: '
         #                                      '#8B93B2;\n}')
         self.rmvprosoftbuttonUNI.clicked.connect(lambda: self.threader(indev()))  #
-        self.srchmedbuttonUNI.clicked.connect(lambda: self.threader(scripfunc.srchmedia))
-        self.chkhashfile_buttonUNI.clicked.connect(lambda: self.threader(scripfunc.hashCheck()))
+        self.srchmedbuttonUNI.clicked.connect(lambda: self.threader(srchmedia()))
+        self.chkhashfile_buttonUNI.clicked.connect(lambda: self.threader(hashCheck()))
 
         # Windows Main Menu Commands
-        self.fwlbutton_2.clicked.connect(lambda: self.threader(scripfunc.fwl))
+        self.fwlbutton_2.clicked.connect(lambda: self.threader(fwl))
         self.basicConfbutton_2.clicked.connect(
             lambda: self.threader(
-                confirmation(lambda: scripfunc.basConf(config.get('Services', 'rdp')))))  #
-        self.rmvprosoftbutton_2.clicked.connect(lambda: self.threader(scripfunc.rmProSoft()))
+                confirmation(lambda: basConf(config.get('Services', 'rdp')))))  #
+        self.rmvprosoftbutton_2.clicked.connect(lambda: self.threader(rmProSoft()))
         self.enblBitLockerbutton.clicked.connect(lambda: self.threader(funcWIN.BITLOCKER()))
         self.servicesConfButton_4.clicked.connect(lambda: self.threader(confirmation(lambda:
-                                                                                     scripfunc.servSet(
+                                                                                     servSet(
                                                                                          config.get(
                                                                                              'Services',
                                                                                              'ssh'),
@@ -558,7 +558,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         self.chngusrpas_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.chngpasswdofall()))
 
         # Linux Main Menu Commands
-        self.fwlbutton_3.clicked.connect(lambda: self.threader(scripfunc.fwl))
+        self.fwlbutton_3.clicked.connect(lambda: self.threader(fwl))
         self.auditbutton_3.clicked.connect(lambda: self.threader(funcLIN.alyn))
         self.malrembutton_3.clicked.connect(lambda: self.threader(funcLIN.malRem()))  #
         self.rmvprosoftbutton_3.clicked.connect(lambda: self.threader(indev()))  #
