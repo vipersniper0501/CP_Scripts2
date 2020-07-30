@@ -127,6 +127,7 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
 # Universal Search Media
 def srchmedia():
     if platform == 'linux' or platform == 'darwin':
+        procPop('touch /home/$USER/Desktop/LotTest.txt')
         extensions = (
             '.jpg', '.mp4', '.flv', '.avi', '.wmv', '.mov', '.png', '.tif', '.gif', '.mp3', '.wma',
             '.aif', '.jar')

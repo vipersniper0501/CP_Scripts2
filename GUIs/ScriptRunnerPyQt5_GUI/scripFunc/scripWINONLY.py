@@ -686,7 +686,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     self.close()
 
                 self.Cancel_button.clicked.connect(cancel_button)
-                self.Confirm_button.clicked.connect(confirmation())
+                self.Confirm_button.clicked.connect(lambda: confirmation())
 
         def callrmvusrfrosys():
             widget = rmvusrfrosys()
@@ -729,7 +729,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     self.close()
 
                 self.Cancel_button.clicked.connect(cancel_button)
-                self.Confirm_button.clicked.connect(confirmation())
+                self.Confirm_button.clicked.connect(lambda: confirmation())
 
         def callrmvgrufrosys():
             widget = rmvgrufrosys()
