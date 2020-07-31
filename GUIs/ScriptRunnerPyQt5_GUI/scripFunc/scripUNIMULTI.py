@@ -717,6 +717,7 @@ def hashCheck():
         def __init__(self, parent = None):
             super(hashRUN, self).__init__(parent)
             self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+            self.setFixedSize(431, 179)
             self.setupUi(self)
 
             def fileselection():

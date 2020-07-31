@@ -7,6 +7,7 @@ from PyUIs.comdescript import Ui_comDescript
 from PyUIs.firstconf import *
 from PyUIs.main import Ui_MainWindow
 from PyUIs.progabout import Ui_About
+from PyUIs.howToUI import Ui_How_To
 from scripFunc.scripLINUXONLY import *
 from scripFunc.scripUNIMULTI import *
 from scripFunc.scripWINONLY import *
@@ -406,28 +407,23 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                 print('Light Mode in development')
 
         def showHOWTO():
-            HOWTO = QMessageBox()
-            HOWTO.setWindowTitle('Hey! This is a How To!')
-            HOWTO.setText("""
-+----------------------------------------+
-|    H o w  T o  U s e  T h e  P r o g r a m    |
-+----------------------------------------+
+            class showHowToUi(QDialog, Ui_How_To):
+                def __init__(self, parent = None):
+                    super(showHowToUi, self).__init__(parent)
+                    self.setupUi(self)
+                    self.setFixedSize(400, 305)
+                    self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
 
-1.) Run as root
-2.) Choose command that you would like to use
-3.) Click it
-4.) Sit back and relax while the command runs   :)
-""")
-            HOWTO.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            HOWTO.setStyleSheet('background-color: #414E6E; color: #CCD2E6')
-            HOWTO.exec_()
+            widget = showHowToUi()
+            widget.exec_()
+
 
         def runCOMDESCRIPT():
             class showComDescript(QDialog, Ui_comDescript):
                 def __init__(self, parent = None):
                     super(showComDescript, self).__init__(parent)
                     self.setupUi(self)
-                    self.setFixedSize(531, 360)
+                    self.setFixedSize(532, 388)
                     self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
 
             def callCOMdescript():
@@ -441,7 +437,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                 def __init__(self, parent = None):
                     super(showAboutProg, self).__init__(parent)
                     self.setupUi(self)
-                    self.setFixedSize(330, 250)
+                    self.setFixedSize(390, 282)
                     self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
 
             def callaboutprog():
@@ -486,100 +482,104 @@ class Mainstart(QMainWindow, Ui_MainWindow):
 
         display(0)
 
-        self.uniCom.clicked.connect(lambda: display(0))
-        self.winCom.clicked.connect(lambda: display(1))
-        self.linCom.clicked.connect(lambda: display(2))
-        self.macCom.clicked.connect(lambda: display(3))
-        self.actionLight_Mode.triggered.connect(lambda: light_darkMODE(1))
-        self.actionDark_Mode.triggered.connect(lambda: light_darkMODE(0))
+        def Button_Connect():
+            self.uniCom.clicked.connect(lambda: display(0))
+            self.winCom.clicked.connect(lambda: display(1))
+            self.linCom.clicked.connect(lambda: display(2))
+            self.macCom.clicked.connect(lambda: display(3))
+            self.actionLight_Mode.triggered.connect(lambda: light_darkMODE(1))
+            self.actionDark_Mode.triggered.connect(lambda: light_darkMODE(0))
 
-        # Menubar Buttons
-        self.actionHow_To_Use_Program.triggered.connect(lambda: self.threader(showHOWTO()))
-        self.actionAbout_Creator.triggered.connect(lambda: self.threader(runABOUTPROG()))
-        self.actionCommand_Descriptions.triggered.connect(lambda: self.threader(runCOMDESCRIPT()))
-        self.actionChange_Configurations.triggered.connect(lambda: self.threader(chngconf()))
+            # Menubar Buttons
+            self.actionHow_To_Use_Program.triggered.connect(lambda: self.threader(showHOWTO()))
+            self.actionAbout_Creator.triggered.connect(lambda: self.threader(runABOUTPROG()))
+            self.actionCommand_Descriptions.triggered.connect(lambda: self.threader(runCOMDESCRIPT()))
+            self.actionChange_Configurations.triggered.connect(lambda: self.threader(chngconf()))
 
-        # Universal Buttons
-        self.Updates_buttonUNI.clicked.connect(lambda: self.threader(updateos()))
-        # self.Updates_buttonUNI.setStyleSheet('Updates_buttonUNI:hover{\nbackground-color: '
-        #                                      '#8B93B2;\n}')
-        self.rmvprosoftbuttonUNI.clicked.connect(lambda: self.threader(indev()))  #
-        self.srchmedbuttonUNI.clicked.connect(lambda: self.threader(srchmedia()))
-        self.chkhashfile_buttonUNI.clicked.connect(lambda: self.threader(hashCheck()))
+            # Universal Buttons
+            self.Updates_buttonUNI.clicked.connect(lambda: self.threader(updateos()))
+            # self.Updates_buttonUNI.setStyleSheet('Updates_buttonUNI:hover{\nbackground-color: '
+            #                                      '#8B93B2;\n}')
+            self.rmvprosoftbuttonUNI.clicked.connect(lambda: self.threader(indev()))  #
+            self.srchmedbuttonUNI.clicked.connect(lambda: self.threader(srchmedia()))
+            self.chkhashfile_buttonUNI.clicked.connect(lambda: self.threader(hashCheck()))
 
-        # Windows Main Menu Commands
-        self.fwlbutton_2.clicked.connect(lambda: self.threader(fwl))
-        self.basicConfbutton_2.clicked.connect(
-            lambda: self.threader(
-                confirmation(lambda: basConf(config.get('Services', 'rdp')))))  #
-        self.rmvprosoftbutton_2.clicked.connect(lambda: self.threader(rmProSoft()))
-        self.enblBitLockerbutton.clicked.connect(lambda: self.threader(funcWIN.BITLOCKER()))
-        self.servicesConfButton_4.clicked.connect(lambda: self.threader(confirmation(lambda:
-                                                                                     servSet(
-                                                                                         config.get(
-                                                                                             'Services',
-                                                                                             'ssh'),
-                                                                                         config.get(
-                                                                                             'Services',
-                                                                                             'smb'),
-                                                                                         config.get(
-                                                                                             'Services',
-                                                                                             'web'),
-                                                                                         config.get(
-                                                                                             'Services',
-                                                                                             'apaweb'),
-                                                                                         config.get(
-                                                                                             'Services',
-                                                                                             'nginweb'),
-                                                                                         config.get(
-                                                                                             'Services',
-                                                                                             'ftp'),
-                                                                                         config.get(
-                                                                                             'Services',
-                                                                                             'proftpd'),
-                                                                                         config.get(
-                                                                                             'Services',
-                                                                                             'vsftpd')))))
-        self.browserConf.clicked.connect(lambda: self.threader(funcWIN.browserCONF()))
-        # Windows User Group Commands
-        self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.lsgruusrin_3,
-                                self.lslocagru_3, self.lslocausr_3, self.lsmemgru_3,
-                                self.rmvusrfrogru_3]
-        for i in range(0, len(self.WINUSRGRUBUTTON)):
-            self.WINUSRGRUBUTTON[i].clicked.connect(lambda: self.threader(indev()))  #
+            # Windows Main Menu Commands
+            self.fwlbutton_2.clicked.connect(lambda: self.threader(fwl))
+            self.basicConfbutton_2.clicked.connect(
+                lambda: self.threader(
+                    confirmation(lambda: basConf(config.get('Services', 'rdp')))))  #
+            self.rmvprosoftbutton_2.clicked.connect(lambda: self.threader(rmProSoft()))
+            self.enblBitLockerbutton.clicked.connect(lambda: self.threader(funcWIN.BITLOCKER()))
+            self.servicesConfButton_4.clicked.connect(lambda: self.threader(confirmation(lambda:
+                                                                                         servSet(
+                                                                                             config.get(
+                                                                                                 'Services',
+                                                                                                 'ssh'),
+                                                                                             config.get(
+                                                                                                 'Services',
+                                                                                                 'smb'),
+                                                                                             config.get(
+                                                                                                 'Services',
+                                                                                                 'web'),
+                                                                                             config.get(
+                                                                                                 'Services',
+                                                                                                 'apaweb'),
+                                                                                             config.get(
+                                                                                                 'Services',
+                                                                                                 'nginweb'),
+                                                                                             config.get(
+                                                                                                 'Services',
+                                                                                                 'ftp'),
+                                                                                             config.get(
+                                                                                                 'Services',
+                                                                                                 'proftpd'),
+                                                                                             config.get(
+                                                                                                 'Services',
+                                                                                                 'vsftpd')))))
+            self.browserConf.clicked.connect(lambda: self.threader(funcWIN.browserCONF()))
+            # Windows User Group Commands
+            self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.lsgruusrin_3,
+                                    self.lsmemgru_3, self.rmvusrfrogru_3]
+            for i in range(0, len(self.WINUSRGRUBUTTON)):
+                self.WINUSRGRUBUTTON[i].clicked.connect(lambda: self.threader(indev()))  #
 
-        self.adusrtosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.addusr()))
-        self.rmvusrfrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remusr()))
-        self.rmvgrufrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remgrufrosys()))
-        self.chngusrpas_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.chngpasswdofall()))
+            self.adusrtosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.addusr()))
+            self.rmvusrfrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remusr()))
+            self.rmvgrufrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remgrufrosys()))
+            self.lslocausr_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.lslocausrs()))
+            self.lslocagru_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.lslocagrus()))
+            self.chngusrpas_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.chngpasswdofall()))
 
-        # Linux Main Menu Commands
-        self.fwlbutton_3.clicked.connect(lambda: self.threader(fwl))
-        self.auditbutton_3.clicked.connect(lambda: self.threader(funcLIN.alyn))
-        self.malrembutton_3.clicked.connect(lambda: self.threader(funcLIN.malRem()))  #
-        self.rmvprosoftbutton_3.clicked.connect(lambda: self.threader(indev()))  #
-        self.basicConfbutton_3.clicked.connect(lambda: self.threader(indev()))  #
-        self.servicesConfButton_2.clicked.connect(lambda: self.threader(indev()))  #
-        # Linux User Group Commands
-        self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4, self.adusrtosys_4,
-                                   self.chngusrpas_4,
-                                   self.lsgruusrin_4, self.lslocagru_4, self.lslocausr_4,
-                                   self.lsmemgru_4,
-                                   self.rmvgrufrosys_4, self.rmvusrfrogru_4, self.rmvusrfrosys_4]
-        for i in range(0, 11):
-            self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: self.threader(indev()))  #
+            # Linux Main Menu Commands
+            self.fwlbutton_3.clicked.connect(lambda: self.threader(fwl))
+            self.auditbutton_3.clicked.connect(lambda: self.threader(funcLIN.alyn))
+            self.malrembutton_3.clicked.connect(lambda: self.threader(funcLIN.malRem()))  #
+            self.rmvprosoftbutton_3.clicked.connect(lambda: self.threader(indev()))  #
+            self.basicConfbutton_3.clicked.connect(lambda: self.threader(indev()))  #
+            self.servicesConfButton_2.clicked.connect(lambda: self.threader(indev()))  #
+            # Linux User Group Commands
+            self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4, self.adusrtosys_4,
+                                       self.chngusrpas_4,
+                                       self.lsgruusrin_4, self.lslocagru_4, self.lslocausr_4,
+                                       self.lsmemgru_4,
+                                       self.rmvgrufrosys_4, self.rmvusrfrogru_4, self.rmvusrfrosys_4]
+            for i in range(0, 11):
+                self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: self.threader(indev()))  #
 
-        # MacOS Buttons
-        self.MACBUTTONS = [self.rmvprosoftbutton_4, self.malrembutton_4, self.basicConfbutton_4,
-                           self.servicesConfButton_3, self.adgrutosys_5, self.adusrtogru_5,
-                           self.adusrtosys_5,
-                           self.chngusrpas_5, self.lsgruusrin_5, self.lslocagru_5, self.lslocausr_5,
-                           self.lsmemgru_5,
-                           self.rmvgrufrosys_5, self.rmvusrfrogru_5, self.rmvusrfrosys_5]
-        for i in range(0, 15):
-            self.MACBUTTONS[i].clicked.connect(lambda: self.threader(indev()))
+            # MacOS Buttons
+            self.MACBUTTONS = [self.rmvprosoftbutton_4, self.malrembutton_4, self.basicConfbutton_4,
+                               self.servicesConfButton_3, self.adgrutosys_5, self.adusrtogru_5,
+                               self.adusrtosys_5,
+                               self.chngusrpas_5, self.lsgruusrin_5, self.lslocagru_5, self.lslocausr_5,
+                               self.lsmemgru_5,
+                               self.rmvgrufrosys_5, self.rmvusrfrogru_5, self.rmvusrfrosys_5]
+            for i in range(0, 15):
+                self.MACBUTTONS[i].clicked.connect(lambda: self.threader(indev()))
 
-        self.quit_button_3.clicked.connect(quitButton)
+            self.quit_button_3.clicked.connect(quitButton)
+
+        Button_Connect()
 
 
 if __name__ == "__main__":

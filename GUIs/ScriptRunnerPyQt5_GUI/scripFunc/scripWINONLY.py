@@ -21,6 +21,7 @@ ops = OS[0]
 config = configparser.ConfigParser()
 config.read('config.ini')
 
+
 # This function is not really needed, but nice to have if needed.
 # def resource_path(relative_path):
 #     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -37,6 +38,15 @@ config.read('config.ini')
 # TODO: When done, possible convert the try and if statements used for enforcing the complexity requirement into it's
 #  own function to reduce the number of lines in the file.
 
+# Allows for program to continue running while the function executes.
+def threader(com):
+    try:
+        threader = Thread(target = com)
+        threader.start()
+    except Exception as e:
+        print(e)
+        print('Could not start thread')
+
 
 class funcWINONLY:
     def BITLOCKER(self):
@@ -44,6 +54,7 @@ class funcWINONLY:
             def __init__(self, parent = None):
                 super(bitRUN, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setFixedSize(483, 323)
                 self.setupUi(self)
                 self.EXECUTE()
 
@@ -288,15 +299,6 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                         buttons[i].setChecked(True)
                     i = i + 1
 
-        # Allows for program to continue running while the function executes.
-        def threader(com):
-            try:
-                threader = Thread(target = com)
-                threader.start()
-            except Exception as e:
-                print(e)
-                print('Could not start thread')
-
         def callBITRUN():
             widget = bitRUN()
             widget.exec_()
@@ -336,21 +338,13 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
         print('Firefox has been configured')
 
 
-def threader(com):
-    try:
-        threader = Thread(target = com)
-        threader.start()
-    except Exception as e:
-        print(e)
-        print('Could not start thread')
-
-
 class funcWINusrgru:
     def addusr(self):
         class addusrtosys(QDialog, Ui_addUSR):
             def __init__(self, parent = None):
                 super(addusrtosys, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setFixedSize(345, 187)
                 self.setupUi(self)
                 self.EXECUTE()
 
@@ -551,6 +545,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
             def __init__(self, parent = None):
                 super(rmvusrfrosys, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setFixedSize(302, 410)
                 self.setupUi(self)
                 self.EXECUTE()
 
@@ -566,63 +561,30 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     output = stdout.decode("utf-8")
                     output = output.split("\n")
                     # print(output)
-                    n = []
-                    for i in range(6, len(output) - 3):
-                        # print(output[i])
-                        # if '\r' in output[i]:
-                        #     print('found in ' + str(i))
-                        #     print(output[i])
-                        n.append(output[i])
-                    a = []
-                    for i in range(0, len(n)):
-                        x = n[i]
-                        y = x.split('\r')
-                        # print(y)
-                        a.append(y)
-                    # print(a)
                     names = []
-                    for i in range(0, len(a)):
-                        # print(a[i])
-                        x = a[i]
-                        y = x[0]
-                        # print(y)
-                        names.append(y)
-                    # print(names)
+                    for i0 in range(6, len(output) - 3):
+                        w = output[i0].split('\r')
+                        x = w[0]
+                        names.append(x)
 
-                    # Local Administrators are added to list of names
+                    '''Local Administrators are added to list of names'''
                     EXEC = sub.Popen(["powershell", "& {net localgroup administrators}"],
                                      stdout = sub.PIPE)
                     stdout, _ = EXEC.communicate()
                     output = stdout.decode("utf-8")
                     output = output.split("\n")
-                    # print(output)
-                    n2 = []
-                    for i in range(6, len(output) - 3):
-                        # print(output[i])
-                        # if '\r' in output[i]:
-                        #     print('found in ' + str(i))
-                        #     print(output[i])
-                        n2.append(output[i])
-                    a2 = []
-                    for i in range(0, len(n2)):
-                        x = n2[i]
-                        y = x.split('\r')
-                        # print(y)
-                        a2.append(y)
-                    # print(a)
-                    for i in range(0, len(a2)):
-                        # print(a[i])
-                        x = a2[i]
-                        y = x[0]
-                        EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
-                        stdout, _ = EXEC.communicate()
-                        output = stdout.decode("utf-8")
-                        output = output.split('\r\n')
-                        if output[0] == y:
-                            y = output[0] + '   (Current User)'
-                        # print(y)
-                        names.append(y)
-                    # print(names)
+
+                    EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output2 = stdout.decode("utf-8")
+                    current_user = output2.split('\r\n')
+                    for i4 in range(6, len(output) - 3):
+                        w = output[i4].split('\r')
+                        x = w[0]
+                        if x == current_user[0]:
+                            x = current_user[0] + '   (Current User)'
+                        names.append(x)
+                    print(names)
                     return names
 
                 listoNames = findnames()
@@ -631,7 +593,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     QListWidgetItem(listoNames[i], self.listOFnames)
 
                 def removal():
-                    username = self.Username_Input.text()
+                    username = self.Name_Input.text()
 
                     def completedPOP(username):
                         COMPLETE = QMessageBox()
@@ -663,7 +625,6 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                             ERROR_NO_USER_FOUND.setStandardButtons(QMessageBox.Close)
                             ERROR_NO_USER_FOUND.exec_()
                     else:
-                        print('User was removed............ This is a test')
                         # Executes command.
                         sub.Popen(["powershell", "& {net user " + username + " /DELETE}"])
                         completedPOP(username)
@@ -702,6 +663,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
             def __init__(self, parent = None):
                 super(rmvgrufrosys, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setFixedSize(302, 410)
                 self.setupUi(self)
                 self.EXECUTE()
 
@@ -710,6 +672,61 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                 self.label.setText('Current Groups:')
                 self.label2.setText('Group Name: ')
 
+                def find_groups():
+                    EXEC = sub.Popen(["powershell", "& {net localgroup}"], stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+                    groups = []
+                    for i in range(4, len(output) - 3):
+                        w = output[i].split('\r')
+                        x = w[0]
+                        y = x.split('*')
+                        z = y[1]
+                        groups.append(z)
+                    print(groups)
+                    return groups
+
+                list_of_groups = find_groups()
+
+                for i in range(0, len(list_of_groups)):
+                    QListWidgetItem(list_of_groups[i], self.listOFnames)
+
+                def remove_group():
+                    group_name = self.Name_Input.text()
+
+                    def completedPOP(group_name):
+                        COMPLETE = QMessageBox()
+                        COMPLETE.setIcon(QMessageBox.Question)
+                        COMPLETE.setWindowTitle('Hey! Listen!')
+                        COMPLETE.setText(
+                            'Group ' + group_name + ' has successfully been removed from the system.')
+                        COMPLETE.setStandardButtons(QMessageBox.Close)
+                        COMPLETE.exec_()
+                        self.close()
+
+                    if len(group_name) == 0:
+                        print('no username entered')
+                        ERROT_NO_GROUP_ENTERED = QMessageBox()
+                        ERROT_NO_GROUP_ENTERED.setIcon(QMessageBox.Warning)
+                        ERROT_NO_GROUP_ENTERED.setWindowTitle('Hey! Listen!')
+                        ERROT_NO_GROUP_ENTERED.setText(
+                            'No group name was entered. No user was removed.')
+                        ERROT_NO_GROUP_ENTERED.setStandardButtons(QMessageBox.Close)
+                        ERROT_NO_GROUP_ENTERED.exec_()
+                    elif group_name not in list_of_groups:
+                        print('User not found')
+                        ERROR_GROUP_NOT_FOUND = QMessageBox()
+                        ERROR_GROUP_NOT_FOUND.setIcon(QMessageBox.Warning)
+                        ERROR_GROUP_NOT_FOUND.setWindowTitle('Hey! Listen!')
+                        ERROR_GROUP_NOT_FOUND.setText(
+                            'User was not found on system. No user was removed.')
+                        ERROR_GROUP_NOT_FOUND.setStandardButtons(QMessageBox.Close)
+                        ERROR_GROUP_NOT_FOUND.exec_()
+                    else:
+                        # Executes command.
+                        sub.Popen(["powershell", "& {net localgroup " + group_name + " /DELETE}"])
+                        completedPOP(group_name)
 
                 def confirmation():
                     CONFIRM = QMessageBox()
@@ -721,7 +738,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     x = CONFIRM.exec_()
                     if x == QMessageBox.Yes:
                         print('Removing group...')
-                        # Removal function here
+                        remove_group()
                     elif x == QMessageBox.No:
                         print('Cancelling...')
 
@@ -744,10 +761,120 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
         pass
 
     def lslocausrs(self):
-        pass
+        class list_local_users(QDialog, Ui_rmvusrogru):
+            def __init__(self, parent = None):
+                super(list_local_users, self).__init__(parent)
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setFixedSize(302, 389)
+                self.setupUi(self)
+                self.EXECUTE()
+
+            def EXECUTE(self):
+                self.setWindowTitle('List Of Current Users On System')
+
+                def find_names():
+                    # Local users are added to a list of names
+                    EXEC = sub.Popen(["powershell", "& {net localgroup users}"], stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+                    # print(output)
+                    names = []
+                    for i0 in range(6, len(output) - 3):
+                        w = output[i0].split('\r')
+                        x = w[0]
+                        names.append(x)
+
+                    '''Local Administrators are added to list of names'''
+                    EXEC = sub.Popen(["powershell", "& {net localgroup administrators}"],
+                                     stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+
+                    EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output2 = stdout.decode("utf-8")
+                    current_user = output2.split('\r\n')
+                    for i4 in range(6, len(output) - 3):
+                        w = output[i4].split('\r')
+                        x = w[0]
+                        if x == current_user[0]:
+                            x = current_user[0] + '   (Current User)'
+                        names.append(x)
+                    print(names)
+                    return names
+
+                list_of_names = find_names()
+
+                for i in range(0, len(list_of_names)):
+                    QListWidgetItem(list_of_names[i], self.listOFnames)
+
+                # def run(): Execute command function
+
+                def cancel_button():
+                    self.close()
+
+                self.Cancel_button.setGeometry(200, 349, 91, 31)
+                self.Cancel_button.setText('Close')
+                self.Cancel_button.clicked.connect(cancel_button)
+                self.Name_Input.hide()
+                self.Confirm_button.hide()
+
+        def call_list_local_users():
+            widget = list_local_users()
+            widget.exec_()
+
+        call_list_local_users()
 
     def lslocagrus(self):
-        pass
+        class list_local_groups(QDialog, Ui_rmvusrogru):
+            def __init__(self, parent = None):
+                super(list_local_groups, self).__init__(parent)
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setFixedSize(302, 389)
+                self.setupUi(self)
+                self.EXECUTE()
+
+            def EXECUTE(self):
+                self.setWindowTitle('List Of Current Groups On System')
+
+                def find_groups():
+                    EXEC = sub.Popen(["powershell", "& {net localgroup}"], stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+                    groups = []
+                    for i in range(4, len(output) - 3):
+                        w = output[i].split('\r')
+                        x = w[0]
+                        y = x.split('*')
+                        z = y[1]
+                        groups.append(z)
+                    print(groups)
+                    return groups
+
+                list_of_groups = find_groups()
+
+                for i in range(0, len(list_of_groups)):
+                    QListWidgetItem(list_of_groups[i], self.listOFnames)
+
+                # def run(): Execute command function
+
+                def cancel_button():
+                    self.close()
+
+                self.Cancel_button.setGeometry(200, 349, 91, 31)
+                self.Cancel_button.setText('Close')
+                self.Cancel_button.clicked.connect(cancel_button)
+                self.Name_Input.hide()
+                self.Confirm_button.hide()
+
+        def call_list_local_groups():
+            widget = list_local_groups()
+            widget.exec_()
+
+        call_list_local_groups()
 
     def lsmemofgru(self):
         pass

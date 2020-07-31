@@ -13,11 +13,26 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_comDescript(object):
     def setupUi(self, comDescript):
         comDescript.setObjectName("comDescript")
-        comDescript.resize(531, 365)
+        comDescript.resize(532, 388)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        comDescript.setFont(font)
         comDescript.setStyleSheet("background-color: #212434;color: #CCD2E6;   ")
-        self.buttonBox = QtWidgets.QDialogButtonBox(comDescript)
-        self.buttonBox.setGeometry(QtCore.QRect(470, 340, 51, 21))
-        self.buttonBox.setStyleSheet("QPushButton {\n"
+        self.textBrowser = QtWidgets.QTextBrowser(comDescript)
+        self.textBrowser.setGeometry(QtCore.QRect(0, 0, 531, 331))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.textBrowser.setFont(font)
+        self.textBrowser.setStyleSheet("border: none;")
+        self.textBrowser.setObjectName("textBrowser")
+        self.pushButton = QtWidgets.QPushButton(comDescript)
+        self.pushButton.setGeometry(QtCore.QRect(430, 347, 81, 31))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("QPushButton {\n"
 "background-color:#414E6E;\n"
 "color: #CCD2E6;\n"
 "font-weight: bold;\n"
@@ -26,20 +41,10 @@ class Ui_comDescript(object):
 "QPushButton:hover {\n"
 "background: rgba(139, 147, 178, .75);\n"
 "}")
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName("buttonBox")
-        self.textBrowser = QtWidgets.QTextBrowser(comDescript)
-        self.textBrowser.setGeometry(QtCore.QRect(0, 0, 531, 331))
-        font = QtGui.QFont()
-        font.setPointSize(15)
-        self.textBrowser.setFont(font)
-        self.textBrowser.setStyleSheet("border: none;")
-        self.textBrowser.setObjectName("textBrowser")
+        self.pushButton.setObjectName("pushButton")
 
         self.retranslateUi(comDescript)
-        self.buttonBox.accepted.connect(comDescript.accept)
-        self.buttonBox.rejected.connect(comDescript.reject)
+        self.pushButton.clicked.connect(comDescript.close)
         QtCore.QMetaObject.connectSlotsByName(comDescript)
 
     def retranslateUi(self, comDescript):
@@ -80,6 +85,7 @@ class Ui_comDescript(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">______________________________________________                    </p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Linux Basic Configurations: </span><span style=\" font-size:12pt;\">This command will install premade Local Policies (E.g. Lockout Policies and Password Policies)</span>                    </p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.pushButton.setText(_translate("comDescript", "Close"))
 
 
 if __name__ == "__main__":

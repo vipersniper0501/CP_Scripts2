@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Apple CIDR Script Runner</string>
+   <string>Apple CIDR</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #212434
@@ -1069,7 +1069,7 @@ background: rgba(139, 147, 178, .75);
 }</string>
               </property>
               <property name="text">
-               <string>Remove Group from System*</string>
+               <string>Remove Group from System</string>
               </property>
              </widget>
             </item>
@@ -1196,7 +1196,7 @@ background: rgba(139, 147, 178, .75);
 }</string>
               </property>
               <property name="text">
-               <string>List Local Users*</string>
+               <string>List Local Users</string>
               </property>
              </widget>
             </item>
@@ -1289,7 +1289,7 @@ background: rgba(139, 147, 178, .75);
 }</string>
               </property>
               <property name="text">
-               <string>List Local Groups*</string>
+               <string>List Local Groups</string>
               </property>
              </widget>
             </item>
@@ -2609,7 +2609,7 @@ background: rgba(139, 147, 178, .75);
   </widget>
   <action name="actionAbout_Creator">
    <property name="text">
-    <string>About Creators</string>
+    <string>About Creators and the Program</string>
    </property>
   </action>
   <action name="actionHow_To_Use_Program">
