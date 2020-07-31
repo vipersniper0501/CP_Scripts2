@@ -567,7 +567,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                         x = w[0]
                         names.append(x)
 
-                    '''Local Administrators are added to list of names'''
+                    """Local Administrators are added to list of names"""
                     EXEC = sub.Popen(["powershell", "& {net localgroup administrators}"],
                                      stdout = sub.PIPE)
                     stdout, _ = EXEC.communicate()
