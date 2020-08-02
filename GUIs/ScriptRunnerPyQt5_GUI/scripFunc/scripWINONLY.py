@@ -603,30 +603,33 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                             'User ' + username + ' has been successfully removed from the system.')
                         COMPLETE.setStandardButtons(QMessageBox.Close)
                         COMPLETE.exec_()
-                        self.close()
+                        self.listOFnames.clear()
+                        self.Name_Input.clear()
+                        for i in range(0, len(listoNames)):
+                            QListWidgetItem(listoNames[i], self.listOFnames)
 
-                    if len(username) == 0 or username not in listoNames:
-                        if len(username) == 0:
-                            print('no username entered')
-                            ERROR_NO_USER = QMessageBox()
-                            ERROR_NO_USER.setIcon(QMessageBox.Warning)
-                            ERROR_NO_USER.setWindowTitle('Hey! Listen!')
-                            ERROR_NO_USER.setText(
-                                'No username was entered. No user was removed.')
-                            ERROR_NO_USER.setStandardButtons(QMessageBox.Close)
-                            ERROR_NO_USER.exec_()
-                        else:
-                            print('User not found')
-                            ERROR_NO_USER_FOUND = QMessageBox()
-                            ERROR_NO_USER_FOUND.setIcon(QMessageBox.Warning)
-                            ERROR_NO_USER_FOUND.setWindowTitle('Hey! Listen!')
-                            ERROR_NO_USER_FOUND.setText(
-                                'User was not found on system. No user was removed.')
-                            ERROR_NO_USER_FOUND.setStandardButtons(QMessageBox.Close)
-                            ERROR_NO_USER_FOUND.exec_()
+
+                    if len(username) == 0:
+                        print('no username entered')
+                        ERROR_NO_USER = QMessageBox()
+                        ERROR_NO_USER.setIcon(QMessageBox.Warning)
+                        ERROR_NO_USER.setWindowTitle('Hey! Listen!')
+                        ERROR_NO_USER.setText(
+                            'No username was entered. No user was removed.')
+                        ERROR_NO_USER.setStandardButtons(QMessageBox.Close)
+                        ERROR_NO_USER.exec_()
+                    elif username not in listoNames:
+                        print('User not found')
+                        ERROR_NO_USER_FOUND = QMessageBox()
+                        ERROR_NO_USER_FOUND.setIcon(QMessageBox.Warning)
+                        ERROR_NO_USER_FOUND.setWindowTitle('Hey! Listen!')
+                        ERROR_NO_USER_FOUND.setText(
+                            'User was not found on system. No user was removed.')
+                        ERROR_NO_USER_FOUND.setStandardButtons(QMessageBox.Close)
+                        ERROR_NO_USER_FOUND.exec_()
                     else:
                         # Executes command.
-                        sub.Popen(["powershell", "& {net user " + username + " /DELETE}"])
+                        # sub.Popen(["powershell", "& {net user " + username + " /DELETE}"])
                         completedPOP(username)
 
                 def confirmation():
@@ -703,7 +706,11 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                             'Group ' + group_name + ' has successfully been removed from the system.')
                         COMPLETE.setStandardButtons(QMessageBox.Close)
                         COMPLETE.exec_()
-                        self.close()
+                        self.listOFnames.clear()
+                        self.Name_Input.clear()
+                        for i in range(0, len(list_of_groups)):
+                            QListWidgetItem(list_of_groups[i], self.listOFnames)
+
 
                     if len(group_name) == 0:
                         print('no username entered')

@@ -1,12 +1,12 @@
-const ipc = require('electron').ipcRenderer;
-const pytestbtn = document.querySelector('#python_test');
-let test_reply = document.querySelector('#TEST_reply');
+const ipc = require("electron").ipcRenderer;
+const pytestbtn = document.querySelector("#python_test");
+let test_reply = document.querySelector("#TEST_reply");
 
 function buttonTest() {
-    console.log('hi');
+    console.log("hi");
 }
 
-pytestbtn.addEventListener('click', () => {
+pytestbtn.addEventListener("click", () => {
     // let reply = ipc.sendSync('testButton', 'Button Works');
     // test_reply.innerHTML = 'from renderer';
     buttonTest();
