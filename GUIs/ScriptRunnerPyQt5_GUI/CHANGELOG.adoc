@@ -3,29 +3,41 @@
 
 == Versions
 
-Version 3.0.16.0
+=== Version 3.0.16.1
 
-Features Added:
+* Features Added:
+    ** Started work on Adding User To Group command
 
-    - Remove Group From System (Windows)
-    - List Local Users on System (Windows)
-    - List Local Groups on System (Windows)
+* Bug Fixes/Minor Improvements:
+    ** Optimization
+    ** Improved efficiency
 
-Bug Fixes:
+'''
 
-    - All Windows and dialogs properly resize to window resolutions when working with multi-monitor setup
-    - Optimized code in `scripFUNC.scripWINONLY.py`
+=== Version 3.0.16.0
+
+* Features Added:
+
+    ** Remove Group From System (Windows)
+    **  List Local Users on System (Windows)
+    ** List Local Groups on System (Windows)
+
+* Bug Fixes/Minor Improvements:
+
+    ** All Windows and dialogs properly resize to window resolutions when working with
+multi-monitor setup
+    ** Optimized code in `scripFUNC.scripWINONLY.py`
 
 
 == Template:
 
 '''
-Version x.x.x.x
+=== Version x.x.x.x
 
 * Features Added:
     ** Feature
 
-* Bug Fixes:
+* Bug Fixes/Minor Improvements:
     ** Bug fix
 
 '''

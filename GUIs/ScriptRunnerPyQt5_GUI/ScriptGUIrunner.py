@@ -1,16 +1,22 @@
 import configparser
+import os
 import sys
 from pathlib import Path
-from sys import platform
+from platform import uname
+from threading import Thread
+
+from PyQt5 import QtGui, QtCore
+from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QDialog
 
 from PyUIs.comdescript import Ui_comDescript
-from PyUIs.firstconf import *
+from PyUIs.firstconf import Ui_firstConf
 from PyUIs.main import Ui_MainWindow
 from PyUIs.progabout import Ui_About
 from PyUIs.howToUI import Ui_How_To
-from scripFunc.scripLINUXONLY import *
-from scripFunc.scripUNIMULTI import *
-from scripFunc.scripWINONLY import *
+
+from scripFunc.scripLINUXONLY import funcLINUX
+from scripFunc.scripUNIMULTI import update_os, search_media, hashCheck, fwl, basConf, rmProSoft, servSet
+from scripFunc.scripWINONLY import funcWINONLY, funcWINusrgru
 
 
 # def resource_path(relative_path):
@@ -23,11 +29,11 @@ from scripFunc.scripWINONLY import *
 #
 #     return os.path.join(base_path, relative_path)
 
+
 class fconfStart(QDialog, Ui_firstConf):
 
     def __init__(self, parent = None):
         super(fconfStart, self).__init__(parent)
-
         print('Script Runner First Time Configurations')
         self.setFixedSize(720, 440)
         self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
@@ -285,7 +291,7 @@ class fconfStart(QDialog, Ui_firstConf):
                 RESTART.setStandardButtons(QMessageBox.Close)
                 RESTART.exec_()
                 self.close()
-                beginMain = Mainstart()
+                beginMain = Main_start()
                 beginMain.show()
             else:
                 HEY = QMessageBox()
@@ -323,7 +329,7 @@ class fconfStart(QDialog, Ui_firstConf):
         self.quit_buttonConf.clicked.connect(quitButton)
 
 
-class Mainstart(QMainWindow, Ui_MainWindow):
+class Main_start(QMainWindow, Ui_MainWindow):
 
     def threader(self, com):
         try:
@@ -334,7 +340,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             print('Could not start thread')
 
     def __init__(self, parent = None):
-        super(Mainstart, self).__init__(parent)
+        super(Main_start, self).__init__(parent)
         print('Script Runner has started')
         self.setFixedSize(860, 675)
         self.setupUi(self)
@@ -346,7 +352,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             application_Path2 = os.path.dirname(__file__)
         config_path2 = os.path.join(application_Path2, config_name2)
         variableCheck2 = Path(config_path2)
-
         self.mmfuncassign(variableCheck2)
         ###################
 
@@ -354,7 +359,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
         print('Assigning functions')
         config = configparser.ConfigParser()
         config.read(configurations)
-
         self.header_title.setWordWrap(True)
         self.descriptions.setWordWrap(True)
         # scripfunc = ScriptRunnerFunc()
@@ -375,7 +379,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                     'Description: These commands will work on most Operating Systems\nE.g. Windows, MacOS X, and Linux (Debian, Ubuntu, certain Arch distros)')
                 self.stackedWidget.setCurrentIndex(i)
             elif i == 1:
-                if platform == 'win32':
+                if uname()[0] == 'Windows':
                     self.header_title.setText('Windows 10 Commands')
                     self.descriptions.setText(
                         'Description: These commands will work on the following Windows systems: 10, 8.x, and 7')
@@ -383,7 +387,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                 else:
                     wrongos()
             elif i == 2:
-                if platform == 'linux' or platform == 'Linux':
+                if uname()[0] == 'Linux':
                     self.header_title.setText('Linux Commands')
                     self.descriptions.setText(
                         'Description: These commands will work on the following Linux systems: Debian based systems, Ubuntu, and Manjaro')
@@ -391,7 +395,7 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                 else:
                     wrongos()
             elif i == 3:
-                if platform == 'darwin':
+                if uname()[0] == 'Darwin':
                     self.header_title.setText('MacOS X Commands')
                     self.descriptions.setText(
                         'Description: These commands will ONLY work on MacOS X')
@@ -417,7 +421,6 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             widget = showHowToUi()
             widget.exec_()
 
-
         def runCOMDESCRIPT():
             class showComDescript(QDialog, Ui_comDescript):
                 def __init__(self, parent = None):
@@ -426,11 +429,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                     self.setFixedSize(532, 388)
                     self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
 
-            def callCOMdescript():
-                widget = showComDescript()
-                widget.exec_()
-
-            callCOMdescript()
+            widget = showComDescript()
+            widget.exec_()
 
         def runABOUTPROG():
             class showAboutProg(QDialog, Ui_About):
@@ -440,11 +440,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                     self.setFixedSize(390, 282)
                     self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
 
-            def callaboutprog():
-                widget = showAboutProg()
-                widget.exec_()
-
-            callaboutprog()
+            widget = showAboutProg()
+            widget.exec_()
 
         def indev():
             INDEV = QMessageBox()
@@ -493,15 +490,16 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             # Menubar Buttons
             self.actionHow_To_Use_Program.triggered.connect(lambda: self.threader(showHOWTO()))
             self.actionAbout_Creator.triggered.connect(lambda: self.threader(runABOUTPROG()))
-            self.actionCommand_Descriptions.triggered.connect(lambda: self.threader(runCOMDESCRIPT()))
+            self.actionCommand_Descriptions.triggered.connect(
+                lambda: self.threader(runCOMDESCRIPT()))
             self.actionChange_Configurations.triggered.connect(lambda: self.threader(chngconf()))
 
             # Universal Buttons
-            self.Updates_buttonUNI.clicked.connect(lambda: self.threader(updateos()))
+            self.Updates_buttonUNI.clicked.connect(lambda: self.threader(update_os()))
             # self.Updates_buttonUNI.setStyleSheet('Updates_buttonUNI:hover{\nbackground-color: '
             #                                      '#8B93B2;\n}')
             self.rmvprosoftbuttonUNI.clicked.connect(lambda: self.threader(indev()))  #
-            self.srchmedbuttonUNI.clicked.connect(lambda: self.threader(srchmedia()))
+            self.srchmedbuttonUNI.clicked.connect(lambda: self.threader(search_media()))
             self.chkhashfile_buttonUNI.clicked.connect(lambda: self.threader(hashCheck()))
 
             # Windows Main Menu Commands
@@ -539,17 +537,19 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                                                                                                  'vsftpd')))))
             self.browserConf.clicked.connect(lambda: self.threader(funcWIN.browserCONF()))
             # Windows User Group Commands
-            self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.adusrtogru_3, self.lsgruusrin_3,
-                                    self.lsmemgru_3, self.rmvusrfrogru_3]
+            self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.lsgruusrin_3, self.lsmemgru_3,
+                                    self.rmvusrfrogru_3]
             for i in range(0, len(self.WINUSRGRUBUTTON)):
                 self.WINUSRGRUBUTTON[i].clicked.connect(lambda: self.threader(indev()))  #
 
             self.adusrtosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.addusr()))
             self.rmvusrfrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remusr()))
             self.rmvgrufrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remgrufrosys()))
+            self.adusrtogru_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.addusrtogru()))
             self.lslocausr_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.lslocausrs()))
             self.lslocagru_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.lslocagrus()))
-            self.chngusrpas_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.chngpasswdofall()))
+            self.chngusrpas_3.clicked.connect(
+                lambda: self.threader(funcWINUSRGRU.chngpasswdofall()))
 
             # Linux Main Menu Commands
             self.fwlbutton_3.clicked.connect(lambda: self.threader(fwl))
@@ -563,7 +563,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
                                        self.chngusrpas_4,
                                        self.lsgruusrin_4, self.lslocagru_4, self.lslocausr_4,
                                        self.lsmemgru_4,
-                                       self.rmvgrufrosys_4, self.rmvusrfrogru_4, self.rmvusrfrosys_4]
+                                       self.rmvgrufrosys_4, self.rmvusrfrogru_4,
+                                       self.rmvusrfrosys_4]
             for i in range(0, 11):
                 self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: self.threader(indev()))  #
 
@@ -571,7 +572,8 @@ class Mainstart(QMainWindow, Ui_MainWindow):
             self.MACBUTTONS = [self.rmvprosoftbutton_4, self.malrembutton_4, self.basicConfbutton_4,
                                self.servicesConfButton_3, self.adgrutosys_5, self.adusrtogru_5,
                                self.adusrtosys_5,
-                               self.chngusrpas_5, self.lsgruusrin_5, self.lslocagru_5, self.lslocausr_5,
+                               self.chngusrpas_5, self.lsgruusrin_5, self.lslocagru_5,
+                               self.lslocausr_5,
                                self.lsmemgru_5,
                                self.rmvgrufrosys_5, self.rmvusrfrogru_5, self.rmvusrfrosys_5]
             for i in range(0, 15):
@@ -601,7 +603,7 @@ if __name__ == "__main__":
         config.read(variableCheck)
         print('Configuration file has been loaded...')
 
-        main = Mainstart()
+        main = Main_start()
         main.show()
         sys.exit(app.exec_())
     else:

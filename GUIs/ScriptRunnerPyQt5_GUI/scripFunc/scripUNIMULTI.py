@@ -7,14 +7,15 @@ from distutils.dir_util import copy_tree
 from shlex import quote as shlex_quote
 from sys import platform
 import distro  # for figuring out what linux distro
+from PyQt5 import QtGui
+from PyQt5.QtWidgets import QMessageBox, QDialog, QFileDialog
 
 if platform == 'linux':
     import pwd
 import configparser
 import shutil
-from PyQt5 import QtGui
+
 from PyUIs.hashgen import Ui_hashGEN
-from PyQt5.QtWidgets import *
 
 OS = distro.linux_distribution()
 ops = OS[0]
@@ -34,7 +35,7 @@ config.read('config.ini')
 #     return os.path.join(base_path, relative_path)
 
 # Universal Updates
-def updateos():
+def update_os():
     # TODO: Have function also update all drivers
     if ops == 'Ubuntu' or ops == 'debian':
         command = 'sudo apt-get update && apt-get upgrade -y'
@@ -125,7 +126,7 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
 
 
 # Universal Search Media
-def srchmedia():
+def search_media():
     if platform == 'linux' or platform == 'darwin':
         procPop('touch /home/$USER/Desktop/LotTest.txt')
         extensions = (
@@ -606,6 +607,7 @@ def basConf(rdp):
             HEY.setIcon(QMessageBox.Critical)
             HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             HEY.exec_()
+
         completed()
     elif platform == 'linux':
         if ops == 'Ubuntu' or ops == 'Debian':
@@ -763,21 +765,33 @@ def hashCheck():
                 OUTPUT.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                 OUTPUT.exec_()
 
-            def hashchk(hashnumber):
+            def hashchk(hash_number):
                 if len(self.fpath.text()) != 0 and Path(self.fpath.text()).is_file():
-                    linhashtypes = ['md5sum', 'sha1sum', 'sha256sum', 'sha384sum', 'sha512sum']
-                    winhashtypes = ['MD5', 'SHA1', 'SHA256', 'SHA384', 'SHA512']
+                    linux_hash_types = ['md5sum', 'sha1sum', 'sha256sum', 'sha384sum', 'sha512sum']
+                    windows_hash_types = ['MD5', 'SHA1', 'SHA256', 'SHA384', 'SHA512']
+                    darwin_hash_types = ['md5', 'shasum -a 1', 'shasum -a 256', 'shasum -a 384',
+                                         'shasum -a 512']
 
-                    if platform == 'linux' or platform == 'darwin':
+                    if platform == 'linux':
                         filepath = self.fpath.text()
-                        command = r'sudo ' + linhashtypes[hashnumber] + ' ' + filepath
+                        command = r'sudo ' + linux_hash_types[hash_number] + ' ' + filepath
+                        EXEC = procPop(command.split(), stdout = sub.PIPE)
+                        stdout, _ = EXEC.communicate()
+                        output = stdout.decode("utf-8")
+                        OUTPUTBOX(output)
+                    elif platform == 'darwin':
+                        filepath = self.fpath.text()
+                        command = r'sudo ' + darwin_hash_types[hash_number] + ' ' + filepath
                         EXEC = procPop(command.split(), stdout = sub.PIPE)
                         stdout, _ = EXEC.communicate()
                         output = stdout.decode("utf-8")
                         OUTPUTBOX(output)
                     elif platform == 'win32':
                         filepath = self.fpath.text()
-                        EXEC = procPop(["powershell", "& {Get-Filehash '" + filepath + "' -Algorithm " + winhashtypes[hashnumber] + " | Format-List}"], stdout = sub.PIPE)
+                        EXEC = procPop(["powershell",
+                                        "& {Get-Filehash '" + filepath + "' -Algorithm " +
+                                        windows_hash_types[hash_number] + " | Format-List}"],
+                                       stdout = sub.PIPE)
                         stdout, _ = EXEC.communicate()
                         output = stdout.decode("utf-8")
                         OUTPUTBOX(output)
@@ -804,8 +818,5 @@ def hashCheck():
 
             self.genhash.clicked.connect(lambda: hashchk(self.hash_number))
 
-    def callhash():
-        widget = hashRUN()
-        widget.exec_()
-
-    callhash()
+    widget = hashRUN()
+    widget.exec_()

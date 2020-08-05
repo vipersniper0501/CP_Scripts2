@@ -3,17 +3,20 @@ import itertools
 import os
 import shutil
 import subprocess as sub
-from threading import *
+
 from distutils.dir_util import copy_tree
+from threading import Thread
 
 import distro  # for figuring out what linux distro
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QListWidgetItem, QDialog, QMessageBox, QTreeWidgetItem
+from bottle import unicode
 
 from PyUIs.changepass import Ui_chngpass
 from PyUIs.enblebit import Ui_bitlockerGUI
 from PyUIs.addusrUI import Ui_addUSR
 from PyUIs.rmvUSRoGRU import Ui_rmvusrogru
+from PyUIs.user_group_modifyUI import Ui_user_group_list_modifiers
 
 OS = distro.linux_distribution()
 ops = OS[0]
@@ -59,7 +62,6 @@ class funcWINONLY:
                 self.EXECUTE()
 
             def EXECUTE(self):
-
                 # Executes encryption command
                 def ENCRYPT(drive):
                     l1 = self.encrypPASS.text()
@@ -69,54 +71,37 @@ class funcWINONLY:
                     # print(l2)
                     # print(len(l2))
                     # Try loop enforces password policy.
+                    character_rules = [0, 0, 0, 0]  # [LowerCase, UpperCase, Numbers, Symbols]
                     try:
                         symbols = '`~!@#$%^&*()_+-=[]{};:,./<>?'
-                        characterBOOL = ''
                         for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
                             character = l1[i]
                             character2 = l2[x]
-                            if character.islower() and character2.islower():
-                                characterBOOL = True
-                            elif not character.islower() and not character2.islower():
-                                characterBOOL = False
-                            if characterBOOL:
-                                break
+                            if character_rules[0] != 1:
+                                if character.islower() and character2.islower():
+                                    character_rules[0] = 1
+                                elif not character.islower() and not character2.islower():
+                                    character_rules[0] = 0
+                            if character_rules[1] != 1:
+                                if character.isupper() and character2.isupper():
+                                    character_rules[1] = 1
+                                elif not character.isupper() and not character2.isupper():
+                                    character_rules[1] = 0
+                            if character_rules[2] != 1:
+                                if character.isdigit() and character2.isdigit():
+                                    character_rules[2] = 1
+                                elif not character.isdigit() and not character2.isdigit():
+                                    character_rules[2] = 0
+                            if character_rules[3] != 1:
+                                if character in symbols and character2 in symbols:
+                                    character_rules[3] = 1
+                                elif character not in symbols and character2 not in symbols:
+                                    character_rules[3] = 0
 
-                        characterUPBOOL = ''
-                        for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
-                            character = l1[i]
-                            character2 = l2[x]
-                            if character.isupper() and character2.isupper():
-                                characterUPBOOL = True
-                            elif not character.isupper() and not character2.isupper():
-                                characterUPBOOL = False
-                            if characterUPBOOL:
-                                break
-
-                        symbolsBOOL = ''
-                        for y in range(0, len(symbols)):
-                            if (symbols[y] not in l1) and (symbols[y] not in l2):
-                                symbolsBOOL = False
-                            elif (symbols[y] in l1) and (symbols[y] in l2):
-                                symbolsBOOL = True
-                            if symbolsBOOL:
-                                break
-
-                        numberBOOL = ''
-                        for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
-                            character = l1[i]
-                            character2 = l2[x]
-                            if character.isdigit() and character2.isdigit():
-                                numberBOOL = True
-                            elif not character.isdigit() and not character2.isdigit():
-                                numberBOOL = False
-                            if numberBOOL:
-                                break
-
-                        print(str(characterBOOL) + ' Lower Case')
-                        print(str(characterUPBOOL) + ' Upper case')
-                        print(str(symbolsBOOL) + ' symbols')
-                        print(str(numberBOOL) + ' number')
+                        print(str(character_rules[0] == 1) + ' Lower Case')
+                        print(str(character_rules[1] == 1) + ' Upper case')
+                        print(str(character_rules[2] == 1) + ' number')
+                        print(str(character_rules[3] == 1) + ' symbols')
                     except IndexError:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
@@ -132,7 +117,7 @@ class funcWINONLY:
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
-                    elif len(l1) <= 8 or len(l2) <= 8:
+                    elif len(l1) < 8 or len(l2) < 8:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 8 characters!")
@@ -146,33 +131,33 @@ class funcWINONLY:
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
-                    elif not characterBOOL:
+                    elif character_rules[0] == 0:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 lower case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
-                    elif not characterUPBOOL:
+                    elif character_rules[1] == 0:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 Upper Case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
-                    elif not symbolsBOOL:
+                    elif character_rules[2] == 0:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 number! [Ex: 123456]")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        HEY.exec_()
+                    elif character_rules[3] == 0:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText(
                             "Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
-                        HEY.setIcon(QMessageBox.Critical)
-                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        HEY.exec_()
-                    elif not numberBOOL:
-                        HEY = QMessageBox()
-                        HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText(
-                            "Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
@@ -185,7 +170,7 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                         you how much has been encrypted so far.'''
                         print(command)
 
-                        sub.Popen(["powershell", "& {" + command + "}"])
+                        # sub.Popen(["powershell", "& {" + command + "}"])
 
                         def restart():
                             print('Restart is now happening')
@@ -199,12 +184,11 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                             'You must restart the computer for encryption to begin on the drive. '
                             '\nWould you like to restart now?')
                         COMPLETE.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
-                        x = COMPLETE.exec_()
-
-                        if x == QMessageBox.Yes:
+                        x_restart = COMPLETE.exec_()
+                        if x_restart == QMessageBox.Yes:
                             print('Restarting...')
                             restart()
-                        elif x == QMessageBox.No:
+                        elif x_restart == QMessageBox.No:
                             print('Closing...')
                             self.close()
 
@@ -299,11 +283,8 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
                         buttons[i].setChecked(True)
                     i = i + 1
 
-        def callBITRUN():
-            widget = bitRUN()
-            widget.exec_()
-
-        callBITRUN()
+        widget = bitRUN()
+        widget.exec_()
 
     def browserCONF(self):
         print('Configuring browser...')
@@ -340,9 +321,9 @@ Enable-BitLocker """ + drive + """ -PasswordProtector $pass"""
 
 class funcWINusrgru:
     def addusr(self):
-        class addusrtosys(QDialog, Ui_addUSR):
+        class add_user_to_system(QDialog, Ui_addUSR):
             def __init__(self, parent = None):
-                super(addusrtosys, self).__init__(parent)
+                super(add_user_to_system, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setFixedSize(345, 187)
                 self.setupUi(self)
@@ -372,54 +353,37 @@ class funcWINusrgru:
                     l1 = passwd
                     l2 = passwd_confirm
                     # Try loop enforces password policy.
+                    character_rules = [0, 0, 0, 0]
                     try:
-                        symbols = "`~!@#$%^&*()_+-=[]{};:,./<>?"
-                        characterBOOL = ''
+                        symbols = '`~!@#$%^&*()_+-=[]{};:,./<>?'
                         for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
                             character = l1[i]
                             character2 = l2[x]
-                            if character.islower() and character2.islower():
-                                characterBOOL = True
-                            elif not character.islower() and not character2.islower():
-                                characterBOOL = False
-                            if characterBOOL:
-                                break
+                            if character_rules[0] != 1:
+                                if character.islower() and character2.islower():
+                                    character_rules[0] = 1
+                                elif not character.islower() and not character2.islower():
+                                    character_rules[0] = 0
+                            if character_rules[1] != 1:
+                                if character.isupper() and character2.isupper():
+                                    character_rules[1] = 1
+                                elif not character.isupper() and not character2.isupper():
+                                    character_rules[1] = 0
+                            if character_rules[2] != 1:
+                                if character.isdigit() and character2.isdigit():
+                                    character_rules[2] = 1
+                                elif not character.isdigit() and not character2.isdigit():
+                                    character_rules[2] = 0
+                            if character_rules[3] != 1:
+                                if character in symbols and character2 in symbols:
+                                    character_rules[3] = 1
+                                elif character not in symbols and character2 not in symbols:
+                                    character_rules[3] = 0
 
-                        characterUPBOOL = ''
-                        for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
-                            character = l1[i]
-                            character2 = l2[x]
-                            if character.isupper() and character2.isupper():
-                                characterUPBOOL = True
-                            elif not character.isupper() and not character2.isupper():
-                                characterUPBOOL = False
-                            if characterUPBOOL:
-                                break
-
-                        symbolsBOOL = ''
-                        for y in range(0, len(symbols)):
-                            if (symbols[y] not in l1) and (symbols[y] not in l2):
-                                symbolsBOOL = False
-                            elif (symbols[y] in l1) and (symbols[y] in l2):
-                                symbolsBOOL = True
-                            if symbolsBOOL:
-                                break
-
-                        numberBOOL = ''
-                        for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
-                            character = l1[i]
-                            character2 = l2[x]
-                            if character.isdigit() and character2.isdigit():
-                                numberBOOL = True
-                            elif not character.isdigit() and not character2.isdigit():
-                                numberBOOL = False
-                            if numberBOOL:
-                                break
-
-                        print(str(characterBOOL) + ' Lower Case')
-                        print(str(characterUPBOOL) + ' Upper case')
-                        print(str(symbolsBOOL) + ' symbols')
-                        print(str(numberBOOL) + ' number')
+                        print(str(character_rules[0] == 1) + ' Lower Case')
+                        print(str(character_rules[1] == 1) + ' Upper case')
+                        print(str(character_rules[2] == 1) + ' number')
+                        print(str(character_rules[3] == 1) + ' symbols')
                     except IndexError:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
@@ -466,21 +430,21 @@ class funcWINusrgru:
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
-                    elif not characterBOOL:
+                    elif character_rules[0] == 0:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 lower case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
-                    elif not characterUPBOOL:
+                    elif character_rules[1] == 0:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 Upper Case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
-                    elif not symbolsBOOL:
+                    elif character_rules[2] == 0:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText(
@@ -488,7 +452,7 @@ class funcWINusrgru:
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
-                    elif not numberBOOL:
+                    elif character_rules[3] == 0:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText(
@@ -534,11 +498,8 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                         print(e)
                         print('Could not start thread')
 
-        def calladdusrtosys():
-            widget = addusrtosys()
-            widget.exec_()
-
-        calladdusrtosys()
+        widget = add_user_to_system()
+        widget.exec_()
 
     def remusr(self):
         class rmvusrfrosys(QDialog, Ui_rmvusrogru):
@@ -587,10 +548,10 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     print(names)
                     return names
 
-                listoNames = findnames()
+                listo_names = findnames()
 
-                for i in range(0, len(listoNames)):
-                    QListWidgetItem(listoNames[i], self.listOFnames)
+                for i in range(0, len(listo_names)):
+                    QListWidgetItem(listo_names[i], self.listOFnames)
 
                 def removal():
                     username = self.Name_Input.text()
@@ -605,9 +566,8 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                         COMPLETE.exec_()
                         self.listOFnames.clear()
                         self.Name_Input.clear()
-                        for i in range(0, len(listoNames)):
-                            QListWidgetItem(listoNames[i], self.listOFnames)
-
+                        for i in range(0, len(listo_names)):
+                            QListWidgetItem(listo_names[i], self.listOFnames)
 
                     if len(username) == 0:
                         print('no username entered')
@@ -618,7 +578,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                             'No username was entered. No user was removed.')
                         ERROR_NO_USER.setStandardButtons(QMessageBox.Close)
                         ERROR_NO_USER.exec_()
-                    elif username not in listoNames:
+                    elif username not in listo_names:
                         print('User not found')
                         ERROR_NO_USER_FOUND = QMessageBox()
                         ERROR_NO_USER_FOUND.setIcon(QMessageBox.Warning)
@@ -652,19 +612,26 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                 self.Cancel_button.clicked.connect(cancel_button)
                 self.Confirm_button.clicked.connect(lambda: confirmation())
 
-        def callrmvusrfrosys():
-            widget = rmvusrfrosys()
-            widget.exec_()
-
-        callrmvusrfrosys()
+        widget = rmvusrfrosys()
+        widget.exec_()
 
     def addgrutosys(self):
-        pass
+        class add_group_to_system(QDialog, ):  # Add Ui_class thing
+            def __init__(self, parent = None):
+                super(add_group_to_system, self).__init__(parent)
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setupUI(self)
+
+            def EXECUTE(self):
+                pass
+
+        widget = add_group_to_system()
+        widget.exec_()
 
     def remgrufrosys(self):
-        class rmvgrufrosys(QDialog, Ui_rmvusrogru):
+        class remove_group_from_system(QDialog, Ui_rmvusrogru):
             def __init__(self, parent = None):
-                super(rmvgrufrosys, self).__init__(parent)
+                super(remove_group_from_system, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setFixedSize(302, 410)
                 self.setupUi(self)
@@ -711,7 +678,6 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                         for i in range(0, len(list_of_groups)):
                             QListWidgetItem(list_of_groups[i], self.listOFnames)
 
-
                     if len(group_name) == 0:
                         print('no username entered')
                         ERROT_NO_GROUP_ENTERED = QMessageBox()
@@ -755,19 +721,126 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                 self.Cancel_button.clicked.connect(cancel_button)
                 self.Confirm_button.clicked.connect(lambda: confirmation())
 
-        def callrmvgrufrosys():
-            widget = rmvgrufrosys()
-            widget.exec_()
-
-        callrmvgrufrosys()
+        widget = remove_group_from_system()
+        widget.exec_()
 
     def addusrtogru(self):
-        pass
+        class add_user_to_group(QDialog, Ui_user_group_list_modifiers):  # Add Ui_class thing
+            def __init__(self, parent = None):
+                super(add_user_to_group, self).__init__(parent)
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+                self.setFixedSize(790, 419)
+                self.setupUi(self)
+                self.EXECUTE()
+
+            def EXECUTE(self):
+                self.setWindowTitle('Add User to Group')
+                self.Title_label.setText('Add User to Group')
+                self.Name_Input_Label1.setText('User to add to group:')
+                self.Name_Input_Label2.setText('Group to add User to:')
+                self.list_label1.setText('Current Users:')
+                self.list_label2.setText('Current Groups w/ Users:')
+
+                def find_names():
+                    # Local users are added to a list of names
+                    EXEC = sub.Popen(["powershell", "& {net localgroup users}"], stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+                    # print(output)
+                    names = []
+                    for i0 in range(6, len(output) - 3):
+                        w = output[i0].split('\r')
+                        x = w[0]
+                        names.append(x)
+
+                    """Local Administrators are added to list of names"""
+                    EXEC = sub.Popen(["powershell", "& {net localgroup administrators}"],
+                                     stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+
+                    EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output2 = stdout.decode("utf-8")
+                    current_user = output2.split('\r\n')
+                    for i4 in range(6, len(output) - 3):
+                        w = output[i4].split('\r')
+                        x = w[0]
+                        if x == current_user[0]:
+                            x = current_user[0] + '   (Current User)'
+                        names.append(x)
+                    names.insert(0, '\n')
+                    print(names)
+                    return names
+
+                def find_groups():
+                    EXEC = sub.Popen(["powershell", "& {net localgroup}"], stdout = sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    output = output.split("\n")
+                    groups = []
+                    for i in range(4, len(output) - 3):
+                        w = output[i].split('\r')
+                        x = w[0]
+                        y = x.split('*')
+                        z = y[1]
+                        groups.append(z)
+
+                    users_in_groups = {}
+                    # TODO: SPEED THIS UP
+                    for i2 in range(0, len(groups)):
+                        print(groups[i2])
+                        EXEC2 = sub.Popen(["powershell", "net localgroup '" + groups[i2] + "'"],
+                                          stdout = sub.PIPE)
+                        stdout2, _ = EXEC2.communicate()
+                        try:
+                            output = stdout2.decode("utf-8")
+                            output2 = output.split("\n")
+                            user_names = []
+                            for i3 in range(6, len(output2) - 3):
+                                y = output2[i3].split('\r')
+                                x = y[0]
+                                print(x)
+                                user_names.append(x)
+                            if len(user_names) == 0:
+                                users_in_groups[groups[i2]] = ['No Users']
+                            elif len(user_names) == 1:
+                                users_in_groups[groups[i2]] = [user_names[0]]
+                            else:
+                                for i4 in range(0, len(user_names)):
+                                    users_in_groups[groups[i2]] = user_names
+                        except Exception as e:
+                            print('\n\nException occurred: ' + str(e))
+
+                    print(groups)
+                    print(users_in_groups)
+                    return users_in_groups, groups
+
+                list_of_names = find_names()
+                group_accounts, list_of_groups = find_groups()
+
+                for i in range(0, len(list_of_names)):
+                    QListWidgetItem(list_of_names[i], self.listWidget)
+
+                group_tree = self.treeWidget
+
+                for i2 in range(0, len(list_of_groups)):
+                    c1 = QTreeWidgetItem(group_tree, [str(list_of_groups[i2])])
+                    log = list_of_groups[i2]
+                    e = group_accounts.get(log)
+                    for i3 in range(0, len(e)):
+                        QTreeWidgetItem(c1, [str(e[i3])])
+
+        widget = add_user_to_group()
+        widget.exec_()
 
     def remusrfrogru(self):
         pass
 
     def lslocausrs(self):
+        # TODO: make it so that it splits between normal users and Administrators
         class list_local_users(QDialog, Ui_rmvusrogru):
             def __init__(self, parent = None):
                 super(list_local_users, self).__init__(parent)
@@ -828,11 +901,8 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                 self.Name_Input.hide()
                 self.Confirm_button.hide()
 
-        def call_list_local_users():
-            widget = list_local_users()
-            widget.exec_()
-
-        call_list_local_users()
+        widget = list_local_users()
+        widget.exec_()
 
     def lslocagrus(self):
         class list_local_groups(QDialog, Ui_rmvusrogru):
@@ -877,11 +947,8 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                 self.Name_Input.hide()
                 self.Confirm_button.hide()
 
-        def call_list_local_groups():
-            widget = list_local_groups()
-            widget.exec_()
-
-        call_list_local_groups()
+        widget = list_local_groups()
+        widget.exec_()
 
     def lsmemofgru(self):
         pass
@@ -890,9 +957,9 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
         pass
 
     def chngpasswdofall(self):
-        class changepasswordofall(QDialog, Ui_chngpass):
+        class change_password_for_all(QDialog, Ui_chngpass):
             def __init__(self, parent = None):
-                super(changepasswordofall, self).__init__(parent)
+                super(change_password_for_all, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setupUi(self)
                 self.EXECUTE()
@@ -1005,54 +1072,37 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     # print(l2)
                     # print(len(l2))
                     # Try loop enforces password policy.
+                    character_rules = [0, 0, 0, 0]  # [LowerCase, UpperCase, Numbers, Symbols]
                     try:
                         symbols = '`~!@#$%^&*()_+-=[]{};:,./<>?'
-                        characterBOOL = ''
                         for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
                             character = l1[i]
                             character2 = l2[x]
-                            if character.islower() and character2.islower():
-                                characterBOOL = True
-                            elif not character.islower() and not character2.islower():
-                                characterBOOL = False
-                            if characterBOOL:
-                                break
+                            if character_rules[0] != 1:
+                                if character.islower() and character2.islower():
+                                    character_rules[0] = 1
+                                elif not character.islower() and not character2.islower():
+                                    character_rules[0] = 0
+                            if character_rules[1] != 1:
+                                if character.isupper() and character2.isupper():
+                                    character_rules[1] = 1
+                                elif not character.isupper() and not character2.isupper():
+                                    character_rules[1] = 0
+                            if character_rules[2] != 1:
+                                if character.isdigit() and character2.isdigit():
+                                    character_rules[2] = 1
+                                elif not character.isdigit() and not character2.isdigit():
+                                    character_rules[2] = 0
+                            if character_rules[3] != 1:
+                                if character in symbols and character2 in symbols:
+                                    character_rules[3] = 1
+                                elif character not in symbols and character2 not in symbols:
+                                    character_rules[3] = 0
 
-                        characterUPBOOL = ''
-                        for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
-                            character = l1[i]
-                            character2 = l2[x]
-                            if character.isupper() and character2.isupper():
-                                characterUPBOOL = True
-                            elif not character.isupper() and not character2.isupper():
-                                characterUPBOOL = False
-                            if characterUPBOOL:
-                                break
-
-                        symbolsBOOL = ''
-                        for y in range(0, len(symbols)):
-                            if (symbols[y] not in l1) and (symbols[y] not in l2):
-                                symbolsBOOL = False
-                            elif (symbols[y] in l1) and (symbols[y] in l2):
-                                symbolsBOOL = True
-                            if symbolsBOOL:
-                                break
-
-                        numberBOOL = ''
-                        for i, x in itertools.product(range(0, len(l1)), range(0, len(l2))):
-                            character = l1[i]
-                            character2 = l2[x]
-                            if character.isdigit() and character2.isdigit():
-                                numberBOOL = True
-                            elif not character.isdigit() and not character2.isdigit():
-                                numberBOOL = False
-                            if numberBOOL:
-                                break
-
-                        print(str(characterBOOL) + ' Lower Case')
-                        print(str(characterUPBOOL) + ' Upper case')
-                        print(str(symbolsBOOL) + ' symbols')
-                        print(str(numberBOOL) + ' number')
+                        print(str(character_rules[0] == 1) + ' Lower Case')
+                        print(str(character_rules[1] == 1) + ' Upper case')
+                        print(str(character_rules[2] == 1) + ' number')
+                        print(str(character_rules[3] == 1) + ' symbols')
                     except IndexError:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
@@ -1068,7 +1118,7 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
-                    elif len(l1) <= 8 or len(l2) <= 8:
+                    elif len(l1) < 8 or len(l2) < 8:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 8 characters!")
@@ -1082,33 +1132,33 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
-                    elif not characterBOOL:
+                    elif character_rules[0] == 0:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 lower case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
-                    elif not characterUPBOOL:
+                    elif character_rules[1] == 0:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText("Hey! Your password must have at least 1 Upper Case letter!")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
-                    elif not symbolsBOOL:
+                    elif character_rules[2] == 0:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText(
+                            "Hey! Your password must have at least 1 number! [Ex: 123456]")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        HEY.exec_()
+                    elif character_rules[3] == 0:
                         HEY = QMessageBox()
                         HEY.setWindowTitle('Hey! Listen!')
                         HEY.setText(
                             "Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
-                        HEY.setIcon(QMessageBox.Critical)
-                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                        HEY.exec_()
-                    elif not numberBOOL:
-                        HEY = QMessageBox()
-                        HEY.setWindowTitle('Hey! Listen!')
-                        HEY.setText(
-                            "Hey! Your password must have at least 1 number! [Ex: !@#$%^%&]")
                         HEY.setIcon(QMessageBox.Critical)
                         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                         HEY.exec_()
@@ -1133,8 +1183,5 @@ $Username | Set-LocalUser -Password $Password"""
                 #         print(e)
                 #         print('Could not start thread')
 
-        def callChangepaswordofall():
-            widget = changepasswordofall()
-            widget.exec_()
-
-        callChangepaswordofall()
+        widget = change_password_for_all()
+        widget.exec_()
