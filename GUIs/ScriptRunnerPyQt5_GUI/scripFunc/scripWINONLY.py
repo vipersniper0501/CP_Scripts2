@@ -3,18 +3,15 @@ import itertools
 import os
 import shutil
 import subprocess as sub
-
-from distutils.dir_util import copy_tree
 from threading import Thread
 
 import distro  # for figuring out what linux distro
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QListWidgetItem, QDialog, QMessageBox, QTreeWidgetItem
-from bottle import unicode
 
+from PyUIs.addusrUI import Ui_addUSR
 from PyUIs.changepass import Ui_chngpass
 from PyUIs.enblebit import Ui_bitlockerGUI
-from PyUIs.addusrUI import Ui_addUSR
 from PyUIs.rmvUSRoGRU import Ui_rmvusrogru
 from PyUIs.user_group_modifyUI import Ui_user_group_list_modifiers
 
@@ -832,6 +829,29 @@ New-LocalUser -Name $nusnm -Password $nuspss"""
                     e = group_accounts.get(log)
                     for i3 in range(0, len(e)):
                         QTreeWidgetItem(c1, [str(e[i3])])
+
+                def run_add_user_to_group():
+                    pass
+
+                def confirmation():
+                    CONFIRM = QMessageBox()
+                    CONFIRM.setWindowTitle('Hey! Listen!')
+                    CONFIRM.setText("Hey! Are you sure you want to do this?")
+                    CONFIRM.setIcon(QMessageBox.Question)
+                    CONFIRM.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
+                    CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                    x = CONFIRM.exec_()
+                    if x == QMessageBox.Yes:
+                        print('Adding User to Group...')
+                        run_add_user_to_group()
+                    elif x == QMessageBox.No:
+                        print('Cancelling...')
+
+                def cancel_button():
+                    self.close()
+
+                self.Cancel_button_2.clicked.connect(cancel_button)
+                self.Confirm_button.clicked.connect(lambda: confirmation())
 
         widget = add_user_to_group()
         widget.exec_()
