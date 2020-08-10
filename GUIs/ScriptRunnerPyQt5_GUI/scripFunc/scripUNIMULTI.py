@@ -591,8 +591,7 @@ def basConf(rdp):
                       "MicrosoftWindowsPowershellV2",
                       "MicrosoftWindowsPowershellV2Root"]
         for i in range(0, len(disableCOM)):
-            command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[
-                i] + ' -NoRestart'
+            command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[i] + ' -NoRestart'
             procPop(["powershell", "& {" + command + "}"])
         windowsCapabilitesDisable = ["RIP.Listener~~~~0.0.1.0",
                                      "SNMP.Client~~~~0.0.1.0"]

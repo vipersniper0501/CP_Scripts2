@@ -1,7 +1,19 @@
-= PyQt5 Change Log
+= PyQt5 Version Change Log
 :toc:
 
 == Versions
+
+=== Version 3.0.17.0
+
+* Features Added:
+    ** Add User To Group Completed
+
+* Bug Fixes/Improvements
+    ** Optimizations in `scripFUN.scripWINONLY.py`
+    ** Updated Github Templates
+
+'''
+
 
 === Version 3.0.16.1
 

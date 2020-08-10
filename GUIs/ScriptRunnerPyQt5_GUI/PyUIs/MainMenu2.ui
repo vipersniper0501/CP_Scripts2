@@ -124,7 +124,7 @@ background: rgba(139, 147, 178, .75);
      <rect>
       <x>10</x>
       <y>600</y>
-      <width>311</width>
+      <width>341</width>
       <height>31</height>
      </rect>
     </property>
@@ -132,7 +132,7 @@ background: rgba(139, 147, 178, .75);
      <string notr="true">color: #CCD2E6</string>
     </property>
     <property name="text">
-     <string>Note: any command with a * is not completed yet</string>
+     <string>Note: any command with a * is either not completed yet or broken </string>
     </property>
    </widget>
    <widget class="QWidget" name="horizontalLayoutWidget">
@@ -786,7 +786,7 @@ background: rgba(139, 147, 178, .75);
 }</string>
               </property>
               <property name="text">
-               <string>Security Policies Configurations</string>
+               <string>Security Policies Configurations*</string>
               </property>
              </widget>
             </item>
@@ -971,7 +971,7 @@ background: rgba(139, 147, 178, .75);
 }</string>
               </property>
               <property name="text">
-               <string>Configure Browser Settings [Firefox]</string>
+               <string>Configure Browser Settings [Firefox]*</string>
               </property>
              </widget>
             </item>
@@ -1227,7 +1227,7 @@ background: rgba(139, 147, 178, .75);
 }</string>
               </property>
               <property name="text">
-               <string>Add User to Group*</string>
+               <string>Add User to Group</string>
               </property>
              </widget>
             </item>
