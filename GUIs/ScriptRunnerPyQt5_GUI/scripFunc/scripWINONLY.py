@@ -8,6 +8,7 @@ import distro  # for figuring out what linux distro
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QListWidgetItem, QDialog, QMessageBox, QTreeWidgetItem
 
+from PyUIs.add_groupUI import Ui_Add_Group_UIClass
 from PyUIs.addusrUI import Ui_addUSR
 from PyUIs.changepass import Ui_chngpass
 from PyUIs.enblebit import Ui_bitlockerGUI
@@ -32,11 +33,6 @@ config.read('config.ini')
 #
 #     return os.path.join(base_path, relative_path)
 
-# This file is used to store commands that are to only be used on Windows machines
-
-# TODO: When done, possible convert the try and if statements used for enforcing the complexity requirement into it's
-#  own function to reduce the number of lines in the file.
-
 # Allows for program to continue running while the function executes.
 def threader(com):
     try:
@@ -48,6 +44,8 @@ def threader(com):
 
 
 def PasswordChecker(Password1, Password2):
+    # The PasswordChecker compares the two user inputted passwords and checks them against a set
+    # of rules.
     character_rules = [0, 0, 0, 0]  # [LowerCase, UpperCase, Numbers, Symbols]
     try:
         symbols = '`~!@#$%^&*()_+-=[]{};:,./<>?'
@@ -131,8 +129,7 @@ def PasswordChecker(Password1, Password2):
     elif character_rules[2] == 0:
         HEY = QMessageBox()
         HEY.setWindowTitle('Hey! Listen!')
-        HEY.setText(
-            "Hey! Your password must have at least 1 number! [Ex: 123456]")
+        HEY.setText("Hey! Your password must have at least 1 number! [Ex: 123456]")
         HEY.setIcon(QMessageBox.Critical)
         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
         HEY.exec_()
@@ -140,14 +137,12 @@ def PasswordChecker(Password1, Password2):
     elif character_rules[3] == 0:
         HEY = QMessageBox()
         HEY.setWindowTitle('Hey! Listen!')
-        HEY.setText(
-            "Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
+        HEY.setText("Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
         HEY.setIcon(QMessageBox.Critical)
         HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
         HEY.exec_()
         return False
     else:
-        # print(Command)
         return True
 
 
@@ -170,7 +165,6 @@ class funcWINONLY:
                     '''Only works if 'Allow BitLocker without compatible TPM' is enabled in the Group Policy
                     Also does not encrypt right away. If you type 'Get-BitlockerVolume' in powershell, it will tell
                     you how much has been encrypted so far.'''
-                    # print(command)
                     
                     if PasswordChecker(self.encrypPASS.text(), self.encrypPASS_2.text()):
                         sub.Popen(['powershell', f'& {command}'])
@@ -217,9 +211,7 @@ class funcWINONLY:
                 
                 # Displays the encryption status of a drive
                 def STATUSCHECK(i):
-                    # print(i)
                     self.selectedDRIVE = i
-                    # print('selected drive: ' + self.selectedDRIVE)
                     index = decryptSTATUS.index(i)
                     status = index + 1
                     if decryptSTATUS[status] == 'FullyDecrypted':
@@ -256,24 +248,17 @@ class funcWINONLY:
                 while True:
                     try:
                         buttons[i].setText(decryptSTATUS[x])
-                        # print('i: ' + str(i))
-                        # print('x: ' + str(x))
-                        # print(decryptSTATUS[x])
-                        # print(len(decryptSTATUS))
                         driveLETTER.append(decryptSTATUS[x])
-                        # print(driveLETTER[i])
                         x = x + 2
                         i = i + 1
                         if x == len(decryptSTATUS):
                             while i != len(buttons):
-                                # print('if')
                                 buttons[i].setText('<No Drive Found>')
                                 buttons[i].setEnabled(False)
                                 i = i + 1
                         else:
                             continue
                     except Exception:
-                        # print('Controlled exit of loop: ' + str(e))
                         break
                 
                 # Sets the C: Drive as the default choice
@@ -513,15 +498,37 @@ class funcWINusrgru:
         widget.exec_()
     
     def addgrutosys(self):
-        class add_group_to_system(QDialog, ):  # Add Ui_class thing
+        class add_group_to_system(QDialog, Ui_Add_Group_UIClass):  # Add Ui_class thing
             def __init__(self, parent = None):
                 super(add_group_to_system, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
                 self.setupUI(self)
+                self.setFixedSize(292, 94)
                 self.EXECUTE()
             
             def EXECUTE(self):
-                pass
+                def add_group():
+                    sub.Popen(f"net localgroup {self.group_name_input.text()} /add")
+                
+                def confirmation():
+                    CONFIRM = QMessageBox()
+                    CONFIRM.setWindowTitle('Hey! Listen!')
+                    CONFIRM.setText("Hey! Are you sure you want to do this?")
+                    CONFIRM.setIcon(QMessageBox.Question)
+                    CONFIRM.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
+                    CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                    x = CONFIRM.exec_()
+                    if x == QMessageBox.Yes:
+                        print('Adding Group...')
+                        add_group()
+                    elif x == QMessageBox.No:
+                        print('Cancelling...')
+    
+                def cancel_button():
+                    self.close()
+    
+                self.Cancel_button.clicked.connect(cancel_button)
+                self.Confirm_button.clicked.connect(lambda: confirmation())
         
         widget = add_group_to_system()
         widget.exec_()
