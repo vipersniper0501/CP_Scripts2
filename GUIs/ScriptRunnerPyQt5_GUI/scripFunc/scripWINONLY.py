@@ -3,6 +3,7 @@ import itertools
 import shutil
 import subprocess as sub
 from threading import Thread
+from typing import Any
 
 import distro  # for figuring out what linux distro
 from PyQt5 import QtGui
@@ -43,9 +44,46 @@ def threader(com):
         print('Could not start thread')
 
 
-def PasswordChecker(Password1, Password2):
-    # The PasswordChecker compares the two user inputted passwords and checks them against a set
-    # of rules.
+def NewThread(com, Returning: bool, *arguments) -> Any:
+    """
+    Will create a new thread for a function/command.
+    
+    :param com: Command to be Executed
+    :param Returning: True/False Will command return anything
+    :param arguments: Arguments to be sent to Command
+    
+    """
+    
+    class NewThreadWorker(Thread):
+        def __init__(self, group = None, target = None, name = None, args = (), kwargs = None, *,
+                     daemon = None):
+            Thread.__init__(self, group, target, name, args, kwargs, daemon = daemon)
+            self.daemon = True
+            self._return = None
+        
+        def run(self):
+            if self._target is not None:
+                self._return = self._target(*self._args, **self._kwargs)
+        
+        def join(self):
+            Thread.join(self)
+            return self._return
+    
+    ntw = NewThreadWorker(target = com, args = (*arguments,))
+    ntw.start()
+    if Returning:
+        return ntw.join()
+
+
+def PasswordChecker(Password1, Password2) -> bool:
+    """
+    The PasswordChecker compares the two user inputted passwords and checks them against a set
+    of rules.
+
+    :param Password1: First Password Entry
+    :param Password2: Second Password Entry
+    :return: True/False (Does the Password meet the complexity requirements)
+    """
     character_rules = [0, 0, 0, 0]  # [LowerCase, UpperCase, Numbers, Symbols]
     try:
         symbols = '`~!@#$%^&*()_+-=[]{};:,./<>?'
@@ -144,6 +182,91 @@ def PasswordChecker(Password1, Password2):
         return False
     else:
         return True
+
+
+def find_names():
+    # Local users are added to a list of names
+    EXEC = sub.Popen("powershell net localgroup users", stdout = sub.PIPE)
+    stdout, _ = EXEC.communicate()
+    output = stdout.decode("utf-8")
+    output = output.split("\n")
+    # print(output)
+    names = []
+    for i0 in range(6, len(output) - 3):
+        w = output[i0].split('\r')
+        x = w[0]
+        names.append(x)
+    
+    """Local Administrators are added to list of names"""
+    EXEC = sub.Popen("powershell net localgroup administrators", stdout = sub.PIPE)
+    stdout, _ = EXEC.communicate()
+    output = stdout.decode("utf-8")
+    output = output.split("\n")
+    
+    EXEC = sub.Popen("powershell $env:UserName", stdout = sub.PIPE)
+    stdout, _ = EXEC.communicate()
+    output2 = stdout.decode("utf-8")
+    current_user = output2.split('\r\n')
+    for i4 in range(6, len(output) - 3):
+        w = output[i4].split('\r')
+        x = w[0]
+        if x == current_user[0]:
+            x = current_user[0] + '   (Current User)'
+        names.append(x)
+    names.insert(0, '\n')
+    print(names)
+    return names
+
+
+def find_groups(users_n_groups: bool):
+    """
+    This is to find local groups and users on the windows 10 operating system
+    
+    :param users_n_groups: True/False  Do you need the users in each group also.
+    :return: Returns a list of local groups and if users_n_groups is True, also returns a dictionary of users in each group
+    """
+    EXEC = sub.Popen(["powershell", "& {net localgroup}"], stdout = sub.PIPE)
+    stdout, _ = EXEC.communicate()
+    output = stdout.decode("utf-8")
+    output = output.split("\n")
+    groups = []
+    for i in range(4, len(output) - 3):
+        w = output[i].split('\r')
+        x = w[0]
+        y = x.split('*')
+        z = y[1]
+        groups.append(z)
+    
+    users_in_groups = {}
+    # TODO: SPEED THIS UP
+    if users_n_groups:
+        for i2 in range(0, len(groups)):
+            print(groups[i2])
+            EXEC2 = sub.Popen(["powershell", "net localgroup '" + groups[i2] + "'"],
+                              stdout = sub.PIPE)
+            stdout2, _ = EXEC2.communicate()
+            try:
+                output = stdout2.decode("utf-8")
+                output2 = output.split("\n")
+                user_names = []
+                for i3 in range(6, len(output2) - 3):
+                    y = output2[i3].split('\r')
+                    x = y[0]
+                    print(x)
+                    user_names.append(x)
+                if len(user_names) == 0:
+                    users_in_groups[groups[i2]] = ['No Users']
+                elif len(user_names) == 1:
+                    users_in_groups[groups[i2]] = [user_names[0]]
+                else:
+                    for i4 in range(0, len(user_names)):
+                        users_in_groups[groups[i2]] = user_names
+            except Exception as e:
+                print('\n\nException occurred: ' + str(e))
+    
+    print(groups)
+    print(users_in_groups)
+    return users_in_groups, groups
 
 
 class funcWINONLY:
@@ -498,17 +621,27 @@ class funcWINusrgru:
         widget.exec_()
     
     def addgrutosys(self):
-        class add_group_to_system(QDialog, Ui_Add_Group_UIClass):  # Add Ui_class thing
+        class add_group_to_system(QDialog, Ui_Add_Group_UIClass):
             def __init__(self, parent = None):
                 super(add_group_to_system, self).__init__(parent)
                 self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
-                self.setupUI(self)
                 self.setFixedSize(292, 94)
+                self.setupUi(self)
                 self.EXECUTE()
             
             def EXECUTE(self):
                 def add_group():
-                    sub.Popen(f"net localgroup {self.group_name_input.text()} /add")
+                    # Add ability to check to make sure group does not already exist
+                    _, groups = NewThread(find_groups, True, False)
+                    if self.group_name_input.text() in groups:
+                        HEY = QMessageBox()
+                        HEY.setWindowTitle('Hey! Listen!')
+                        HEY.setText("Hey! Your passwords do not match!")
+                        HEY.setIcon(QMessageBox.Critical)
+                        HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                        HEY.exec_()
+                    else:
+                        sub.Popen(f"net localgroup {self.group_name_input.text()} /add")
                 
                 def confirmation():
                     CONFIRM = QMessageBox()
@@ -523,10 +656,10 @@ class funcWINusrgru:
                         add_group()
                     elif x == QMessageBox.No:
                         print('Cancelling...')
-    
+                
                 def cancel_button():
                     self.close()
-    
+                
                 self.Cancel_button.clicked.connect(cancel_button)
                 self.Confirm_button.clicked.connect(lambda: confirmation())
         
@@ -547,22 +680,7 @@ class funcWINusrgru:
                 self.label.setText('Current Groups:')
                 self.label2.setText('Group Name: ')
                 
-                def find_groups():
-                    EXEC = sub.Popen(["powershell", "& {net localgroup}"], stdout = sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output = stdout.decode("utf-8")
-                    output = output.split("\n")
-                    groups = []
-                    for i in range(4, len(output) - 3):
-                        w = output[i].split('\r')
-                        x = w[0]
-                        y = x.split('*')
-                        z = y[1]
-                        groups.append(z)
-                    print(groups)
-                    return groups
-                
-                list_of_groups = find_groups()
+                _, list_of_groups = NewThread(find_groups, True, False)
                 
                 for i in range(0, len(list_of_groups)):
                     QListWidgetItem(list_of_groups[i], self.listOFnames)
@@ -656,84 +774,8 @@ class funcWINusrgru:
                     COMPLETE.exec_()
                     self.__init__()
                 
-                def find_names():
-                    # Local users are added to a list of names
-                    EXEC = sub.Popen("powershell net localgroup users", stdout = sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output = stdout.decode("utf-8")
-                    output = output.split("\n")
-                    # print(output)
-                    names = []
-                    for i0 in range(6, len(output) - 3):
-                        w = output[i0].split('\r')
-                        x = w[0]
-                        names.append(x)
-                    
-                    """Local Administrators are added to list of names"""
-                    EXEC = sub.Popen("powershell net localgroup administrators", stdout = sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output = stdout.decode("utf-8")
-                    output = output.split("\n")
-                    
-                    EXEC = sub.Popen("powershell $env:UserName", stdout = sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output2 = stdout.decode("utf-8")
-                    current_user = output2.split('\r\n')
-                    for i4 in range(6, len(output) - 3):
-                        w = output[i4].split('\r')
-                        x = w[0]
-                        if x == current_user[0]:
-                            x = current_user[0] + '   (Current User)'
-                        names.append(x)
-                    names.insert(0, '\n')
-                    print(names)
-                    return names
-                
-                def find_groups():
-                    EXEC = sub.Popen(["powershell", "& {net localgroup}"], stdout = sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output = stdout.decode("utf-8")
-                    output = output.split("\n")
-                    groups = []
-                    for i in range(4, len(output) - 3):
-                        w = output[i].split('\r')
-                        x = w[0]
-                        y = x.split('*')
-                        z = y[1]
-                        groups.append(z)
-                    
-                    users_in_groups = {}
-                    # TODO: SPEED THIS UP
-                    for i2 in range(0, len(groups)):
-                        print(groups[i2])
-                        EXEC2 = sub.Popen(["powershell", "net localgroup '" + groups[i2] + "'"],
-                                          stdout = sub.PIPE)
-                        stdout2, _ = EXEC2.communicate()
-                        try:
-                            output = stdout2.decode("utf-8")
-                            output2 = output.split("\n")
-                            user_names = []
-                            for i3 in range(6, len(output2) - 3):
-                                y = output2[i3].split('\r')
-                                x = y[0]
-                                print(x)
-                                user_names.append(x)
-                            if len(user_names) == 0:
-                                users_in_groups[groups[i2]] = ['No Users']
-                            elif len(user_names) == 1:
-                                users_in_groups[groups[i2]] = [user_names[0]]
-                            else:
-                                for i4 in range(0, len(user_names)):
-                                    users_in_groups[groups[i2]] = user_names
-                        except Exception as e:
-                            print('\n\nException occurred: ' + str(e))
-                    
-                    print(groups)
-                    print(users_in_groups)
-                    return users_in_groups, groups
-                
                 list_of_names = find_names()
-                group_accounts, list_of_groups = find_groups()
+                group_accounts, list_of_groups = NewThread(find_groups, True, True)
                 
                 for i in range(0, len(list_of_names)):
                     QListWidgetItem(list_of_names[i], self.listWidget)
@@ -804,39 +846,6 @@ class funcWINusrgru:
             def EXECUTE(self):
                 self.setWindowTitle('List Of Current Users On System')
                 
-                def find_names():
-                    # Local users are added to a list of names
-                    EXEC = sub.Popen("powershell net localgroup users", stdout = sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output = stdout.decode("utf-8")
-                    output = output.split("\n")
-                    # print(output)
-                    names = []
-                    for i0 in range(6, len(output) - 3):
-                        w = output[i0].split('\r')
-                        x = w[0]
-                        names.append(x)
-                    
-                    '''Local Administrators are added to list of names'''
-                    EXEC = sub.Popen(["powershell", "& {net localgroup administrators}"],
-                                     stdout = sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output = stdout.decode("utf-8")
-                    output = output.split("\n")
-                    
-                    EXEC = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output2 = stdout.decode("utf-8")
-                    current_user = output2.split('\r\n')
-                    for i4 in range(6, len(output) - 3):
-                        w = output[i4].split('\r')
-                        x = w[0]
-                        if x == current_user[0]:
-                            x = current_user[0] + '   (Current User)'
-                        names.append(x)
-                    print(names)
-                    return names
-                
                 list_of_names = find_names()
                 
                 for i in range(0, len(list_of_names)):
@@ -866,22 +875,7 @@ class funcWINusrgru:
             def EXECUTE(self):
                 self.setWindowTitle('List Of Current Groups On System')
                 
-                def find_groups():
-                    EXEC = sub.Popen(["powershell", "& {net localgroup}"], stdout = sub.PIPE)
-                    stdout, _ = EXEC.communicate()
-                    output = stdout.decode("utf-8")
-                    output = output.split("\n")
-                    groups = []
-                    for i in range(4, len(output) - 3):
-                        w = output[i].split('\r')
-                        x = w[0]
-                        y = x.split('*')
-                        z = y[1]
-                        groups.append(z)
-                    print(groups)
-                    return groups
-                
-                list_of_groups = find_groups()
+                _, list_of_groups = NewThread(find_groups, True, False)
                 
                 for i in range(0, len(list_of_groups)):
                     QListWidgetItem(list_of_groups[i], self.listOFnames)

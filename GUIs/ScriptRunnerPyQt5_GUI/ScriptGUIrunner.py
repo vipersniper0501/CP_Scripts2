@@ -537,13 +537,13 @@ class Main_start(QMainWindow, Ui_MainWindow):
                                                                                                  'vsftpd')))))
             self.browserConf.clicked.connect(lambda: self.threader(funcWIN.browserCONF()))
             # Windows User Group Commands
-            self.WINUSRGRUBUTTON = [self.adgrutosys_3, self.lsgruusrin_3, self.lsmemgru_3,
-                                    self.rmvusrfrogru_3]
+            self.WINUSRGRUBUTTON = [self.lsgruusrin_3, self.lsmemgru_3, self.rmvusrfrogru_3]
             for i in range(0, len(self.WINUSRGRUBUTTON)):
                 self.WINUSRGRUBUTTON[i].clicked.connect(lambda: self.threader(indev()))  #
 
             self.adusrtosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.addusr()))
             self.rmvusrfrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remusr()))
+            self.adgrutosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.addgrutosys()))
             self.rmvgrufrosys_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.remgrufrosys()))
             self.adusrtogru_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.addusrtogru()))
             self.lslocausr_3.clicked.connect(lambda: self.threader(funcWINUSRGRU.lslocausrs()))

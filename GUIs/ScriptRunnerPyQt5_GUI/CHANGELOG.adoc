@@ -3,12 +3,23 @@
 
 == Versions
 
+=== Version 3.0.18.0
+
+* Features Added:
+    ** Completed development of Add Group To System command
+
+* Bug Fixes/Improvements:
+    ** Made functions find_names, find_groups, and PasswordChecker into their own functions to be
+called on when needed.
+    ** Started work on trying to Thread functions better to improve speed of commands
+    ** General code optimizations
+
 === Version 3.0.17.1
 
 * Features Added:
     ** None
 
-* Bug Fixes/Improvements
+* Bug Fixes/Improvements:
     ** Worked on/Started Add Group To System command (Need to make sure it checks to see if the
 group already exists before adding)
     ** Removed some unused debugging print statements
@@ -20,7 +31,7 @@ group already exists before adding)
 * Features Added:
     ** Add User To Group Completed
 
-* Bug Fixes/Improvements
+* Bug Fixes/Improvements:
     ** Optimizations in `scripFUN.scripWINONLY.py`
     ** Updated Github Templates
 
@@ -40,13 +51,11 @@ group already exists before adding)
 === Version 3.0.16.0
 
 * Features Added:
-
     ** Remove Group From System (Windows)
     **  List Local Users on System (Windows)
     ** List Local Groups on System (Windows)
 
 * Bug Fixes/Minor Improvements:
-
     ** All Windows and dialogs properly resize to window resolutions when working with
 multi-monitor setup
     ** Optimized code in `scripFUNC.scripWINONLY.py`
