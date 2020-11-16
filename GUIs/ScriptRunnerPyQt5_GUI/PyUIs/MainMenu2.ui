@@ -1258,7 +1258,7 @@ background: rgba(139, 147, 178, .75);
 }</string>
               </property>
               <property name="text">
-               <string>Add Group to System*</string>
+               <string>Add Group to System</string>
               </property>
              </widget>
             </item>

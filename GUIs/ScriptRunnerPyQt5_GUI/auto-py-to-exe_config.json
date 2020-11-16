@@ -1,0 +1,101 @@
+{
+ "version": "auto-py-to-exe-configuration_v1",
+ "pyinstallerOptions": [
+  {
+   "optionDest": "noconfirm",
+   "value": true
+  },
+  {
+   "optionDest": "filenames",
+   "value": "C:/Users/Michael/Desktop/App Builder/ScriptGUIrunner.py"
+  },
+  {
+   "optionDest": "onefile",
+   "value": false
+  },
+  {
+   "optionDest": "console",
+   "value": true
+  },
+  {
+   "optionDest": "icon_file",
+   "value": "C:/Users/Michael/Desktop/App Builder/images/cup2.ico"
+  },
+  {
+   "optionDest": "name",
+   "value": "AppleCIDR"
+  },
+  {
+   "optionDest": "ascii",
+   "value": false
+  },
+  {
+   "optionDest": "clean_build",
+   "value": false
+  },
+  {
+   "optionDest": "strip",
+   "value": false
+  },
+  {
+   "optionDest": "noupx",
+   "value": false
+  },
+  {
+   "optionDest": "version_file",
+   "value": "C:/Users/Michael/Desktop/App Builder/version.txt"
+  },
+  {
+   "optionDest": "uac_admin",
+   "value": true
+  },
+  {
+   "optionDest": "uac_uiaccess",
+   "value": false
+  },
+  {
+   "optionDest": "win_private_assemblies",
+   "value": false
+  },
+  {
+   "optionDest": "win_no_prefer_redirects",
+   "value": false
+  },
+  {
+   "optionDest": "bootloader_ignore_signals",
+   "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Michael/Desktop/App Builder/resources.qrc;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Michael/Desktop/App Builder/resources_rc.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Michael/Desktop/App Builder/scripFunc;scripFunc/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Michael/Desktop/App Builder/PyUIs;PyUIs/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Michael/Desktop/App Builder/images;images/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Michael/Desktop/App Builder/configurations;configurations/"
+  },
+  {
+   "optionDest": "excludes",
+   "value": "tkinter"
+  }
+ ],
+ "nonPyinstallerOptions": {
+  "increaseRecursionLimit": true,
+  "manualArguments": ""
+ }
+}

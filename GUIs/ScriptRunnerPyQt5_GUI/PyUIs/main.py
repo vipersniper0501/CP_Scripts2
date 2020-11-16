@@ -1383,7 +1383,7 @@ class Ui_MainWindow(object):
         self.rmvusrfrogru_3.setText(_translate("MainWindow", "Remove User from Group*"))
         self.lslocausr_3.setText(_translate("MainWindow", "List Local Users"))
         self.adusrtogru_3.setText(_translate("MainWindow", "Add User to Group"))
-        self.adgrutosys_3.setText(_translate("MainWindow", "Add Group to System*"))
+        self.adgrutosys_3.setText(_translate("MainWindow", "Add Group to System"))
         self.lslocagru_3.setText(_translate("MainWindow", "List Local Groups"))
         self.lsgruusrin_3.setText(_translate("MainWindow", "List Groups an User is in*"))
         self.chngusrpas_3.setText(_translate("MainWindow", "Change all User Passwords at Once"))

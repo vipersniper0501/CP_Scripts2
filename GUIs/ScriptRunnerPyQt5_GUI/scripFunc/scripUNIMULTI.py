@@ -8,7 +8,10 @@ from shlex import quote as shlex_quote
 from sys import platform
 import distro  # for figuring out what linux distro
 from PyQt5 import QtGui
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QMessageBox, QDialog, QFileDialog
+
+from scripFunc.scripWINONLY import NewThread
 
 if platform == 'linux':
     import pwd
@@ -36,6 +39,10 @@ config.read('config.ini')
 
 # Universal Updates
 def update_os():
+    """
+    Updates host operating system.
+    :return:
+    """
     # TODO: Have function also update all drivers
     if ops == 'Ubuntu' or ops == 'debian':
         command = 'sudo apt-get update && apt-get upgrade -y'
@@ -127,11 +134,14 @@ Write-Host('Reboot required! please reboot now..') -Fore Red
 
 # Universal Search Media
 def search_media():
+    """
+    Searches host computer for .mp4, .mp3, .png, and .jpg files and prints results into a text file.
+    :return:
+    """
     if platform == 'linux' or platform == 'darwin':
         procPop('touch /home/$USER/Desktop/LotTest.txt')
         extensions = (
-            '.jpg', '.mp4', '.flv', '.avi', '.wmv', '.mov', '.png', '.tif', '.gif', '.mp3', '.wma',
-            '.aif', '.jar')
+            '.jpg', '.mp4', '.mov', '.png', '.gif', '.mp3', '.jar')
         for root, dirs, files in os.walk('/home/'):
             for filename in files:
                 if any(filename.endswith(extension) for extension in extensions):
@@ -160,9 +170,14 @@ def search_media():
 
 # linux and windows firewall settings. Can only change Mac firewall through GUI
 def fwl():
+    """
+    Configures firewall on host computer to close and block vulnerable ports
+
+    :return:
+    """
     if platform == 'linux':
         commandtest = 'sudo ufw status'
-        EXEC = procPop(commandtest.split(), stdout = sub.PIPE)
+        EXEC = procPop(commandtest.split(), stdout=sub.PIPE)
         stdout, _ = EXEC.communicate()
         output = stdout.decode('utf-8')
 
@@ -186,59 +201,59 @@ def fwl():
         print('-----------------------Firewall Settings Has Started-----------------------')
         # SSH
         ssh = config.get('Services', 'ssh')
-        if ssh == 'yes':
+        if ssh == True:
             command = 'sudo ufw allow 22'
             procPop(command.split())
-        elif ssh == 'no':
+        elif ssh == False:
             command = 'sudo ufw deny 22'
             procPop(command.split())
         # FTP
         ftp = config.get('Services', 'ftp')
-        if ftp == 'yes':
+        if ftp == True:
             command = 'sudo ufw allow 21'
             procPop(command.split())
-        elif ftp == 'no':
+        elif ftp == False:
             command = 'sudo ufw deny 21'
             procPop(command.split())
         # WEB
         web = config.get('Services', 'web')
-        if web == 'yes':
+        if web == True:
             command = 'sudo ufw allow 80'
             procPop(command.split())
             https = config.get('Services', 'https')
-        elif web == 'no':
+        elif web == False:
             command = 'sudo ufw deny 80'
             procPop(command.split())
         # HTTPS
         https = config.get('Services', 'https')
-        if https == 'yes':
+        if https == True:
             command = 'sudo ufw allow 443'
             procPop(command.split())
-        elif https == 'no':
+        elif https == False:
             command = 'sudo ufw deny 443'
             procPop(command.split())
         # Samba
         smb = config.get('Services', 'smb')
-        if smb == 'yes':
+        if smb == True:
             command = 'sudo ufw allow 139'
             procPop(command.split())
-        elif smb == 'no':
+        elif smb == False:
             command = 'sudo ufw deny 139'
             procPop(command.split())
         # SQL
         sql = config.get('Services', 'sql')
-        if sql == 'yes':
+        if sql == True:
             command = 'sudo ufw allow 3306'
             procPop(command.split())
-        elif sql == 'no':
+        elif sql == False:
             command = 'sudo ufw deny 3306'
             procPop(command.split())
         # Rsync
         rsnc = config.get('Services', 'rsnc')
-        if rsnc == 'yes':
+        if rsnc == True:
             command = 'sudo ufw allow 873'
             procPop(command.split())
-        elif rsnc == 'no':
+        elif rsnc == False:
             command = 'sudo ufw deny 873'
             procPop(command.split())
 
@@ -273,12 +288,12 @@ def fwl():
     elif platform == 'win32':
         print('-----------------------Firewall Settings Has Started-----------------------')
         ssh = config.get('Services', 'ssh')
-        if ssh == 'yes':
+        if ssh == True:
             command = "netsh advfirewall firewall add rule name='ssh' dir=in action=allow protocol=TCP localport=22"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='ssh' dir=out action=allow protocol=TCP localport=22"
             procPop(["powershell", "& {" + command + "}"])
-        elif ssh == 'no':
+        elif ssh == False:
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=22"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='ssh' dir=in action=block protocol=TCP localport=22"
@@ -287,12 +302,12 @@ def fwl():
             procPop(["powershell", "& {" + command + "}"])
         # FTP
         ftp = config.get('Services', 'ftp')
-        if ftp == 'yes':
+        if ftp == True:
             command = "netsh advfirewall firewall add rule name='ftp' dir=in action=allow protocol=TCP localport=21"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='ftp' dir=out action=allow protocol=TCP localport=21"
             procPop(["powershell", "& {" + command + "}"])
-        elif ftp == 'no':
+        elif ftp == False:
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=21"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='ftp' dir=in action=block protocol=TCP localport=21"
@@ -301,12 +316,12 @@ def fwl():
             procPop(["powershell", "& {" + command + "}"])
         # WEB
         web = config.get('Services', 'web')
-        if web == 'yes':
+        if web == True:
             command = "netsh advfirewall firewall add rule name='webserver' dir=in action=allow protocol=TCP localport=80"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='webserver' dir=out action=allow protocol=TCP localport=80"
             procPop(["powershell", "& {" + command + "}"])
-        elif web == 'no':
+        elif web == False:
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=80"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='webserver' dir=in action=block protocol=TCP localport=80"
@@ -315,12 +330,12 @@ def fwl():
             procPop(["powershell", "& {" + command + "}"])
         # HTTPS
         https = config.get('Services', 'https')
-        if https == 'yes':
+        if https == True:
             command = "netsh advfirewall firewall add rule name='https' dir=in action=allow protocol=TCP localport=443"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='https' dir=out action=allow protocol=TCP localport=443"
             procPop(["powershell", "& {" + command + "}"])
-        elif https == 'no':
+        elif https == False:
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=443"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='https' dir=in action=block protocol=TCP localport=443"
@@ -329,12 +344,12 @@ def fwl():
             procPop(["powershell", "& {" + command + "}"])
         # Samba
         smb = config.get('Services', 'smb')
-        if smb == 'yes':
+        if smb == True:
             command = "netsh advfirewall firewall add rule name='SAMBA' dir=in action=allow protocol=TCP localport=139"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='SAMBA' dir=out action=allow protocol=TCP localport=139"
             procPop(["powershell", "& {" + command + "}"])
-        elif smb == 'no':
+        elif smb == False:
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=139"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='SAMBA' dir=in action=block protocol=TCP localport=139"
@@ -343,12 +358,12 @@ def fwl():
             procPop(["powershell", "& {" + command + "}"])
         # SQL
         sql = config.get('Services', 'sql')
-        if sql == 'yes':
+        if sql == True:
             command = "netsh advfirewall firewall add rule name='SQLserver' dir=in action=allow protocol=TCP localport=3306"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='SQLserver' dir=out action=allow protocol=TCP localport=3306"
             procPop(["powershell", "& {" + command + "}"])
-        elif sql == 'no':
+        elif sql == False:
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=3306"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='SQLserver' dir=in action=block protocol=TCP localport=3306"
@@ -357,12 +372,12 @@ def fwl():
             procPop(["powershell", "& {" + command + "}"])
         # Rsync
         rsnc = config.get('Services', 'rsnc')
-        if rsnc == 'yes':
+        if rsnc == True:
             command = "netsh advfirewall firewall add rule name='RSYNC' dir=in action=allow protocol=TCP localport=873"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RSYNC' dir=out action=allow protocol=TCP localport=873"
             procPop(["powershell", "& {" + command + "}"])
-        elif rsnc == 'no':
+        elif rsnc == False:
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=873"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RSYNC' dir=in action=block protocol=TCP localport=873"
@@ -371,7 +386,7 @@ def fwl():
             procPop(["powershell", "& {" + command + "}"])
         # RDP
         rdp = config.get('Services', 'rdp')  # must block/allow port 5985 and 3389
-        if rdp == 'yes':
+        if rdp == True:
             command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=allow protocol=TCP localport=5985"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=allow protocol=TCP localport=3389"
@@ -380,7 +395,7 @@ def fwl():
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=allow protocol=TCP localport=3389"
             procPop(["powershell", "& {" + command + "}"])
-        elif rdp == 'no':
+        elif rdp == False:
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=5985"
             procPop(["powershell", "& {" + command + "}"])
             command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=3389"
@@ -442,7 +457,19 @@ def fwl():
 
 # TODO: Need to add way to easily create samba shares
 #  Need easy way to edit ssh settings (going into services and doing it there takes to long. and it is complicated to explain how to get there)
-def servSet(ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
+def servSet(ssh: bool, samba: bool, web: bool, apaweb: bool, nginweb: bool, ftp: bool, proftpd: bool, vsftpd: bool):
+    """
+    Configures host server settings for variety of servers.
+    :param ssh:
+    :param samba:
+    :param web:
+    :param apaweb:
+    :param nginweb:
+    :param ftp:
+    :param proftpd:
+    :param vsftpd:
+    :return:
+    """
     # TODO: Testing and making sure everything works correctly
     if platform == 'linux':
         if ops == 'Ubuntu' or ops == 'Debian':
@@ -455,13 +482,13 @@ def servSet(ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
             procPop(command.split())
             command = 'sudo pacman -S wenglish'
             procPop(command.split())
-        if ssh == 'yes':
+        if ssh == True:
             shutil.copy('../configurations/linux_config_files/ssh_config',
                         '/etc/ssh/ssh_config')
             shutil.copy('../configurations/linux_config_files/sshd_config',
                         '/etc/ssh/sshd_config')
-        if ftp == 'yes':
-            if proftpd == 'yes':
+        if ftp == True:
+            if proftpd == True:
                 # first line of command creates a backup of the original configurations
                 command = """sudo cp /etc/proftpd/proftpd.conf ~/Desktop/orig_proftpd.conf 
                              sudo mkdir /etc/proftpd/ssl
@@ -474,18 +501,18 @@ def servSet(ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
                             '/etc/proftpd/proftpd.conf')
                 shutil.copy('../configurations/linux_config_files/proftpTls_patch.conf',
                             '/etc/proftpd/tls.conf')
-            if vsftpd == 'yes':
+            if vsftpd == True:
                 # FIXME: Create and add vsftpd configuration
                 pass
 
-        if samba == 'yes':
+        if samba == True:
             shutil.copy('../configurations/linux_config_files/smb.conf', '/etc/samba/smb.conf')
 
-        if web == 'yes':
-            if apaweb == 'yes':
+        if web == True:
+            if apaweb == True:
                 shutil.copy('../configurations/linux_config_files/apache2.conf',
                             '/etc/apache2/apache2.conf')
-            elif nginweb == 'yes':
+            elif nginweb == True:
                 shutil.copy('../configurations/linux_config_files/nginx.conf',
                             '/etc/nginx/nginx.conf')
             else:
@@ -496,7 +523,7 @@ def servSet(ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
                 except ImportError:
                     pass
     elif platform == 'win32':
-        if samba == 'yes':
+        if samba == True:
             featuresSMB = ["SmbDirect",
                            "SMB1Protocol",
                            "SMB1Protocol-Client",
@@ -506,7 +533,7 @@ def servSet(ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
                 command = 'Enable-WindowsOptionalFeature -Online -FeatureName ' + featuresSMB[
                     i] + ' -NoRestart'
                 procPop(["powershell", "& {" + command + "}"])
-        elif samba == 'no':
+        elif samba == False:
             featuresSMB = ["SmbDirect",
                            "SMB1Protocol",
                            "SMB1Protocol-Client",
@@ -516,13 +543,13 @@ def servSet(ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
                 command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + featuresSMB[
                     i] + ' -NoRestart'
                 procPop(["powershell", "& {" + command + "}"])
-        if ssh == 'yes':
+        if ssh == True:
             command = "Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
             procPop(["powershell", "& {" + command + "}"])
             command = "Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
             procPop(["powershell", "& {" + command + "}"])
             print('Added / confirmed installation of openssh capability')
-        elif ssh == 'no':
+        elif ssh == False:
             command = "Remove-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
             procPop(["powershell", "& {" + command + "}"])
             command = "Remove-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
@@ -532,7 +559,7 @@ def servSet(ssh, samba, web, apaweb, nginweb, ftp, proftpd, vsftpd):
 
 def basConf(rdp):
     if platform == 'win32':
-        if rdp == 'yes':
+        if rdp == True:
             try:
                 shutil.copy('../configurations/winCONF/win10StigsRDPy/win10secRDPallowed.inf',
                             'C:/win10secRDPallowed.inf')
@@ -547,7 +574,7 @@ def basConf(rdp):
             except IOError as e:
                 print("Unable to copy file. %s" % e)
             path = 'C:/win10secRDPallowed.inf'
-        elif rdp == 'no':
+        elif rdp == False:
             try:
                 shutil.copy('../configurations/winCONF/win10StigsRDPn/Windows10Template11_17'
                             '.inf',
@@ -591,7 +618,8 @@ def basConf(rdp):
                       "MicrosoftWindowsPowershellV2",
                       "MicrosoftWindowsPowershellV2Root"]
         for i in range(0, len(disableCOM)):
-            command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[i] + ' -NoRestart'
+            command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[
+                i] + ' -NoRestart'
             procPop(["powershell", "& {" + command + "}"])
         windowsCapabilitesDisable = ["RIP.Listener~~~~0.0.1.0",
                                      "SNMP.Client~~~~0.0.1.0"]
@@ -710,112 +738,118 @@ def rmProSoft():
     print('This command is currently in developement')
 
 
-def hashCheck():
-    class hashRUN(QDialog, Ui_hashGEN):
+class hashRUN(QDialog, Ui_hashGEN):
+    # signal = pyqtSignal()
+    hash_number = 0
 
-        hash_number = 0
+    def __init__(self, parent=None):
+        print('hashcheck init')
+        super(hashRUN, self).__init__(parent)
+        self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
+        self.setFixedSize(431, 179)
+        self.setupUi(self)
 
-        def __init__(self, parent = None):
-            super(hashRUN, self).__init__(parent)
-            self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
-            self.setFixedSize(431, 179)
-            self.setupUi(self)
+        def fileselection():
+            dialog = QFileDialog.getOpenFileName(self, 'Select file')
+            self.fpath.setText(dialog[0])
+            print(dialog[0])
 
-            def fileselection():
-                dialog = QFileDialog.getOpenFileName(self, 'Select file')
-                self.fpath.setText(dialog[0])
-                print(dialog[0])
+        self.browsebutton.clicked.connect(fileselection)
 
-            self.browsebutton.clicked.connect(fileselection)
+        def hashMD5(selected):
+            if selected:
+                print('selected 0')
+                self.hash_number = 0
 
-            def hashMD5(selected):
-                if selected:
-                    self.hash_number = 0
+        def hashsha1(selected):
+            if selected:
+                print('selected 1')
+                self.hash_number = 1
 
-            def hashsha1(selected):
-                if selected:
-                    self.hash_number = 1
+        def hashsha256(selected):
+            if selected:
+                print('selected 2')
+                self.hash_number = 2
 
-            def hashsha256(selected):
-                if selected:
-                    self.hash_number = 2
+        def hashsha384(selected):
+            if selected:
+                print('selected 3')
+                self.hash_number = 3
 
-            def hashsha384(selected):
-                if selected:
-                    self.hash_number = 3
+        def hashsha512(selected):
+            if selected:
+                print('selected 4')
+                self.hash_number = 4
 
-            def hashsha512(selected):
-                if selected:
-                    self.hash_number = 4
+        self.MD5radio.toggled.connect(lambda: NewThread(hashMD5, False, self))
+        self.SHA1radio.toggled.connect(hashsha1)
+        self.SHA256radio.toggled.connect(hashsha256)
+        self.SHA384radio.toggled.connect(hashsha384)
+        self.SHA512radio.toggled.connect(hashsha512)
 
-            self.MD5radio.toggled.connect(hashMD5)
-            self.SHA1radio.toggled.connect(hashsha1)
-            self.SHA256radio.toggled.connect(hashsha256)
-            self.SHA384radio.toggled.connect(hashsha384)
-            self.SHA512radio.toggled.connect(hashsha512)
+        def OUTPUTBOX(text):
+            OUTPUT = QMessageBox()
+            OUTPUT.setWindowTitle('Hey! Listen!')
+            OUTPUT.setText(
+                "Hash has been successfully created.\nYou can copy the hash in Details.\n\n" + text)
+            OUTPUT.setDetailedText(text)
+            OUTPUT.setIcon(QMessageBox.Information)
+            OUTPUT.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+            OUTPUT.exec_()
 
-            def OUTPUTBOX(text):
-                OUTPUT = QMessageBox()
-                OUTPUT.setWindowTitle('Hey! Listen!')
-                OUTPUT.setText(
-                    "Hash has been successfully created.\nYou can copy the hash in Details.\n\n" + text)
-                OUTPUT.setDetailedText(text)
-                OUTPUT.setIcon(QMessageBox.Information)
-                OUTPUT.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                OUTPUT.exec_()
+        def hashchk(hash_number):
+            if len(self.fpath.text()) != 0 and Path(self.fpath.text()).is_file():
+                linux_hash_types = ['md5sum', 'sha1sum', 'sha256sum', 'sha384sum', 'sha512sum']
+                windows_hash_types = ['MD5', 'SHA1', 'SHA256', 'SHA384', 'SHA512']
+                darwin_hash_types = ['md5', 'shasum -a 1', 'shasum -a 256', 'shasum -a 384',
+                                     'shasum -a 512']
 
-            def hashchk(hash_number):
-                if len(self.fpath.text()) != 0 and Path(self.fpath.text()).is_file():
-                    linux_hash_types = ['md5sum', 'sha1sum', 'sha256sum', 'sha384sum', 'sha512sum']
-                    windows_hash_types = ['MD5', 'SHA1', 'SHA256', 'SHA384', 'SHA512']
-                    darwin_hash_types = ['md5', 'shasum -a 1', 'shasum -a 256', 'shasum -a 384',
-                                         'shasum -a 512']
+                if platform == 'linux':
+                    filepath = self.fpath.text()
+                    command = r'sudo ' + linux_hash_types[hash_number] + ' ' + filepath
+                    EXEC = sub.Popen(command.split(), stdout=sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    OUTPUTBOX(output)
+                elif platform == 'darwin':
+                    filepath = self.fpath.text()
+                    command = r'sudo ' + darwin_hash_types[hash_number] + ' ' + filepath
+                    EXEC = sub.Popen(command.split(), stdout=sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    OUTPUTBOX(output)
+                elif platform == 'win32':
+                    filepath = self.fpath.text()
+                    EXEC = sub.Popen(["powershell",
+                                      "& {Get-Filehash '" + filepath + "' -Algorithm " +
+                                      windows_hash_types[hash_number] + " | Format-List}"],
+                                     stdout=sub.PIPE)
+                    stdout, _ = EXEC.communicate()
+                    output = stdout.decode("utf-8")
+                    OUTPUTBOX(output)
+            elif len(self.fpath.text()) == 0:
+                print('No file path entered')
+                ERROR_NO_FILEPATH = QMessageBox()
+                ERROR_NO_FILEPATH.setIcon(QMessageBox.Warning)
+                ERROR_NO_FILEPATH.setWindowTitle('Hey! Listen!')
+                ERROR_NO_FILEPATH.setText(
+                    'ERROR: No File Path Found')
+                ERROR_NO_FILEPATH.setStandardButtons(QMessageBox.Close)
+                ERROR_NO_FILEPATH.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                ERROR_NO_FILEPATH.exec_()
+            elif not Path(self.fpath.text()).is_file():
+                print('No file path entered')
+                ERROR_FILE_NOT_FOUND = QMessageBox()
+                ERROR_FILE_NOT_FOUND.setIcon(QMessageBox.Warning)
+                ERROR_FILE_NOT_FOUND.setWindowTitle('Hey! Listen!')
+                ERROR_FILE_NOT_FOUND.setText(
+                    'ERROR: File Not Found Or Does Not Exist')
+                ERROR_FILE_NOT_FOUND.setStandardButtons(QMessageBox.Close)
+                ERROR_FILE_NOT_FOUND.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                ERROR_FILE_NOT_FOUND.exec_()
 
-                    if platform == 'linux':
-                        filepath = self.fpath.text()
-                        command = r'sudo ' + linux_hash_types[hash_number] + ' ' + filepath
-                        EXEC = procPop(command.split(), stdout = sub.PIPE)
-                        stdout, _ = EXEC.communicate()
-                        output = stdout.decode("utf-8")
-                        OUTPUTBOX(output)
-                    elif platform == 'darwin':
-                        filepath = self.fpath.text()
-                        command = r'sudo ' + darwin_hash_types[hash_number] + ' ' + filepath
-                        EXEC = procPop(command.split(), stdout = sub.PIPE)
-                        stdout, _ = EXEC.communicate()
-                        output = stdout.decode("utf-8")
-                        OUTPUTBOX(output)
-                    elif platform == 'win32':
-                        filepath = self.fpath.text()
-                        EXEC = procPop(["powershell",
-                                        "& {Get-Filehash '" + filepath + "' -Algorithm " +
-                                        windows_hash_types[hash_number] + " | Format-List}"],
-                                       stdout = sub.PIPE)
-                        stdout, _ = EXEC.communicate()
-                        output = stdout.decode("utf-8")
-                        OUTPUTBOX(output)
-                elif len(self.fpath.text()) == 0:
-                    print('No file path entered')
-                    ERROR_NO_FILEPATH = QMessageBox()
-                    ERROR_NO_FILEPATH.setIcon(QMessageBox.Warning)
-                    ERROR_NO_FILEPATH.setWindowTitle('Hey! Listen!')
-                    ERROR_NO_FILEPATH.setText(
-                        'ERROR: No File Path Found')
-                    ERROR_NO_FILEPATH.setStandardButtons(QMessageBox.Close)
-                    ERROR_NO_FILEPATH.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                    ERROR_NO_FILEPATH.exec_()
-                elif not Path(self.fpath.text()).is_file():
-                    print('No file path entered')
-                    ERROR_FILE_NOT_FOUND = QMessageBox()
-                    ERROR_FILE_NOT_FOUND.setIcon(QMessageBox.Warning)
-                    ERROR_FILE_NOT_FOUND.setWindowTitle('Hey! Listen!')
-                    ERROR_FILE_NOT_FOUND.setText(
-                        'ERROR: File Not Found Or Does Not Exist')
-                    ERROR_FILE_NOT_FOUND.setStandardButtons(QMessageBox.Close)
-                    ERROR_FILE_NOT_FOUND.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-                    ERROR_FILE_NOT_FOUND.exec_()
+        self.genhash.clicked.connect(lambda: hashchk(self.hash_number))
 
-            self.genhash.clicked.connect(lambda: hashchk(self.hash_number))
-
-    widget = hashRUN()
-    widget.exec_()
+    def begin(self):
+        print('starting hash function')
+        super(hashRUN, self).exec_()

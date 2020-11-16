@@ -831,7 +831,19 @@ class funcWINusrgru:
         widget.exec_()
     
     def remusrfrogru(self):
-        pass
+        class remove_user_from_group(QDialog, Ui_user_group_list_modifiers):
+            def __init__(self, parent = None):
+                super(remove_user_from_group, self).__init__(parent)
+                self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cups2.png'))
+                self.setFixedSize(790, 419)
+                self.setupUi(self)
+                self.EXECUTE()
+            
+            def EXECUTE(self):
+                pass
+        
+        widget = remove_user_from_group()
+        widget.exec_()
     
     def lslocausrs(self):
         # TODO: make it so that it splits between normal users and Administrators
