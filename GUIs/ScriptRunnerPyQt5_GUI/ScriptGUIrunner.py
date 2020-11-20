@@ -458,7 +458,11 @@ class Main_start(QMainWindow, Ui_MainWindow):
             widget.exec_()
         
         def runCOMDESCRIPT():
-            
+           class showComDescript(QDialog, Ui_comDescript):
+               def __init__(self, parent = None):
+                   super(showComDescript, self).__init__(parent)
+                   self.setupUI(self)
+                   self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png')) 
 
             widget = showComDescript()
             widget.exec_()
@@ -527,6 +531,11 @@ class Main_start(QMainWindow, Ui_MainWindow):
         # self.Updates_buttonUNI.clicked.connect(lambda: NewThread(update_os, False))
         # self.rmvprosoftbuttonUNI.clicked.connect(lambda: indev())
         # self.srchmedbuttonUNI.clicked.connect(lambda: NewThread(search_media, False))
+        
+        """
+        Attempt at making signal connect between hashRUN() classes begin() function. The use of signals should allow the functions to become multithreaded. As of right now this is currently not working. There are no "errors" as in it doesn't crash, but when I run it and try to click on the Hash Check button, nothing happens. This use of signals is used to prevent an error in pyqt5 that says something like "PyQt Timer could not be started..."
+        """
+
         h = hashRUN()
         self.signalMain.connect(h.begin)
         self.chkhashfile_buttonUNI.clicked.connect(lambda: NewThread(self.run_command, False))

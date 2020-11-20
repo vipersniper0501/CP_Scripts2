@@ -688,8 +688,7 @@ done"""
 def rmProSoft():
     # Get-WmiObject -Class Win32_Product | Select-Object -Property Name
     # ^ will print out list of all installed programs.
-    # TODO: Possibly have Charlotte work on this while I work on other parts
-    #  Should be modular so more programs can be easily added.
+    # TODO: Should be modular so more programs can be easily added.
 
     index = ['uTorrent',
              'BitTorrent',
