@@ -738,7 +738,10 @@ def rmProSoft():
 
 
 class hashRUN(QDialog, Ui_hashGEN):
-    # signal = pyqtSignal()
+    """
+    Checks the hash of a file 
+    """
+    signal = pyqtSignal()
     hash_number = 0
 
     def __init__(self, parent=None):
@@ -852,3 +855,4 @@ class hashRUN(QDialog, Ui_hashGEN):
     def begin(self):
         print('starting hash function')
         super(hashRUN, self).exec_()
+        self.signal.emit()

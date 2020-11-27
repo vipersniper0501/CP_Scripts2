@@ -36,10 +36,10 @@ from scripFunc.scripWINONLY import funcWINONLY, funcWINusrgru
 # TODO: Most buttons and functions are not working as of right now do to switching from the old "threading" module to the "NewThread" module. Try with QThread Module
 
 try:
-    if sys.argv[1] == '-DEBUG':
-        DEBUG = 1
+    if sys.argv[1] == '--DEBUG':
+        DEBUG = True
 except IndexError:
-    DEBUG = 0
+    DEBUG = False
 
 print(DEBUG)
 
@@ -78,7 +78,6 @@ def NewThread(com, Returning: bool, *arguments) -> Any:
 
 
 class fconfStart(QDialog, Ui_firstConf):
-    
     def __init__(self, parent = None):
         super(fconfStart, self).__init__(parent)
         print('Script Runner First Time Configurations')
@@ -301,18 +300,9 @@ class fconfStart(QDialog, Ui_firstConf):
                 sys.exit(0)
         
         def confirmBTTN():
-            if (self.ssh != '' and self.ftp != '' and self.proftpd != '' and self.vsftpd != ''
-                    and self.web != '' and self.apaweb != '' and self.nginweb != '' and
-                    self.https != '' and self.smb != '' and self.sql != '' and self.rsnc != '' and
-                    self.rdp != ''):
+            if (self.ssh != '' and self.ftp != '' and self.proftpd != '' and self.vsftpd != '' and self.web != '' and self.apaweb != '' and self.nginweb != '' and self.https != '' and self.smb != '' and self.sql != '' and self.rsnc != '' and self.rdp != ''):
                 print('saving configurations\n')
-                print(
-                    "ssh=" + str(self.ssh) + ", ftp=" + str(self.ftp) + ", proftpd=" + str(
-                        self.proftpd) + ", vsftpd=" + str(self.vsftpd) + ", web=" + str(
-                        self.web) + ", apaweb=" + str(self.apaweb) + ", nginweb=" + str(
-                        self.nginweb) + ", https=" + str(self.https) + ", smb=" + str(
-                        self.smb) + ", sql=" + str(self.sql) + ", rsnc=" + str(
-                        self.rsnc) + ", RDP=" + str(self.rdp))
+                print("ssh=" + str(self.ssh) + ", ftp=" + str(self.ftp) + ", proftpd=" + str(self.proftpd) + ", vsftpd=" + str(self.vsftpd) + ", web=" + str(self.web) + ", apaweb=" + str(self.apaweb) + ", nginweb=" + str(self.nginweb) + ", https=" + str(self.https) + ", smb=" + str(self.smb) + ", sql=" + str(self.sql) + ", rsnc=" + str(self.rsnc) + ", RDP=" + str(self.rdp))
                 
                 config = configparser.ConfigParser()
                 config['Services'] = {'ssh': self.ssh,
@@ -392,6 +382,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
             application_Path2 = os.path.dirname(__file__)
         config_path2 = os.path.join(application_Path2, config_name2)
         variableCheck2 = Path(config_path2)
+        self.dialog_done = False
         self.mmfuncassign(variableCheck2)
     
     def mmfuncassign(self, configurations):
@@ -409,13 +400,16 @@ class Main_start(QMainWindow, Ui_MainWindow):
             sys.exit(0)
         
         def display(i):
+            """
+            Sets the window Title and Descriptions upon OS selection. (The buttons that say 'Linux', 'Windows', and 'MacOS')
+            """
             if i == 0:
                 self.header_title.setText('Universal Commands')
                 self.descriptions.setText(
                     'Description: These commands will work on most Operating Systems\nE.g. Windows, MacOS X, and Linux (Debian, Ubuntu, certain Arch distros)')
                 self.stackedWidget.setCurrentIndex(i)
             elif i == 1:
-                if uname()[0] == 'Windows' or DEBUG == 1:
+                if uname()[0] == 'Windows' or DEBUG == True:
                     self.header_title.setText('Windows 10 Commands')
                     self.descriptions.setText(
                         'Description: These commands will work on the following Windows systems: 10, 8.x, and 7')
@@ -423,7 +417,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
                 else:
                     wrongos()
             elif i == 2:
-                if uname()[0] == 'Linux' or DEBUG == 1:
+                if uname()[0] == 'Linux' or DEBUG == True:
                     self.header_title.setText('Linux Commands')
                     self.descriptions.setText(
                         'Description: These commands will work on the following Linux systems: Debian based systems, Ubuntu, and Manjaro')
@@ -431,7 +425,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
                 else:
                     wrongos()
             elif i == 3:
-                if uname()[0] == 'Darwin' or DEBUG == 1:
+                if uname()[0] == 'Darwin' or DEBUG == True:
                     self.header_title.setText('MacOS X Commands')
                     self.descriptions.setText(
                         'Description: These commands will ONLY work on MacOS X')
@@ -458,11 +452,11 @@ class Main_start(QMainWindow, Ui_MainWindow):
             widget.exec_()
         
         def runCOMDESCRIPT():
-           class showComDescript(QDialog, Ui_comDescript):
-               def __init__(self, parent = None):
-                   super(showComDescript, self).__init__(parent)
-                   self.setupUI(self)
-                   self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png')) 
+            class showComDescript(QDialog, Ui_comDescript):
+                def __init__(self, parent = None):
+                    super(showComDescript, self).__init__(parent)
+                    self.setupUi(self)
+                    self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
 
             widget = showComDescript()
             widget.exec_()
@@ -522,11 +516,11 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.actionDark_Mode.triggered.connect(lambda: light_darkMODE(0))
         
         # Menubar Buttons
-        # self.actionHow_To_Use_Program.triggered.connect(lambda: showHOWTO())
-        # self.actionAbout_Creator.triggered.connect(lambda: runABOUTPROG())
-        # self.actionCommand_Descriptions.triggered.connect(lambda: runCOMDESCRIPT())
-        # self.actionChange_Configurations.triggered.connect(lambda: chngconf())
-        #
+        self.actionHow_To_Use_Program.triggered.connect(lambda: showHOWTO())
+        self.actionAbout_Creator.triggered.connect(lambda: runABOUTPROG())
+        self.actionCommand_Descriptions.triggered.connect(lambda: runCOMDESCRIPT())
+        self.actionChange_Configurations.triggered.connect(lambda: chngconf())
+        
         # # Universal Buttons
         # self.Updates_buttonUNI.clicked.connect(lambda: NewThread(update_os, False))
         # self.rmvprosoftbuttonUNI.clicked.connect(lambda: indev())
@@ -536,9 +530,9 @@ class Main_start(QMainWindow, Ui_MainWindow):
         Attempt at making signal connect between hashRUN() classes begin() function. The use of signals should allow the functions to become multithreaded. As of right now this is currently not working. There are no "errors" as in it doesn't crash, but when I run it and try to click on the Hash Check button, nothing happens. This use of signals is used to prevent an error in pyqt5 that says something like "PyQt Timer could not be started..."
         """
 
-        h = hashRUN()
-        self.signalMain.connect(h.begin)
-        self.chkhashfile_buttonUNI.clicked.connect(lambda: NewThread(self.run_command, False))
+        self.h = hashRUN()
+        # self.signalMain.connect(h.begin)
+        self.chkhashfile_buttonUNI.clicked.connect(lambda: NewThread(self.signalAssignment, False, self.h.begin))
         
         # Windows Main Menu Commands
         # self.fwlbutton_2.clicked.connect(lambda: NewThread(fwl, False))
@@ -617,9 +611,23 @@ class Main_start(QMainWindow, Ui_MainWindow):
         #     self.MACBUTTONS[i].clicked.connect(lambda: indev())
         
         self.quit_button_3.clicked.connect(quitButton)
+
+    def signalAssignment(self, com):
+        self.signalMain.connect(com)
+        self.run_command()
+        
+
+    def wait_for_command(self):
+        while not self.dialog_done:
+            pass
+        self.dialog_done = False
     
+    def dialog_completed(self):
+        self.dialog_done = True
+
     def run_command(self):
         self.signalMain.emit()
+        self.wait_for_command()
 
 
 if __name__ == "__main__":
