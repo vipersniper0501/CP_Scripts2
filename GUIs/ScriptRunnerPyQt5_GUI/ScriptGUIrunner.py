@@ -613,11 +613,14 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.quit_button_3.clicked.connect(quitButton)
 
     def signalAssignment(self, com):
+        # Assigns the function to the main signal
         self.signalMain.connect(com)
         self.run_command()
         
 
     def wait_for_command(self):
+        # locks up main thread until the command dialog has closed
+        # NOTE: This might interfere with commands that run in the background (Ex: Search for prohibited)
         while not self.dialog_done:
             pass
         self.dialog_done = False
@@ -626,6 +629,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.dialog_done = True
 
     def run_command(self):
+        # emits the main signal essentially calling the function (This is all done within a new thread, seperate from the main thread)
         self.signalMain.emit()
         self.wait_for_command()
 
