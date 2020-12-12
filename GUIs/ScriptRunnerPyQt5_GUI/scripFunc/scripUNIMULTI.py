@@ -10,7 +10,6 @@ import distro  # for figuring out what linux distro
 from PyQt5 import QtGui
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QMessageBox, QDialog, QFileDialog
-
 from scripFunc.scripWINONLY import NewThread
 
 if platform == 'linux':
@@ -138,15 +137,18 @@ def search_media():
     Searches host computer for .mp4, .mp3, .png, and .jpg files and prints results into a text file.
     :return:
     """
+    user = getpass.getpass()
+    print(user)
     if platform == 'linux' or platform == 'darwin':
-        procPop('touch /home/$USER/Desktop/LotTest.txt')
+        procPop(f'touch /home/{self.user}/Desktop/LogTest.txt')
         extensions = (
             '.jpg', '.mp4', '.mov', '.png', '.gif', '.mp3', '.jar')
         for root, dirs, files in os.walk('/home/'):
             for filename in files:
                 if any(filename.endswith(extension) for extension in extensions):
                     # f = open('Q:\\Cyber Patriots\\my_scripts_and_STIGS\\Scripts\\CP_ScriptsREPAIR\\Script Runner GUI\\logTest.txt', 'a+')
-                    f = open('/home/' + getpass.getuser() + '/Desktop/LogTest.txt', 'a+')
+                    # f = open('/home/' + getpass.getuser() + '/Desktop/LogTest.txt', 'a+')
+                    f = open(f'/home/{self.user}/Desktop/LogTest.txt', 'a+')
                     filepath = os.path.join(root, filename)
                     f.write(filepath + '\n')
                     f.close()
@@ -741,7 +743,6 @@ class hashRUN(QDialog, Ui_hashGEN):
     """
     Checks the hash of a file 
     """
-    signal = pyqtSignal()
     hash_number = 0
 
     def __init__(self, parent=None):
@@ -783,7 +784,7 @@ class hashRUN(QDialog, Ui_hashGEN):
                 print('selected 4')
                 self.hash_number = 4
 
-        self.MD5radio.toggled.connect(lambda: NewThread(hashMD5, False, self))
+        self.MD5radio.toggled.connect(hashMD5)
         self.SHA1radio.toggled.connect(hashsha1)
         self.SHA256radio.toggled.connect(hashsha256)
         self.SHA384radio.toggled.connect(hashsha384)
@@ -791,13 +792,12 @@ class hashRUN(QDialog, Ui_hashGEN):
 
         def OUTPUTBOX(text):
             OUTPUT = QMessageBox()
-            OUTPUT.setWindowTitle('Hey! Listen!')
-            OUTPUT.setText(
-                "Hash has been successfully created.\nYou can copy the hash in Details.\n\n" + text)
+            OUTPUT.about(self, 'Hey! Listen!', f'Hash has been succesfully created.\n\n {text}')
+            # OUTPUT.setWindowTitle('Hey! Listen!')
             OUTPUT.setDetailedText(text)
             OUTPUT.setIcon(QMessageBox.Information)
             OUTPUT.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            OUTPUT.exec_()
+            # OUTPUT.exec_()
 
         def hashchk(hash_number):
             if len(self.fpath.text()) != 0 and Path(self.fpath.text()).is_file():
@@ -852,7 +852,16 @@ class hashRUN(QDialog, Ui_hashGEN):
 
         self.genhash.clicked.connect(lambda: hashchk(self.hash_number))
 
+    # def stop(self):
+    #     self.m = Main_start()
+    #     self.close()
+    #     self.m.dialog_completed()
+    #     print('Dialog is closed')
+        
+
+
     def begin(self):
         print('starting hash function')
         super(hashRUN, self).exec_()
-        self.signal.emit()
+
+

@@ -5,6 +5,7 @@ import sys
 from pathlib import Path
 from platform import uname
 from threading import Thread
+import threading
 from typing import Any
 
 from PyQt5 import QtGui
@@ -18,8 +19,7 @@ from PyUIs.progabout import Ui_About
 from PyUIs.howToUI import Ui_How_To
 
 from scripFunc.scripLINUXONLY import funcLINUX
-from scripFunc.scripUNIMULTI import update_os, search_media, fwl, basConf, rmProSoft, \
-    servSet, hashRUN
+from scripFunc.scripUNIMULTI import update_os, search_media, fwl, basConf, rmProSoft, servSet, hashRUN
 from scripFunc.scripWINONLY import funcWINONLY, funcWINusrgru
 
 # def resource_path(relative_path):
@@ -35,6 +35,8 @@ from scripFunc.scripWINONLY import funcWINONLY, funcWINusrgru
 
 # TODO: Most buttons and functions are not working as of right now do to switching from the old "threading" module to the "NewThread" module. Try with QThread Module
 
+# Possible way to kill a thread: Have the program created in a thread constantly checking if in an external file a stop flag has been set, and if it is set, raise an exception to kill the thread.
+
 try:
     if sys.argv[1] == '--DEBUG':
         DEBUG = True
@@ -44,7 +46,7 @@ except IndexError:
 print(DEBUG)
 
 
-def NewThread(com, Returning: bool, *arguments) -> Any:
+def NewThread(com, Returning: bool, thread_ID, *arguments) -> Any:
     """
     Will create a new thread for a function/command.
 
@@ -69,7 +71,7 @@ def NewThread(com, Returning: bool, *arguments) -> Any:
             Thread.join(self)
             return self._return
     
-    ntw = NewThreadWorker(target = com, args = (*arguments,))
+    ntw = NewThreadWorker(target = com, name = thread_ID, args = (*arguments,))
     if Returning:
         ntw.start()
         return ntw.join()
@@ -113,8 +115,6 @@ class fconfStart(QDialog, Ui_firstConf):
             self.quit_buttonConf.setText('Cancel')
         else:
             self.quit_buttonConf.setText('Quit')
-        
-        # TODO: Convert to a switch statement. Should improve efficiency.
         
         def sshYES(selected):
             if selected:
@@ -295,6 +295,8 @@ class fconfStart(QDialog, Ui_firstConf):
             if variableCheck.is_file():
                 print('Cancelling configurations. Nothing has changed.')
                 self.close()
+                main_commands = Main_start()
+                main_commands.dialog_completed()
             else:
                 print('Closing program')
                 sys.exit(0)
@@ -328,8 +330,8 @@ class fconfStart(QDialog, Ui_firstConf):
                 RESTART.setStandardButtons(QMessageBox.Close)
                 RESTART.exec_()
                 self.close()
-                beginMain = Main_start()
-                beginMain.show()
+                # beginMain = Main_start()
+                # beginMain.show()
             else:
                 HEY = QMessageBox()
                 HEY.setWindowTitle('Hey! Listen!')
@@ -364,6 +366,10 @@ class fconfStart(QDialog, Ui_firstConf):
         self.rdpn.toggled.connect(rdpNO)
         self.confirmbtn.clicked.connect(confirmBTTN)
         self.quit_buttonConf.clicked.connect(quitButton)
+
+    def begin(self):
+        super(fconfStart, self).exec_()
+
 
 
 class Main_start(QMainWindow, Ui_MainWindow):
@@ -434,6 +440,9 @@ class Main_start(QMainWindow, Ui_MainWindow):
                     wrongos()
         
         def light_darkMODE(i):
+            """
+            This function is not working currently. Need to find way of actually switching colorschemes.
+            """
             print('Mode change')
             if i == 0:
                 print('Dark Mode in development')
@@ -519,12 +528,13 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.actionHow_To_Use_Program.triggered.connect(lambda: showHOWTO())
         self.actionAbout_Creator.triggered.connect(lambda: runABOUTPROG())
         self.actionCommand_Descriptions.triggered.connect(lambda: runCOMDESCRIPT())
-        self.actionChange_Configurations.triggered.connect(lambda: chngconf())
+        self.f = fconfStart()
+        self.actionChange_Configurations.triggered.connect(lambda: NewThread(self.signalAssignment, False, "Change_Conf", self.f.begin))
         
         # # Universal Buttons
         # self.Updates_buttonUNI.clicked.connect(lambda: NewThread(update_os, False))
         # self.rmvprosoftbuttonUNI.clicked.connect(lambda: indev())
-        # self.srchmedbuttonUNI.clicked.connect(lambda: NewThread(search_media, False))
+        self.srchmedbuttonUNI.clicked.connect(lambda: NewThread(self.signalAssignment, False, "Search_Media", search_media))
         
         """
         Attempt at making signal connect between hashRUN() classes begin() function. The use of signals should allow the functions to become multithreaded. As of right now this is currently not working. There are no "errors" as in it doesn't crash, but when I run it and try to click on the Hash Check button, nothing happens. This use of signals is used to prevent an error in pyqt5 that says something like "PyQt Timer could not be started..."
@@ -532,7 +542,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
 
         self.h = hashRUN()
         # self.signalMain.connect(h.begin)
-        self.chkhashfile_buttonUNI.clicked.connect(lambda: NewThread(self.signalAssignment, False, self.h.begin))
+        self.chkhashfile_buttonUNI.clicked.connect(lambda: NewThread(self.signalAssignment, False, "Hash_Check", self.h.begin))
         
         # Windows Main Menu Commands
         # self.fwlbutton_2.clicked.connect(lambda: NewThread(fwl, False))
@@ -613,7 +623,9 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.quit_button_3.clicked.connect(quitButton)
 
     def signalAssignment(self, com):
+        # add way to save thread id to Current_Threads dictionary to be called later to stop the thread.
         # Assigns the function to the main signal
+        print(threading.current_thread().getName())
         self.signalMain.connect(com)
         self.run_command()
         
@@ -622,14 +634,16 @@ class Main_start(QMainWindow, Ui_MainWindow):
         # locks up main thread until the command dialog has closed
         # NOTE: This might interfere with commands that run in the background (Ex: Search for prohibited)
         while not self.dialog_done:
+            # print(threading.get_ident())
             pass
         self.dialog_done = False
     
     def dialog_completed(self):
+        print('Dialog has stopped?')
         self.dialog_done = True
 
     def run_command(self):
-        # emits the main signal essentially calling the function (This is all done within a new thread, seperate from the main thread)
+        # emits the main signal essentially calling the function assigned to the signal (This is all done within a new thread, seperate from the main thread)
         self.signalMain.emit()
         self.wait_for_command()
 

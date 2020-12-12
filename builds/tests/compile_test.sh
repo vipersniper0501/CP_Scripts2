@@ -1,5 +1,4 @@
 #!/bin/bash
-
 git checkout GUI-Updates
 
 if [ $TRAVIS_OS_NAME = 'osx' ]; then
