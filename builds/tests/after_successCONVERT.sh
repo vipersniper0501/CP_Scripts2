@@ -105,6 +105,7 @@ upload_files() {
     elif [ $TRAVIS_BRANCH = master ]; then
         git push -f -q https://vipersniper0501:${GH_TOKEN}@github.com/vipersniper0501/CP_Scripts2.git master
         echo "Pushed to master"
+    fi
 }
 
 #if [ $TRAVIS_OS_NAME = 'osx' ]; then
