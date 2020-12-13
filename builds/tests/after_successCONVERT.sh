@@ -100,10 +100,10 @@ commit_compiled_executables() {
 
 upload_files() {
     if [ $TRAVIS_BRANCH = dev ]; then
-        git push -f -q https://vipersniper0501:${GH_TOKEN}@github.com/vipersniper0501/CP_Scripts2.git dev
+        git push -f -q https://vipersniper0501:${GH_TOKEN_DEV}@github.com/vipersniper0501/CP_Scripts2.git dev
         echo "Pushed to dev"
     elif [ $TRAVIS_BRANCH = master ]; then
-        git push -f -q https://vipersniper0501:${GH_TOKEN}@github.com/vipersniper0501/CP_Scripts2.git master
+        git push -f -q https://vipersniper0501:${GH_TOKEN_DEV}@github.com/vipersniper0501/CP_Scripts2.git master
         echo "Pushed to master"
     fi
 }
