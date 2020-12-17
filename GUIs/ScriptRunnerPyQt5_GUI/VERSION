@@ -33,8 +33,8 @@ VSVersionInfo(
         StringStruct(u'ProductVersion', u'3.0.18.0'),
         StringStruct(u'OriginalFilename', u'AppleCIDRScriptRunner.exe'),
         StringStruct(u'FileDescription', u'Apple CIDR Script Runner'),
-        StringStruct(u'LegalCopyright', u'Copyright? Dont have one :P'),
-        StringStruct(u'LegalTrademarks', u'You dont own me'),])
+        StringStruct(u'LegalCopyright', u'GPL-3.0 License'),
+        StringStruct(u'LegalTrademarks', u''),])
       ]),
     VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
   ]
