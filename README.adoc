@@ -1,5 +1,5 @@
 = CP_Scripts2
-Michael Brenner
+Author: Michael Brenner
 :toc:
 
 image:https://app.codacy.com/project/badge/Grade/d277e9b251a74fc0a61da1fc321a9bfa["Codacy code quality",link="https://www.codacy.com/manual/vipersniper0501/CP_Scripts2?utm_source=github.com&utm_medium=referral&utm_content=vipersniper0501/CP_Scripts2&utm_campaign=Badge_Grade"]
@@ -42,7 +42,7 @@ by just using them alone.
 I currently have available three GUI's. Of the three, only two are very developed. The following
 list are the available GUI's to choose from:
 
-* link:./GUIs/ScriptRunnerTkinter_GUI/[Script Runner Tkinter] (Depricated)
+* link:./GUIs/ScriptRunnerTkinter_GUI/[Script Runner Tkinter] (VERY Depricated)
 ** Built on the TKinter framework so it looks like it was made in the 90's
 
 * link:./GUIs/ScriptRunnerElectron/[Script Runner Electron] (Depricated)
@@ -51,15 +51,17 @@ Although due to it using website code (HTML, CSS, JavaScript) I am still having 
 to connect it to python code that will actually execute the commands
 
 * link:./GUIs/ScriptRunnerPyQt5_GUI/[Script Runner PyQt5]  image:https://travis-ci.com/vipersniper0501/CP_Scripts2.svg?branch=GUI-Updates["Build Status",link="https://travis-ci.com/vipersniper0501/CP_Scripts2"]
-** This GUI is built on the PyQt frame work. This is the newest best version of all of the GUI's and
+** This GUI is built on the PyQt frame work. This is the newest and best version of all of the GUI's and
 Scripts Combined. It is the most modern looking and has the most commands, platform support, and
 ease of use.
 
+image:./Preview.JPG[title="PyQt5 AppleCIDR Script Runner"]
+
 == How to compile GUI from source code
 
-Make sure you have the correct version of Pyinstaller:
+Make sure you have the most up-to-date version of Pyinstaller:
 
-`pip install https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz`
+`pip install pyinstaller`
 
 Run `pip install auto-py-to-exe` to install the compiler.
 
