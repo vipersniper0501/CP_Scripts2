@@ -529,7 +529,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.actionHow_To_Use_Program.triggered.connect(lambda: showHOWTO())
         self.actionAbout_Creator.triggered.connect(lambda: runABOUTPROG())
         self.actionCommand_Descriptions.triggered.connect(lambda: runCOMDESCRIPT())
-        self.actionChange_Configurations.triggered.connect(lambda: changconf())
+        self.actionChange_Configurations.triggered.connect(lambda: chngconf())
         
         # # Universal Buttons
         # self.Updates_buttonUNI.clicked.connect(lambda: NewThread(update_os, False))
