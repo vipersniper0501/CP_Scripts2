@@ -19,7 +19,7 @@ from PyUIs.progabout import Ui_About
 from PyUIs.howToUI import Ui_How_To
 
 from scripFunc.scripLINUXONLY import funcLINUX
-from scripFunc.scripUNIMULTI import update_os, search_media, fwl, basConf, rmProSoft, servSet, hashRUN
+from scripFunc.scripUNIMULTI import Update_OS, Media_Search, Configure_Firewall, Basic_Configurations, rmProSoft, Configure_Services, Hash_Run
 from scripFunc.scripWINONLY import funcWINONLY, funcWINusrgru
 
 # def resource_path(relative_path):
@@ -51,7 +51,8 @@ def NewThread(com, Returning: bool, thread_ID, *arguments) -> Any:
     Will create a new thread for a function/command.
 
     :param com: Command to be Executed
-    :param Returning: True/False Will command return anything
+    :param Returning: True/False Will the command return anything?
+    :param thread_ID: Name of thread
     :param arguments: Arguments to be sent to Command
 
     """
@@ -67,14 +68,14 @@ def NewThread(com, Returning: bool, thread_ID, *arguments) -> Any:
             if self._target is not None:
                 self._return = self._target(*self._args, **self._kwargs)
         
-        def join(self):
+        def joinThread(self):
             Thread.join(self)
             return self._return
     
     ntw = NewThreadWorker(target = com, name = thread_ID, args = (*arguments,))
     if Returning:
         ntw.start()
-        return ntw.join()
+        return ntw.joinThread()
     else:
         ntw.start()
 
@@ -330,8 +331,8 @@ class fconfStart(QDialog, Ui_firstConf):
                 RESTART.setStandardButtons(QMessageBox.Close)
                 RESTART.exec_()
                 self.close()
-                # beginMain = Main_start()
-                # beginMain.show()
+                beginMain = Main_start()
+                beginMain.show()
             else:
                 HEY = QMessageBox()
                 HEY.setWindowTitle('Hey! Listen!')
@@ -528,30 +529,31 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.actionHow_To_Use_Program.triggered.connect(lambda: showHOWTO())
         self.actionAbout_Creator.triggered.connect(lambda: runABOUTPROG())
         self.actionCommand_Descriptions.triggered.connect(lambda: runCOMDESCRIPT())
-        self.f = fconfStart()
-        self.actionChange_Configurations.triggered.connect(lambda: NewThread(self.signalAssignment, False, "Change_Conf", self.f.begin))
+        self.actionChange_Configurations.triggered.connect(lambda: changconf())
         
         # # Universal Buttons
         # self.Updates_buttonUNI.clicked.connect(lambda: NewThread(update_os, False))
         # self.rmvprosoftbuttonUNI.clicked.connect(lambda: indev())
-        self.srchmedbuttonUNI.clicked.connect(lambda: NewThread(self.signalAssignment, False, "Search_Media", search_media))
+        # self.srchmedbuttonUNI.clicked.connect(lambda: NewThread(self.signalAssignment, False, "Search_Media", search_media))
+        self.srchmedbuttonUNI.clicked.connect(lambda: Media_Search())
         
         """
         Attempt at making signal connect between hashRUN() classes begin() function. The use of signals should allow the functions to become multithreaded. As of right now this is currently not working. There are no "errors" as in it doesn't crash, but when I run it and try to click on the Hash Check button, nothing happens. This use of signals is used to prevent an error in pyqt5 that says something like "PyQt Timer could not be started..."
         """
 
-        self.h = hashRUN()
+        # self.h = hashRUN()
         # self.signalMain.connect(h.begin)
-        self.chkhashfile_buttonUNI.clicked.connect(lambda: NewThread(self.signalAssignment, False, "Hash_Check", self.h.begin))
+        # self.chkhashfile_buttonUNI.clicked.connect(lambda: NewThread(self.signalAssignment, False, "Hash_Check", self.h.begin))
+        self.chkhashfile_buttonUNI.clicked.connect(lambda: Hash_Run())
         
         # Windows Main Menu Commands
-        # self.fwlbutton_2.clicked.connect(lambda: NewThread(fwl, False))
+        # self.fwlbutton_2.clicked.connect(lambda: Configure_Firewall())
         # self.basicConfbutton_2.clicked.connect(
         #     lambda: NewThread(confirmation, False, basConf(config.get('Services', 'rdp'))))
         # self.rmvprosoftbutton_2.clicked.connect(lambda: NewThread(rmProSoft, False))
         # self.enblBitLockerbutton.clicked.connect(lambda: funcWIN.BITLOCKER())
         # self.servicesConfButton_4.clicked.connect(
-        #     lambda: NewThread(confirmation, False, servSet(
+        #     lambda: NewThread(confirmation, False, Configure_Services(
         #         config.get(
         #             'Services',
         #             'ssh'),
@@ -622,30 +624,30 @@ class Main_start(QMainWindow, Ui_MainWindow):
         
         self.quit_button_3.clicked.connect(quitButton)
 
-    def signalAssignment(self, com):
+    # def signalAssignment(self, com):
         # add way to save thread id to Current_Threads dictionary to be called later to stop the thread.
         # Assigns the function to the main signal
-        print(threading.current_thread().getName())
-        self.signalMain.connect(com)
-        self.run_command()
+    #     print(threading.current_thread().getName())
+    #     self.signalMain.connect(com)
+    #     self.run_command()
         
 
-    def wait_for_command(self):
+    # def wait_for_command(self):
         # locks up main thread until the command dialog has closed
         # NOTE: This might interfere with commands that run in the background (Ex: Search for prohibited)
-        while not self.dialog_done:
+    #     while not self.dialog_done:
             # print(threading.get_ident())
-            pass
-        self.dialog_done = False
+    #         pass
+    #     self.dialog_done = False
     
-    def dialog_completed(self):
-        print('Dialog has stopped?')
-        self.dialog_done = True
+    # def dialog_completed(self):
+    #     print('Dialog has stopped?')
+    #     self.dialog_done = True
 
-    def run_command(self):
+    # def run_command(self):
         # emits the main signal essentially calling the function assigned to the signal (This is all done within a new thread, seperate from the main thread)
-        self.signalMain.emit()
-        self.wait_for_command()
+    #     self.signalMain.emit()
+    #     self.wait_for_command()
 
 
 if __name__ == "__main__":

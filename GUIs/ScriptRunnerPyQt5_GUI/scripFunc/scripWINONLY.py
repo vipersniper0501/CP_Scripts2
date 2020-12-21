@@ -35,13 +35,6 @@ config.read('config.ini')
 #     return os.path.join(base_path, relative_path)
 
 # Allows for program to continue running while the function executes.
-def threader(com):
-    try:
-        threader = Thread(target = com)
-        threader.start()
-    except Exception as e:
-        print(e)
-        print('Could not start thread')
 
 
 def NewThread(com, Returning: bool, *arguments) -> Any:
