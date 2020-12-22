@@ -2,6 +2,7 @@
 import configparser
 import os
 import sys
+import logging as log
 from pathlib import Path
 from platform import uname
 from threading import Thread
@@ -10,7 +11,7 @@ from typing import Any
 
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QDialog
-from PyQt5.QtCore import QThread, Qt, pyqtSignal, pyqtSlot, QObject
+from PyQt5.QtCore import Qt, pyqtSignal, pyqtSlot, QObject
 
 from PyUIs.comdescript import Ui_comDescript
 from PyUIs.firstconf import Ui_firstConf
@@ -20,7 +21,7 @@ from PyUIs.howToUI import Ui_How_To
 
 from scripFunc.scripLINUXONLY import funcLINUX
 from scripFunc.scripUNIMULTI import Update_OS, Media_Search, Configure_Firewall, Basic_Configurations, rmProSoft, Configure_Services, Hash_Run
-from scripFunc.scripWINONLY import funcWINONLY, funcWINusrgru
+from scripFunc.scripWINONLY import BITLOCKER, Configure_Browsers, chngpasswdofall, lsgrusanusrin, lsmemofgru, lslocagrus, lslocausrs, remusrfrogru, addusrtogru, remgrufrosys, addgrutosys, remusr, addusr
 
 # def resource_path(relative_path):
 #     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -32,10 +33,8 @@ from scripFunc.scripWINONLY import funcWINONLY, funcWINusrgru
 #
 #     return os.path.join(base_path, relative_path)
 
+# log.basicConfig(filename = 'runtime.log', level=log.INFO)
 
-# TODO: Most buttons and functions are not working as of right now do to switching from the old "threading" module to the "NewThread" module. Try with QThread Module
-
-# Possible way to kill a thread: Have the program created in a thread constantly checking if in an external file a stop flag has been set, and if it is set, raise an exception to kill the thread.
 
 try:
     if sys.argv[1] == '--DEBUG':
@@ -379,7 +378,7 @@ def CIDR_Configurations():
 
 
 class Main_start(QMainWindow, Ui_MainWindow):
-    signalMain = pyqtSignal()
+    # signalMain = pyqtSignal()
     
     def __init__(self, parent = None):
         super(Main_start, self).__init__(parent)
@@ -403,12 +402,11 @@ class Main_start(QMainWindow, Ui_MainWindow):
         config.read(configurations)
         self.header_title.setWordWrap(True)
         self.descriptions.setWordWrap(True)
-        funcWIN = funcWINONLY()
-        funcWINUSRGRU = funcWINusrgru()
+        # funcWINUSRGRU = funcWINusrgru()
         funcLIN = funcLINUX()
         
         def quitButton():
-            print('Closing program')
+            # log.info('Closing program')
             sys.exit(0)
         
         def display(i):
@@ -503,10 +501,6 @@ class Main_start(QMainWindow, Ui_MainWindow):
             WRONGOS.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             WRONGOS.exec_()
         
-        def chngconf():
-            widget = fconfStart()
-            widget.exec_()
-        
         def confirmation(com):
             CONFIRM = QMessageBox()
             CONFIRM.setWindowTitle('Hey! Listen!')
@@ -545,18 +539,14 @@ class Main_start(QMainWindow, Ui_MainWindow):
         """
         Attempt at making signal connect between hashRUN() classes begin() function. The use of signals should allow the functions to become multithreaded. As of right now this is currently not working. There are no "errors" as in it doesn't crash, but when I run it and try to click on the Hash Check button, nothing happens. This use of signals is used to prevent an error in pyqt5 that says something like "PyQt Timer could not be started..."
         """
-
-        # self.h = hashRUN()
-        # self.signalMain.connect(h.begin)
-        # self.chkhashfile_buttonUNI.clicked.connect(lambda: NewThread(self.signalAssignment, False, "Hash_Check", self.h.begin))
         self.chkhashfile_buttonUNI.clicked.connect(lambda: Hash_Run())
         
         # Windows Main Menu Commands
-        # self.fwlbutton_2.clicked.connect(lambda: Configure_Firewall())
+        self.fwlbutton_2.clicked.connect(lambda: Configure_Firewall())
         # self.basicConfbutton_2.clicked.connect(
         #     lambda: NewThread(confirmation, False, basConf(config.get('Services', 'rdp'))))
         # self.rmvprosoftbutton_2.clicked.connect(lambda: NewThread(rmProSoft, False))
-        # self.enblBitLockerbutton.clicked.connect(lambda: funcWIN.BITLOCKER())
+        self.enblBitLockerbutton.clicked.connect(lambda: BITLOCKER())
         # self.servicesConfButton_4.clicked.connect(
         #     lambda: NewThread(confirmation, False, Configure_Services(
         #         config.get(
@@ -583,21 +573,21 @@ class Main_start(QMainWindow, Ui_MainWindow):
         #         config.get(
         #             'Services',
         #             'vsftpd'))))
-        # self.browserConf.clicked.connect(lambda: NewThread(funcWIN.browserCONF, False))
+        # self.browserConf.clicked.connect(lambda: Configure_Browsers())
         # Windows User Group Commands
         self.WINUSRGRUBUTTON = [self.lsgruusrin_3, self.lsmemgru_3]
         for i in range(0, len(self.WINUSRGRUBUTTON)):
             self.WINUSRGRUBUTTON[i].clicked.connect(lambda: indev())
         
-        # self.adusrtosys_3.clicked.connect(lambda: funcWINUSRGRU.addusr())
-        # self.rmvusrfrosys_3.clicked.connect(lambda: funcWINUSRGRU.remusr())
-        # self.adgrutosys_3.clicked.connect(lambda: funcWINUSRGRU.addgrutosys())
-        # self.rmvgrufrosys_3.clicked.connect(lambda: funcWINUSRGRU.remgrufrosys())
-        # self.adusrtogru_3.clicked.connect(lambda: funcWINUSRGRU.addusrtogru())
-        # self.rmvusrfrogru_3.clicked.connect(lambda: funcWINUSRGRU.remusrfrogru())
-        # self.lslocausr_3.clicked.connect(lambda: funcWINUSRGRU.lslocausrs())
-        # self.lslocagru_3.clicked.connect(lambda: funcWINUSRGRU.lslocagrus())
-        # self.chngusrpas_3.clicked.connect(lambda: funcWINUSRGRU.chngpasswdofall())
+        self.adusrtosys_3.clicked.connect(lambda: addusr())
+        self.rmvusrfrosys_3.clicked.connect(lambda: remusr())
+        self.adgrutosys_3.clicked.connect(lambda: addgrutosys())
+        self.rmvgrufrosys_3.clicked.connect(lambda: remgrufrosys())
+        self.adusrtogru_3.clicked.connect(lambda: addusrtogru())
+        self.rmvusrfrogru_3.clicked.connect(lambda: remusrfrogru())
+        self.lslocausr_3.clicked.connect(lambda: lslocausrs())
+        self.lslocagru_3.clicked.connect(lambda: lslocagrus())
+        self.chngusrpas_3.clicked.connect(lambda: chngpasswdofall())
         #
         # # Linux Main Menu Commands
         # self.fwlbutton_3.clicked.connect(lambda: NewThread(fwl, False))

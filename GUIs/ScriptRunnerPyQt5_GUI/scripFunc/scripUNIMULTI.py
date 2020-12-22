@@ -896,7 +896,6 @@ def Hash_Run():
             print('starting hash function')
             super(hashRUN, self).exec_()
 
-
     h = hashRUN()
     NewThread(h.begin, False, "Hash_Check")
 
