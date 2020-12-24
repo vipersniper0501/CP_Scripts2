@@ -19,7 +19,7 @@ from PyUIs.main import Ui_MainWindow
 from PyUIs.progabout import Ui_About
 from PyUIs.howToUI import Ui_How_To
 
-from scripFunc.scripLINUXONLY import funcLINUX
+from scripFunc.scripLINUXONLY import malRem, alyn
 from scripFunc.scripUNIMULTI import Update_OS, Media_Search, Configure_Firewall, Basic_Configurations, rmProSoft, Configure_Services, Hash_Run
 from scripFunc.scripWINONLY import BITLOCKER, Configure_Browsers, chngpasswdofall, lsgrusanusrin, lsmemofgru, lslocagrus, lslocausrs, remusrfrogru, addusrtogru, remgrufrosys, addgrutosys, remusr, addusr
 
@@ -297,8 +297,8 @@ def CIDR_Configurations():
                 if variableCheck.is_file():
                     print('Cancelling configurations. Nothing has changed.')
                     self.close()
-                    main_commands = Main_start()
-                    main_commands.dialog_completed()
+                    # main_commands = Main_start()
+                    # main_commands.dialog_completed()
                 else:
                     print('Closing program')
                     sys.exit(0)
@@ -402,8 +402,6 @@ class Main_start(QMainWindow, Ui_MainWindow):
         config.read(configurations)
         self.header_title.setWordWrap(True)
         self.descriptions.setWordWrap(True)
-        # funcWINUSRGRU = funcWINusrgru()
-        funcLIN = funcLINUX()
         
         def quitButton():
             # log.info('Closing program')
@@ -461,8 +459,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
                     self.setFixedSize(400, 305)
                     self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             
-            widget = showHowToUi()
-            widget.exec_()
+            showHowToUi().exec_()
         
         def runCOMDESCRIPT():
             class showComDescript(QDialog, Ui_comDescript):
@@ -471,8 +468,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
                     self.setupUi(self)
                     self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
 
-            widget = showComDescript()
-            widget.exec_()
+            showComDescript().exec_()
         
         def runABOUTPROG():
             class showAboutProg(QDialog, Ui_About):
@@ -482,8 +478,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
                     self.setFixedSize(390, 282)
                     self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             
-            widget = showAboutProg()
-            widget.exec_()
+            showAboutProg().exec_()
         
         def indev():
             INDEV = QMessageBox()
@@ -590,12 +585,12 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.chngusrpas_3.clicked.connect(lambda: chngpasswdofall())
         #
         # # Linux Main Menu Commands
-        # self.fwlbutton_3.clicked.connect(lambda: NewThread(fwl, False))
-        # self.auditbutton_3.clicked.connect(lambda: NewThread(funcLIN.alyn, False))
-        # self.malrembutton_3.clicked.connect(lambda: NewThread(funcLIN.malRem, False))  #
-        # self.rmvprosoftbutton_3.clicked.connect(lambda: NewThread(indev, False))  #
-        # self.basicConfbutton_3.clicked.connect(lambda: NewThread(indev, False))  #
-        # self.servicesConfButton_2.clicked.connect(lambda: NewThread(indev, False))  #
+        # self.fwlbutton_3.clicked.connect(lambda: fwl())
+        # self.auditbutton_3.clicked.connect(lambda: alyn())
+        # self.malrembutton_3.clicked.connect(lambda: malRem())  #
+        # self.rmvprosoftbutton_3.clicked.connect(lambda: indev())  #
+        # self.basicConfbutton_3.clicked.connect(lambda: indev())  #
+        # self.servicesConfButton_2.clicked.connect(lambda: indev())  #
 
         # Linux User Group Commands
         self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4, self.adusrtosys_4,

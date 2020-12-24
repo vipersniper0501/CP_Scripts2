@@ -30,7 +30,7 @@ VSVersionInfo(
         u'040904b0',
         [StringStruct(u'CompanyName', u'Apple CIDR'),
         StringStruct(u'ProductName', u'Apple CIDR Script Runner'),
-        StringStruct(u'ProductVersion', u'3.0.18.0'),
+        StringStruct(u'ProductVersion', u'3.0.19.0'),
         StringStruct(u'OriginalFilename', u'AppleCIDRScriptRunner.exe'),
         StringStruct(u'FileDescription', u'Apple CIDR Script Runner'),
         StringStruct(u'LegalCopyright', u'GPL-3.0 License'),
