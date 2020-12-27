@@ -1,7 +1,7 @@
 = PyQt5 Version Change Log
 :toc:
 
-== Versions
+== Releases
 
 === Version 3.0.19.0
 

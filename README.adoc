@@ -54,6 +54,7 @@ to connect it to python code that will actually execute the commands
 ** This GUI is built on the PyQt frame work. This is the newest and best version of all of the GUI's and
 Scripts Combined. It is the most modern looking and has the most commands, platform support, and
 ease of use.
+** link:./GUIs/ScriptRunnerPyQt5_GUI/CHANGELOG.adoc[Change Log]
 
 image:./Preview.JPG[title="PyQt5 AppleCIDR Script Runner"]
 
