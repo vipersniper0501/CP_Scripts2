@@ -1,0 +1,277 @@
+/* CSS code for website */
+body {
+  padding: 3px 3px 3px 3px;
+  background-color: #212434;
+  font-family: Verdana, sans-serif;
+  font-size: 11pt;
+  text-align: center;
+}
+
+div.main_page {
+  position: relative;
+  margin-bottom: 3px;
+  margin-left: 160px;
+  margin-right: 10px;
+  padding: 0 0 0 0;
+  border-width: 2px;
+  border-color: #212738;
+  border-style: solid;
+  background-color: #2e344a;
+  text-align: center;
+  border-radius: 10px;
+}
+
+div.page_header {
+  height: 99px;
+  width: 100%;
+  color: #ccd2e6;
+}
+
+div.page_header span {
+  margin: 15px 0 0 50px;
+  font-size: 180%;
+  font-weight: bold;
+}
+
+div.page_header img {
+  margin: 3px 0 0 40px;
+}
+
+div.table_of_contents {
+  clear: left;
+  min-width: 200px;
+  margin: 3px 3px 3px 3px;
+  background-color: #fff;
+  text-align: left;
+}
+
+div.table_of_contents_item {
+  clear: left;
+  width: 100%;
+  margin: 4px 0 0 0;
+  color: #000;
+  text-align: left;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+}
+
+div.table_of_contents_item a {
+  /*  margin: 6px 0px 0px 6px; */
+}
+
+div.content_section {
+  margin: 3px 3px 3px 3px;
+  text-align: left;
+}
+
+div.content_section_text {
+  padding: 5px 10px 5px 10px;
+  color: #ccd2e6;
+  font-size: 100%;
+}
+
+div.content_section_text pre {
+  margin: 8px 0 8px 0;
+  padding: 8px 8px 8px 8px;
+  border-width: 1px;
+  border-style: dotted;
+  border-color: #000;
+  background-color: #f5f6f7;
+  font-style: italic;
+}
+
+div.content_section_text p {
+  margin-bottom: 6px;
+}
+
+div.content_section_text ul,
+div.content_section_text li {
+  padding: 4px 8px 4px 16px;
+}
+
+div.section_header {
+  padding: 3px 6px 3px 6px;
+  background-color: #8e9cb2;
+  color: #f5f6f7;
+  font-weight: bold;
+  font-size: 112%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+div.section_header_grey {
+  background-color: #9f9386;
+  padding-top: 5px;
+}
+
+.floating_element {
+  position: relative;
+  float: inherit;
+}
+
+div.table_of_contents_item a,
+div.content_section_text a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+div.table_of_contents_item a:link,
+div.table_of_contents_item a:visited,
+div.table_of_contents_item a:active {
+  color: #000;
+}
+
+div.table_of_contents_item a:hover {
+  color: #098ea7;
+}
+
+div.content_section_text a:link,
+div.content_section_text a:visited,
+div.content_section_text a:active {
+  color: #000;
+}
+
+div.content_section_text a:hover {
+  color: #098ea7;
+}
+
+.sidenav {
+  height: auto;
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  margin-top: 14px;
+  margin-left: 5px;
+  border-style: solid;
+  border-color: #212738;
+  border-width: 2px;
+  border-radius: 10px;
+  background: #2e344a;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0 10px;
+}
+
+.textarea {
+  width: 400px;
+  height: 80px;
+  background-color: #f5f6f7;
+  resize: none;
+}
+
+.comment-box {
+  width: 800px;
+  margin-left: 165px;
+  margin-bottom: 4px;
+  border-radius: 2px;
+}
+
+.dropbtn {
+  color: black;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  width: 150px;
+  border-radius: 5px;
+  border-color: black;
+  border-style: solid;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.drop-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.drop-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  border-radius: 5px;
+}
+
+.show {
+  display: block;
+}
+
+.buttonStyle {
+  border-radius: 5px;
+  width: 150px;
+  font-size: 14px;
+  font-weight: bold;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  padding: 3px;
+  background: #414e6e;
+  color: #ccd2e6;
+}
+
+.buttonStyle:hover {
+  background: #8b93b2;
+}
+
+.buttonStyleDrop {
+  border-radius: 5px;
+  width: 150px;
+  font-size: 14px;
+  font-weight: bold;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  padding: 3px;
+  background: #697aa1;
+  color: #ccd2e6;
+}
+
+#particles-dot_connect {
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  right: 0;
+  background: #212434;
+}
+
+#particle_canvas1 {
+  opacity: 50%;
+}
+
+#APPLECIDR_content {
+  position: fixed;
+  top: 25%;
+  left: 35%;
+  bottom: 25%;
+  right: 35%;
+  text-align: center;
+  border: 2px solid;
+  background: #2e344a;
+  height: 380px;
+  width: 768px;
+  border-radius: 15px;
+  padding: 10px;
+  color: #ccd2e6;
+}
+
+.version-grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+.version-grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

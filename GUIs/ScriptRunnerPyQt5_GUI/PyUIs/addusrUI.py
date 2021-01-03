@@ -14,6 +14,11 @@ class Ui_addUSR(object):
     def setupUi(self, addUSR):
         addUSR.setObjectName("addUSR")
         addUSR.resize(345, 187)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(addUSR.sizePolicy().hasHeightForWidth())
+        addUSR.setSizePolicy(sizePolicy)
         addUSR.setStyleSheet("background-color: #212434\n"
 "   ")
         self.label = QtWidgets.QLabel(addUSR)

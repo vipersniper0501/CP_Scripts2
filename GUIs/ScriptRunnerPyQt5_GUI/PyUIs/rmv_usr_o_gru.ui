@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>302</width>
-    <height>334</height>
+    <height>410</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,11 +17,11 @@
    <string notr="true">background-color: #212434
             </string>
   </property>
-  <widget class="QLineEdit" name="Username_Input">
+  <widget class="QLineEdit" name="Name_Input">
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>250</y>
+     <y>330</y>
      <width>191</width>
      <height>21</height>
     </rect>
@@ -34,7 +34,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>250</y>
+     <y>330</y>
      <width>91</width>
      <height>21</height>
     </rect>
@@ -66,7 +66,7 @@
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>290</y>
+     <y>370</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -97,7 +97,7 @@ background: rgba(139, 147, 178, .75);
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>290</y>
+     <y>370</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -130,7 +130,7 @@ background: rgba(139, 147, 178, .75);
      <x>10</x>
      <y>40</y>
      <width>281</width>
-     <height>191</height>
+     <height>271</height>
     </rect>
    </property>
    <property name="styleSheet">

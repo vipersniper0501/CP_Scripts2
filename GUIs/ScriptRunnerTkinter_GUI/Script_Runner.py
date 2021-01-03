@@ -132,7 +132,7 @@ class scriptrunnerGUI():
     usrd = 0
     mmd = 0
     fconf = 0
-    #commands = [mmfunc.srchmedia, mmfunc.updates, self.usrgru]
+    #commands = [mmfunc.search_media, mmfunc.updates, self.usrgru]
 
     #def __init__(self):
     #    print('')
@@ -199,7 +199,7 @@ class scriptrunnerGUI():
         thred = ThreadmmFunc()
 
         commands = [thred.threaderSRCH, thred.threaderUPDT, chngTOusr, thred.threaderFWL, thred.threaderServ, thred.threaderMALREM, thred.threaderALYN, thred.threaderBASEconf, thred.threaderRMproCont]
-        # commands = [mmfunc.srchmedia, mmfunc.updates, self.usrgru]
+        # commands = [mmfunc.search_media, mmfunc.updates, self.usrgru]
         gridrow = ['5', '1', '1', '2', '2', '3', '4', '4', '3']
         gridcolumn = ['0', '0', '1', '0', '1', '1', '0', '1', '0']
 
