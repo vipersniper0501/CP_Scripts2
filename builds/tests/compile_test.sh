@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git checkout GUI-Updates
+git checkout dev
 
 if [ $TRAVIS_OS_NAME = 'osx' ]; then
     # Install some custom requirements on macOS
