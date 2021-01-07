@@ -32,8 +32,8 @@ jobs:
         run: |
           pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
           pip3 install pyinstaller
-          l /home/runner/.local/lib/python3.8/site-packages/
-          l /usr/lib/python3/dist-packages/
+          ls -la /home/runner/.local/lib/python3.8/site-packages/
+          ls -la /usr/lib/python3/dist-packages/
 
       - name: Build Executables
         run:
