@@ -23,10 +23,20 @@ jobs:
       # checks out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Run a one line script
-        run: ls
-
-      - name: multiline script
+      - name: Changing Test-Scripts to Executables
         run: |
-          echo "test"
-          sudo apt-get install python3
+          sudo chmod +x ./builds/tests/compile_test.sh
+          sudo chmod +x ./builds/tests/after_successCONVERT.sh
+
+      - name: Installing Dependencies
+        run: |
+          pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
+
+      - name: Build Executables
+        run:
+          sudo sh ./builds/tests/compile_test.sh
+
+      - name: Upload to Github
+        run:
+          sudo sh ./builds/tests/after_successCONVERT.sh
+
