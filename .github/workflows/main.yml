@@ -32,7 +32,7 @@ jobs:
         run: |
           pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
           pip3 install pyinstaller
-          pyinstaller --version
+          ./home/runner/.local/lib/python3.8/site-packages/pyinstaller --version
 
       - name: Build Executables
         run:
