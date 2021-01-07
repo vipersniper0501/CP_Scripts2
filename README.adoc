@@ -134,4 +134,3 @@ working on that I started to look into other ways of creating scripts and realiz
 also try and make things such as GUIs for it. Before I knew it, I had several versions and types
 of projects in one repository and have been too lazy to create a new repo for each version of the
 project.
->>>>>>> origin/master
