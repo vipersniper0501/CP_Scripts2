@@ -34,7 +34,7 @@ jobs:
 
       - name: Build Executables
         run:
-          sudo sh ./builds/tests/compile_test.sh
+          sudo sh ./builds/tests/compile_test.sh linux
 
       - name: Upload to Github
         run:
