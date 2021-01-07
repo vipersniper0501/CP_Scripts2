@@ -31,7 +31,6 @@ jobs:
       - name: Installing Dependencies
         run: |
           pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
-          PATH="$HOME/.local/bin:$PATH"
           ~/.local/bin/pyinstaller --version
 
       - name: Build Executables
