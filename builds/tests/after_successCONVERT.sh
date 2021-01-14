@@ -8,7 +8,7 @@ setup_git() {
 commit_compiled_executables() {
 
     Branch_Name=$(git rev-parse --abbrev-ref HEAD)
-    Branch_Commit_Number=$(git rev-list --cound $Branch_Name)
+    Branch_Commit_Number=$(git rev-list --count $Branch_Name)
 
     if [ $Branch_Name = dev ]; then
         git checkout dev
