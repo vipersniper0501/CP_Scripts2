@@ -26,7 +26,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Changing Test-Scripts to Executables
         run: |
-          l
+          ls -al
           chmod +x ./builds/tests/compile_test.sh
           chmod +x ./builds/tests/after_successCONVERT.sh
 
