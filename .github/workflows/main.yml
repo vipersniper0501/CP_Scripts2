@@ -32,7 +32,7 @@ jobs:
 
       - name: Build Executables
         run:
-          sh ./builds/tests/compile_test.sh linux
+          sh ./builds/tests/Actions_compile_test.sh linux
 
       - name: Upload to Github
         run:
