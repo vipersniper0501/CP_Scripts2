@@ -1,5 +1,8 @@
 #!/bin/bash
 
+OS_Name="$1"
+
+
 setup_git() {
     git config --global user.email "github@github-actions.org"
     git config --global user.name "Runner"
@@ -9,7 +12,6 @@ commit_compiled_executables() {
 
     Branch_Name=$(git rev-parse --abbrev-ref HEAD)
     Branch_Commit_Number=$(git rev-list --count $Branch_Name)
-    OS_Name="$1"
 
     echo "Branch Name: $Branch_Name"
     echo "Branch Commit Number: $Branch_Commit_Number"
