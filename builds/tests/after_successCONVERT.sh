@@ -7,7 +7,7 @@ setup_git() {
 
 commit_compiled_executables() {
 
-    Branch_Name=$(git branch --show-current)
+    Branch_Name=$(git rev-parse --abbrev-ref HEAD)
     Branch_Commit_Number=$(git rev-list --cound $Branch_Name)
 
     if [ $Branch_Name = dev ]; then
@@ -17,7 +17,7 @@ commit_compiled_executables() {
         ls ./dist
         echo "./builds directory BEFORE"
         ls ./builds
-        if [ $@ = 'windows' ]; then
+        if [ $1 = 'windows' ]; then
             mv "./dist/AppleCIDR_Windows_x64.exe" "./builds/PyQt5_Executables/AppleCIDR_Windows_x64.exe"
             echo "Moved AppleCIDR_Windows_x64.exe from ./dist to ./builds"
             echo "./dist directory AFTER"
@@ -28,7 +28,7 @@ commit_compiled_executables() {
             git add "./builds"
             git status
         fi
-        if [ $@ = 'linux' ]; then
+        if [ $1 = 'linux' ]; then
             mv "./dist/AppleCIDR_Linux_x64" "./builds/PyQt5_Executables/AppleCIDR_Linux_x64"
             echo "Moved AppleCIDR_Linux_x64 from ./dist to ./builds"
             echo "./dist directory AFTER"
@@ -40,7 +40,7 @@ commit_compiled_executables() {
             git add "./builds"
             git status
         fi
-        if [ $@ = 'osx' ]; then
+        if [ $1 = 'osx' ]; then
             mv "./dist/AppleCIDR_MacOS_x64" "./builds/PyQt5_Executables/AppleCIDR_MacOS_x64"
             echo "Moved AppleCIDR_MacOS_x64 from ./dist to ./builds/PyQt5_Executables/"
             echo "./dist directory AFTER"
@@ -61,7 +61,7 @@ commit_compiled_executables() {
         ls ./dist
         echo "./builds directory BEFORE"
         ls ./builds
-        if [ $@ = 'windows' ]; then
+        if [ $1 = 'windows' ]; then
             mv "./dist/AppleCIDR_Windows_x64.exe" "./builds/PyQt5_Executables/AppleCIDR_Windows_x64.exe"
             echo "Moved AppleCIDR_Windows_x64.exe from ./dist to ./builds"
             echo "./dist directory AFTER"
@@ -72,7 +72,7 @@ commit_compiled_executables() {
             git add "./builds"
             git status
         fi
-        if [ $@ = 'linux' ]; then
+        if [ $1 = 'linux' ]; then
             mv "./dist/AppleCIDR_Linux_x64" "./builds/PyQt5_Executables/AppleCIDR_Linux_x64"
             echo "Moved AppleCIDR_Linux_x64 from ./dist to ./builds"
             echo "./dist directory AFTER"
@@ -84,7 +84,7 @@ commit_compiled_executables() {
             git add "./builds"
             git status
         fi
-        if [ $@ = 'osx' ]; then
+        if [ $1 = 'osx' ]; then
             mv "./dist/AppleCIDR_MacOS_x64" "./builds/PyQt5_Executables/AppleCIDR_MacOS_x64"
             echo "Moved AppleCIDR_MacOS_x64 from ./dist to ./builds/PyQt5_Executables/"
             echo "./dist directory AFTER"
