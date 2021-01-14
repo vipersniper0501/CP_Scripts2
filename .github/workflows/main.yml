@@ -27,8 +27,8 @@ jobs:
       - name: Changing Test-Scripts to Executables
         run: |
           ls -al
-          chmod +x ./builds/tests/compile_test.sh
-          chmod +x ./builds/tests/after_successCONVERT.sh
+          chmod +x ./builds/tests/Actions_compile_test.sh
+          chmod +x ./builds/tests/after_successCONVERT.sh 
 
       - name: Build Executables
         run:
@@ -36,5 +36,5 @@ jobs:
 
       - name: Upload to Github
         run:
-          sh ./builds/tests/after_successCONVERT.sh
+          sh ./builds/tests/after_successCONVERT.sh linux
 
