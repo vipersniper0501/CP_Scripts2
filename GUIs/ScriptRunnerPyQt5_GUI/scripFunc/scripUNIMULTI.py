@@ -12,7 +12,7 @@ import distro  # for figuring out what linux distro
 from PyQt5 import QtGui
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QMessageBox, QDialog, QFileDialog
-from scripFunc.scripWINONLY import NewThread
+from Custom_threading import NewThread
 
 if platform == 'linux':
     import pwd

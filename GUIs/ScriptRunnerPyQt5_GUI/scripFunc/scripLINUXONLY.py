@@ -2,6 +2,8 @@ import configparser
 import subprocess as sub
 from sys import platform
 
+from Custom_threading import NewThread
+
 import distro  # for figuring out what linux distro
 
 OS = distro.linux_distribution()
@@ -23,7 +25,7 @@ config.read('config.ini')
 '''This file is used to store commands that are to only be used on Linux machines'''
 
 
-def malRem(self):
+def malRem():
     if platform == 'linux':
         if ops == 'Manjaro Linux':
             command = 'sudo pacman -S clamav -y'
@@ -38,7 +40,8 @@ def malRem(self):
     else:
         print('This command is currently in development')
 
-def alyn(self):
+def alyn():
+    # Check to see if lynis is installed first, if yes : skip install, if no : install
     if ops in ('Ubuntu', 'debian'):
         command = 'sudo apt install lynis -y'
         sub.Popen(command.split())
