@@ -586,7 +586,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
         #
         # # Linux Main Menu Commands
         # self.fwlbutton_3.clicked.connect(lambda: fwl())
-        # self.auditbutton_3.clicked.connect(lambda: alyn())
+        self.auditbutton_3.clicked.connect(lambda: alyn())
         # self.malrembutton_3.clicked.connect(lambda: malRem())  #
         # self.rmvprosoftbutton_3.clicked.connect(lambda: indev())  #
         # self.basicConfbutton_3.clicked.connect(lambda: indev())  #
