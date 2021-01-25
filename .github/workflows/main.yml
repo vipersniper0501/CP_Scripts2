@@ -1,0 +1,41 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Compilation
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ dev ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  Linux_Build:
+    # The type of runner that the job will run on
+    runs-on: [self-hosted, linux, x64]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: Changing Test-Scripts to Executables
+        run: |
+          #chmod +x ./builds/tests/Actions_compile_test.sh
+          chmod +x ./builds/tests/Actions_Linux_Compile_Test.sh
+          chmod +x ./builds/tests/after_successCONVERT.sh 
+          ls -al
+
+      - name: Build Executables
+        run:
+          ./builds/tests/Actions_Linux_Compile_Test.sh linux
+
+      - name: Upload to Github
+        run:
+          ./builds/tests/after_successCONVERT.sh linux
+

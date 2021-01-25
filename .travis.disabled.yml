@@ -1,0 +1,33 @@
+language: python
+sudo: required
+jobs:
+  include:
+  - name: Linux Ubuntu Python 3.8
+    os: linux
+    dist: xenial
+    python: 3.8
+    before_install:
+    - chmod +x ./builds/tests/compile_test.sh
+    - chmod +x ./builds/tests/after_successCONVERT.sh
+  - name: MacOS X Build Python 3.8
+    os: osx
+    language: generic
+    before_install:
+    - chmod +x ./builds/tests/compile_test.sh
+    - chmod +x ./builds/tests/after_successCONVERT.sh
+    env: TOXENV=py38
+  - name: Windows 10 Build Python 3.8
+    os: windows
+    language: shell
+    before_install:
+    - choco install python --version 3.8.3
+    - python -m pip install --upgrade pip
+    env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+python:
+- '3.8'
+install:
+- pip3 install -r ./GUIs/ScriptRunnerPyQt5_GUI/requirements.txt
+script:
+- "./builds/tests/compile_test.sh"
+after_success:
+- "./builds/tests/after_successCONVERT.sh"
