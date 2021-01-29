@@ -25,36 +25,36 @@ commit_compiled_executables() {
         echo "./builds directory BEFORE"
         ls ./builds
         if [ $OS_Name = 'windows' ]; then
-            mv "./dist/AppleCIDR_Windows_x64.exe" "./builds/PyQt5_Executables/AppleCIDR_Windows_x64.exe"
+            mv "./dist/AppleCIDR_Windows_x64.exe" "./builds/Executables/AppleCIDR_Windows_x64.exe"
             echo "Moved AppleCIDR_Windows_x64.exe from ./dist to ./builds"
             echo "./dist directory AFTER"
             ls ./dist
             echo "./builds directory AFTER"
-            ls ./builds/PyQt5_Executables
+            ls ./builds/Executables
             git pull
             git add "./builds"
             git status
         fi
         if [ $OS_Name = 'linux' ]; then
-            mv "./dist/AppleCIDR_Linux_x64" "./builds/PyQt5_Executables/AppleCIDR_Linux_x64"
+            mv "./dist/AppleCIDR_Linux_x64" "./builds/Executables/AppleCIDR_Linux_x64"
             echo "Moved AppleCIDR_Linux_x64 from ./dist to ./builds"
             echo "./dist directory AFTER"
             ls ./dist
             echo "./builds directory AFTER"
-            ls ./builds/PyQt5_Executables
-            chmod +x "./builds/PyQt5_Executables/AppleCIDR_Linux_x64"
+            ls ./builds/Executables
+            chmod +x "./builds/Executables/AppleCIDR_Linux_x64"
             git pull
             git add "./builds"
             git status
         fi
         if [ $OS_Name = 'osx' ]; then
-            mv "./dist/AppleCIDR_MacOS_x64" "./builds/PyQt5_Executables/AppleCIDR_MacOS_x64"
-            echo "Moved AppleCIDR_MacOS_x64 from ./dist to ./builds/PyQt5_Executables/"
+            mv "./dist/AppleCIDR_MacOS_x64" "./builds/Executables/AppleCIDR_MacOS_x64"
+            echo "Moved AppleCIDR_MacOS_x64 from ./dist to ./builds/Executables/"
             echo "./dist directory AFTER"
             ls ./dist
             echo "./builds directory AFTER"
-            ls ./builds/PyQt5_Executables
-            chmod +x "./builds/PyQt5_Executables/AppleCIDR_MacOS_x64"
+            ls ./builds/Executables
+            chmod +x "./builds/Executables/AppleCIDR_MacOS_x64"
             git pull
             git add "./builds"
             git status
