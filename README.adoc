@@ -7,18 +7,11 @@ Website: https://matrix0501.com
 image:https://app.codacy.com/project/badge/Grade/d277e9b251a74fc0a61da1fc321a9bfa["Codacy code quality",link="https://www.codacy.com/manual/vipersniper0501/CP_Scripts2?utm_source=github.com&utm_medium=referral&utm_content=vipersniper0501/CP_Scripts2&utm_campaign=Badge_Grade"]
 image:https://img.shields.io/github/issues-raw/vipersniper0501/CP_Scripts2[GitHub issues]
 image:https://img.shields.io/github/repo-size/vipersniper0501/CP_Scripts2[GitHub repo size]
-
-*DISCLAIMERS:* This project is student made with inspiration from other projects such as the scripts
-made by Ethan Fowler from TEAM BYTE.
+image:https://github.com/vipersniper0501/CP_Scripts2/workflows/Compilation/badge.svg?branch=dev[link="https://github.com/vipersniper0501/CP_Scripts2/actions?query=workflow%3ACompilation"]
 
 NOTE: This is program is Pre-Alpha so it still has many bugs and is missing many of the core features.
 I am only one person so this will take a while to even get to Alpha.
 Thank you for your understanding.
-
-
-
-This script also uses Microsoft Sysinternals suite which is owned and created by Microsoft. I do
-not take any credit in the creation of that program.(_I don't want to get sued_)
 
 Before using any of these scripts for the CyberPatriot challenges, please make sure
 that you complete as many of the Forensic Questions as possible! If not, then you risk the chance
@@ -26,39 +19,19 @@ that the script will remove or change something that the Forensics Question requ
 
 '''
 
-== Dependancies
+== Description
 
-- Admin access
-- Set-ExecutionPolicy Unrestricted _(For Powershell Scripts only)_
+This script was made for myself and team mates for the AFA Cyberpatriots Competition. This program is compatible with Debian/Ubuntu based linux distrobutions and windows 10.
+You can use this program to configure commonly used services and programs along with user and security auditing, along with firewall configuration.
 
-== Current Scripts and GUI's Available
+== How to use
 
-I currently have two Command Line scripts:
+All you will have to do is download the executable from my website https://matrix0501.com/CyberSecurity/Apple_CIDR_Script_Runner.html[Matrix0501.com], from the Releases tab, or compile it yourself.
+Once downloaded, run as administrator/sudo and you should be up and running. :)
 
-- link:./CLI_Scripts/WindowsScript/[Powershell Script] for Windows machines
-- link:./CLI_Scripts/LinuxScript/[Bash Script] for Linux machines
+NOTE: Please again note that this is a work in progress by a highschooler in his free time. I do my best to get as much of it working as I can, however there will bugs and I can't catch everything myself. If you find a bug please let me know by creating an Issue or even better, help me out and create a pull request ;). 
 
-These two scripts currently have around 10-20 commands each.They do most of the basic commands that
-you would use in competition, but, they are not good enough that they could get you a ton of points
-by just using them alone.
-
-I currently have available three GUI's. Of the three, only two are very developed. The following
-list are the available GUI's to choose from:
-
-* link:./GUIs/ScriptRunnerTkinter_GUI/[Script Runner Tkinter]
-** Built on the TKinter framework so it looks like it was made in the 90's
-
-* link:./GUIs/ScriptRunnerElectron/[Script Runner Electron]
-** This GUI is built on the same framework that applications like Discord, Slack, and Atom.
-Although due to it using website code (HTML, CSS, JavaScript) I am still having trouble attempting
-to connect it to python code that will actually execute the commands
-
-* link:./GUIs/ScriptRunnerPyQt5_GUI/[Script Runner PyQt5]  image:https://travis-ci.com/vipersniper0501/CP_Scripts2.svg?branch=GUI-Updates["Build Status",link="https://travis-ci.com/vipersniper0501/CP_Scripts2"]
-** This GUI is built on the PyQt frame work.This is the newest best version of all of the GUI's and
-Scripts Combined.It is the most modern looking and has the most commands, platform support, and
-Ease of Use.
-
-== How to compile a GUI from source code
+== How to compile
 
 Make sure you have the correct version of Pyinstaller:
 
@@ -78,27 +51,6 @@ For executables that work with **Linux:** Run auto-py-to-exe on a Linux/Unix mac
 7.) your newly created .exe file should now have been created and added to the desktop
 
 https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-3cfi
-
-== Usage Instructions For CLI Powershell Scripts:
-
-1.) Run Powershell as Admin +
-2.) Navigate to location of script file through powershell ex: `cd C:\Users\Michael\Downloads\` +
-3.) In Powershell type the following: `Set-ExecutionPolicy Unrestricted` +
-Do this to allow the execution of `Powershell` scripts +
-4.) Once at the location where the script is located type the following: `./cyberWin10.ps1`
-
-Hit Enter
-
-That is it! Good Luck!
-
-Some of the commands might require for you to execute them twice if they did not show a list when
-they should have. I am currently working on fixing this problem.
-
-== Usage Instructions For Linux CLI Scripts
-
-1.) Navigate to directory where script is located in terminal +
-2.) Type the following: `sudo bash ./linux_Script.sh` +
-3.) The script is now running and you are now free to choose the commands to execute
 
 == Version Numbers
 
@@ -127,11 +79,5 @@ Why is it that when I download the exe, it says it is malware?::
     This is because I have not yet been able to sign my executables. So as of right now, windows
 does not know that this program is safe so it try's to warn you that this is not an official
 program.
-Why are there so many different versions within the same repository?::
-    This is because when I first made the repository, I did not plan on making any of the other
-versions. I thought it was going to be just the CLI Script and that was it. After some time
-working on that I started to look into other ways of creating scripts and realized that I could
-also try and make things such as GUIs for it. Before I knew it, I had several versions and types
-of projects in one repository and have been too lazy to create a new repo for each version of the
-project.
+
 
