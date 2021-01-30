@@ -195,9 +195,9 @@ def Find_Groups(users_n_groups: bool):
         users_in_groups = {}
         # TODO: SPEED THIS UP
         if users_n_groups:
-            for i2 in range(0, len(groups)):
-                print(groups[i2])
-                stdout2, _ = sub.Popen(["powershell", "net localgroup '" + groups[i2] + "'"],stdout = sub.PIPE).communicate()
+            for _, group in enumerate(groups):
+                print(group)
+                stdout2, _ = sub.Popen(["powershell", "net localgroup '" + group + "'"],stdout = sub.PIPE).communicate()
                 try:
                     output = stdout2.decode("utf-8").split("\n")
                     user_names = []
@@ -206,12 +206,12 @@ def Find_Groups(users_n_groups: bool):
                         print(y)
                         user_names.append(y)
                     if len(user_names) == 0:
-                        users_in_groups[groups[i2]] = ['No Users']
+                        users_in_groups[group] = ['No Users']
                     elif len(user_names) == 1:
-                        users_in_groups[groups[i2]] = [user_names[0]]
+                        users_in_groups[group] = [user_names[0]]
                     else:
                         for i4 in range(0, len(user_names)):
-                            users_in_groups[groups[i2]] = user_names
+                            users_in_groups[group] = user_names
                 except Exception as e:
                     print('\n\nException occurred: ' + str(e))
         
@@ -236,9 +236,9 @@ def BITLOCKER():
                 command = f"$pass = ConvertTo-SecureString {self.encrypPASS.text()} -AsPlainText -Force " \
                           f"\nEnable-BitLocker {drive} -PasswordProtector $pass"
                 
-                '''Only works if 'Allow BitLocker without compatible TPM' is enabled in the Group Policy
-                Also does not encrypt right away. If you type 'Get-BitlockerVolume' in powershell, it will tell
-                you how much has been encrypted so far.'''
+                #  Only works if 'Allow BitLocker without compatible TPM' is enabled in the Group Policy
+                #  Also does not encrypt right away. If you type 'Get-BitlockerVolume' in powershell, it will tell
+                #  you how much has been encrypted so far.
                 
                 if Check_Password(self.encrypPASS.text(), self.encrypPASS_2.text()):
                     sub.Popen(['powershell', f'& {command}'])
@@ -495,8 +495,8 @@ def remusr():
             
             listo_names = findnames()
             
-            for i in range(0, len(listo_names)):
-                QListWidgetItem(listo_names[i], self.listOFnames)
+            for _, name in enumerate(listo_names):
+                QListWidgetItem(name, self.listOFnames)
             
             def removal():
                 username = self.Name_Input.text()
