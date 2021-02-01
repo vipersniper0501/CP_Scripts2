@@ -2,7 +2,7 @@
 import configparser
 import os
 import sys
-import logging as log
+# import logging as log
 from pathlib import Path
 from platform import uname
 
@@ -10,7 +10,7 @@ from scripFunc.Custom_threading import NewThread
 
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QDialog
-from PyQt5.QtCore import Qt, pyqtSignal, pyqtSlot, QObject
+from PyQt5.QtCore import Qt
 
 from PyUIs.comdescript import Ui_comDescript
 from PyUIs.firstconf import Ui_firstConf
@@ -43,10 +43,11 @@ except IndexError:
 
 print(DEBUG)
 
+
 def CIDR_Configurations():
 
     class fconfStart(QDialog, Ui_firstConf):
-        def __init__(self, parent = None):
+        def __init__(self, parent=None):
             super(fconfStart, self).__init__(parent)
             print('Script Runner First Time Configurations')
             self.setFixedSize(720, 440)
@@ -340,11 +341,10 @@ def CIDR_Configurations():
     NewThread(c.begin, False, "CIDR_Configurations")
 
 
-
 class Main_start(QMainWindow, Ui_MainWindow):
     # signalMain = pyqtSignal()
     
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(Main_start, self).__init__(parent)
         print('Script Runner has started')
         self.setFixedSize(860, 675)
@@ -359,7 +359,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
         variableCheck2 = Path(config_path2)
         self.dialog_done = False
         self.mmfuncassign(variableCheck2)
-    
+ 
     def mmfuncassign(self, configurations):
         print('Assigning functions')
         config = configparser.ConfigParser()
@@ -417,7 +417,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
         
         def showHOWTO():
             class showHowToUi(QDialog, Ui_How_To):
-                def __init__(self, parent = None):
+                def __init__(self, parent=None):
                     super(showHowToUi, self).__init__(parent)
                     self.setupUi(self)
                     self.setFixedSize(400, 305)
@@ -427,7 +427,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
         
         def runCOMDESCRIPT():
             class showComDescript(QDialog, Ui_comDescript):
-                def __init__(self, parent = None):
+                def __init__(self, parent=None):
                     super(showComDescript, self).__init__(parent)
                     self.setupUi(self)
                     self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
@@ -436,7 +436,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
         
         def runABOUTPROG():
             class showAboutProg(QDialog, Ui_About):
-                def __init__(self, parent = None):
+                def __init__(self, parent=None):
                     super(showAboutProg, self).__init__(parent)
                     self.setupUi(self)
                     self.setFixedSize(390, 282)
@@ -495,9 +495,14 @@ class Main_start(QMainWindow, Ui_MainWindow):
         # self.srchmedbuttonUNI.clicked.connect(lambda: NewThread(self.signalAssignment, False, "Search_Media", search_media))
         self.srchmedbuttonUNI.clicked.connect(lambda: Media_Search())
         
-        """
-        Attempt at making signal connect between hashRUN() classes begin() function. The use of signals should allow the functions to become multithreaded. As of right now this is currently not working. There are no "errors" as in it doesn't crash, but when I run it and try to click on the Hash Check button, nothing happens. This use of signals is used to prevent an error in pyqt5 that says something like "PyQt Timer could not be started..."
-        """
+        # Attempt at making signal connect between hashRUN() classes begin() 
+        # function. The use of signals should allow the functions to become 
+        # multithreaded. As of right now this is currently not working. There 
+        # are no "errors" as in it doesn't crash, but when I run it and try to 
+        # click on the Hash Check button, nothing happens. This use of signals 
+        # is used to prevent an error in pyqt5 that says something like "PyQt 
+        # Timer could not be started..."
+        
         self.chkhashfile_buttonUNI.clicked.connect(lambda: Hash_Run())
         
         # Windows Main Menu Commands
@@ -596,7 +601,9 @@ class Main_start(QMainWindow, Ui_MainWindow):
     #     self.dialog_done = True
 
     # def run_command(self):
-        # emits the main signal essentially calling the function assigned to the signal (This is all done within a new thread, seperate from the main thread)
+        # emits the main signal essentially calling the function assigned to 
+        # the signal (This is all done within a new thread, seperate from 
+        # the main thread)
     #     self.signalMain.emit()
     #     self.wait_for_command()
 
@@ -614,7 +621,8 @@ if __name__ == "__main__":
     print(config_path)
     variableCheck = Path(config_path)
     
-    # Checks to make sure there is a config file. If not, then First time setup runs
+    # Checks to make sure there is a config file. 
+    # If not, then First time setup runs
     if variableCheck.is_file():
         config = configparser.ConfigParser()
         config.read(variableCheck)

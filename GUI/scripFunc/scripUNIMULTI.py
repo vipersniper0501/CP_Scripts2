@@ -2,7 +2,7 @@ import getpass
 import os
 import subprocess as sub
 from threading import Thread
-import threading
+#  import threading
 from subprocess import Popen as procPop
 from pathlib import Path
 from distutils.dir_util import copy_tree
@@ -10,16 +10,17 @@ from shlex import quote as shlex_quote
 from sys import platform
 import distro  # for figuring out what linux distro
 from PyQt5 import QtGui
-from PyQt5.QtCore import pyqtSignal
+#  from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QMessageBox, QDialog, QFileDialog
-from Custom_threading import NewThread
+#  from Custom_threading import NewThread
+import configparser
+import shutil
+from PyUIs.hashgen import Ui_hashGEN
+from typing import Any
 
 if platform == 'linux':
     import pwd
-import configparser
-import shutil
 
-from PyUIs.hashgen import Ui_hashGEN
 
 OS = distro.linux_distribution()
 ops = OS[0]
@@ -28,7 +29,7 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 
-def NewThread(com, Returning: bool, thread_ID, *arguments):
+def NewThread(com, Returning: bool, thread_ID, *arguments) -> Any:
     """
     Will create a new thread for a function/command.
 
@@ -40,9 +41,9 @@ def NewThread(com, Returning: bool, thread_ID, *arguments):
     """
     
     class NewThreadWorker(Thread):
-        def __init__(self, group = None, target = None, name = None, args = (), kwargs = None, *,
-                     daemon = None):
-            Thread.__init__(self, group, target, name, args, kwargs, daemon = daemon)
+        def __init__(self, group=None, target=None, name=None, args=(), kwargs=None, *,
+                     daemon=None):
+            Thread.__init__(self, group, target, name, args, kwargs, daemon=daemon)
             self.daemon = True
             self._return = None
         
@@ -54,12 +55,13 @@ def NewThread(com, Returning: bool, thread_ID, *arguments):
             Thread.join(self)
             return self._return
     
-    ntw = NewThreadWorker(target = com, name = thread_ID, args = (*arguments,))
+    ntw = NewThreadWorker(target=com, name=thread_ID, args=(*arguments,))
     if Returning:
         ntw.start()
         return ntw.joinThread()
     else:
         ntw.start()
+
 
 # Universal Updates
 def Update_OS():

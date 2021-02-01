@@ -1,7 +1,5 @@
 from threading import Thread
-# import threading
 from typing import Any
-
 
 
 def NewThread(com, Returning: bool, thread_ID, *arguments) -> Any:
@@ -16,9 +14,9 @@ def NewThread(com, Returning: bool, thread_ID, *arguments) -> Any:
     """
     
     class NewThreadWorker(Thread):
-        def __init__(self, group = None, target = None, name = None, args = (), kwargs = None, *,
-                     daemon = None):
-            Thread.__init__(self, group, target, name, args, kwargs, daemon = daemon)
+        def __init__(self, group=None, target=None, name=None, args=(), kwargs=None, *,
+                     daemon=None):
+            Thread.__init__(self, group, target, name, args, kwargs, daemon=daemon)
             self.daemon = True
             self._return = None
         
@@ -30,7 +28,7 @@ def NewThread(com, Returning: bool, thread_ID, *arguments) -> Any:
             Thread.join(self)
             return self._return
     
-    ntw = NewThreadWorker(target = com, name = thread_ID, args = (*arguments,))
+    ntw = NewThreadWorker(target=com, name=thread_ID, args=(*arguments,))
     if Returning:
         ntw.start()
         return ntw.joinThread()

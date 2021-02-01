@@ -3,8 +3,10 @@ import itertools
 import shutil
 import subprocess as sub
 
-from Custom_threading import NewThread
+#  from Custom_threading import NewThread
 
+from typing import Any
+from threading import Thread
 import distro  # for figuring out what linux distro
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QListWidgetItem, QDialog, QMessageBox, QTreeWidgetItem
@@ -35,6 +37,41 @@ config.read('config.ini')
 #     return os.path.join(base_path, relative_path)
 
 # Allows for program to continue running while the function executes.
+
+def NewThread(com, Returning: bool, thread_ID, *arguments) -> Any:
+    """
+    Will create a new thread for a function/command.
+
+    :param com: Command to be Executed
+    :param Returning: True/False Will the command return anything?
+    :param thread_ID: Name of thread
+    :param arguments: Arguments to be sent to Command
+
+    """
+    
+    class NewThreadWorker(Thread):
+        def __init__(self, group=None, target=None, name=None, args=(), kwargs=None, *,
+                     daemon=None):
+            Thread.__init__(self, group, target, name, args, kwargs, daemon=daemon)
+            self.daemon = True
+            self._return = None
+        
+        def run(self):
+            if self._target is not None:
+                self._return = self._target(*self._args, **self._kwargs)
+        
+        def joinThread(self):
+            Thread.join(self)
+            return self._return
+    
+    ntw = NewThreadWorker(target=com, name=thread_ID, args=(*arguments,))
+    if Returning:
+        ntw.start()
+        return ntw.joinThread()
+    else:
+        ntw.start()
+
+
 
 def Check_Password(Password1, Password2):
     def PasswordChecker(Password1, Password2) -> bool:
@@ -72,7 +109,7 @@ def Check_Password(Password1, Password2):
                         character_rules[3] = 1
                     elif character not in symbols and character2 not in symbols:
                         character_rules[3] = 0
-            
+ 
             print(str(character_rules[0] == 1) + ' Lower Case')
             print(str(character_rules[1] == 1) + ' Upper case')
             print(str(character_rules[2] == 1) + ' number')
@@ -511,8 +548,8 @@ def remusr():
                     COMPLETE.exec_()
                     self.listOFnames.clear()
                     self.Name_Input.clear()
-                    for i in range(0, len(listo_names)):
-                        QListWidgetItem(listo_names[i], self.listOFnames)
+                    for _, name in enumerate(listo_names):
+                        QListWidgetItem(name, self.listOFnames)
                 
                 if len(username) == 0:
                     print('no username entered')
@@ -628,8 +665,8 @@ def remgrufrosys():
             
             _, list_of_groups = Find_Groups(False)
             
-            for i in range(0, len(list_of_groups)):
-                QListWidgetItem(list_of_groups[i], self.listOFnames)
+            for _, group in enumerate(list_of_groups):
+                QListWidgetItem(group, self.listOFnames)
             
             def remove_group():
                 group_name = self.Name_Input.text()
@@ -725,16 +762,16 @@ def addusrtogru():
             list_of_names = Find_Names()
             group_accounts, list_of_groups = Find_Groups(True)
             
-            for i in range(0, len(list_of_names)):
-                QListWidgetItem(list_of_names[i], self.listWidget)
+            for _, name in enumerate(list_of_names):
+                QListWidgetItem(name, self.listWidget)
             
             group_tree = self.treeWidget
             
-            for i2 in range(0, len(list_of_groups)):
-                c1 = QTreeWidgetItem(group_tree, [str(list_of_groups[i2])])
-                e = group_accounts.get(list_of_groups[i2])
-                for i3 in range(0, len(e)):
-                    QTreeWidgetItem(c1, [str(e[i3])])
+            for _, group in enumerate(list_of_groups):
+                c1 = QTreeWidgetItem(group_tree, [str(group)])
+                e = group_accounts.get(group)
+                for _, i3 in enumerate(e):
+                    QTreeWidgetItem(c1, [str(i3)])
             
             def run_add_user_to_group():
                 user_to_add = self.Name_Input.text()
@@ -879,8 +916,8 @@ def lslocausrs():
             self.Name_Input.hide()
             self.Confirm_button.hide()
             list_of_names = Find_Names()
-            for i in range(0, len(list_of_names)):
-                QListWidgetItem(list_of_names[i], self.listOFnames)
+            for _, name in enumerate(list_of_names):
+                QListWidgetItem(name, self.listOFnames)
                 
         def begin(self):
             super(list_local_users, self).exec_()
@@ -902,8 +939,8 @@ def lslocagrus():
             
             _, list_of_groups = Find_Groups(False)
             
-            for i in range(0, len(list_of_groups)):
-                QListWidgetItem(list_of_groups[i], self.listOFnames)
+            for _, group in enumerate(list_of_groups):
+                QListWidgetItem(group, self.listOFnames)
             
             def cancel_button():
                 self.close()
@@ -939,41 +976,41 @@ def chngpasswdofall():
                 try:
                     print('Detecting Users On System...')
                     # Local users are added to a list of names
-                    stdout, _ = sub.Popen(["powershell", "& {net localgroup users}"], stdout = sub.PIPE).communicate()
+                    stdout, _ = sub.Popen(["powershell", "& {net localgroup users}"], stdout=sub.PIPE).communicate()
                     output = stdout.decode("utf-8").split("\n")
                     n = []
                     for i in range(6, len(output) - 3):
                         n.append(output[i])
                     a = []
-                    for i in range(0, len(n)):
-                        x = n[i].split('\r')
+                    for _, i in enumerate(n):
+                        x = i.split('\r')
                         a.append(x)
-                    for i in range(0, len(a)):
-                        x = a[i][0]
+                    for _, i in enumerate(a):
+                        x = i[0]
                         names.append(x)
                     # Local Administrators are added to list of names
-                    stdout, _ = sub.Popen(["powershell", "& {net localgroup administrators}"], stdout = sub.PIPE).communicate()
+                    stdout, _ = sub.Popen(["powershell", "& {net localgroup administrators}"], stdout=sub.PIPE).communicate()
                     output = stdout.decode("utf-8").split("\n")
                     n2 = []
                     for i in range(6, len(output) - 3):
                         n2.append(output[i])
                     a2 = []
-                    for i in range(0, len(n2)):
-                        x = n2[i].split("\r")
+                    for _, i in enumerate(n2):
+                        x = i.split("\r")
                         a2.append(x)
-                    for i in range(0, len(a2)):
-                        x = a2[i][0]
+                    for _, i in enumerate(a2):
+                        x = i[0]
                         names.append(x)
                     
                     # Removal of current user from list of names (This is so the current user does not get it's password
                 # changed.
                     stdout, _ = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE).communicate()
                     output = stdout.decode("utf-8").split("\r\n")
-                    for i in range(0, len(names)):
-                        print(names[i])
-                        if output[0] == names[i]:
+                    for n, i in enumerate(names):
+                        print(i)
+                        if output[0] == i:
                             names.pop(i)
-                        if i == len(names):
+                        if n == len(names):
                             break
                     print('--------------------------------------------------')
                     print('The following list are all current users and admins on this system')
@@ -996,12 +1033,12 @@ def chngpasswdofall():
             
             def RUN(names):
                 if Check_Password(self.passwd.text(), self.pass_verify.text()):
-                    for i in range(0, len(names)):
+                    for _, name in enumerate(names):
                         command = f"$Password = ConvertTo-SecureString '{self.passwd.text()}' -AsPlainText -Force" \
-                              f"$Username = Get-LocalUser -Name '{names[i]}'" \
+                              f"$Username = Get-LocalUser -Name '{name}'" \
                               "$Username | Set-LocalUser -Password $Password"
-                        sub.Popen(f"powershell {command}", stdout = sub.PIPE)
-                        print('User ' + names[i] + "'s password has been successfully changed.")
+                        sub.Popen(f"powershell {command}", stdout=sub.PIPE)
+                        print('User ' + name + "'s password has been successfully changed.")
                     completedPOP()
             
             self.chngpass_button.clicked.connect(lambda: NewThread(RUN, False, "Changing_Users_Passwords", x))
