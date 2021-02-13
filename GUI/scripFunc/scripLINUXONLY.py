@@ -1,6 +1,5 @@
 import configparser
 import subprocess as sub
-from sys import platform
 import distro
 from scripFunc.AppleCIDR_Util import NewThread, Check_Password
 import logging as log
@@ -42,7 +41,8 @@ def Linux_Find_Names():
         args = "cat /etc/group"
         process_catGroup = sub.Popen(args.split(), shell=False, stdout=sub.PIPE).communicate()[0].decode("utf-8").split("\n")
         args = "grep 'root'"
-        output = sub.Popen(args.split(), shell-False, stdin=process_catGroup.stdout, stdout=sub.PIPE).communicate()[0].decode("utf-8").split("\n")
+        output = sub.Popen(args.split(), shell=False, stdin=process_catGroup.stdout, stdout=sub.PIPE).communicate()[0].decode("utf-8").split("\n")
+        process_catGroup.stdout.close()
 
         output[0] = output[0][9:]
         for _, i in enumerate(output):
