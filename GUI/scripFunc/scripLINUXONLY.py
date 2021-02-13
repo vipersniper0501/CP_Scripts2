@@ -30,7 +30,7 @@ def Linux_Find_Names():
     # do it in python -_-
     def find_names():
         # Local users are added to a list of standardUsers
-        output = sub.run(['ls', '/home'], stdout=sub.PIPE, check=True, text=True)
+        output = sub.run("ls /home".split(), stdout=sub.PIPE, check=True, text=True)
         allUsers = []
         standardUsers = []
         admins = []
@@ -40,10 +40,8 @@ def Linux_Find_Names():
         # Local Administrators are added to list of admins
 
         # Use this as an example for sub.Popen commands
-        args = "cat /etc/group"
-        process_catGroup = sub.run(args.split(), stdout=sub.PIPE, check=True, text=True)
-        args = "grep 'root'"
-        output = sub.run(args.split(), input=process_catGroup.stdout, stdout=sub.PIPE, check=True, text=True)
+        process_catGroup = sub.run("cat /etc/group".split(), stdout=sub.PIPE, check=True, text=True)
+        output = sub.run("grep 'root'".split(), input=process_catGroup.stdout, stdout=sub.PIPE, check=True, text=True)
         process_catGroup.stdout.close()
 
         output.stdout[0] = output.stdout[0][9:]
@@ -88,14 +86,13 @@ def Find_Groups(users_n_groups: bool):
                     user_names = []
                     for i3 in range(6, len(output) - 3):
                         y = output[i3].split('\r')[0]
-                        print(y)
                         user_names.append(y)
                     if len(user_names) == 0:
                         users_in_groups[group] = ['No Users']
                     elif len(user_names) == 1:
                         users_in_groups[group] = [user_names[0]]
                     else:
-                        for i4 in range(0, len(user_names)):
+                        for _, group in enumerate(user_names):
                             users_in_groups[group] = user_names
                 except Exception as e:
                     print('\n\nException occurred: ' + str(e))
@@ -111,7 +108,7 @@ def malRem():
             if OS == 'Manjaro Linux':
                 sub.Popen("sudo pacman -S clamav -y", shell=True)
             else:
-                sub.Popen("sudo apt install clamav -y", shell=True)
+                sub.run("sudo apt install clamav -y".split())
             command = ['sudo freshclam', 'sudo touch CLAMresults.txt',
                        'sudo clamscan -r --remove / | tee CLAMresults.txt']
             for _, i in enumerate(command):
