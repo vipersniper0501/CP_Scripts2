@@ -28,7 +28,8 @@ def Linux_Find_Names():
     """
     def find_names():
         # Local users are added to a list of standardUsers
-        output = sub.Popen("ls /home", shell=True, stdout=sub.PIPE).communicate()[0].decode("utf-8").split("\n")
+        args = "ls /home"
+        output = sub.Popen(args.split(), shell=False, stdout=sub.PIPE).communicate()[0].decode("utf-8").split("\n")
         allUsers = []
         standardUsers = []
         admins = []
@@ -36,7 +37,13 @@ def Linux_Find_Names():
             standardUsers.append(i)
         
         # Local Administrators are added to list of admins
-        output = sub.Popen("cat /etc/group | grep 'root'", shell=True, stdout=sub.PIPE).communicate()[0].decode("utf-8").split("\n")
+
+        # Use this as an example for sub.Popen commands
+        args = "cat /etc/group"
+        process_catGroup = sub.Popen(args.split(), shell=False, stdout=sub.PIPE).communicate()[0].decode("utf-8").split("\n")
+        args = "grep 'root'"
+        output = sub.Popen(args.split(), shell-False, stdin=process_catGroup.stdout, stdout=sub.PIPE).communicate()[0].decode("utf-8").split("\n")
+
         output[0] = output[0][9:]
         for _, i in enumerate(output):
             admins.append(i)
