@@ -38,11 +38,8 @@ def Linux_Find_Names():
             standardUsers.append(i)
 
         # Local Administrators are added to list of admins
-
-        # Use this as an example for sub.Popen commands
         process_catGroup = sub.run("cat /etc/group".split(), stdout=sub.PIPE, check=True, text=True)
         output = sub.run("grep 'root'".split(), input=process_catGroup.stdout, stdout=sub.PIPE, check=True, text=True)
-        process_catGroup.stdout.close()
 
         output.stdout[0] = output.stdout[0][9:]
         for _, i in enumerate(output):
@@ -68,8 +65,7 @@ def Find_Groups(users_n_groups: bool):
     :return: Returns a list of local groups and if users_n_groups is True, also returns a dictionary of users in each group
     """
     def find_groups(users_n_groups: bool):
-        stdout, _ = sub.Popen(["powershell", "& {net localgroup}"], stdout=sub.PIPE).communicate()
-        output = stdout.decode("utf-8").split("\n")
+        output = sub.run(["powershell", "net localgroup"], stdout=sub.PIPE, text=True, check=True)
         groups = []
         for i in range(4, len(output) - 3):
             w = output[i].split('\r')[0].split('*')[1]
@@ -79,10 +75,8 @@ def Find_Groups(users_n_groups: bool):
         # TODO: SPEED THIS UP
         if users_n_groups:
             for _, group in enumerate(groups):
-                print(group)
-                stdout2, _ = sub.Popen(["powershell", "net localgroup '" + group + "'"], stdout=sub.PIPE).communicate()
+                output = sub.run(["powershell", "net localgroup '" + group + "'"], stdout=sub.PIPE, check=True, text=True)
                 try:
-                    output = stdout2.decode("utf-8").split("\n")
                     user_names = []
                     for i3 in range(6, len(output) - 3):
                         y = output[i3].split('\r')[0]
@@ -97,8 +91,6 @@ def Find_Groups(users_n_groups: bool):
                 except Exception as e:
                     print('\n\nException occurred: ' + str(e))
         
-        print(groups)
-        print(users_in_groups)
         return users_in_groups, groups
     return NewThread(find_groups, True, "Finding Groups", users_n_groups)
 
@@ -106,30 +98,29 @@ def Find_Groups(users_n_groups: bool):
 def malRem():
     def malrem():
             if OS == 'Manjaro Linux':
-                sub.Popen("sudo pacman -S clamav -y", shell=True)
+                sub.run("sudo pacman -S clamav -y".split())
             else:
                 sub.run("sudo apt install clamav -y".split())
             command = ['sudo freshclam', 'sudo touch CLAMresults.txt',
                        'sudo clamscan -r --remove / | tee CLAMresults.txt']
             for _, i in enumerate(command):
-                sub.Popen(command[i].split())
+                sub.run(command[i].split())
     NewThread(malrem, False, "Malware Removal")
 
 
 def alyn():
     def audit_w_lynis():
         if OS in ('Ubuntu', 'debian'):
-            # output = sub.run("sudo lynis --version", stdout=sub.PIPE, check=True, text=True)
             if sub.run("sudo lynis".split(), check=True, text=True).returncode == 1:
                 sub.run("sudo apt install lynis -y".split())
             sub.run("sudo lynis audit system | tee ~/Desktop/audit_results.txt".split())
         elif OS == 'Manjaro Linux':
             command = 'sudo pacman -S lynis --noconfirm'
-            sub.Popen(command.split())
+            sub.run(command.split())
             command = 'sudo touch audit_results.txt'
-            sub.Popen(command.split())
+            sub.run(command.split())
             command2 = 'sudo lynis audit system | tee audit_results.txt'
-            sub.Popen(command2.split())
+            sub.run(command2.split())
     NewThread(audit_w_lynis, False, "Auditing with lynis")
 
 
@@ -180,16 +171,16 @@ def Linux_addusr():
                     print('This user will be an admin')
                     if Check_Password(self.Password1_input.text(),
                                       self.Password2_input.text()):
-                        sub.Popen(f"sudo useradd -G users,admin,sudo -m -d /home/{username} -p $(echo {passwd} | openssl passwd -1 -stdin) {username}", shell=True)
-                        sub.Popen(f"sudo echo '%/# User privelage specfication\na\n{username}    ALL=(ALL:ALL) ALL\n.\nwq' | ed /etc/sudoers", shell=True)
+                        sub.run(f"sudo useradd -G users,admin,sudo -m -d /home/{username} -p $(echo {passwd} | openssl passwd -1 -stdin) {username}".split())
+                        sub.run(f"sudo echo '%/# User privelage specfication\na\n{username}    ALL=(ALL:ALL) ALL\n.\nwq' | ed /etc/sudoers".split())
                         log.info(f"User {username} has been successfully added!")
                         completedPOP()
                 elif self.adminyn == 'n':
                     log.info('This user will not be an admin')
                     if Check_Password(self.Password1_input.text(),
                                       self.Password2_input.text()):
-                        output = sub.Popen(f"echo '{passwd}' | openssl passwd -1 -stdin", stdout=sub.PIPE, shell=True).communicate()[0].decode("utf-8").split("\n")
-                        sub.Popen(f"useradd -g users -m -d /home/{username} -p '{output[0]}' {username}", shell=True)
+                        output = sub.run(f"echo '{passwd}' | openssl passwd -1 -stdin".split(), stdout=sub.PIPE, check=True, text=True)
+                        sub.run(f"useradd -g users -m -d /home/{username} -p '{output.stdout}' {username}".split())
                         log.info(f"User {username} has been successfully added!")
                         completedPOP()
             
@@ -260,8 +251,8 @@ def Linux_remusr():
                     ERROR_NO_USER_FOUND.setStandardButtons(QMessageBox.Close)
                     ERROR_NO_USER_FOUND.exec_()
                 else:
-                    sub.Popen(f"sudo killall -u {username}", shell=True)
-                    sub.Popen(f"sudo userdel -f -r {username}", shell=True)
+                    sub.run(f"sudo killall -u {username}".split())
+                    sub.run(f"sudo userdel -f -r {username}".split())
                     completedPOP(username)
             
             def confirmation():
