@@ -25,14 +25,12 @@ def Linux_Find_Names():
 
     :return: Returns three lists, Standard Users, Admins, and all users.
     """
-
     # convert these to python function. Get rid of shell script. 
     # Honestly, there is no reason to use 'ls /home' in a shell script when I can
     # do it in python -_-
     def find_names():
         # Local users are added to a list of standardUsers
-        args = "ls /home"
-        output = sub.run(args.split(), stdout=sub.PIPE, check=True, text=True)
+        output = sub.run(['ls', '/home'], stdout=sub.PIPE, check=True, text=True)
         allUsers = []
         standardUsers = []
         admins = []
