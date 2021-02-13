@@ -10,7 +10,7 @@ from PyUIs.add_groupUI import Ui_Add_Group_UIClass
 from PyUIs.addusrUI import Ui_addUSR
 from PyUIs.changepass import Ui_chngpass
 from PyUIs.rmvUSRoGRU import Ui_rmvusrogru
-from PyUIs.user_group_modifyUI import Ui_user_group_list_modifiers
+# from PyUIs.user_group_modifyUI import Ui_user_group_list_modifiers
 
 
 OS = distro.linux_distribution()[0]
@@ -34,14 +34,14 @@ def Linux_Find_Names():
         admins = []
         for _, i in enumerate(output):
             standardUsers.append(i)
-        
+
         # Local Administrators are added to list of admins
 
         # Use this as an example for sub.Popen commands
         args = "cat /etc/group"
-        process_catGroup = sub.Popen(args.split(), stdout=sub.PIPE).communicate()[0].decode("utf-8").split("\n")
+        process_catGroup = sub.run(args.split(), stdout=sub.PIPE, check=True, text=True)
         args = "grep 'root'"
-        output = sub.Popen(args.split(), stdin=process_catGroup.stdout, stdout=sub.PIPE).communicate()[0].decode("utf-8").split("\n")
+        output = sub.run(args.split(), input=process_catGroup.stdout, stdout=sub.PIPE, check=True, text=True)
         process_catGroup.stdout.close()
 
         output[0] = output[0][9:]
@@ -176,6 +176,8 @@ def Linux_addusr():
                 
                 # Need to make error message if could not add user. Currently popup will still activate
                 # announcing success even if the command failed.
+                # Possible way is to use sub.run as it gives back a return code that can be used to check if
+                # the command succeeded.
                 if self.adminyn == 'y':
                     print('This user will be an admin')
                     if Check_Password(self.Password1_input.text(),
