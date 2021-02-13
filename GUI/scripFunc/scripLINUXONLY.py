@@ -25,14 +25,18 @@ def Linux_Find_Names():
 
     :return: Returns three lists, Standard Users, Admins, and all users.
     """
+
+    # convert these to python function. Get rid of shell script. 
+    # Honestly, there is no reason to use 'ls /home' in a shell script when I can
+    # do it in python -_-
     def find_names():
         # Local users are added to a list of standardUsers
         args = "ls /home"
-        output = sub.Popen(args.split(), shell=False, stdout=sub.PIPE).communicate()[0].decode("utf-8").split("\n")
+        output = sub.run(args.split(), stdout=sub.PIPE, check=True, text=True)
         allUsers = []
         standardUsers = []
         admins = []
-        for _, i in enumerate(output):
+        for _, i in enumerate(output.stdout):
             standardUsers.append(i)
 
         # Local Administrators are added to list of admins
@@ -44,7 +48,7 @@ def Linux_Find_Names():
         output = sub.run(args.split(), input=process_catGroup.stdout, stdout=sub.PIPE, check=True, text=True)
         process_catGroup.stdout.close()
 
-        output[0] = output[0][9:]
+        output.stdout[0] = output.stdout[0][9:]
         for _, i in enumerate(output):
             admins.append(i)
         print(standardUsers)
@@ -113,18 +117,17 @@ def malRem():
             command = ['sudo freshclam', 'sudo touch CLAMresults.txt',
                        'sudo clamscan -r --remove / | tee CLAMresults.txt']
             for _, i in enumerate(command):
-                sub.Popen(command[i], shell=True)
+                sub.Popen(command[i].split())
     NewThread(malrem, False, "Malware Removal")
 
 
 def alyn():
     def audit_w_lynis():
         if OS in ('Ubuntu', 'debian'):
-            output = sub.Popen("sudo lynis --version", stdout=sub.PIPE, shell=True).communicate()[0].decode("utf-8").split("\n")
-            if len(output) != 5:
-                sub.Popen("sudo apt install lynis -y", shell=True)
-            sub.Popen("touch ~/Desktop/audit_results.txt", shell=True)
-            sub.Popen("sudo lynis audit system | tee ~/Desktop/audit_results.txt", shell=True)
+            # output = sub.run("sudo lynis --version", stdout=sub.PIPE, check=True, text=True)
+            if sub.run("sudo lynis".split(), check=True, text=True).returncode == 1:
+                sub.run("sudo apt install lynis -y".split())
+            sub.run("sudo lynis audit system | tee ~/Desktop/audit_results.txt".split())
         elif OS == 'Manjaro Linux':
             command = 'sudo pacman -S lynis --noconfirm'
             sub.Popen(command.split())
