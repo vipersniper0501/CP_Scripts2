@@ -1,25 +1,17 @@
 import configparser
-import itertools
 import shutil
 import subprocess as sub
-
-#  from Custom_threading import NewThread
-
-from typing import Any
-from threading import Thread
-import distro  # for figuring out what linux distro
+import logging as log
+from scripFunc.AppleCIDR_Util import NewThread, Check_Password, Timer
+from functools import lru_cache
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QListWidgetItem, QDialog, QMessageBox, QTreeWidgetItem
-
 from PyUIs.add_groupUI import Ui_Add_Group_UIClass
 from PyUIs.addusrUI import Ui_addUSR
 from PyUIs.changepass import Ui_chngpass
 from PyUIs.enblebit import Ui_bitlockerGUI
 from PyUIs.rmvUSRoGRU import Ui_rmvusrogru
 from PyUIs.user_group_modifyUI import Ui_user_group_list_modifiers
-
-OS = distro.linux_distribution()
-ops = OS[0]
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -36,158 +28,12 @@ config.read('config.ini')
 #
 #     return os.path.join(base_path, relative_path)
 
-# Allows for program to continue running while the function executes.
 
-def NewThread(com, Returning: bool, thread_ID, *arguments) -> Any:
-    """
-    Will create a new thread for a function/command.
-
-    :param com: Command to be Executed
-    :param Returning: True/False Will the command return anything?
-    :param thread_ID: Name of thread
-    :param arguments: Arguments to be sent to Command
-
-    """
-    
-    class NewThreadWorker(Thread):
-        def __init__(self, group=None, target=None, name=None, args=(), kwargs=None, *,
-                     daemon=None):
-            Thread.__init__(self, group, target, name, args, kwargs, daemon=daemon)
-            self.daemon = True
-            self._return = None
-        
-        def run(self):
-            if self._target is not None:
-                self._return = self._target(*self._args, **self._kwargs)
-        
-        def joinThread(self):
-            Thread.join(self)
-            return self._return
-    
-    ntw = NewThreadWorker(target=com, name=thread_ID, args=(*arguments,))
-    if Returning:
-        ntw.start()
-        return ntw.joinThread()
-    else:
-        ntw.start()
-
-
-
-def Check_Password(Password1, Password2):
-    def PasswordChecker(Password1, Password2) -> bool:
-        """
-        The PasswordChecker compares the two user inputted passwords and checks them against a set
-        of rules.
-
-        :param Password1: First Password Entry
-        :param Password2: Second Password Entry
-        :return: True/False (Does the Password meet the complexity requirements)
-        """
-        character_rules = [0, 0, 0, 0]  # [LowerCase, UpperCase, Numbers, Symbols]
-        try:
-            symbols = "'`~!@#$%^&*()_+-=[]{};:,./<>?"
-            for i, x in itertools.product(range(0, len(Password1)), range(0, len(Password2))):
-                character = Password1[i]
-                character2 = Password2[x]
-                if character_rules[0] != 1:
-                    if character.islower() and character2.islower():
-                        character_rules[0] = 1
-                    elif not character.islower() and not character2.islower():
-                        character_rules[0] = 0
-                if character_rules[1] != 1:
-                    if character.isupper() and character2.isupper():
-                        character_rules[1] = 1
-                    elif not character.isupper() and not character2.isupper():
-                        character_rules[1] = 0
-                if character_rules[2] != 1:
-                    if character.isdigit() and character2.isdigit():
-                        character_rules[2] = 1
-                    elif not character.isdigit() and not character2.isdigit():
-                        character_rules[2] = 0
-                if character_rules[3] != 1:
-                    if character in symbols and character2 in symbols:
-                        character_rules[3] = 1
-                    elif character not in symbols and character2 not in symbols:
-                        character_rules[3] = 0
- 
-            print(str(character_rules[0] == 1) + ' Lower Case')
-            print(str(character_rules[1] == 1) + ' Upper case')
-            print(str(character_rules[2] == 1) + ' number')
-            print(str(character_rules[3] == 1) + ' symbols')
-        except IndexError:
-            HEY = QMessageBox()
-            HEY.setWindowTitle('Hey! Listen!')
-            HEY.setText("Hey! Your passwords do not match!")
-            HEY.setIcon(QMessageBox.Critical)
-            HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            HEY.exec_()
-            return False
-        
-        if len(Password1) == 0 or len(Password2) == 0:
-            HEY = QMessageBox()
-            HEY.setWindowTitle('Hey! Listen!')
-            HEY.setText("Hey! You don't have a password!")
-            HEY.setIcon(QMessageBox.Critical)
-            HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            HEY.exec_()
-            return False
-        elif len(Password1) < 8 or len(Password2) < 8:
-            HEY = QMessageBox()
-            HEY.setWindowTitle('Hey! Listen!')
-            HEY.setText("Hey! Your password must have at least 8 characters!")
-            HEY.setIcon(QMessageBox.Critical)
-            HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            HEY.exec_()
-            return False
-        elif Password1 != Password2:
-            HEY = QMessageBox()
-            HEY.setWindowTitle('Hey! Listen!')
-            HEY.setText("Hey! Your passwords do not match!")
-            HEY.setIcon(QMessageBox.Critical)
-            HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            HEY.exec_()
-            return False
-        elif character_rules[0] == 0:
-            HEY = QMessageBox()
-            HEY.setWindowTitle('Hey! Listen!')
-            HEY.setText("Hey! Your password must have at least 1 lower case letter!")
-            HEY.setIcon(QMessageBox.Critical)
-            HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            HEY.exec_()
-            return False
-        elif character_rules[1] == 0:
-            HEY = QMessageBox()
-            HEY.setWindowTitle('Hey! Listen!')
-            HEY.setText("Hey! Your password must have at least 1 Upper Case letter!")
-            HEY.setIcon(QMessageBox.Critical)
-            HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            HEY.exec_()
-            return False
-        elif character_rules[2] == 0:
-            HEY = QMessageBox()
-            HEY.setWindowTitle('Hey! Listen!')
-            HEY.setText("Hey! Your password must have at least 1 number! [Ex: 123456]")
-            HEY.setIcon(QMessageBox.Critical)
-            HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            HEY.exec_()
-            return False
-        elif character_rules[3] == 0:
-            HEY = QMessageBox()
-            HEY.setWindowTitle('Hey! Listen!')
-            HEY.setText("Hey! Your password must have at least 1 Symbol! [Ex: !@#$%^%&]")
-            HEY.setIcon(QMessageBox.Critical)
-            HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            HEY.exec_()
-            return False
-        else:
-            return True
-    return NewThread(PasswordChecker, True, "Check_Password", Password1, Password2)
-
-
+@lru_cache
 def Find_Names():
     def find_names():
         # Local users are added to a list of names
-        stdout, _ = sub.Popen("powershell net localgroup users", stdout = sub.PIPE).communicate()
+        stdout, _ = sub.Popen("powershell net localgroup users", stdout=sub.PIPE).communicate()
         output = stdout.decode("utf-8").split("\n")
         # print(output)
         names = []
@@ -197,10 +43,10 @@ def Find_Names():
             names.append(x)
         
         # Local Administrators are added to list of names
-        stdout, _ = sub.Popen("powershell net localgroup administrators", stdout = sub.PIPE).communicate()
+        stdout, _ = sub.Popen("powershell net localgroup administrators", stdout=sub.PIPE).communicate()
         output = stdout.decode("utf-8").split("\n")
         
-        stdout, _ = sub.Popen("powershell $env:UserName", stdout = sub.PIPE).communicate()
+        stdout, _ = sub.Popen("powershell $env:UserName", stdout=sub.PIPE).communicate()
         current_user = stdout.decode("utf-8").split("\r\n")
         for i4 in range(6, len(output) - 3):
             w = output[i4].split('\r')
@@ -209,11 +55,11 @@ def Find_Names():
                 x = current_user[0] + '   (Current User)'
             names.append(x)
         names.insert(0, '\n')
-        print(names)
         return names
     return NewThread(find_names, True, "Finding Names")
 
 
+@lru_cache
 def Find_Groups(users_n_groups: bool):
     def find_groups(users_n_groups: bool):
         """
@@ -222,7 +68,7 @@ def Find_Groups(users_n_groups: bool):
         :param users_n_groups: True/False  Do you need the users in each group also.
         :return: Returns a list of local groups and if users_n_groups is True, also returns a dictionary of users in each group
         """
-        stdout, _ = sub.Popen(["powershell", "& {net localgroup}"], stdout = sub.PIPE).communicate()
+        stdout, _ = sub.Popen(["powershell", "& {net localgroup}"], stdout=sub.PIPE).communicate()
         output = stdout.decode("utf-8").split("\n")
         groups = []
         for i in range(4, len(output) - 3):
@@ -233,14 +79,12 @@ def Find_Groups(users_n_groups: bool):
         # TODO: SPEED THIS UP
         if users_n_groups:
             for _, group in enumerate(groups):
-                print(group)
                 stdout2, _ = sub.Popen(["powershell", "net localgroup '" + group + "'"],stdout = sub.PIPE).communicate()
                 try:
                     output = stdout2.decode("utf-8").split("\n")
                     user_names = []
                     for i3 in range(6, len(output) - 3):
                         y = output[i3].split('\r')[0]
-                        print(y)
                         user_names.append(y)
                     if len(user_names) == 0:
                         users_in_groups[group] = ['No Users']
@@ -270,14 +114,13 @@ def BITLOCKER():
         def EXECUTE(self):
             # Executes encryption command
             def ENCRYPT(drive):
-                command = f"$pass = ConvertTo-SecureString {self.encrypPASS.text()} -AsPlainText -Force " \
-                          f"\nEnable-BitLocker {drive} -PasswordProtector $pass"
-                
                 #  Only works if 'Allow BitLocker without compatible TPM' is enabled in the Group Policy
                 #  Also does not encrypt right away. If you type 'Get-BitlockerVolume' in powershell, it will tell
                 #  you how much has been encrypted so far.
                 
                 if Check_Password(self.encrypPASS.text(), self.encrypPASS_2.text()):
+                    command = f"$pass = ConvertTo-SecureString {self.encrypPASS.text()} -AsPlainText -Force " \
+                          f"\nEnable-BitLocker {drive} -PasswordProtector $pass"
                     sub.Popen(['powershell', f'& {command}'])
                     
                     def restart():
@@ -292,18 +135,17 @@ def BITLOCKER():
                     COMPLETE.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
                     x_restart = COMPLETE.exec_()
                     if x_restart == QMessageBox.Yes:
-                        print('Restarting...')
+                        log.info('Restarting...')
                         restart()
                     elif x_restart == QMessageBox.No:
-                        print('Closing...')
+                        log.info('Closing...')
                         self.close()
             
             # Gets list of drives and encryption status'
             decryptSTATUS = [] # Note: This should be a dictionary
             command = 'Get-BitLockerVolume'
-            stdout, _ = sub.Popen(["powershell", "& {" + command + "}"], stdout = sub.PIPE).communicate()
-            output = stdout.decode("utf-8").split('\n')
-            print(f"Output: {output}")
+            output = sub.Popen(["powershell", "& {" + command + "}"], stdout = sub.PIPE).communicate()[0].decode("utf-8").split("\n")
+            log.info(f"Output: {output}")
             i = 7
             while True:
                 try:
@@ -313,7 +155,7 @@ def BITLOCKER():
                     i += 1
                 except Exception:
                     break
-            print(decryptSTATUS)
+            log.info(decryptSTATUS)
             buttons = [self.radioButton, self.radioButton_2, self.radioButton_3,
                        self.radioButton_4, self.radioButton_5, self.radioButton_6,
                        self.radioButton_7]
@@ -418,9 +260,10 @@ def Configure_Browsers():
         print('Firefox has been configured')
     NewThread(browserCONF, False, "Configuring Browsers")
 
+
 def addusr():
     class add_user_to_system(QDialog, Ui_addUSR):
-        def __init__(self, parent = None):
+        def __init__(self, parent=None):
             super(add_user_to_system, self).__init__(parent)
             self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
             self.setFixedSize(345, 187)
@@ -506,31 +349,7 @@ def remusr():
             self.label.setText('Current Users:')
             self.label2.setText('Username: ')
             
-            def findnames():
-                # Local users are added to a list of names
-                stdout, _ = sub.Popen(["powershell", "& {net localgroup users}"], stdout = sub.PIPE).communicate()
-                output = stdout.decode("utf-8").split("\n")
-                # print(output)
-                names = []
-                for ix in range(6, len(output) - 3):
-                    w = output[ix].split('\r')[0]
-                    names.append(w)
-                
-                """Local Administrators are added to list of names"""
-                stdout, _ = sub.Popen(["powershell", "& {net localgroup administrators}"], stdout = sub.PIPE).communicate()
-                output = stdout.decode("utf-8").split("\n")
-                
-                stdout, _ = sub.Popen(["powershell", "& {$env:UserName}"], stdout = sub.PIPE).communicate()
-                current_user = stdout.decode("utf-8").split("\r\n")
-                for i4 in range(6, len(output) - 3):
-                    w = output[i4].split('\r')[0]
-                    if w == current_user[0]:
-                        w = current_user[0] + '   (Current User)'
-                    names.append(w)
-                print(names)
-                return names
-            
-            listo_names = findnames()
+            listo_names = Find_Names()
             
             for _, name in enumerate(listo_names):
                 QListWidgetItem(name, self.listOFnames)
@@ -759,8 +578,11 @@ def addusrtogru():
                 COMPLETE.exec_()
                 self.__init__()
             
+            t=Timer()
+            t.start()
             list_of_names = Find_Names()
             group_accounts, list_of_groups = Find_Groups(True)
+            t.stop()
             
             for _, name in enumerate(list_of_names):
                 QListWidgetItem(name, self.listWidget)
@@ -915,7 +737,10 @@ def lslocausrs():
             self.Cancel_button.clicked.connect(cancel_button)
             self.Name_Input.hide()
             self.Confirm_button.hide()
+            t = Timer()
+            t.start()
             list_of_names = Find_Names()
+            t.stop()
             for _, name in enumerate(list_of_names):
                 QListWidgetItem(name, self.listOFnames)
                 

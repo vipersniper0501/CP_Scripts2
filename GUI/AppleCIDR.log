@@ -1,0 +1,77 @@
+2021-02-12 12:01:56,738 [Finding Names] [DEBUG] ['viper', '']
+2021-02-12 12:01:59,877 [Finding Names] [DEBUG] ['viper', '']
+2021-02-12 12:02:00,736 [Finding Names] [DEBUG] ['viper', '']
+2021-02-12 12:23:06,285 [Finding Names] [DEBUG] ['viper', '']
+2021-02-12 12:23:08,329 [Finding Names] [DEBUG] ['viper', '']
+2021-02-12 12:23:10,218 [Finding Names] [DEBUG] ['viper', '']
+2021-02-12 12:29:07,479 [Finding Names] [DEBUG] ['viper', '']
+2021-02-13 09:05:07,926 [MainThread] [DEBUG] True
+2021-02-13 09:05:23,500 [MainThread] [INFO] Script Runner has started
+2021-02-13 09:05:23,611 [MainThread] [INFO] Assigning functions
+2021-02-13 09:06:13,863 [Finding Names] [DEBUG] ['viper', '']
+2021-02-13 09:44:51,691 [MainThread] [DEBUG] True
+2021-02-13 09:44:51,737 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-13 09:44:51,738 [MainThread] [INFO] Script Runner has started
+2021-02-13 09:44:51,787 [MainThread] [INFO] Assigning functions
+2021-02-13 13:28:07,869 [MainThread] [DEBUG] True
+2021-02-13 13:28:07,924 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-13 13:28:07,925 [MainThread] [INFO] Script Runner has started
+2021-02-13 13:28:08,005 [MainThread] [INFO] Assigning functions
+2021-02-13 13:28:15,028 [Finding Names] [DEBUG] ['viper', '']
+2021-02-13 13:28:32,190 [Finding Names] [DEBUG] ['viper', '']
+2021-02-13 13:28:35,107 [Finding Names] [DEBUG] ['viper', '']
+2021-02-13 13:32:03,328 [MainThread] [DEBUG] True
+2021-02-13 13:32:03,366 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-13 13:32:03,367 [MainThread] [INFO] Script Runner has started
+2021-02-13 13:32:03,416 [MainThread] [INFO] Assigning functions
+2021-02-13 13:32:24,960 [Finding Names] [DEBUG] ['viper', '']
+2021-02-13 13:33:02,195 [Adding User] [INFO] This user will not be an admin
+2021-02-13 13:33:02,207 [Adding User] [INFO] User testuser has been successfully added!
+2021-02-13 13:37:40,748 [MainThread] [INFO] Assigning First Time Configurations Functions
+2021-02-13 13:50:30,043 [MainThread] [DEBUG] True
+2021-02-13 13:50:30,091 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-13 13:50:30,091 [MainThread] [INFO] Script Runner has started
+2021-02-13 13:50:30,140 [MainThread] [INFO] Assigning functions
+2021-02-13 15:23:23,924 [MainThread] [DEBUG] False
+2021-02-13 15:23:23,979 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-13 15:23:23,980 [MainThread] [INFO] Script Runner has started
+2021-02-13 15:23:24,230 [MainThread] [INFO] Assigning functions
+2021-02-13 15:23:33,118 [Finding Names] [DEBUG] Elapsed time: 0.5386 seconds
+2021-02-13 15:24:06,831 [Finding Names] [DEBUG] Elapsed time: 0.5220 seconds
+2021-02-13 15:25:51,358 [MainThread] [DEBUG] False
+2021-02-13 15:25:51,377 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-13 15:25:51,378 [MainThread] [INFO] Script Runner has started
+2021-02-13 15:25:51,444 [MainThread] [INFO] Assigning functions
+2021-02-13 15:25:56,626 [Finding Names] [DEBUG] Elapsed time: 0.5139 seconds
+2021-02-13 15:28:18,752 [MainThread] [DEBUG] False
+2021-02-13 15:28:18,771 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-13 15:28:18,771 [MainThread] [INFO] Script Runner has started
+2021-02-13 15:28:18,839 [MainThread] [INFO] Assigning functions
+2021-02-13 15:28:22,087 [MainThread] [DEBUG] Elapsed time: 0.5409 seconds
+2021-02-13 15:28:27,081 [MainThread] [DEBUG] Elapsed time: 0.0000 seconds
+2021-02-13 15:28:30,544 [MainThread] [DEBUG] Elapsed time: 0.0000 seconds
+2021-02-13 15:31:22,646 [MainThread] [DEBUG] False
+2021-02-13 15:31:22,665 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-13 15:31:22,665 [MainThread] [INFO] Script Runner has started
+2021-02-13 15:31:22,732 [MainThread] [INFO] Assigning functions
+2021-02-13 15:31:26,919 [MainThread] [DEBUG] Elapsed time: 0.5267 seconds
+2021-02-13 15:31:29,378 [MainThread] [DEBUG] Elapsed time: 0.0000 seconds
+2021-02-13 15:31:52,714 [MainThread] [DEBUG] Elapsed time: 0.0000 seconds
+2021-02-13 15:31:58,442 [MainThread] [DEBUG] False
+2021-02-13 15:31:58,462 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-13 15:31:58,462 [MainThread] [INFO] Script Runner has started
+2021-02-13 15:31:58,529 [MainThread] [INFO] Assigning functions
+2021-02-13 15:32:04,256 [MainThread] [DEBUG] Elapsed time: 3.0887 seconds
+2021-02-13 15:32:15,198 [MainThread] [DEBUG] Elapsed time: 0.0000 seconds
+2021-02-13 15:35:50,987 [MainThread] [DEBUG] False
+2021-02-13 15:35:51,006 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-13 15:35:51,007 [MainThread] [INFO] Script Runner has started
+2021-02-13 15:35:51,073 [MainThread] [INFO] Assigning functions
+2021-02-13 15:37:50,849 [MainThread] [INFO] Output: ['Get-CimInstance : Access denied ', 'At C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\BitLocker\\BitLocker.psm1:144 char:13', '+             Get-CimInstance `', '+             ~~~~~~~~~~~~~~~~~', '    + CategoryInfo          : PermissionDenied: (root\\cimv2\\Secu...cryptableVolume:String) [Get-CimInstance], CimException', '    + FullyQualifiedErrorId : HRESULT 0x80041003,Microsoft.Management.Infrastructure.CimCmdlets.GetCimInstanceCommand', ' ', 'Get-Win32EncryptableVolumeInternal :  does not have an associated BitLocker volume.', 'At C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\BitLocker\\BitLocker.psm1:696 char:42', '+ ...       $AllWin32EncryptableVolume = Get-Win32EncryptableVolumeInternal', '+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', '    + CategoryInfo          : NotSpecified: (:) [Write-Error], COMException', '    + FullyQualifiedErrorId : System.Runtime.InteropServices.COMException,Get-Win32EncryptableVolumeInternal', '']
+2021-02-13 15:37:50,850 [MainThread] [INFO] [':', 'not', 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\BitLocker\\BitLocker.psm1:696']
+2021-02-13 15:38:49,619 [MainThread] [DEBUG] False
+2021-02-13 15:38:49,638 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-13 15:38:49,638 [MainThread] [INFO] Script Runner has started
+2021-02-13 15:38:49,706 [MainThread] [INFO] Assigning functions
+2021-02-13 15:38:56,798 [MainThread] [INFO] Output: ['\r', '\r', '   ComputerName: MICHAEL-PC\r', '\r', 'VolumeType      Mount CapacityGB VolumeStatus           Encryption KeyProtector              AutoUnlock Protection\r', '                Point                                   Percentage                           Enabled    Status    \r', '----------      ----- ---------- ------------           ---------- ------------              ---------- ----------\r', 'Data            E:      3,725.90 FullyDecrypted         0          {}                                   Off       \r', 'Data            D:        930.97 FullyDecrypted         0          {}                                   Off       \r', 'OperatingSystem C:        930.43 FullyDecrypted         0          {}                                   Off       \r', 'Data            S:      1,863.00 FullyDecrypted         0          {}                                   Off       \r', 'Data            Q:         28.83 FullyDecrypted         0          {}                                   Off       \r', '\r', '\r', '']
+2021-02-13 15:38:56,799 [MainThread] [INFO] ['E:', 'FullyDecrypted', 'D:', 'FullyDecrypted', 'C:', 'FullyDecrypted', 'S:', 'FullyDecrypted', 'Q:', 'FullyDecrypted']

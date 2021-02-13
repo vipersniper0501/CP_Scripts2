@@ -1,12 +1,10 @@
-#!/usr/bin/env python3
 import configparser
 import os
 import sys
-# import logging as log
+import logging as log
+from scripFunc.AppleCIDR_Util import NewThread
 from pathlib import Path
 from platform import uname
-
-from scripFunc.Custom_threading import NewThread
 
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QDialog
@@ -18,9 +16,11 @@ from PyUIs.main import Ui_MainWindow
 from PyUIs.progabout import Ui_About
 from PyUIs.howToUI import Ui_How_To
 
-from scripFunc.scripLINUXONLY import malRem, alyn
+from scripFunc.scripLINUXONLY import malRem, alyn, Linux_addusr, Linux_remusr
 from scripFunc.scripUNIMULTI import Update_OS, Media_Search, Configure_Firewall, Basic_Configurations, rmProSoft, Configure_Services, Hash_Run
 from scripFunc.scripWINONLY import BITLOCKER, Configure_Browsers, chngpasswdofall, lsgrusanusrin, lsmemofgru, lslocagrus, lslocausrs, remusrfrogru, addusrtogru, remgrufrosys, addgrutosys, remusr, addusr
+
+
 
 # def resource_path(relative_path):
 #     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -32,8 +32,6 @@ from scripFunc.scripWINONLY import BITLOCKER, Configure_Browsers, chngpasswdofal
 #
 #     return os.path.join(base_path, relative_path)
 
-# log.basicConfig(filename = 'runtime.log', level=log.INFO)
-
 
 try:
     if sys.argv[1] == '--DEBUG':
@@ -41,7 +39,7 @@ try:
 except IndexError:
     DEBUG = False
 
-print(DEBUG)
+log.debug(DEBUG)
 
 
 def CIDR_Configurations():
@@ -56,7 +54,7 @@ def CIDR_Configurations():
             self.fcFuncts()
         
         def fcFuncts(self):
-            print('Assigning First Time Configurations Functions')
+            log.info('Assigning First Time Configurations Functions')
             
             # sets default values
             self.rdp = False
@@ -307,6 +305,7 @@ def CIDR_Configurations():
                     HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                     HEY.exec_()
             
+            # Connecting Radio Buttons To Their Functions
             self.sshy.toggled.connect(sshYES)
             self.sshn.toggled.connect(sshNO)
             self.proftpdy.toggled.connect(ftpPROyes)
@@ -346,7 +345,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
     
     def __init__(self, parent=None):
         super(Main_start, self).__init__(parent)
-        print('Script Runner has started')
+        log.info('Script Runner has started')
         self.setFixedSize(860, 675)
         self.setupUi(self)
         self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
@@ -361,7 +360,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.mmfuncassign(variableCheck2)
  
     def mmfuncassign(self, configurations):
-        print('Assigning functions')
+        log.info('Assigning functions')
         config = configparser.ConfigParser()
         config.read(configurations)
         self.header_title.setWordWrap(True)
@@ -474,6 +473,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
             elif x == QMessageBox.No:
                 print('Cancelling...')
         
+        # Display the Universal Commands page as the first page when launched
         display(0)
         
         self.uniCom.clicked.connect(lambda: display(0))
@@ -490,19 +490,9 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.actionChange_Configurations.triggered.connect(lambda: CIDR_Configurations())
         
         # # Universal Buttons
-        # self.Updates_buttonUNI.clicked.connect(lambda: NewThread(update_os, False))
+        self.Updates_buttonUNI.clicked.connect(lambda: Update_OS())
         # self.rmvprosoftbuttonUNI.clicked.connect(lambda: indev())
-        # self.srchmedbuttonUNI.clicked.connect(lambda: NewThread(self.signalAssignment, False, "Search_Media", search_media))
         self.srchmedbuttonUNI.clicked.connect(lambda: Media_Search())
-        
-        # Attempt at making signal connect between hashRUN() classes begin() 
-        # function. The use of signals should allow the functions to become 
-        # multithreaded. As of right now this is currently not working. There 
-        # are no "errors" as in it doesn't crash, but when I run it and try to 
-        # click on the Hash Check button, nothing happens. This use of signals 
-        # is used to prevent an error in pyqt5 that says something like "PyQt 
-        # Timer could not be started..."
-        
         self.chkhashfile_buttonUNI.clicked.connect(lambda: Hash_Run())
         
         # Windows Main Menu Commands
@@ -552,22 +542,25 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.lslocausr_3.clicked.connect(lambda: lslocausrs())
         self.lslocagru_3.clicked.connect(lambda: lslocagrus())
         self.chngusrpas_3.clicked.connect(lambda: chngpasswdofall())
-        #
-        # # Linux Main Menu Commands
+
+        # Linux Main Menu Commands
         # self.fwlbutton_3.clicked.connect(lambda: fwl())
         self.auditbutton_3.clicked.connect(lambda: alyn())
-        # self.malrembutton_3.clicked.connect(lambda: malRem())  #
+        self.malrembutton_3.clicked.connect(lambda: malRem())  #
         # self.rmvprosoftbutton_3.clicked.connect(lambda: indev())  #
         # self.basicConfbutton_3.clicked.connect(lambda: indev())  #
         # self.servicesConfButton_2.clicked.connect(lambda: indev())  #
 
         # Linux User Group Commands
-        self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4, self.adusrtosys_4,
-                                   self.chngusrpas_4,self.lsgruusrin_4, self.lslocagru_4, self.lslocausr_4,
-                                   self.lsmemgru_4,self.rmvgrufrosys_4, self.rmvusrfrogru_4,
-                                   self.rmvusrfrosys_4]
-        for i in range(0, 11):
+        self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4,
+                                   self.chngusrpas_4,self.lsgruusrin_4, self.lslocagru_4,
+                                   self.lsmemgru_4,self.rmvgrufrosys_4, self.rmvusrfrogru_4]
+        for i in range(0, len(self.LINUXUSRGRUBUTTONS)):
             self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: indev())  #
+
+        self.adusrtosys_4.clicked.connect(lambda: Linux_addusr())
+        self.rmvusrfrosys_4.clicked.connect(lambda: Linux_remusr())
+        self.lslocausr_4.clicked.connect(lambda: indev())
         
         # # MacOS Buttons
         self.MACBUTTONS = [self.rmvprosoftbutton_4, self.malrembutton_4, self.basicConfbutton_4,
@@ -618,20 +611,19 @@ if __name__ == "__main__":
     elif __file__:
         application_Path = os.path.dirname(__file__)
     config_path = os.path.join(application_Path, config_name)
-    print(config_path)
     variableCheck = Path(config_path)
-    
+
     # Checks to make sure there is a config file. 
     # If not, then First time setup runs
     if variableCheck.is_file():
         config = configparser.ConfigParser()
         config.read(variableCheck)
-        print('Configuration file has been loaded...')
+        log.info('Configuration file has been loaded...')
         
         main = Main_start()
         main.show()
         sys.exit(app.exec_())
     else:
-        print('Ello, you have some configurations to do!')
+        log.info('Ello, you have some configurations to do!')
         CIDR_Configurations()
         sys.exit(app.exec_())
