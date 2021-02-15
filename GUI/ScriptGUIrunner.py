@@ -17,9 +17,14 @@ from PyUIs.progabout import Ui_About
 from PyUIs.howToUI import Ui_How_To
 
 from scripFunc.scripLINUXONLY import malRem, alyn, Linux_addusr, Linux_remusr
-from scripFunc.scripUNIMULTI import Update_OS, Media_Search, Configure_Firewall, Basic_Configurations, rmProSoft, Configure_Services, Hash_Run
-from scripFunc.scripWINONLY import BITLOCKER, Configure_Browsers, chngpasswdofall, lsgrusanusrin, lsmemofgru, lslocagrus, lslocausrs, remusrfrogru, addusrtogru, remgrufrosys, addgrutosys, remusr, addusr
-
+from scripFunc.scripUNIMULTI import Update_OS, Media_Search,\
+                                    Configure_Firewall, Basic_Configurations,\
+                                    rmProSoft, Configure_Services, Hash_Run
+from scripFunc.scripWINONLY import BITLOCKER, Configure_Browsers,\
+                                    chngpasswdofall, lsgrusanusrin,\
+                                    lsmemofgru, lslocagrus, lslocausrs,\
+                                    remusrfrogru, addusrtogru, remgrufrosys,\
+                                    addgrutosys, remusr, addusr
 
 
 # def resource_path(relative_path):
@@ -52,10 +57,10 @@ def CIDR_Configurations():
             self.setWindowIcon(QtGui.QIcon(':/Pictures/images/cup2.png'))
             self.setupUi(self)
             self.fcFuncts()
-        
+
         def fcFuncts(self):
             log.info('Assigning First Time Configurations Functions')
-            
+
             # sets default values
             self.rdp = False
             self.rsnc = False
@@ -80,12 +85,12 @@ def CIDR_Configurations():
                 self.quit_buttonConf.setText('Cancel')
             else:
                 self.quit_buttonConf.setText('Quit')
-            
+
             def sshYES(selected):
                 if selected:
                     print('ssh yes')
                     self.ssh = True
-            
+
             def sshNO(selected):
                 if selected:
                     print('ssh no')
@@ -99,7 +104,7 @@ def CIDR_Configurations():
                     self.vsftpdy.setEnabled(True)
                     self.vsftpdn.setEnabled(True)
                     self.ftp = True
-            
+
             def ftpNO(selected):
                 if selected:
                     print('no ftp')
@@ -112,14 +117,14 @@ def CIDR_Configurations():
                     self.ftp = False
                     self.proftpd = False
                     self.vsftpd = False
-            
+
             def ftpPROno(selected):
                 if selected:
                     print('Proftpd no')
                     self.vsftpdy.setEnabled(True)
                     self.vsftpdn.setEnabled(True)
                     self.proftpd = False
-            
+
             def ftpPROyes(selected):
                 if selected:
                     print('Proftpd Yes')
@@ -128,7 +133,7 @@ def CIDR_Configurations():
                     self.vsftpdn.setChecked(True)
                     self.proftpd = True
                     self.vsftpd = False
-            
+
             def vsftpdYES(selected):
                 if selected:
                     print('Vsftpd No')
@@ -137,14 +142,14 @@ def CIDR_Configurations():
                     self.proftpdn.setChecked(True)
                     self.vsftpd = True
                     self.proftpd = False
-            
+
             def vsftpdNO(selected):
                 if selected:
                     print('Vsfptd Yes')
                     self.proftpdy.setEnabled(True)
                     self.proftpdn.setEnabled(True)
                     self.vsftpd = False
-            
+
             def webserverNO(selected):
                 if selected:
                     print('No Webserver')
@@ -161,7 +166,7 @@ def CIDR_Configurations():
                     self.apaweb = False
                     self.nginweb = False
                     self.https = False
-            
+
             def webserverYES(selected):
                 if selected:
                     print('Yes Webserver')
@@ -172,7 +177,7 @@ def CIDR_Configurations():
                     self.httpsy.setEnabled(True)
                     self.httpsn.setEnabled(True)
                     self.web = True
-            
+
             def apacheYES(selected):
                 if selected:
                     print('Yes apache')
@@ -181,14 +186,14 @@ def CIDR_Configurations():
                     self.nginxn.setChecked(True)
                     self.apaweb = True
                     self.nginweb = False
-            
+
             def apacheNo(selected):
                 if selected:
                     print('No Apache')
                     self.nginxy.setEnabled(True)
                     self.nginxn.setEnabled(True)
                     self.apaweb = False
-            
+
             def nginxYES(selected):
                 if selected:
                     print('Yes Nginx')
@@ -197,80 +202,92 @@ def CIDR_Configurations():
                     self.apachen.setChecked(True)
                     self.nginweb = True
                     self.apaweb = False
-            
+
             def nginxNO(selected):
                 if selected:
                     print('No Nginx')
                     self.apachey.setEnabled(True)
                     self.apachen.setEnabled(True)
                     self.nginweb = False
-            
+
             def httpsYES(selected):
                 if selected:
                     print('HTTPS Yes')
                     self.https = True
-            
+
             def httpsNO(selected):
                 if selected:
                     print('https no')
                     self.https = False
-            
+
             def smbYES(selected):
                 if selected:
                     print('SMB yes')
                     self.smb = True
-            
+
             def smbNO(selected):
                 if selected:
                     print('SMB no')
                     self.smb = False
-            
+
             def sqlYES(selected):
                 if selected:
                     print('SQL Yes')
                     self.sql = True
-            
+
             def sqlNO(selected):
                 if selected:
                     print('SQL No')
                     self.sql = False
-            
+
             def rsncYES(selected):
                 if selected:
                     print('rsnc Yes')
                     self.rsnc = True
-            
+
             def rsncNO(selected):
                 if selected:
                     print('rsnc No')
                     self.rsnc = False
-            
+
             def rdpYES(selected):
                 if selected:
                     print('RDP Yes')
                     self.rdp = True
-            
+
             def rdpNO(selected):
                 if selected:
                     print('RDP No')
                     self.rdp = False
-            
+
             def quitButton():
-                
+
                 if variableCheck.is_file():
-                    print('Cancelling configurations. Nothing has changed.')
+                    print("Cancelling configurations. Nothing has changed.")
                     self.close()
                     # main_commands = Main_start()
                     # main_commands.dialog_completed()
                 else:
                     print('Closing program')
                     sys.exit(0)
-            
+
             def confirmBTTN():
-                if (self.ssh != '' and self.ftp != '' and self.proftpd != '' and self.vsftpd != '' and self.web != '' and self.apaweb != '' and self.nginweb != '' and self.https != '' and self.smb != '' and self.sql != '' and self.rsnc != '' and self.rdp != ''):
+                if (self.ssh != '' and self.ftp != '' and self.proftpd != ''
+                        and self.vsftpd != '' and self.web != ''
+                        and self.apaweb != '' and self.nginweb != ''
+                        and self.https != '' and self.smb != ''
+                        and self.sql != ''and self.rsnc != ''
+                        and self.rdp != ''):
                     print('saving configurations\n')
-                    print("ssh=" + str(self.ssh) + ", ftp=" + str(self.ftp) + ", proftpd=" + str(self.proftpd) + ", vsftpd=" + str(self.vsftpd) + ", web=" + str(self.web) + ", apaweb=" + str(self.apaweb) + ", nginweb=" + str(self.nginweb) + ", https=" + str(self.https) + ", smb=" + str(self.smb) + ", sql=" + str(self.sql) + ", rsnc=" + str(self.rsnc) + ", RDP=" + str(self.rdp))
-                    
+                    print("ssh=" + str(self.ssh) + ", ftp=" + str(self.ftp)
+                          + ", proftpd=" + str(self.proftpd) + ", vsftpd="
+                          + str(self.vsftpd) + ", web=" + str(self.web)
+                          + ", apaweb=" + str(self.apaweb) + ", nginweb="
+                          + str(self.nginweb) + ", https=" + str(self.https)
+                          + ", smb=" + str(self.smb) + ", sql=" + str(self.sql)
+                          + ", rsnc=" + str(self.rsnc) + ", RDP="
+                          + str(self.rdp))
+
                     config = configparser.ConfigParser()
                     config['Services'] = {'ssh': self.ssh,
                                           'ftp': self.ftp,
@@ -286,12 +303,14 @@ def CIDR_Configurations():
                                           'rdp': self.rdp}
                     with open('config.ini', 'w') as configfile:
                         config.write(configfile)
-                    
+
                     RESTART = QMessageBox()
                     RESTART.setWindowTitle("Hey! Listen!")
-                    RESTART.setText("Configurations have been sucessfully saved.")
+                    RESTART.setText("Configurations have been"
+                                    " sucessfully saved.")
                     RESTART.setIcon(QMessageBox.Information)
-                    RESTART.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                    RESTART.setWindowIcon(QtGui.QIcon(
+                        ':/Pictures/images/HEY.png'))
                     RESTART.setStandardButtons(QMessageBox.Close)
                     RESTART.exec_()
                     self.close()
@@ -300,11 +319,12 @@ def CIDR_Configurations():
                 else:
                     HEY = QMessageBox()
                     HEY.setWindowTitle('Hey! Listen!')
-                    HEY.setText("Hey! You have not finished filling in all of the choices!")
+                    HEY.setText("Hey! You have not finished filling in all of"
+                                " the choices!")
                     HEY.setIcon(QMessageBox.Critical)
                     HEY.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                     HEY.exec_()
-            
+
             # Connecting Radio Buttons To Their Functions
             self.sshy.toggled.connect(sshYES)
             self.sshn.toggled.connect(sshNO)
@@ -342,7 +362,7 @@ def CIDR_Configurations():
 
 class Main_start(QMainWindow, Ui_MainWindow):
     # signalMain = pyqtSignal()
-    
+
     def __init__(self, parent=None):
         super(Main_start, self).__init__(parent)
         log.info('Script Runner has started')
@@ -358,107 +378,120 @@ class Main_start(QMainWindow, Ui_MainWindow):
         variableCheck2 = Path(config_path2)
         self.dialog_done = False
         self.mmfuncassign(variableCheck2)
- 
+
     def mmfuncassign(self, configurations):
         log.info('Assigning functions')
         config = configparser.ConfigParser()
         config.read(configurations)
         self.header_title.setWordWrap(True)
         self.descriptions.setWordWrap(True)
-        
+
         def quitButton():
             # log.info('Closing program')
             sys.exit(0)
-        
+
         def display(i):
             """
-            Sets the window Title and Descriptions upon OS selection. (The buttons that say 'Linux', 'Windows', and 'MacOS')
+            Sets the window Title and Descriptions upon OS selection. (The
+            buttons that say 'Linux', 'Windows', and 'MacOS')
             """
             if i == 0:
                 self.header_title.setText('Universal Commands')
                 self.descriptions.setText(
-                    'Description: These commands will work on most Operating Systems\nE.g. Windows, MacOS X, and Linux (Debian, Ubuntu, certain Arch distros)')
+                    "Description: These commands will work on most Operating "
+                    "Systems\nE.g. Windows, MacOS X, and Linux (Debian, "
+                    "Ubuntu, certain Arch distros)")
                 self.stackedWidget.setCurrentIndex(i)
             elif i == 1:
-                if uname()[0] == 'Windows' or DEBUG == True:
+                if uname()[0] == 'Windows' or DEBUG is True:
                     self.header_title.setText('Windows 10 Commands')
                     self.descriptions.setText(
-                        'Description: These commands will work on the following Windows systems: 10, 8.x, and 7')
+                        "Description: These commands will work on the "
+                        "following Windows systems: 10, 8.x, and 7")
                     self.stackedWidget.setCurrentIndex(i)
                 else:
                     wrongos()
             elif i == 2:
-                if uname()[0] == 'Linux' or DEBUG == True:
+                if uname()[0] == 'Linux' or DEBUG is True:
                     self.header_title.setText('Linux Commands')
                     self.descriptions.setText(
-                        'Description: These commands will work on the following Linux systems: Debian based systems, Ubuntu, and Manjaro')
+                        "Description: These commands will work on the "
+                        "following Linux systems: Debian based systems, "
+                        "Ubuntu, and Manjaro")
                     self.stackedWidget.setCurrentIndex(i)
                 else:
                     wrongos()
             elif i == 3:
-                if uname()[0] == 'Darwin' or DEBUG == True:
+                if uname()[0] == 'Darwin' or DEBUG is True:
                     self.header_title.setText('MacOS X Commands')
                     self.descriptions.setText(
-                        'Description: These commands will ONLY work on MacOS X')
+                        "Description: These commands will "
+                        "ONLY work on MacOS X")
                     self.stackedWidget.setCurrentIndex(i)
                 else:
                     wrongos()
-        
+
         def light_darkMODE(i):
             """
-            This function is not working currently. Need to find way of actually switching colorschemes.
+            This function is not working currently.
+            Need to find way of actually switching colorschemes.
             """
             print('Mode change')
             if i == 0:
                 print('Dark Mode in development')
             elif i == 1:
                 print('Light Mode in development')
-        
+
         def showHOWTO():
             class showHowToUi(QDialog, Ui_How_To):
                 def __init__(self, parent=None):
                     super(showHowToUi, self).__init__(parent)
                     self.setupUi(self)
                     self.setFixedSize(400, 305)
-                    self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            
+                    self.setWindowIcon(QtGui.QIcon(
+                        ':/Pictures/images/HEY.png'))
+
             showHowToUi().exec_()
-        
+
         def runCOMDESCRIPT():
             class showComDescript(QDialog, Ui_comDescript):
                 def __init__(self, parent=None):
                     super(showComDescript, self).__init__(parent)
                     self.setupUi(self)
-                    self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
+                    self.setWindowIcon(QtGui.QIcon(
+                        ':/Pictures/images/HEY.png'))
 
             showComDescript().exec_()
-        
+
         def runABOUTPROG():
             class showAboutProg(QDialog, Ui_About):
                 def __init__(self, parent=None):
                     super(showAboutProg, self).__init__(parent)
                     self.setupUi(self)
                     self.setFixedSize(390, 282)
-                    self.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
-            
+                    self.setWindowIcon(QtGui.QIcon(
+                        ':/Pictures/images/HEY.png'))
+
             showAboutProg().exec_()
-        
+
         def indev():
             INDEV = QMessageBox()
             INDEV.setWindowTitle('Hey! Listen!')
-            INDEV.setText('Hey! This command is not yet complete and in development!')
+            INDEV.setText("Hey! This command is not yet "
+                          "complete and in development!")
             INDEV.setIcon(QMessageBox.Critical)
             INDEV.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             INDEV.exec_()
-        
+
         def wrongos():
             WRONGOS = QMessageBox()
             WRONGOS.setWindowTitle('Hey! Listen!')
-            WRONGOS.setText('Hey! These commands do not support this Operating System!')
+            WRONGOS.setText("Hey! These commands do not support "
+                            "this Operating System!")
             WRONGOS.setIcon(QMessageBox.Critical)
             WRONGOS.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
             WRONGOS.exec_()
-        
+
         def confirmation(com):
             CONFIRM = QMessageBox()
             CONFIRM.setWindowTitle('Hey! Listen!')
@@ -472,34 +505,36 @@ class Main_start(QMainWindow, Ui_MainWindow):
                 com()
             elif x == QMessageBox.No:
                 print('Cancelling...')
-        
+
         # Display the Universal Commands page as the first page when launched
         display(0)
-        
+
         self.uniCom.clicked.connect(lambda: display(0))
         self.winCom.clicked.connect(lambda: display(1))
         self.linCom.clicked.connect(lambda: display(2))
         self.macCom.clicked.connect(lambda: display(3))
         self.actionLight_Mode.triggered.connect(lambda: light_darkMODE(1))
         self.actionDark_Mode.triggered.connect(lambda: light_darkMODE(0))
-        
+
         # Menubar Buttons
         self.actionHow_To_Use_Program.triggered.connect(lambda: showHOWTO())
         self.actionAbout_Creator.triggered.connect(lambda: runABOUTPROG())
-        self.actionCommand_Descriptions.triggered.connect(lambda: runCOMDESCRIPT())
-        self.actionChange_Configurations.triggered.connect(lambda: CIDR_Configurations())
-        
+        self.actionCommand_Descriptions.triggered.connect(
+            lambda: runCOMDESCRIPT())
+        self.actionChange_Configurations.triggered.connect(
+            lambda: CIDR_Configurations())
+
         # # Universal Buttons
         self.Updates_buttonUNI.clicked.connect(lambda: Update_OS())
         # self.rmvprosoftbuttonUNI.clicked.connect(lambda: indev())
         self.srchmedbuttonUNI.clicked.connect(lambda: Media_Search())
         self.chkhashfile_buttonUNI.clicked.connect(lambda: Hash_Run())
-        
+
         # Windows Main Menu Commands
         self.fwlbutton_2.clicked.connect(lambda: Configure_Firewall())
         # self.basicConfbutton_2.clicked.connect(
-        #     lambda: NewThread(confirmation, False, basConf(config.get('Services', 'rdp'))))
-        # self.rmvprosoftbutton_2.clicked.connect(lambda: NewThread(rmProSoft, False))
+        #     lambda: basConf(config.get('Services', 'rdp')))
+        # self.rmvprosoftbutton_2.clicked.connect(lambda: rmProSoft)
         self.enblBitLockerbutton.clicked.connect(lambda: BITLOCKER())
         # self.servicesConfButton_4.clicked.connect(
         #     lambda: NewThread(confirmation, False, Configure_Services(
@@ -532,7 +567,7 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.WINUSRGRUBUTTON = [self.lsgruusrin_3, self.lsmemgru_3]
         for i in range(0, len(self.WINUSRGRUBUTTON)):
             self.WINUSRGRUBUTTON[i].clicked.connect(lambda: indev())
-        
+
         self.adusrtosys_3.clicked.connect(lambda: addusr())
         self.rmvusrfrosys_3.clicked.connect(lambda: remusr())
         self.adgrutosys_3.clicked.connect(lambda: addgrutosys())
@@ -553,49 +588,54 @@ class Main_start(QMainWindow, Ui_MainWindow):
 
         # Linux User Group Commands
         self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4,
-                                   self.chngusrpas_4,self.lsgruusrin_4, self.lslocagru_4,
-                                   self.lsmemgru_4,self.rmvgrufrosys_4, self.rmvusrfrogru_4]
+                                   self.chngusrpas_4, self.lsgruusrin_4,
+                                   self.lslocagru_4, self.lsmemgru_4,
+                                   self.rmvgrufrosys_4, self.rmvusrfrogru_4]
         for i in range(0, len(self.LINUXUSRGRUBUTTONS)):
             self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: indev())  #
 
         self.adusrtosys_4.clicked.connect(lambda: Linux_addusr())
         self.rmvusrfrosys_4.clicked.connect(lambda: Linux_remusr())
         self.lslocausr_4.clicked.connect(lambda: indev())
-        
+
         # # MacOS Buttons
-        self.MACBUTTONS = [self.rmvprosoftbutton_4, self.malrembutton_4, self.basicConfbutton_4,
-                           self.servicesConfButton_3, self.adgrutosys_5, self.adusrtogru_5,
-                           self.adusrtosys_5,self.chngusrpas_5, self.lsgruusrin_5, self.lslocagru_5,
-                           self.lslocausr_5,self.lsmemgru_5,self.rmvgrufrosys_5, self.rmvusrfrogru_5, 
+        self.MACBUTTONS = [self.rmvprosoftbutton_4, self.malrembutton_4,
+                           self.basicConfbutton_4, self.servicesConfButton_3,
+                           self.adgrutosys_5, self.adusrtogru_5,
+                           self.adusrtosys_5, self.chngusrpas_5,
+                           self.lsgruusrin_5, self.lslocagru_5,
+                           self.lslocausr_5, self.lsmemgru_5,
+                           self.rmvgrufrosys_5, self.rmvusrfrogru_5,
                            self.rmvusrfrosys_5]
         for i in range(0, 15):
             self.MACBUTTONS[i].clicked.connect(lambda: indev())
-        
+
         self.quit_button_3.clicked.connect(quitButton)
 
     # def signalAssignment(self, com):
-        # add way to save thread id to Current_Threads dictionary to be called later to stop the thread.
+        # add way to save thread id to Current_Threads dictionary to be
+        # called later to stop the thread.
         # Assigns the function to the main signal
     #     print(threading.current_thread().getName())
     #     self.signalMain.connect(com)
     #     self.run_command()
-        
 
     # def wait_for_command(self):
         # locks up main thread until the command dialog has closed
-        # NOTE: This might interfere with commands that run in the background (Ex: Search for prohibited)
+        # NOTE: This might interfere with commands that run in the
+        # background (Ex: Search for prohibited)
     #     while not self.dialog_done:
-            # print(threading.get_ident())
+        # print(threading.get_ident())
     #         pass
     #     self.dialog_done = False
-    
+
     # def dialog_completed(self):
     #     print('Dialog has stopped?')
     #     self.dialog_done = True
 
     # def run_command(self):
-        # emits the main signal essentially calling the function assigned to 
-        # the signal (This is all done within a new thread, seperate from 
+        # emits the main signal essentially calling the function assigned to
+        # the signal (This is all done within a new thread, seperate from
         # the main thread)
     #     self.signalMain.emit()
     #     self.wait_for_command()
@@ -613,13 +653,13 @@ if __name__ == "__main__":
     config_path = os.path.join(application_Path, config_name)
     variableCheck = Path(config_path)
 
-    # Checks to make sure there is a config file. 
+    # Checks to make sure there is a config file.
     # If not, then First time setup runs
     if variableCheck.is_file():
         config = configparser.ConfigParser()
         config.read(variableCheck)
         log.info('Configuration file has been loaded...')
-        
+
         main = Main_start()
         main.show()
         sys.exit(app.exec_())

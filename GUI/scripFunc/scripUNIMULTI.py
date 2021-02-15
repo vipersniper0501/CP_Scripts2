@@ -2,17 +2,15 @@ import getpass
 import os
 import subprocess as sub
 from threading import Thread
-#  import threading
 from subprocess import Popen as procPop
 from pathlib import Path
 from distutils.dir_util import copy_tree
 from shlex import quote as shlex_quote
 from sys import platform
-import distro  # for figuring out what linux distro
+import distro
 from PyQt5 import QtGui
-#  from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QMessageBox, QDialog, QFileDialog
-#  from Custom_threading import NewThread
+from scripFunc.AppleCIDR_Util import NewThread
 import configparser
 import shutil
 from PyUIs.hashgen import Ui_hashGEN
@@ -29,40 +27,6 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 
-def NewThread(com, Returning: bool, thread_ID, *arguments) -> Any:
-    """
-    Will create a new thread for a function/command.
-
-    :param com: Command to be Executed
-    :param Returning: True/False Will the command return anything?
-    :param thread_ID: Name of thread
-    :param arguments: Arguments to be sent to Command
-
-    """
-    
-    class NewThreadWorker(Thread):
-        def __init__(self, group=None, target=None, name=None, args=(), kwargs=None, *,
-                     daemon=None):
-            Thread.__init__(self, group, target, name, args, kwargs, daemon=daemon)
-            self.daemon = True
-            self._return = None
-        
-        def run(self):
-            if self._target is not None:
-                self._return = self._target(*self._args, **self._kwargs)
-        
-        def joinThread(self):
-            Thread.join(self)
-            return self._return
-    
-    ntw = NewThreadWorker(target=com, name=thread_ID, args=(*arguments,))
-    if Returning:
-        ntw.start()
-        return ntw.joinThread()
-    else:
-        ntw.start()
-
-
 # Universal Updates
 def Update_OS():
     def os_update():
@@ -71,6 +35,8 @@ def Update_OS():
         :return:
         """
         # TODO: Have function also update all drivers
+        # TODO: Transfer win32 update script to "update.ps1".
+        # use subprocess to run the powershell script.
         if ops == 'Ubuntu' or ops == 'debian':
             command = 'sudo apt-get update && apt-get upgrade -y'
             procPop(command.split())
@@ -93,23 +59,24 @@ def Update_OS():
             $updates = Invoke-Command -ScriptBlock {Get-Wulist -verbose}
             $updatenumber = ($updates.kb).count
             if ($null -ne $updates){
-                Get-WindowsUpdate -AcceptAll -Install | Out-File C:\PSWindowsUpdate.log
-                do {$updatestatus = Get-Content c:\PSWindowsUpdate.log
+                Get-WindowsUpdate -AcceptAll -Install | Out-File C:\\PSWindowsUpdate.log
+                do {$updatestatus = Get-Content c:\\PSWindowsUpdate.log
                     "Currently processing the following update:"
-                    Get-Content c:\PSWindowsUpdate.log | select-object -last 1
+                    Get-Content c:\\PSWindowsUpdate.log | select-object -last 1
                     Start-Sleep -Seconds 10
                     $ErrorActionPreference = 'SilentlyContinue'
                     $installednumber = ([regex]::Matches($updatestatus, "Installed" )).count
                     $ErrorActionPreference = ‘Continue’
                 }until ( $installednumber -eq $updatenumber)
             }
-            Remove-Item -path C:\PSWindowsUpdate.log -ErrorAction SilentlyContinue
+            Remove-Item -path C:\\PSWindowsUpdate.log -ErrorAction SilentlyContinue
             Write-Host("")
             Write-Host("All updates are installed!")"""
             procPop(["powershell", "& {" + commands + "}"])
             print('Windows Update completed')
             print('Updating device drivers...')
-            # FIXME: Need to find a way to confirm if the drivers are being updated
+            # FIXME: Need to find a way to confirm if
+            # the drivers are being updated
             command = """
     $UpdateSvc = New-Object -ComObject Microsoft.Update.ServiceManager
     $UpdateSvc.AddService2("7971f918-a847-4430-9279-4a52d1efe18d", 7,"")
@@ -150,8 +117,8 @@ def Update_OS():
     $Installer = $UpdateSession.CreateUpdateInstaller()
     $Installer.Updates = $UpdatesToInstall
     $InstallationResult = $Installer.Install()
-    if($InstallationResult.RebootRequired) {  
-    Write-Host('Reboot required! please reboot now..') -Fore Red  
+    if($InstallationResult.RebootRequired) {
+    Write-Host('Reboot required! please reboot now..') -Force Red
     } else { Write-Host('Done..') -Fore Green }
             """
             procPop(["powershell", "& {" + command + "}"])
@@ -165,7 +132,8 @@ def Media_Search():
     # TODO: search is kinda broken
     def search_media():
         """
-        Searches host computer for .mp4, .mp3, .png, and .jpg files and prints results into a text file.
+        Searches host computer for .mp4, .mp3, .png, and .jpg files and
+        prints results into a text file.
         :return:
         """
         if platform == 'linux' or platform == 'darwin':
@@ -208,7 +176,8 @@ def Media_Search():
 def Configure_Firewall():
     def fwl():
         """
-        Configures firewall on host computer to close and block vulnerable ports
+        Configures firewall on host computer to close
+        and blocks vulnerable ports
 
         :return:
         """
@@ -238,59 +207,59 @@ def Configure_Firewall():
             print('-----------------------Firewall Settings Has Started-----------------------')
             # SSH
             ssh = config.get('Services', 'ssh')
-            if ssh == True:
+            if ssh:
                 command = 'sudo ufw allow 22'
                 procPop(command.split())
-            elif ssh == False:
+            elif ssh is False:
                 command = 'sudo ufw deny 22'
                 procPop(command.split())
             # FTP
             ftp = config.get('Services', 'ftp')
-            if ftp == True:
+            if ftp:
                 command = 'sudo ufw allow 21'
                 procPop(command.split())
-            elif ftp == False:
+            elif ftp is False:
                 command = 'sudo ufw deny 21'
                 procPop(command.split())
             # WEB
             web = config.get('Services', 'web')
-            if web == True:
+            if web:
                 command = 'sudo ufw allow 80'
                 procPop(command.split())
                 https = config.get('Services', 'https')
-            elif web == False:
+            elif web is False:
                 command = 'sudo ufw deny 80'
                 procPop(command.split())
             # HTTPS
             https = config.get('Services', 'https')
-            if https == True:
+            if https:
                 command = 'sudo ufw allow 443'
                 procPop(command.split())
-            elif https == False:
+            elif https is False:
                 command = 'sudo ufw deny 443'
                 procPop(command.split())
             # Samba
             smb = config.get('Services', 'smb')
-            if smb == True:
+            if smb:
                 command = 'sudo ufw allow 139'
                 procPop(command.split())
-            elif smb == False:
+            elif smb is False:
                 command = 'sudo ufw deny 139'
                 procPop(command.split())
             # SQL
             sql = config.get('Services', 'sql')
-            if sql == True:
+            if sql:
                 command = 'sudo ufw allow 3306'
                 procPop(command.split())
-            elif sql == False:
+            elif sql is False:
                 command = 'sudo ufw deny 3306'
                 procPop(command.split())
             # Rsync
             rsnc = config.get('Services', 'rsnc')
-            if rsnc == True:
+            if rsnc:
                 command = 'sudo ufw allow 873'
                 procPop(command.split())
-            elif rsnc == False:
+            elif rsnc is False:
                 command = 'sudo ufw deny 873'
                 procPop(command.split())
 
@@ -325,12 +294,12 @@ def Configure_Firewall():
         elif platform == 'win32':
             print('-----------------------Firewall Settings Has Started-----------------------')
             ssh = config.get('Services', 'ssh')
-            if ssh == True:
+            if ssh:
                 command = "netsh advfirewall firewall add rule name='ssh' dir=in action=allow protocol=TCP localport=22"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='ssh' dir=out action=allow protocol=TCP localport=22"
                 procPop(["powershell", "& {" + command + "}"])
-            elif ssh == False:
+            elif ssh is False:
                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=22"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='ssh' dir=in action=block protocol=TCP localport=22"
@@ -339,12 +308,12 @@ def Configure_Firewall():
                 procPop(["powershell", "& {" + command + "}"])
             # FTP
             ftp = config.get('Services', 'ftp')
-            if ftp == True:
+            if ftp:
                 command = "netsh advfirewall firewall add rule name='ftp' dir=in action=allow protocol=TCP localport=21"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='ftp' dir=out action=allow protocol=TCP localport=21"
                 procPop(["powershell", "& {" + command + "}"])
-            elif ftp == False:
+            elif ftp is False:
                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=21"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='ftp' dir=in action=block protocol=TCP localport=21"
@@ -353,12 +322,12 @@ def Configure_Firewall():
                 procPop(["powershell", "& {" + command + "}"])
             # WEB
             web = config.get('Services', 'web')
-            if web == True:
+            if web:
                 command = "netsh advfirewall firewall add rule name='webserver' dir=in action=allow protocol=TCP localport=80"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='webserver' dir=out action=allow protocol=TCP localport=80"
                 procPop(["powershell", "& {" + command + "}"])
-            elif web == False:
+            elif web is False:
                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=80"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='webserver' dir=in action=block protocol=TCP localport=80"
@@ -367,12 +336,12 @@ def Configure_Firewall():
                 procPop(["powershell", "& {" + command + "}"])
             # HTTPS
             https = config.get('Services', 'https')
-            if https == True:
+            if https:
                 command = "netsh advfirewall firewall add rule name='https' dir=in action=allow protocol=TCP localport=443"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='https' dir=out action=allow protocol=TCP localport=443"
                 procPop(["powershell", "& {" + command + "}"])
-            elif https == False:
+            elif https is False:
                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=443"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='https' dir=in action=block protocol=TCP localport=443"
@@ -381,12 +350,12 @@ def Configure_Firewall():
                 procPop(["powershell", "& {" + command + "}"])
             # Samba
             smb = config.get('Services', 'smb')
-            if smb == True:
+            if smb:
                 command = "netsh advfirewall firewall add rule name='SAMBA' dir=in action=allow protocol=TCP localport=139"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='SAMBA' dir=out action=allow protocol=TCP localport=139"
                 procPop(["powershell", "& {" + command + "}"])
-            elif smb == False:
+            elif smb is False:
                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=139"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='SAMBA' dir=in action=block protocol=TCP localport=139"
@@ -395,12 +364,12 @@ def Configure_Firewall():
                 procPop(["powershell", "& {" + command + "}"])
             # SQL
             sql = config.get('Services', 'sql')
-            if sql == True:
+            if sql:
                 command = "netsh advfirewall firewall add rule name='SQLserver' dir=in action=allow protocol=TCP localport=3306"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='SQLserver' dir=out action=allow protocol=TCP localport=3306"
                 procPop(["powershell", "& {" + command + "}"])
-            elif sql == False:
+            elif sql is False:
                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=3306"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='SQLserver' dir=in action=block protocol=TCP localport=3306"
@@ -409,12 +378,12 @@ def Configure_Firewall():
                 procPop(["powershell", "& {" + command + "}"])
             # Rsync
             rsnc = config.get('Services', 'rsnc')
-            if rsnc == True:
+            if rsnc:
                 command = "netsh advfirewall firewall add rule name='RSYNC' dir=in action=allow protocol=TCP localport=873"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='RSYNC' dir=out action=allow protocol=TCP localport=873"
                 procPop(["powershell", "& {" + command + "}"])
-            elif rsnc == False:
+            elif rsnc is False:
                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=873"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='RSYNC' dir=in action=block protocol=TCP localport=873"
@@ -423,7 +392,7 @@ def Configure_Firewall():
                 procPop(["powershell", "& {" + command + "}"])
             # RDP
             rdp = config.get('Services', 'rdp')  # must block/allow port 5985 and 3389
-            if rdp == True:
+            if rdp:
                 command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=allow protocol=TCP localport=5985"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='RDPconfig' dir=in action=allow protocol=TCP localport=3389"
@@ -432,7 +401,7 @@ def Configure_Firewall():
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall add rule name='RDPconfig' dir=out action=allow protocol=TCP localport=3389"
                 procPop(["powershell", "& {" + command + "}"])
-            elif rdp == False:
+            elif rdp is False:
                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=5985"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "netsh advfirewall firewall delete rule name=all protocol=TCP localport=3389"
@@ -493,10 +462,14 @@ def Configure_Firewall():
 
     NewThread(fwl, False, "Configure_Firewall")
 
-def Configure_Services(ssh: bool, samba: bool, web: bool, apaweb: bool, nginweb: bool, ftp: bool, proftpd: bool, vsftpd: bool):
+
+def Configure_Services(ssh: bool, samba: bool, web: bool, apaweb: bool,
+                       nginweb: bool, ftp: bool, proftpd: bool, vsftpd: bool):
     # TODO: Need to add way to easily create samba shares
-    #  Need easy way to edit ssh settings (going into services and doing it there takes to long. and it is complicated to explain how to get there)
-    def servSet(ssh: bool, samba: bool, web: bool, apaweb: bool, nginweb: bool, ftp: bool, proftpd: bool, vsftpd: bool):
+    # Need easy way to edit ssh settings (going into services and doing it
+    # there takes to long. and it is complicated to explain how to get there)
+    def servSet(ssh: bool, samba: bool, web: bool, apaweb: bool, nginweb: bool,
+                ftp: bool, proftpd: bool, vsftpd: bool):
         """
         Configures host server settings for variety of servers.
         :param ssh:
@@ -521,15 +494,15 @@ def Configure_Services(ssh: bool, samba: bool, web: bool, apaweb: bool, nginweb:
                 procPop(command.split())
                 command = 'sudo pacman -S wenglish'
                 procPop(command.split())
-            if ssh == True:
+            if ssh:
                 shutil.copy('../configurations/linux_config_files/ssh_config',
                             '/etc/ssh/ssh_config')
                 shutil.copy('../configurations/linux_config_files/sshd_config',
                             '/etc/ssh/sshd_config')
-            if ftp == True:
-                if proftpd == True:
+            if ftp:
+                if proftpd:
                     # first line of command creates a backup of the original configurations
-                    command = """sudo cp /etc/proftpd/proftpd.conf ~/Desktop/orig_proftpd.conf 
+                    command = """sudo cp /etc/proftpd/proftpd.conf ~/Desktop/orig_proftpd.conf
                                  sudo mkdir /etc/proftpd/ssl
                                  sudo openssl req -new -x509 -days 365 -nodes -out /etc/proftpd/ssl/proftpd.cert.pem -keyout /etc/proftpd/ssl/proftpd.key.pem
                                  sudo systemctl restart proftpd.service
@@ -540,18 +513,18 @@ def Configure_Services(ssh: bool, samba: bool, web: bool, apaweb: bool, nginweb:
                                 '/etc/proftpd/proftpd.conf')
                     shutil.copy('../configurations/linux_config_files/proftpTls_patch.conf',
                                 '/etc/proftpd/tls.conf')
-                if vsftpd == True:
+                if vsftpd:
                     # FIXME: Create and add vsftpd configuration
                     pass
 
-            if samba == True:
+            if samba:
                 shutil.copy('../configurations/linux_config_files/smb.conf', '/etc/samba/smb.conf')
 
-            if web == True:
-                if apaweb == True:
+            if web:
+                if apaweb:
                     shutil.copy('../configurations/linux_config_files/apache2.conf',
                                 '/etc/apache2/apache2.conf')
-                elif nginweb == True:
+                elif nginweb:
                     shutil.copy('../configurations/linux_config_files/nginx.conf',
                                 '/etc/nginx/nginx.conf')
                 else:
@@ -562,7 +535,7 @@ def Configure_Services(ssh: bool, samba: bool, web: bool, apaweb: bool, nginweb:
                     except ImportError:
                         pass
         elif platform == 'win32':
-            if samba == True:
+            if samba:
                 featuresSMB = ["SmbDirect",
                                "SMB1Protocol",
                                "SMB1Protocol-Client",
@@ -572,7 +545,7 @@ def Configure_Services(ssh: bool, samba: bool, web: bool, apaweb: bool, nginweb:
                     command = 'Enable-WindowsOptionalFeature -Online -FeatureName ' + featuresSMB[
                         i] + ' -NoRestart'
                     procPop(["powershell", "& {" + command + "}"])
-            elif samba == False:
+            elif samba is False:
                 featuresSMB = ["SmbDirect",
                                "SMB1Protocol",
                                "SMB1Protocol-Client",
@@ -582,13 +555,13 @@ def Configure_Services(ssh: bool, samba: bool, web: bool, apaweb: bool, nginweb:
                     command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + featuresSMB[
                         i] + ' -NoRestart'
                     procPop(["powershell", "& {" + command + "}"])
-            if ssh == True:
+            if ssh:
                 command = "Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
                 procPop(["powershell", "& {" + command + "}"])
                 print('Added / confirmed installation of openssh capability')
-            elif ssh == False:
+            elif ssh is False:
                 command = "Remove-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0"
                 procPop(["powershell", "& {" + command + "}"])
                 command = "Remove-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
@@ -602,7 +575,7 @@ def Configure_Services(ssh: bool, samba: bool, web: bool, apaweb: bool, nginweb:
 def Basic_Configurations(rdp):
     def basConf(rdp):
         if platform == 'win32':
-            if rdp == True:
+            if rdp:
                 try:
                     shutil.copy('../configurations/winCONF/win10StigsRDPy/win10secRDPallowed.inf',
                                 'C:/win10secRDPallowed.inf')
@@ -617,7 +590,7 @@ def Basic_Configurations(rdp):
                 except IOError as e:
                     print("Unable to copy file. %s" % e)
                 path = 'C:/win10secRDPallowed.inf'
-            elif rdp == False:
+            elif rdp is False:
                 try:
                     shutil.copy('../configurations/winCONF/win10StigsRDPn/Windows10Template11_17'
                                 '.inf',
@@ -661,9 +634,8 @@ def Basic_Configurations(rdp):
                           "MicrosoftWindowsPowershellV2",
                           "MicrosoftWindowsPowershellV2Root"]
             for i in range(0, len(disableCOM)):
-                command = 'Disable-WindowsOptionalFeature -Online -FeatureName ' + disableCOM[
-                    i] + ' -NoRestart'
-                procPop(["powershell", "& {" + command + "}"])
+                command = f"Disable-WindowsOptionalFeature -Online -FeatureName {disableCOM[i]} -NoRestart"
+                procPop(["powershell", f"{command}"])
             windowsCapabilitesDisable = ["RIP.Listener~~~~0.0.1.0",
                                          "SNMP.Client~~~~0.0.1.0"]
             for i in range(0, len(windowsCapabilitesDisable)):
@@ -893,14 +865,9 @@ def Hash_Run():
 
             self.genhash.clicked.connect(lambda: hashchk(self.hash_number))
 
-
         def begin(self):
             print('starting hash function')
             super(hashRUN, self).exec_()
 
     h = hashRUN()
     NewThread(h.begin, False, "Hash_Check")
-
-
-
-

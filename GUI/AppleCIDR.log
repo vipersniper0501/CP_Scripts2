@@ -75,3 +75,95 @@
 2021-02-13 15:38:49,706 [MainThread] [INFO] Assigning functions
 2021-02-13 15:38:56,798 [MainThread] [INFO] Output: ['\r', '\r', '   ComputerName: MICHAEL-PC\r', '\r', 'VolumeType      Mount CapacityGB VolumeStatus           Encryption KeyProtector              AutoUnlock Protection\r', '                Point                                   Percentage                           Enabled    Status    \r', '----------      ----- ---------- ------------           ---------- ------------              ---------- ----------\r', 'Data            E:      3,725.90 FullyDecrypted         0          {}                                   Off       \r', 'Data            D:        930.97 FullyDecrypted         0          {}                                   Off       \r', 'OperatingSystem C:        930.43 FullyDecrypted         0          {}                                   Off       \r', 'Data            S:      1,863.00 FullyDecrypted         0          {}                                   Off       \r', 'Data            Q:         28.83 FullyDecrypted         0          {}                                   Off       \r', '\r', '\r', '']
 2021-02-13 15:38:56,799 [MainThread] [INFO] ['E:', 'FullyDecrypted', 'D:', 'FullyDecrypted', 'C:', 'FullyDecrypted', 'S:', 'FullyDecrypted', 'Q:', 'FullyDecrypted']
+2021-02-15 09:23:33,274 [MainThread] [DEBUG] True
+2021-02-15 10:14:26,580 [Thread-25] [DEBUG] Starting new HTTP connection (48): 127.0.0.1:37013
+2021-02-15 10:14:26,581 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=37013): Max retries exceeded with url: /filter_and_sort_candidates (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0ef0707430>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:14:26,583 [Thread-8] [DEBUG] Starting new HTTP connection (49): 127.0.0.1:37013
+2021-02-15 10:14:26,583 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=37013): Max retries exceeded with url: /semantic_completion_available (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0e940fc610>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:14:26,611 [Thread-26] [DEBUG] Starting new HTTP connection (50): 127.0.0.1:37013
+2021-02-15 10:14:27,756 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=37013): Max retries exceeded with url: /semantic_completion_available (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0e940fc880>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:14:28,990 [Thread-14] [DEBUG] Starting new HTTP connection (51): 127.0.0.1:37013
+2021-02-15 10:14:29,091 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=37013): Max retries exceeded with url: /semantic_completion_available (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0e94130670>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:14:30,935 [Thread-27] [DEBUG] Starting new HTTP connection (52): 127.0.0.1:37013
+2021-02-15 10:14:39,799 [Thread-5] [DEBUG] Starting new HTTP connection (53): 127.0.0.1:37013
+2021-02-15 10:14:39,923 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=37013): Max retries exceeded with url: /semantic_completion_available (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0e940b82e0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:14:39,953 [Thread-28] [DEBUG] Starting new HTTP connection (54): 127.0.0.1:37013
+2021-02-15 10:14:39,954 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=37013): Max retries exceeded with url: /semantic_completion_available (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0e940dbfa0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:14:39,979 [Thread-15] [DEBUG] Starting new HTTP connection (55): 127.0.0.1:37013
+2021-02-15 10:14:40,005 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=37013): Max retries exceeded with url: /semantic_completion_available (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0e940b8df0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:14:40,007 [Thread-29] [DEBUG] Starting new HTTP connection (56): 127.0.0.1:37013
+2021-02-15 10:14:40,009 [Thread-9] [DEBUG] Starting new HTTP connection (57): 127.0.0.1:37013
+2021-02-15 10:14:40,009 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=37013): Max retries exceeded with url: /semantic_completion_available (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0e940b85b0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:14:40,036 [Thread-30] [DEBUG] Starting new HTTP connection (58): 127.0.0.1:37013
+2021-02-15 10:14:41,382 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=37013): Max retries exceeded with url: /semantic_completion_available (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0e940db7c0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:14:41,484 [Thread-16] [DEBUG] Starting new HTTP connection (59): 127.0.0.1:37013
+2021-02-15 10:14:41,518 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=37013): Max retries exceeded with url: /completions (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0e940db220>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:14:42,165 [Thread-31] [DEBUG] Starting new HTTP connection (60): 127.0.0.1:37013
+2021-02-15 10:14:56,514 [Thread-2] [DEBUG] Starting new HTTP connection (61): 127.0.0.1:37013
+2021-02-15 10:14:56,532 [Thread-17] [DEBUG] Starting new HTTP connection (62): 127.0.0.1:37013
+2021-02-15 10:15:03,460 [Thread-3] [DEBUG] Starting new HTTP connection (63): 127.0.0.1:37013
+2021-02-15 10:15:03,477 [Thread-18] [DEBUG] Starting new HTTP connection (64): 127.0.0.1:37013
+2021-02-15 10:15:03,479 [Thread-10] [DEBUG] Starting new HTTP connection (65): 127.0.0.1:37013
+2021-02-15 10:15:03,480 [Thread-19] [DEBUG] Starting new HTTP connection (66): 127.0.0.1:37013
+2021-02-15 10:15:03,480 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=37013): Max retries exceeded with url: /shutdown (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0e741329d0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:15:30,921 [Thread-6] [DEBUG] Starting new HTTP connection (5): 127.0.0.1:39737
+2021-02-15 10:15:30,925 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=39737): Max retries exceeded with url: /semantic_completion_available (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f3ca8c80940>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:15:30,947 [Thread-7] [DEBUG] Starting new HTTP connection (6): 127.0.0.1:39737
+2021-02-15 10:15:36,030 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=39737): Max retries exceeded with url: /semantic_completion_available (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f3ca8c0c190>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:15:36,162 [Thread-8] [DEBUG] Starting new HTTP connection (7): 127.0.0.1:39737
+2021-02-15 10:15:36,263 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=39737): Max retries exceeded with url: /semantic_completion_available (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f3ca8c0ce50>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 10:15:36,558 [Thread-5] [DEBUG] Starting new HTTP connection (8): 127.0.0.1:39737
+2021-02-15 10:15:50,004 [Thread-2] [DEBUG] Starting new HTTP connection (9): 127.0.0.1:39737
+2021-02-15 10:15:50,021 [Thread-11] [DEBUG] Starting new HTTP connection (10): 127.0.0.1:39737
+2021-02-15 10:15:50,024 [Thread-12] [DEBUG] Starting new HTTP connection (11): 127.0.0.1:39737
+2021-02-15 10:15:50,026 [Thread-13] [DEBUG] Starting new HTTP connection (12): 127.0.0.1:39737
+2021-02-15 10:15:50,027 [MainThread] [ERROR] HTTPConnectionPool(host='127.0.0.1', port=39737): Max retries exceeded with url: /shutdown (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f3ca83c69d0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2021-02-15 15:36:56,855 [MainThread] [DEBUG] False
+2021-02-15 15:36:56,901 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-15 15:36:56,904 [MainThread] [INFO] Script Runner has started
+2021-02-15 15:36:57,093 [MainThread] [INFO] Assigning functions
+2021-02-15 15:37:11,180 [MainThread] [DEBUG] Elapsed time: 2.6723 seconds
+2021-02-15 15:37:13,509 [MainThread] [DEBUG] Elapsed time: 0.0000 seconds
+2021-02-15 15:37:19,729 [MainThread] [DEBUG] Elapsed time: 0.0000 seconds
+2021-02-15 15:44:03,622 [MainThread] [DEBUG] False
+2021-02-15 15:44:03,642 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-15 15:44:03,643 [MainThread] [INFO] Script Runner has started
+2021-02-15 15:44:03,709 [MainThread] [INFO] Assigning functions
+2021-02-15 15:44:16,355 [MainThread] [INFO] Output: ['Get-CimInstance : Access denied ', 'At C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\BitLocker\\BitLocker.psm1:144 char:13', '+             Get-CimInstance `', '+             ~~~~~~~~~~~~~~~~~', '    + CategoryInfo          : PermissionDenied: (root\\cimv2\\Secu...cryptableVolume:String) [Get-CimInstance], CimException', '    + FullyQualifiedErrorId : HRESULT 0x80041003,Microsoft.Management.Infrastructure.CimCmdlets.GetCimInstanceCommand', ' ', 'Get-Win32EncryptableVolumeInternal :  does not have an associated BitLocker volume.', 'At C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\BitLocker\\BitLocker.psm1:696 char:42', '+ ...       $AllWin32EncryptableVolume = Get-Win32EncryptableVolumeInternal', '+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', '    + CategoryInfo          : NotSpecified: (:) [Write-Error], COMException', '    + FullyQualifiedErrorId : System.Runtime.InteropServices.COMException,Get-Win32EncryptableVolumeInternal', '']
+2021-02-15 15:44:16,356 [MainThread] [INFO] [':', 'not', 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\BitLocker\\BitLocker.psm1:696']
+2021-02-15 15:53:22,473 [MainThread] [DEBUG] False
+2021-02-15 15:53:22,493 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-15 15:53:22,494 [MainThread] [INFO] Script Runner has started
+2021-02-15 15:53:22,562 [MainThread] [INFO] Assigning functions
+2021-02-15 15:53:34,282 [MainThread] [DEBUG] Elapsed time: 3.1805 seconds
+2021-02-15 15:55:42,164 [MainThread] [DEBUG] Elapsed time: 0.0000 seconds
+2021-02-15 15:56:24,196 [MainThread] [DEBUG] True
+2021-02-15 15:56:24,308 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-15 15:56:24,311 [MainThread] [INFO] Script Runner has started
+2021-02-15 15:56:24,433 [MainThread] [INFO] Assigning functions
+2021-02-15 15:58:27,083 [MainThread] [DEBUG] True
+2021-02-15 15:58:27,127 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-15 15:58:27,128 [MainThread] [INFO] Script Runner has started
+2021-02-15 15:58:27,179 [MainThread] [INFO] Assigning functions
+2021-02-15 15:59:21,166 [MainThread] [DEBUG] True
+2021-02-15 15:59:21,219 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-15 15:59:21,219 [MainThread] [INFO] Script Runner has started
+2021-02-15 15:59:21,266 [MainThread] [INFO] Assigning functions
+2021-02-15 15:59:50,454 [MainThread] [DEBUG] True
+2021-02-15 15:59:50,492 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-15 15:59:50,492 [MainThread] [INFO] Script Runner has started
+2021-02-15 15:59:50,546 [MainThread] [INFO] Assigning functions
+2021-02-15 16:12:25,257 [MainThread] [DEBUG] False
+2021-02-15 16:12:25,278 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-15 16:12:25,279 [MainThread] [INFO] Script Runner has started
+2021-02-15 16:12:25,345 [MainThread] [INFO] Assigning functions
+2021-02-15 16:12:30,005 [Finding Names] [INFO] ['\n', 'NT AUTHORITY\\Authenticated Users', 'NT AUTHORITY\\INTERACTIVE', 'postgres', 'Administrator', 'Michael   (Current User)']
+2021-02-15 16:12:30,005 [MainThread] [DEBUG] Elapsed time: 0.5473 seconds
+2021-02-15 16:12:36,248 [Finding Groups] [INFO] ['__vmware__', 'Administrators', 'Distributed COM Users', 'Event Log Readers', 'Guests', 'Hyper-V Administrators', 'IIS_IUSRS', 'Performance Log Users', 'Performance Monitor Users', 'Remote Management Users', 'Ssh Users', 'System Managed Accounts Group', 'Users']
+2021-02-15 16:12:36,248 [Finding Groups] [INFO] {}
+2021-02-15 16:12:40,896 [MainThread] [DEBUG] Elapsed time: 0.0000 seconds
+2021-02-15 16:31:03,691 [MainThread] [DEBUG] False
+2021-02-15 16:31:03,712 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-15 16:31:03,712 [MainThread] [INFO] Script Runner has started
+2021-02-15 16:31:03,780 [MainThread] [INFO] Assigning functions
+2021-02-15 16:31:11,366 [MainThread] [DEBUG] Elapsed time: 0.0000 seconds
