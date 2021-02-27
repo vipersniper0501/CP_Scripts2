@@ -1,6 +1,7 @@
 import getpass
 import os
 import subprocess as sub
+import logging as log
 from threading import Thread
 from subprocess import Popen as procPop
 from pathlib import Path
@@ -80,18 +81,18 @@ def Update_OS():
             command = """
     $UpdateSvc = New-Object -ComObject Microsoft.Update.ServiceManager
     $UpdateSvc.AddService2("7971f918-a847-4430-9279-4a52d1efe18d", 7,"")
-            
+
     #search and list all missing Drivers
-    $Session = New-Object -ComObject Microsoft.Update.Session           
-    $Searcher = $Session.CreateUpdateSearcher() 
+    $Session = New-Object -ComObject Microsoft.Update.Session
+    $Searcher = $Session.CreateUpdateSearcher()
 
     $Searcher.ServiceID = '7971f918-a847-4430-9279-4a52d1efe18d'
     $Searcher.SearchScope =  1 # MachineOnly
     $Searcher.ServerSelection = 3 # Third Party
 
     $Criteria = "IsInstalled=0 and Type='Driver' and ISHidden=0"
-    Write-Host('Searching Driver-Updates...') -Fore Green  
-    $SearchResult = $Searcher.Search($Criteria)          
+    Write-Host('Searching Driver-Updates...') -Fore Green
+    $SearchResult = $Searcher.Search($Criteria)
     $Updates = $SearchResult.Updates
 
     #Show available Drivers
@@ -102,7 +103,7 @@ def Update_OS():
 
     $UpdatesToDownload = New-Object -Com Microsoft.Update.UpdateColl
     $updates | % { $UpdatesToDownload.Add($_) | out-null }
-    Write-Host('Downloading Drivers...')  -Fore Green  
+    Write-Host('Downloading Drivers...')  -Fore Green
     $UpdateSession = New-Object -Com Microsoft.Update.Session
     $Downloader = $UpdateSession.CreateUpdateDownloader()
     $Downloader.Updates = $UpdatesToDownload
@@ -113,7 +114,7 @@ def Update_OS():
     $UpdatesToInstall = New-Object -Com Microsoft.Update.UpdateColl
     $updates | % { if($_.IsDownloaded) { $UpdatesToInstall.Add($_) | out-null } }
 
-    Write-Host('Installing Drivers...')  -Fore Green  
+    Write-Host('Installing Drivers...')  -Fore Green
     $Installer = $UpdateSession.CreateUpdateInstaller()
     $Installer.Updates = $UpdatesToInstall
     $InstallationResult = $Installer.Install()
@@ -137,25 +138,24 @@ def Media_Search():
         :return:
         """
         if platform == 'linux' or platform == 'darwin':
-            EXEC = procPop('whoami', stdout = sub.PIPE)
+            EXEC = procPop('whoami', stdout=sub.PIPE)
             stdout, _ = EXEC.communicate()
             output = stdout.decode("utf-8")
             output = output.split("\n")
-            print(output)
             user = output[0]
 
-            procPop(f'touch ~/Desktop/LogTest.txt')
+            # procPop('touch ~/Desktop/LogTest.txt')
             extensions = ('.mp4', '.mov', '.mp3', '.jar')
             for root, dirs, files in os.walk('/home/'):
                 for filename in files:
                     if any(filename.endswith(extension) for extension in extensions):
                         # f = open('Q:\\Cyber Patriots\\my_scripts_and_STIGS\\Scripts\\CP_ScriptsREPAIR\\Script Runner GUI\\logTest.txt', 'a+')
                         # f = open('/home/' + getpass.getuser() + '/Desktop/LogTest.txt', 'a+')
-                        f = open(f'/home/{user}/Desktop/LogTest.txt', 'a+')
+                        f = open(f'/home/{user}/Desktop/LogTest.txt', 'wa+')
                         filepath = os.path.join(root, filename)
                         f.write(filepath + '\n')
                         f.close()
-                        print(filepath)
+                        log.info(filepath)
             print('Scan for unapproved media complete.')
         elif platform == 'win32':
             extensions = ('.mp4', '.png', '.mp3', '.wma', '.jar')
@@ -754,7 +754,7 @@ def rmProSoft():
 def Hash_Run():
     class hashRUN(QDialog, Ui_hashGEN):
         """
-        Checks the hash of a file 
+        Checks the hash of a file
         """
         hash_number = 0
 

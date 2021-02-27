@@ -167,3 +167,29 @@
 2021-02-15 16:31:03,712 [MainThread] [INFO] Script Runner has started
 2021-02-15 16:31:03,780 [MainThread] [INFO] Assigning functions
 2021-02-15 16:31:11,366 [MainThread] [DEBUG] Elapsed time: 0.0000 seconds
+2021-02-18 12:17:27,907 [MainThread] [DEBUG] True
+2021-02-18 12:17:27,986 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-18 12:17:27,989 [MainThread] [INFO] Script Runner has started
+2021-02-18 12:17:28,101 [MainThread] [INFO] Assigning functions
+                                                                                                                                                     self.actionHow_To_Use_Program.triggered.connect(lambda: showHOWTO())
+        self.actionAbout_Creator.triggered.conne2021-02-24 12:01:36,599 [MainThread] [DEBUG] False
+2021-02-24 12:01:36,688 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-24 12:01:36,689 [MainThread] [INFO] Script Runner has started
+2021-02-24 12:01:36,733 [MainThread] [INFO] Assigning functions
+2021-02-24 12:01:46,234 [MainThread] [DEBUG] True
+2021-02-24 12:01:46,330 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-24 12:01:46,331 [MainThread] [INFO] Script Runner has started
+2021-02-24 12:01:46,375 [MainThread] [INFO] Assigning functions
+2021-02-24 12:01:55,862 [MainThread] [DEBUG] Elapsed time: 0.0043 seconds
+2021-02-24 12:12:09,582 [MainThread] [DEBUG] True
+2021-02-24 12:12:09,674 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-24 12:12:09,674 [MainThread] [INFO] Script Runner has started
+2021-02-24 12:12:09,718 [MainThread] [INFO] Assigning functions
+2021-02-26 13:10:42,247 [MainThread] [DEBUG] False
+2021-02-26 13:10:42,362 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-26 13:10:42,365 [MainThread] [INFO] Script Runner has started
+2021-02-26 13:10:42,426 [MainThread] [INFO] Assigning functions
+2021-02-26 20:20:50,699 [MainThread] [DEBUG] True
+2021-02-26 20:20:50,784 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-26 20:20:50,787 [MainThread] [INFO] Script Runner has started
+2021-02-26 20:20:50,901 [MainThread] [INFO] Assigning functions

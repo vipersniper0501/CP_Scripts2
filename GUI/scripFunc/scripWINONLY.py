@@ -44,16 +44,17 @@ def Find_Names():
             names.append(x)
 
         # Local Administrators are added to list of names
-        stdout, _ = sub.Popen("powershell net localgroup administrators", stdout=sub.PIPE).communicate()
+        stdout, _ = sub.Popen("powershell net localgroup administrators",
+                              stdout=sub.PIPE).communicate()
         output = stdout.decode("utf-8").split("\n")
 
-        stdout, _ = sub.Popen("powershell $env:UserName", stdout=sub.PIPE).communicate()
+        stdout, _ = sub.Popen("powershell $env:UserName",
+                              stdout=sub.PIPE).communicate()
         current_user = stdout.decode("utf-8").split("\r\n")
         for i4 in range(6, len(output) - 3):
             w = output[i4].split('\r')
-            x = w[0]
-            if x == current_user[0]:
-                x = current_user[0] + '   (Current User)'
+            if w[0] == current_user[0]:
+                w[0] = current_user[0] + '   (Current User)'
             names.append(x)
         names.insert(0, '\n')
         log.info(names)
@@ -63,13 +64,16 @@ def Find_Names():
 
 @lru_cache
 def Find_Groups(users_n_groups: bool):
-    def find_groups(users_n_groups: bool):
-        """
-        This is to find local groups and users on the windows 10 operating system
+    """
+    This is to find local groups and users on the windows 10
+    operating system
 
-        :param users_n_groups: True/False  Do you need the users in each group also.
-        :return: Returns a list of local groups and if users_n_groups is True, also returns a dictionary of users in each group
-        """
+    :param users_n_groups: True/False  Do you need the users in
+    each group also.
+    :return: Returns a list of local groups and if users_n_groups is True,
+    also returns a dictionary of users in each group
+    """
+    def find_groups(users_n_groups: bool):
         stdout, _ = sub.Popen(["powershell", "& {net localgroup}"], stdout=sub.PIPE).communicate()
         output = stdout.decode("utf-8").split("\n")
         groups = []
@@ -96,7 +100,7 @@ def Find_Groups(users_n_groups: bool):
                         for i4 in range(0, len(user_names)):
                             users_in_groups[group] = user_names
                 except Exception as e:
-                    print('\n\nException occurred: ' + str(e))
+                    log.debug('\n\nException occurred: ' + str(e))
 
         log.info(groups)
         log.info(users_in_groups)
@@ -116,9 +120,11 @@ def BITLOCKER():
         def EXECUTE(self):
             # Executes encryption command
             def ENCRYPT(drive):
-                #  Only works if 'Allow BitLocker without compatible TPM' is enabled in the Group Policy
-                #  Also does not encrypt right away. If you type 'Get-BitlockerVolume' in powershell, it will tell
-                #  you how much has been encrypted so far.
+                # Only works if 'Allow BitLocker without compatible TPM' is
+                # enabled in the Group Policy
+                # Also does not encrypt right away. If you type
+                # 'Get-BitlockerVolume' in powershell, it will tell you
+                # how much has been encrypted so far.
 
                 if Check_Password(self.encrypPASS.text(), self.encrypPASS_2.text()):
                     command = f"$pass = ConvertTo-SecureString {self.encrypPASS.text()} -AsPlainText -Force " \
@@ -198,7 +204,8 @@ def BITLOCKER():
             self.enblBIT.clicked.connect(lambda: NewThread(ENCRYPT, False, "Encrypting Drive", self.selectedDRIVE))
             self.cancelbutton.clicked.connect(cancel_button)
 
-            # NOTE: This will provide an error saying "C: drive cannot be found in index" if not run as Administrator
+            # NOTE: This will provide an error saying "C: drive cannot be 
+            # found in index" if not run as Administrator
             # Sets default status check to the C: Drive
             try:
                 STATUSCHECK("C:")
@@ -240,7 +247,7 @@ def BITLOCKER():
 
 def Configure_Browsers():
     def browserCONF():
-        print('Configuring browser...')
+        log.info('Configuring browser...')
         # def cptree(src, dst, symlinks=False, ignore=None):
         #    for item in os.listdir(src):
         #        s = os.path.join(src, item)
@@ -257,7 +264,7 @@ def Configure_Browsers():
             shutil.rmtree(rmv_folder)
             # shutil.rmtree(r'%appdata%\Mozilla\SystemExtensionsDev')
         except Exception as e:
-            print('Error caught: ' + str(e))
+            log.debug('Error caught: ' + str(e))
         # copy_tree('../configurations/Win_Mozilla/Extensions', 'C:/')
         # copy_tree('../configurations/Win_Mozilla/Firefox', 'C:/')
         # copy_tree('../configurations/Win_Mozilla/SystemExtensionsDev', 'C:/')
@@ -267,7 +274,7 @@ def Configure_Browsers():
                         r'%appdata%\Mozilla\Firefox')
         shutil.copytree('../configurations/Win_Mozilla/SystemExtensionsDev',
                         r'%appdata%\Mozilla\SystemExtensionsDev')
-        print('Firefox has been configured')
+        log.info('Firefox has been configured')
     NewThread(browserCONF, False, "Configuring Browsers")
 
 
@@ -285,12 +292,12 @@ def addusr():
 
             def adminy(selected):
                 if selected:
-                    print('This user will be an admin')
+                    log.info('This user will be an admin')
                     self.adminyn = 'y'
 
             def adminn(selected):
                 if selected:
-                    print('This user will NOT be an admin')
+                    log.info('This user will NOT be an admin')
                     self.adminyn = 'n'
 
             self.admin_y.toggled.connect(adminy)
@@ -312,7 +319,7 @@ def addusr():
                     self.close()
 
                 if self.adminyn == 'y':
-                    print('This user will be an admin')
+                    log.info('This user will be an admin')
                     if Check_Password(self.Password1_input.text(),
                                        self.Password2_input.text()):
                         command = f"$nusnm = '{username}'" \
@@ -320,17 +327,17 @@ def addusr():
                               "\nNew-LocalUser -Name $nusnm -Password $nuspss"\
                               "\nAdd-LocalGroupMember -Group 'Administrators' -Member $nusnm"
                         sub.Popen(f"powershell {command}")
-                        print(f"User {username} has been successfully added!")
+                        log.info(f"User {username} has been successfully added!")
                         completedPOP()
                 elif self.adminyn == 'n':
-                    print('This user will not be an admin')
+                    log.info('This user will not be an admin')
                     if Check_Password(self.Password1_input.text(),
                                       self.Password2_input.text()):
                         command = f"$nusnm = '{username}'" \
                               f"\n$nuspss = ConvertTo-SecureString '{passwd}' -AsPlainText -Force" \
                               "\nNew-LocalUser -Name $nusnm -Password $nuspss"
                         sub.Popen(f"powershell {command}")
-                        print(f"User {username} has been successfully added!")
+                        log.info(f"User {username} has been successfully added!")
                         completedPOP()
 
             def cancel_button():
@@ -383,7 +390,7 @@ def remusr():
                         QListWidgetItem(name, self.listOFnames)
 
                 if len(username) == 0:
-                    print('no username entered')
+                    log.info('no username entered')
                     ERROR_NO_USER = QMessageBox()
                     ERROR_NO_USER.setIcon(QMessageBox.Warning)
                     ERROR_NO_USER.setWindowTitle('Hey! Listen!')
@@ -392,7 +399,7 @@ def remusr():
                     ERROR_NO_USER.setStandardButtons(QMessageBox.Close)
                     ERROR_NO_USER.exec_()
                 elif username not in listo_names:
-                    print('User not found')
+                    log.info('User not found')
                     ERROR_NO_USER_FOUND = QMessageBox()
                     ERROR_NO_USER_FOUND.setIcon(QMessageBox.Warning)
                     ERROR_NO_USER_FOUND.setWindowTitle('Hey! Listen!')
@@ -413,10 +420,10 @@ def remusr():
                 CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                 x = CONFIRM.exec_()
                 if x == QMessageBox.Yes:
-                    print('Removing user...')
+                    log.info('Removing user...')
                     removal()
                 elif x == QMessageBox.No:
-                    print('Cancelling...')
+                    log.info('Cancelling...')
 
             def cancel_button():
                 self.close()
@@ -464,10 +471,10 @@ def addgrutosys():
                 CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                 x = CONFIRM.exec_()
                 if x == QMessageBox.Yes:
-                    print('Adding Group...')
+                    log.info('Adding Group...')
                     add_group()
                 elif x == QMessageBox.No:
-                    print('Cancelling...')
+                    log.info('Cancelling...')
 
             def cancel_button():
                 self.close()
@@ -518,7 +525,7 @@ def remgrufrosys():
                         QListWidgetItem(list_of_groups[i], self.listOFnames)
 
                 if len(group_name) == 0:
-                    print('no group entered')
+                    log.info('no group entered')
                     ERROR_NO_GROUP_ENTERED = QMessageBox()
                     ERROR_NO_GROUP_ENTERED.setIcon(QMessageBox.Warning)
                     ERROR_NO_GROUP_ENTERED.setWindowTitle('Hey! Listen!')
@@ -528,7 +535,7 @@ def remgrufrosys():
                         QMessageBox.Close)
                     ERROR_NO_GROUP_ENTERED.exec_()
                 elif group_name not in list_of_groups:
-                    print('Group not found')
+                    log.info('Group not found')
                     ERROR_GROUP_NOT_FOUND = QMessageBox()
                     ERROR_GROUP_NOT_FOUND.setIcon(QMessageBox.Warning)
                     ERROR_GROUP_NOT_FOUND.setWindowTitle('Hey! Listen!')
@@ -550,10 +557,10 @@ def remgrufrosys():
                 CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                 x = CONFIRM.exec_()
                 if x == QMessageBox.Yes:
-                    print('Removing group...')
+                    log.info('Removing group...')
                     remove_group()
                 elif x == QMessageBox.No:
-                    print('Cancelling...')
+                    log.info('Cancelling...')
 
             def cancel_button():
                 self.close()
@@ -615,8 +622,8 @@ def addusrtogru():
             def run_add_user_to_group():
                 user_to_add = self.Name_Input.text()
                 group_to_add_user_to = self.Name_Input_2.text()
-                print(user_to_add)
-                print(group_to_add_user_to)
+                log.debug(user_to_add)
+                log.debug(group_to_add_user_to)
                 if " " in user_to_add:
                     Hey = QMessageBox()
                     Hey.setWindowTitle('Hey! Listen!')
@@ -638,10 +645,10 @@ def addusrtogru():
                 CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                 x = CONFIRM.exec_()
                 if x == QMessageBox.Yes:
-                    print('Adding User to Group...')
+                    log.info('Adding User to Group...')
                     run_add_user_to_group()
                 elif x == QMessageBox.No:
-                    print('Cancelling...')
+                    log.info('Cancelling...')
 
             def cancel_button():
                 self.close()
@@ -722,10 +729,10 @@ def remusrfrogru():
                 CONFIRM.setWindowIcon(QtGui.QIcon(':/Pictures/images/HEY.png'))
                 x = CONFIRM.exec_()
                 if x == QMessageBox.Yes:
-                    print('Removing User from Group...')
+                    log.info('Removing User from Group...')
                     run_remove_user_from_group()
                 elif x == QMessageBox.No:
-                    print('Cancelling...')
+                    log.info('Cancelling...')
 
             def cancel_button():
                 self.close()
@@ -824,7 +831,7 @@ def chngpasswdofall():
             def findnames():
                 names = []
                 try:
-                    print('Detecting Users On System...')
+                    log.info('Detecting Users On System...')
                     # Local users are added to a list of names
                     output = sub.run("powershell net localgroup users".split(),
                                      stdout=sub.PIPE, check=True, text=True)
@@ -860,27 +867,27 @@ def chngpasswdofall():
                     stdout, _ = sub.Popen(["powershell", "& {$env:UserName}"], stdout=sub.PIPE).communicate()
                     output = stdout.decode("utf-8").split("\r\n")
                     for n, i in enumerate(names):
-                        print(i)
                         if output[0] == i:
                             names.pop(i)
                         if n == len(names):
                             break
-                    print('--------------------------------------------------')
-                    print('The following list are all current users and admins on this system')
-                    print(names)
+                    log.info('The following list are all current users and admins on this system')
+                    log.info(names)
                     return names
                 except Exception as e:
-                    print(f"Index error has occured. exception was "
-                          "caught: {str(e))}")
-                    print(names)
+                    log.debug(f"Index error has occured. exception was "
+                              "caught: {str(e))}")
+                    log.debug(names)
                     return names
 
             x = Find_Names()
+
             def completedPOP():
                 COMPLETE = QMessageBox()
                 COMPLETE.setIcon(QMessageBox.Question)
                 COMPLETE.setWindowTitle('Hey! Listen!')
-                COMPLETE.setText('Passwords for all users have been successfully changed.')
+                COMPLETE.setText("Passwords for all users have been "
+                                 "successfully changed.")
                 COMPLETE.setStandardButtons(QMessageBox.Close)
                 COMPLETE.exec_()
                 self.close()
@@ -888,14 +895,21 @@ def chngpasswdofall():
             def RUN(names):
                 if Check_Password(self.passwd.text(), self.pass_verify.text()):
                     for _, name in enumerate(names):
-                        command = f"$Password = ConvertTo-SecureString '{self.passwd.text()}' -AsPlainText -Force" \
-                              f"$Username = Get-LocalUser -Name '{name}'" \
-                              "$Username | Set-LocalUser -Password $Password"
+                        command = f"$Password = ConvertTo-SecureString"
+                        f" '{self.passwd.text()}' -AsPlainText -Force"
+                        f"$Username = Get-LocalUser -Name '{name}'"
+                        "$Username | Set-LocalUser -Password $Password"
                         sub.Popen(f"powershell {command}", stdout=sub.PIPE)
-                        print('User ' + name + "'s password has been successfully changed.")
+                        log.info(f"User {name}'s password has been"
+                                 " successfully changed.")
                     completedPOP()
 
-            self.chngpass_button.clicked.connect(lambda: NewThread(RUN, False, "Changing_Users_Passwords", x))
+            self.chngpass_button.clicked.connect(lambda:
+                                                 NewThread(
+                                                     RUN,
+                                                     False,
+                                                     "Changing_User_Passwords",
+                                                     x))
 
         def begin(self):
             super(change_password_for_all, self).exec_()

@@ -16,7 +16,9 @@ from PyUIs.main import Ui_MainWindow
 from PyUIs.progabout import Ui_About
 from PyUIs.howToUI import Ui_How_To
 
-from scripFunc.scripLINUXONLY import malRem, alyn, Linux_addusr, Linux_remusr
+from scripFunc.scripLINUXONLY import malRem, alyn, Linux_addusr, Linux_remusr,\
+                                     Linux_add_group_to_system, \
+                                     Linux_remgrufrosys
 from scripFunc.scripUNIMULTI import Update_OS, Media_Search,\
                                     Configure_Firewall, Basic_Configurations,\
                                     rmProSoft, Configure_Services, Hash_Run
@@ -276,7 +278,7 @@ def CIDR_Configurations():
                         and self.vsftpd != '' and self.web != ''
                         and self.apaweb != '' and self.nginweb != ''
                         and self.https != '' and self.smb != ''
-                        and self.sql != ''and self.rsnc != ''
+                        and self.sql != '' and self.rsnc != ''
                         and self.rdp != ''):
                     print('saving configurations\n')
                     print("ssh=" + str(self.ssh) + ", ftp=" + str(self.ftp)
@@ -361,8 +363,6 @@ def CIDR_Configurations():
 
 
 class Main_start(QMainWindow, Ui_MainWindow):
-    # signalMain = pyqtSignal()
-
     def __init__(self, parent=None):
         super(Main_start, self).__init__(parent)
         log.info('Script Runner has started')
@@ -581,21 +581,23 @@ class Main_start(QMainWindow, Ui_MainWindow):
         # Linux Main Menu Commands
         # self.fwlbutton_3.clicked.connect(lambda: fwl())
         self.auditbutton_3.clicked.connect(lambda: alyn())
-        self.malrembutton_3.clicked.connect(lambda: malRem())  #
-        # self.rmvprosoftbutton_3.clicked.connect(lambda: indev())  #
-        # self.basicConfbutton_3.clicked.connect(lambda: indev())  #
-        # self.servicesConfButton_2.clicked.connect(lambda: indev())  #
+        self.malrembutton_3.clicked.connect(lambda: malRem())
+        # self.rmvprosoftbutton_3.clicked.connect(lambda: indev())
+        # self.basicConfbutton_3.clicked.connect(lambda: indev())
+        # self.servicesConfButton_2.clicked.connect(lambda: indev())
 
         # Linux User Group Commands
-        self.LINUXUSRGRUBUTTONS = [self.adgrutosys_4, self.adusrtogru_4,
+        self.LINUXUSRGRUBUTTONS = [self.adusrtogru_4,
                                    self.chngusrpas_4, self.lsgruusrin_4,
                                    self.lslocagru_4, self.lsmemgru_4,
                                    self.rmvgrufrosys_4, self.rmvusrfrogru_4]
         for i in range(0, len(self.LINUXUSRGRUBUTTONS)):
-            self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: indev())  #
+            self.LINUXUSRGRUBUTTONS[i].clicked.connect(lambda: indev())
 
         self.adusrtosys_4.clicked.connect(lambda: Linux_addusr())
         self.rmvusrfrosys_4.clicked.connect(lambda: Linux_remusr())
+        self.adgrutosys_4.clicked.connect(lambda: Linux_add_group_to_system())
+        self.rmvgrufrosys_4.clicked.connect(lambda: Linux_remgrufrosys())
         self.lslocausr_4.clicked.connect(lambda: indev())
 
         # # MacOS Buttons
