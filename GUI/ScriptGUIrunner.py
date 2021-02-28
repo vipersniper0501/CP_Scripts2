@@ -2,9 +2,10 @@ import configparser
 import os
 import sys
 import logging as log
-from scripFunc.AppleCIDR_Util import NewThread
 from pathlib import Path
 from platform import uname
+from Commands.AppleCIDR_Util import NewThread
+
 
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QDialog
@@ -16,13 +17,13 @@ from PyUIs.main import Ui_MainWindow
 from PyUIs.progabout import Ui_About
 from PyUIs.howToUI import Ui_How_To
 
-from scripFunc.scripLINUXONLY import malRem, alyn, Linux_addusr, Linux_remusr,\
+from Commands.scripLINUXONLY import malRem, alyn, Linux_addusr, Linux_remusr,\
                                      Linux_add_group_to_system, \
                                      Linux_remgrufrosys
-from scripFunc.scripUNIMULTI import Update_OS, Media_Search,\
+from Commands.scripUNIMULTI import Update_OS, Media_Search,\
                                     Configure_Firewall, Basic_Configurations,\
                                     rmProSoft, Configure_Services, Hash_Run
-from scripFunc.scripWINONLY import BITLOCKER, Configure_Browsers,\
+from Commands.scripWINONLY import BITLOCKER, Configure_Browsers,\
                                     chngpasswdofall, lsgrusanusrin,\
                                     lsmemofgru, lslocagrus, lslocausrs,\
                                     remusrfrogru, addusrtogru, remgrufrosys,\
@@ -90,17 +91,14 @@ def CIDR_Configurations():
 
             def sshYES(selected):
                 if selected:
-                    print('ssh yes')
                     self.ssh = True
 
             def sshNO(selected):
                 if selected:
-                    print('ssh no')
                     self.ssh = False
 
             def ftpYES(selected):
                 if selected:
-                    print('yes ftp')
                     self.proftpdy.setEnabled(True)
                     self.proftpdn.setEnabled(True)
                     self.vsftpdy.setEnabled(True)
@@ -109,7 +107,6 @@ def CIDR_Configurations():
 
             def ftpNO(selected):
                 if selected:
-                    print('no ftp')
                     self.proftpdy.setEnabled(False)
                     self.proftpdn.setEnabled(False)
                     self.vsftpdy.setEnabled(False)
@@ -122,14 +119,12 @@ def CIDR_Configurations():
 
             def ftpPROno(selected):
                 if selected:
-                    print('Proftpd no')
                     self.vsftpdy.setEnabled(True)
                     self.vsftpdn.setEnabled(True)
                     self.proftpd = False
 
             def ftpPROyes(selected):
                 if selected:
-                    print('Proftpd Yes')
                     self.vsftpdy.setEnabled(False)
                     self.vsftpdn.setEnabled(False)
                     self.vsftpdn.setChecked(True)
@@ -138,7 +133,6 @@ def CIDR_Configurations():
 
             def vsftpdYES(selected):
                 if selected:
-                    print('Vsftpd No')
                     self.proftpdy.setEnabled(False)
                     self.proftpdn.setEnabled(False)
                     self.proftpdn.setChecked(True)
@@ -147,14 +141,12 @@ def CIDR_Configurations():
 
             def vsftpdNO(selected):
                 if selected:
-                    print('Vsfptd Yes')
                     self.proftpdy.setEnabled(True)
                     self.proftpdn.setEnabled(True)
                     self.vsftpd = False
 
             def webserverNO(selected):
                 if selected:
-                    print('No Webserver')
                     self.apachey.setEnabled(False)
                     self.apachen.setEnabled(False)
                     self.apachen.setChecked(True)
@@ -171,7 +163,6 @@ def CIDR_Configurations():
 
             def webserverYES(selected):
                 if selected:
-                    print('Yes Webserver')
                     self.apachey.setEnabled(True)
                     self.apachen.setEnabled(True)
                     self.nginxy.setEnabled(True)
@@ -182,7 +173,6 @@ def CIDR_Configurations():
 
             def apacheYES(selected):
                 if selected:
-                    print('Yes apache')
                     self.nginxy.setEnabled(False)
                     self.nginxn.setEnabled(False)
                     self.nginxn.setChecked(True)
@@ -191,14 +181,12 @@ def CIDR_Configurations():
 
             def apacheNo(selected):
                 if selected:
-                    print('No Apache')
                     self.nginxy.setEnabled(True)
                     self.nginxn.setEnabled(True)
                     self.apaweb = False
 
             def nginxYES(selected):
                 if selected:
-                    print('Yes Nginx')
                     self.apachey.setEnabled(False)
                     self.apachen.setEnabled(False)
                     self.apachen.setChecked(True)
@@ -207,70 +195,59 @@ def CIDR_Configurations():
 
             def nginxNO(selected):
                 if selected:
-                    print('No Nginx')
                     self.apachey.setEnabled(True)
                     self.apachen.setEnabled(True)
                     self.nginweb = False
 
             def httpsYES(selected):
                 if selected:
-                    print('HTTPS Yes')
                     self.https = True
 
             def httpsNO(selected):
                 if selected:
-                    print('https no')
                     self.https = False
 
             def smbYES(selected):
                 if selected:
-                    print('SMB yes')
                     self.smb = True
 
             def smbNO(selected):
                 if selected:
-                    print('SMB no')
                     self.smb = False
 
             def sqlYES(selected):
                 if selected:
-                    print('SQL Yes')
                     self.sql = True
 
             def sqlNO(selected):
                 if selected:
-                    print('SQL No')
                     self.sql = False
 
             def rsncYES(selected):
                 if selected:
-                    print('rsnc Yes')
                     self.rsnc = True
 
             def rsncNO(selected):
                 if selected:
-                    print('rsnc No')
                     self.rsnc = False
 
             def rdpYES(selected):
                 if selected:
-                    print('RDP Yes')
                     self.rdp = True
 
             def rdpNO(selected):
                 if selected:
-                    print('RDP No')
                     self.rdp = False
 
             def quitButton():
 
                 if variableCheck.is_file():
-                    print("Cancelling configurations. Nothing has changed.")
+                    log.info("Cancelling configurations. Nothing has changed.")
                     self.close()
                     # main_commands = Main_start()
                     # main_commands.dialog_completed()
                 else:
-                    print('Closing program')
+                    log.info('Closing program')
                     sys.exit(0)
 
             def confirmBTTN():
@@ -380,6 +357,9 @@ class Main_start(QMainWindow, Ui_MainWindow):
         self.mmfuncassign(variableCheck2)
 
     def mmfuncassign(self, configurations):
+        """
+            Assigns Functions to the buttons.
+        """
         log.info('Assigning functions')
         config = configparser.ConfigParser()
         config.read(configurations)
@@ -444,6 +424,9 @@ class Main_start(QMainWindow, Ui_MainWindow):
 
         def showHOWTO():
             class showHowToUi(QDialog, Ui_How_To):
+                """
+                Shows the How To Use dialog
+                """
                 def __init__(self, parent=None):
                     super(showHowToUi, self).__init__(parent)
                     self.setupUi(self)
@@ -455,6 +438,9 @@ class Main_start(QMainWindow, Ui_MainWindow):
 
         def runCOMDESCRIPT():
             class showComDescript(QDialog, Ui_comDescript):
+                """
+                Shows the commands descriptions
+                """
                 def __init__(self, parent=None):
                     super(showComDescript, self).__init__(parent)
                     self.setupUi(self)
@@ -465,6 +451,9 @@ class Main_start(QMainWindow, Ui_MainWindow):
 
         def runABOUTPROG():
             class showAboutProg(QDialog, Ui_About):
+                """
+                Shows the programs About page
+                """
                 def __init__(self, parent=None):
                     super(showAboutProg, self).__init__(parent)
                     self.setupUi(self)
@@ -493,6 +482,9 @@ class Main_start(QMainWindow, Ui_MainWindow):
             WRONGOS.exec_()
 
         def confirmation(com):
+            """
+            Shows Confirmation Dialog
+            """
             CONFIRM = QMessageBox()
             CONFIRM.setWindowTitle('Hey! Listen!')
             CONFIRM.setText("Hey! Are you sure you want to do this?")

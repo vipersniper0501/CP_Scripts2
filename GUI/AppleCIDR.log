@@ -193,3 +193,11 @@
 2021-02-26 20:20:50,784 [MainThread] [INFO] Configuration file has been loaded...
 2021-02-26 20:20:50,787 [MainThread] [INFO] Script Runner has started
 2021-02-26 20:20:50,901 [MainThread] [INFO] Assigning functions
+2021-02-28 11:46:32,365 [MainThread] [DEBUG] True
+2021-02-28 11:46:32,451 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-28 11:46:32,453 [MainThread] [INFO] Script Runner has started
+2021-02-28 11:46:32,560 [MainThread] [INFO] Assigning functions
+2021-02-28 12:20:40,783 [MainThread] [DEBUG] True
+2021-02-28 12:20:40,834 [MainThread] [INFO] Configuration file has been loaded...
+2021-02-28 12:20:40,834 [MainThread] [INFO] Script Runner has started
+2021-02-28 12:20:40,883 [MainThread] [INFO] Assigning functions

@@ -3,7 +3,7 @@ import subprocess as sub
 import distro
 import logging as log
 from functools import lru_cache
-from scripFunc.AppleCIDR_Util import NewThread, Check_Password
+from Commands.AppleCIDR_Util import NewThread, Check_Password
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QListWidgetItem, QDialog, QMessageBox  # ,\
 # QTreeWidgetItem

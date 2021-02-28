@@ -28,6 +28,9 @@ def NewThread(com, Returning: bool, thread_ID, *arguments) -> Any:
     """
 
     class NewThreadWorker(Thread):
+        """
+        New Thread Class
+        """
         def __init__(self, group=None, target=None, name=None, args=(),
                      kwargs=None, *, daemon=None):
             Thread.__init__(self, group, target, name, args, kwargs,
@@ -40,15 +43,18 @@ def NewThread(com, Returning: bool, thread_ID, *arguments) -> Any:
                 self._return = self._target(*self._args, **self._kwargs)
 
         def joinThread(self):
+            """
+            Joins the threads, allowing a return value
+            """
             Thread.join(self)
             return self._return
 
     ntw = NewThreadWorker(target=com, name=thread_ID, args=(*arguments,))
-    if Returning:
+    if not Returning:
         ntw.start()
-        return ntw.joinThread()
     else:
         ntw.start()
+        return ntw.joinThread()
 
 
 # NOTE: This is in developement. Trying to get rid of the stupid
@@ -80,6 +86,9 @@ def Check_Password(Password1, Password2):
     """
 
     def PasswordChecker(Password1, Password2) -> bool:
+        """
+        Actually checks and compares the passwords
+        """
         if Password1 != Password2:
             HEY = QMessageBox()
             HEY.setWindowTitle('Hey! Listen!')
@@ -182,6 +191,9 @@ class TimerError(Exception):
 
 
 class Timer:
+    """
+    Creates a timer to calculate speed of code.
+    """
     def __init__(self):
         self._start_time = None
 

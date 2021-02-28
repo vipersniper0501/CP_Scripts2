@@ -11,7 +11,7 @@ from sys import platform
 import distro
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMessageBox, QDialog, QFileDialog
-from scripFunc.AppleCIDR_Util import NewThread
+from Commands.AppleCIDR_Util import NewThread
 import configparser
 import shutil
 from PyUIs.hashgen import Ui_hashGEN

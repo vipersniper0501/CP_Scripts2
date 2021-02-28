@@ -2,7 +2,7 @@ import configparser
 import shutil
 import subprocess as sub
 import logging as log
-from scripFunc.AppleCIDR_Util import NewThread, Check_Password, Timer
+from Commands.AppleCIDR_Util import NewThread, Check_Password, Timer
 from functools import lru_cache
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QListWidgetItem, QDialog, QMessageBox,\
@@ -97,10 +97,9 @@ def Find_Groups(users_n_groups: bool):
                     elif len(user_names) == 1:
                         users_in_groups[group] = [user_names[0]]
                     else:
-                        for i4 in range(0, len(user_names)):
-                            users_in_groups[group] = user_names
+                        users_in_groups[group] = user_names
                 except Exception as e:
-                    log.debug('\n\nException occurred: ' + str(e))
+                    log.debug(f"\n\nException occurred: {str(e)}")
 
         log.info(groups)
         log.info(users_in_groups)
@@ -201,10 +200,13 @@ def BITLOCKER():
                                                STATUSCHECK(driveLETTER[4]))
             self.radioButton_6.toggled.connect(lambda:
                                                STATUSCHECK(driveLETTER[5]))
-            self.enblBIT.clicked.connect(lambda: NewThread(ENCRYPT, False, "Encrypting Drive", self.selectedDRIVE))
+            self.enblBIT.clicked.connect(lambda: 
+                                         NewThread(ENCRYPT, False,
+                                                   "Encrypting Drive",
+                                                   self.selectedDRIVE))
             self.cancelbutton.clicked.connect(cancel_button)
 
-            # NOTE: This will provide an error saying "C: drive cannot be 
+            # NOTE: This will provide an error saying "C: drive cannot be
             # found in index" if not run as Administrator
             # Sets default status check to the C: Drive
             try:
@@ -343,7 +345,9 @@ def addusr():
             def cancel_button():
                 self.close()
 
-            self.Confirm_button.clicked.connect(lambda: NewThread(CONFIRM, False, "Adding User"))
+            self.Confirm_button.clicked.connect(lambda:
+                                                NewThread(CONFIRM, False,
+                                                          "Adding User"))
             self.Cancel_button.clicked.connect(cancel_button)
 
         def begin(self):
@@ -875,8 +879,8 @@ def chngpasswdofall():
                     log.info(names)
                     return names
                 except Exception as e:
-                    log.debug(f"Index error has occured. exception was "
-                              "caught: {str(e))}")
+                    log.debug("Index error has occured. exception was "
+                              f"caught: {str(e)}")
                     log.debug(names)
                     return names
 
@@ -895,7 +899,7 @@ def chngpasswdofall():
             def RUN(names):
                 if Check_Password(self.passwd.text(), self.pass_verify.text()):
                     for _, name in enumerate(names):
-                        command = f"$Password = ConvertTo-SecureString"
+                        command = "$Password = ConvertTo-SecureString"
                         f" '{self.passwd.text()}' -AsPlainText -Force"
                         f"$Username = Get-LocalUser -Name '{name}'"
                         "$Username | Set-LocalUser -Password $Password"
@@ -912,6 +916,9 @@ def chngpasswdofall():
                                                      x))
 
         def begin(self):
+            """
+            Begins Dialog Change Password Configuration Command
+            """
             super(change_password_for_all, self).exec_()
 
     c = change_password_for_all()
