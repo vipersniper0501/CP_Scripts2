@@ -35,6 +35,12 @@ jobs:
         run:
           ./builds/tests/Actions_Compile_Test.sh linux
 
+      - name: Coverage
+        run: |
+          coverage run ./src/tests/Linux_Tests.py
+          coverage xml -d ./src/tests/coverage.xml
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Python -r ./src/tests/coverage.xml
+
       - name: Upload to Github
         run:
           ./builds/tests/after_successCONVERT.sh linux

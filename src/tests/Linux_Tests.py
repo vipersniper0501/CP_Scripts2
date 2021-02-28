@@ -1,6 +1,7 @@
 import unittest
 import sys
 sys.path.insert(1, '../')
+sys.path.insert(1, './src')
 from Commands.scripLINUXONLY import Linux_Find_Groups, alyn
 
 
