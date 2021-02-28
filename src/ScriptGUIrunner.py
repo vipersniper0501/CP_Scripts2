@@ -40,7 +40,7 @@ from Commands.scripWINONLY import BITLOCKER, Configure_Browsers,\
 #
 #     return os.path.join(base_path, relative_path)
 
-
+DEBUG = False
 try:
     if sys.argv[1] == '--DEBUG':
         DEBUG = True

@@ -1,9 +1,8 @@
 import configparser
 import subprocess as sub
-import distro
-import logging as log
 from functools import lru_cache
-from Commands.AppleCIDR_Util import NewThread, Check_Password
+import distro  # pragma: no cover
+import logging as log
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QListWidgetItem, QDialog, QMessageBox  # ,\
 # QTreeWidgetItem
@@ -12,6 +11,7 @@ from PyUIs.addusrUI import Ui_addUSR
 # from PyUIs.changepass import Ui_chngpass
 from PyUIs.rmvUSRoGRU import Ui_rmvusrogru
 # from PyUIs.user_group_modifyUI import Ui_user_group_list_modifiers
+from Commands.AppleCIDR_Util import NewThread, Check_Password
 
 
 OS = distro.linux_distribution()[0]
@@ -64,7 +64,7 @@ def Linux_Find_Names():
 
 # Need to be configured for linux
 @lru_cache
-def Find_Groups(users_n_groups: bool):
+def Linux_Find_Groups(users_n_groups: bool):
     """
     This is to find local groups and users on the windows 10 operating system
 
@@ -72,13 +72,16 @@ def Find_Groups(users_n_groups: bool):
     :return: Returns a list of local groups
     if users_n_groups is True, also returns a dictionary of users in each group
     """
+
     def find_groups(users_n_groups: bool):
-        f = open("/etc/group", "r")
-        output = f.read().split("\n")
+        with open("/etc/group", "r") as f:
+            output = f.read().split("\n")
         groups = []
         users_in_groups = {}
         for _, i in enumerate(output):
-            group_name = i.split(":")[1]
+            if i == '':
+                break
+            group_name = i.split(":")[0]
             group_users = i.split(":")[3]
             groups.append(group_name)
             if len(group_users) == 0:
@@ -105,20 +108,12 @@ def malRem():
 
 def alyn():
     def audit_w_lynis():
-        if OS in ('Ubuntu', 'debian'):
-            if sub.run("sudo lynis".split(), check=True,
-                       text=True).returncode == 1:
-                sub.run("sudo apt install lynis -y".split())
-            sub.run("sudo lynis audit system | "
-                    "tee ~/Desktop/audit_results.txt".split())
-        elif OS == 'Manjaro Linux':
-            command = 'sudo pacman -S lynis --noconfirm'
-            sub.run(command.split())
-            command = 'sudo touch audit_results.txt'
-            sub.run(command.split())
-            command2 = 'sudo lynis audit system | tee audit_results.txt'
-            sub.run(command2.split())
-    NewThread(audit_w_lynis, False, "Auditing with lynis")
+        if sub.run("sudo lynis --version".split(), check=True,
+                   text=True).returncode == 1:
+            sub.run("sudo apt install lynis -y".split())
+        code = sub.run("sudo lynis audit system".split(), check=True)
+        return code.returncode
+    return NewThread(audit_w_lynis, True, "Auditing with lynis")
 
 
 def Linux_addusr():
@@ -310,7 +305,7 @@ def Linux_add_group_to_system():
             def add_group():
                 # Add ability to check to make sure group does
                 # not already exist
-                _, groups = Find_Groups(False)
+                _, groups = Linux_Find_Groups(False)
                 if self.group_name_input.text() in groups:
                     HEY = QMessageBox()
                     HEY.setWindowTitle('Hey! Listen!')
@@ -363,7 +358,7 @@ def Linux_remgrufrosys():
             self.label.setText('Current Groups:')
             self.label2.setText('Group Name: ')
 
-            _, list_of_groups = Find_Groups(False)
+            _, list_of_groups = Linux_Find_Groups(False)
 
             for _, group in enumerate(list_of_groups):
                 QListWidgetItem(group, self.listOFnames)
