@@ -26,14 +26,13 @@ jobs:
       # Runs a single command using the runners shell
       - name: Changing Test-Scripts to Executables
         run: |
-          chmod +x ./builds/tests/Actions_Compile_Test.sh
-          # chmod +x ./builds/tests/Actions_Linux_Compile_Test.sh
-          chmod +x ./builds/tests/after_successCONVERT.sh 
+          chmod +x ./builds/Build_Script/Actions_Compile_Test.sh
+          chmod +x ./builds/Build_Script/after_successCONVERT.sh 
           ls -al
 
       - name: Build Executables
         run:
-          ./builds/tests/Actions_Compile_Test.sh linux
+          ./builds/Build_Script/Actions_Compile_Test.sh linux
 
       - name: Coverage
         run: |
@@ -43,5 +42,5 @@ jobs:
 
       - name: Upload to Github
         run:
-          ./builds/tests/after_successCONVERT.sh linux
+          ./builds/Build_Script/after_successCONVERT.sh linux
 
