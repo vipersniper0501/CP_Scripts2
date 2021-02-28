@@ -19,7 +19,7 @@ class TestUserAndGroupCommands(unittest.TestCase):
 
     def test_Linux_Find_Groups(self):
         result = Linux_Find_Groups(False)
-        self.assertEqual(result, "Hello World")  # Linux_Find_Groups(False))
+        self.assertEqual(result, Linux_Find_Groups(False))
 
 
 if __name__ == '__main__':

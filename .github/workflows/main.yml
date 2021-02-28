@@ -2,7 +2,7 @@
 
 name: Compilation
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
@@ -27,20 +27,19 @@ jobs:
       - name: Changing Test-Scripts to Executables
         run: |
           chmod +x ./builds/Build_Script/Actions_Compile_Test.sh
-          chmod +x ./builds/Build_Script/after_successCONVERT.sh 
+          chmod +x ./builds/Build_Script/after_successCONVERT.sh
           ls -al
 
       - name: Build Executables
         run:
           ./builds/Build_Script/Actions_Compile_Test.sh linux
 
-      - name: Coverage
-        run: |
-          coverage run ./src/tests/Linux_Tests.py
-          coverage xml -d ./src/tests/coverage.xml
-          bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Python -r ./src/tests/coverage.xml
+          # - name: Coverage
+          # run: |
+            # coverage run ./src/tests/Linux_Tests.py
+            # coverage xml -d ./src/tests/coverage.xml
+            # bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Python -r ./src/tests/coverage.xml
 
       - name: Upload to Github
         run:
           ./builds/Build_Script/after_successCONVERT.sh linux
-
