@@ -1,4 +1,4 @@
 *__pycache__
 builds/Executables/config.ini
-
+*.replit
 *.log
