@@ -2,3 +2,4 @@
 builds/Executables/config.ini
 *.replit
 *.log
+.idea/
